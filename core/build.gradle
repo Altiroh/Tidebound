@@ -57,6 +57,11 @@ tasks.register('domainSelfTest', JavaExec) {
     mainClass = 'dev.tidebound.core.data.DomainSelfTest'
 }
 
+tasks.withType(Test).configureEach {
+    // DomainSelfTest is an intentional standalone main class, not a JUnit test class.
+    failOnNoDiscoveredTests = false
+}
+
 tasks.named('check') {
     dependsOn tasks.named('domainSelfTest')
 }
