@@ -6,6 +6,9 @@ import dev.tidebound.core.data.ContractProgress;
 import dev.tidebound.core.data.PlayerProgress;
 import dev.tidebound.core.data.PlayerVessel;
 import dev.tidebound.core.data.VesselDeployment;
+import dev.tidebound.core.data.VesselHoldPolicy;
+import dev.tidebound.core.data.VesselUpgrade;
+import dev.tidebound.core.data.VesselUpgradeQuote;
 import dev.tidebound.core.progression.SkillProgression;
 import java.util.List;
 import net.minecraft.ChatFormatting;
@@ -108,6 +111,33 @@ public final class HarborBoardService {
             line.append(Component.literal("  "))
                     .append(commandButton("[COMPAS DE REMPLACEMENT]", "/tidebound vessel compass"));
         }
+        player.sendSystemMessage(line);
+        player.sendSystemMessage(Component.literal("Cale utilisable : "
+                + VesselHoldPolicy.usableSlots(vessel.holdTier()) + "/27 emplacements.")
+                .withStyle(ChatFormatting.GRAY));
+        showUpgrade(player, VesselUpgrade.HULL, "COQUE", "hull");
+        showUpgrade(player, VesselUpgrade.MOTOR, "MOTEUR", "motor");
+        showUpgrade(player, VesselUpgrade.HOLD, "CALE", "hold");
+        showUpgrade(player, VesselUpgrade.MODULE_SLOT, "MODULE", "module");
+        VesselMaintenanceService.nearbyPhysicalVessel(player).ifPresent(boat -> {
+            if (boat.getDamage() > 0.01F) {
+                player.sendSystemMessage(commandButton("[RÉPARER LE NAVIRE]", "/tidebound vessel repair"));
+            }
+        });
+    }
+
+    private static void showUpgrade(ServerPlayer player, VesselUpgrade upgrade, String label, String command) {
+        VesselUpgradeQuote quote = VesselMaintenanceService.nextUpgrade(player, upgrade).orElse(null);
+        if (quote == null) {
+            player.sendSystemMessage(Component.literal("• " + label + " — niveau maximum")
+                    .withStyle(ChatFormatting.DARK_GRAY));
+            return;
+        }
+        MutableComponent line = Component.literal("• " + label + " → " + quote.targetTier() + " — "
+                + quote.tideCost() + " Tides + " + quote.materialCount() + " × "
+                + quote.materialItemId() + " — " + quote.requiredSkill() + " niv. "
+                + quote.requiredSkillLevel() + "  ").withStyle(ChatFormatting.GRAY);
+        line.append(commandButton("[ACHETER]", "/tidebound vessel purchase " + command));
         player.sendSystemMessage(line);
     }
 

@@ -4,7 +4,7 @@ Dernière mise à jour : **4 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-005A` / `0.5.0-alpha`
+État importé : `TB-CORE-005B` / `0.6.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -35,6 +35,13 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - Compas de sillage utilisable pour direction, distance et dernière position ;
 - états persistants déployé, disparu, détruit et sans position ;
 - exemples de ponts KubeJS et FTB Quests ;
+- achats de coque, moteur, cale et emplacements de modules avec Tides et matériaux ;
+- prérequis de navigation, commerce ou récupération selon l'amélioration ;
+- transactions anti-double clic avec remboursement en cas d'échec ;
+- réparations payantes uniquement lorsque le navire est ramené au port ;
+- capacité de cale progressive : 9, 18 puis 27 emplacements, sans suppression du surplus ;
+- Gradle Wrapper, workflow GitHub Actions et guide de test reproductible ;
+- manifeste CurseForge minimal avec FTB Library, Teams et Quests ;
 - tests Java autonomes du domaine.
 
 Les détails et commandes sont dans `core/README.md` et `core/TB-CORE-001.md` à `core/TB-CORE-005A.md`.
@@ -43,28 +50,24 @@ Les détails et commandes sont dans `core/README.md` et `core/TB-CORE-001.md` à
 
 Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pas être présentés comme fonctionnels :
 
-1. **Économie des améliorations.** Les coûts en Tides et matériaux, les réparations et les prérequis de métier restent à coder.
-2. **Cale progressive.** Les 27 emplacements vanilla sont encore disponibles à tous les niveaux.
-3. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
-4. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
-5. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
-6. **Compilation en jeu.** Le mod complet n'a pas encore été compilé ni lancé dans un client NeoForge 1.21.1.
+1. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
+2. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
+3. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
+4. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
+5. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
 
 ## Prochaine tâche recommandée
 
-### TB-CORE-005B — Économie et entretien du navire
+### TB-CORE-005C — Modules du navire v1
 
 À réaliser maintenant :
 
-- définir les coûts par niveau de coque, moteur, cale et emplacement de module ;
-- débiter atomiquement Tides et matériaux ;
-- ajouter la réparation au port avec un prix dépendant des dégâts ;
-- poser les premiers prérequis de métiers ;
-- rendre la capacité de cale progressive sans perdre les objets existants ;
-- exposer ces services dans la capitainerie et dans `TideboundApi` ;
-- tester les refus, remboursements et doubles clics.
-
-Ensuite, poursuivre avec `TB-CORE-005C` : projecteur, sonar, treuil et filet.
+- définir l'inventaire persistant des modules équipés ;
+- rendre le projecteur, le sonar, le treuil et le filet fabricables ou achetables ;
+- limiter le nombre de modules aux emplacements débloqués ;
+- donner à chaque module un premier effet serveur mesurable ;
+- exposer installation, retrait et inspection dans la capitainerie et `TideboundApi` ;
+- préserver les sauvegardes `0.6.0-alpha`.
 
 ## Architecture et sources de vérité
 
@@ -85,11 +88,12 @@ Le projet cible Java 21. Exécuter, depuis `core/` :
 
 ```bash
 python tools/validate_content.py
-gradle check
-gradle build
+./gradlew check
+./gradlew build
 ```
 
-Si Gradle n'est pas installé, installer un JDK 21 et générer le wrapper avec `gradle wrapper`. Ne jamais annoncer que le JAR fonctionne en jeu avant un vrai lancement client/serveur NeoForge.
+Le wrapper est inclus ; Java 21 suffit. Le workflow `.github/workflows/build.yml` produit aussi un artifact.
+Ne jamais annoncer qu'une boucle fonctionne en jeu avant un vrai lancement client/serveur NeoForge.
 
 ## Règle de transmission
 

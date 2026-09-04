@@ -3,6 +3,7 @@ package dev.tidebound.core.service;
 import dev.tidebound.core.data.PlayerVessel;
 import dev.tidebound.core.data.VesselDeployment;
 import dev.tidebound.core.data.VesselEntityLink;
+import dev.tidebound.core.data.VesselHoldPolicy;
 import dev.tidebound.core.registry.TideboundAttachments;
 import java.util.Comparator;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.entity.vehicle.ChestBoat;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
@@ -131,10 +133,45 @@ public final class VesselDeploymentService {
         findActive(player).ifPresent(entity -> syncEntity(player, entity));
     }
 
+    /** Converts a registered vanilla boat into a chest boat when the first hold upgrade is bought. */
+    public static ChestBoat ensureCargoVessel(ServerPlayer player, PlayerVessel vessel) {
+        Entity entity = findActive(player)
+                .orElseThrow(() -> new IllegalStateException("Le navire physique est introuvable"));
+        if (entity instanceof ChestBoat chestBoat) {
+            enforceHoldCapacity(player, chestBoat);
+            return chestBoat;
+        }
+        if (!(entity instanceof Boat boat) || !(boat.level() instanceof ServerLevel level)) {
+            throw new IllegalStateException("Le navire ne peut pas recevoir de cale");
+        }
+        if (!boat.getPassengers().isEmpty()) {
+            throw new IllegalStateException("Descendez du navire avant d'installer la cale");
+        }
+
+        ChestBoat cargoBoat = new ChestBoat(level, boat.getX(), boat.getY(), boat.getZ());
+        cargoBoat.setVariant(boat.getVariant());
+        cargoBoat.setYRot(boat.getYRot());
+        cargoBoat.setXRot(boat.getXRot());
+        cargoBoat.setDeltaMovement(boat.getDeltaMovement());
+        cargoBoat.setDamage(boat.getDamage());
+        configureOwnedBoat(player, cargoBoat, vessel);
+        if (!level.addFreshEntity(cargoBoat)) {
+            throw new IllegalStateException("La cale n'a pas pu être installée");
+        }
+        boat.discard();
+        setDeployment(player, deploymentFor(cargoBoat));
+        enforceHoldCapacity(player, cargoBoat);
+        return cargoBoat;
+    }
+
     private static void onPlayerTick(PlayerTickEvent.Post event) {
-        if (!(event.getEntity() instanceof ServerPlayer player)
-                || !(player.getVehicle() instanceof Boat boat)
-                || !isOwnedBy(boat, player.getUUID())) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        if (player.tickCount % TRACK_INTERVAL_TICKS == 0) {
+            enforceNearbyHoldCapacity(player);
+        }
+        if (!(player.getVehicle() instanceof Boat boat) || !isOwnedBy(boat, player.getUUID())) {
             return;
         }
         applyRuntimeUpgrades(player, boat);
@@ -239,6 +276,44 @@ public final class VesselDeploymentService {
         if (vessel.hullTier() > 1 && boat.getDamage() > 0) {
             float recovery = (vessel.hullTier() - 1) * 0.05F;
             boat.setDamage(Math.max(0, boat.getDamage() - recovery));
+        }
+    }
+
+    private static void enforceNearbyHoldCapacity(ServerPlayer player) {
+        player.serverLevel().getEntitiesOfClass(
+                ChestBoat.class,
+                player.getBoundingBox().inflate(12.0),
+                boat -> isOwnedBy(boat, player.getUUID())
+        ).forEach(boat -> enforceHoldCapacity(player, boat));
+    }
+
+    private static void enforceHoldCapacity(ServerPlayer player, ChestBoat boat) {
+        int allowed = VesselHoldPolicy.usableSlots(VesselService.vessel(player).holdTier());
+        if (allowed >= boat.getContainerSize()) {
+            return;
+        }
+        boolean moved = false;
+        boolean dropped = false;
+        for (int slot = allowed; slot < boat.getContainerSize(); slot++) {
+            ItemStack existing = boat.getItem(slot);
+            if (existing.isEmpty()) {
+                continue;
+            }
+            ItemStack overflow = existing.copy();
+            boat.setItem(slot, ItemStack.EMPTY);
+            moved = true;
+            player.getInventory().add(overflow);
+            if (!overflow.isEmpty()) {
+                boat.spawnAtLocation(overflow);
+                dropped = true;
+            }
+        }
+        if (moved) {
+            boat.setChanged();
+            String suffix = dropped ? " Le surplus a été posé près du navire." : " Le surplus vous a été rendu.";
+            player.sendSystemMessage(Component.literal("Cale niveau "
+                    + VesselService.vessel(player).holdTier() + " : " + allowed
+                    + " emplacements utilisables." + suffix).withStyle(ChatFormatting.YELLOW));
         }
     }
 

@@ -6,6 +6,8 @@ import dev.tidebound.core.data.PlayerProgress;
 import dev.tidebound.core.data.TideWallet;
 import dev.tidebound.core.data.VesselUpgrade;
 import dev.tidebound.core.data.VesselDeployment;
+import dev.tidebound.core.data.VesselTransactionResult;
+import dev.tidebound.core.data.VesselUpgradeQuote;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.service.ContractService;
 import dev.tidebound.core.service.MilestoneService;
@@ -14,9 +16,11 @@ import dev.tidebound.core.service.RewardService;
 import dev.tidebound.core.service.TideEconomy;
 import dev.tidebound.core.service.VesselService;
 import dev.tidebound.core.service.VesselDeploymentService;
+import dev.tidebound.core.service.VesselMaintenanceService;
 import dev.tidebound.core.service.WakeCompassService;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.entity.vehicle.Boat;
@@ -53,6 +57,18 @@ public final class TideboundApi {
 
     public static PlayerVessel upgradeVessel(ServerPlayer player, VesselUpgrade upgrade) {
         return VesselService.upgrade(player, upgrade);
+    }
+
+    public static Optional<VesselUpgradeQuote> nextVesselUpgrade(ServerPlayer player, VesselUpgrade upgrade) {
+        return VesselMaintenanceService.nextUpgrade(player, upgrade);
+    }
+
+    public static VesselTransactionResult purchaseVesselUpgrade(ServerPlayer player, VesselUpgrade upgrade) {
+        return VesselMaintenanceService.purchaseUpgrade(player, upgrade);
+    }
+
+    public static VesselTransactionResult repairVessel(ServerPlayer player) {
+        return VesselMaintenanceService.repair(player);
     }
 
     public static PlayerVessel renameVessel(ServerPlayer player, String name) {

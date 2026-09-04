@@ -1,0 +1,34 @@
+{
+  "minecraft": {
+    "version": "1.21.1",
+    "modLoaders": [
+      {
+        "id": "neoforge-21.1.249",
+        "primary": true
+      }
+    ]
+  },
+  "manifestType": "minecraftModpack",
+  "manifestVersion": 1,
+  "name": "Tidebound Development Pack",
+  "version": "0.6.0-alpha",
+  "author": "Tidebound",
+  "files": [
+    {
+      "projectID": 404465,
+      "fileID": 8569579,
+      "required": true
+    },
+    {
+      "projectID": 404468,
+      "fileID": 8724782,
+      "required": true
+    },
+    {
+      "projectID": 289412,
+      "fileID": 8730556,
+      "required": true
+    }
+  ],
+  "overrides": "overrides"
+}

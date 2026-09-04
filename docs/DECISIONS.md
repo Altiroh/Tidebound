@@ -31,7 +31,15 @@
 
 - La monnaie propre s'appelle le **Tide** ; le pluriel affiché est **Tides**.
 - Les améliorations du navire, réparations et services portuaires doivent créer les principaux débouchés monétaires.
+- Une amélioration exige le navire au quai, des Tides, un matériau et un niveau de métier.
+- La cale du prototype utilise 9, 18 puis 27 cases ; les cases verrouillées ne détruisent jamais leur contenu.
 - Les émeraudes et fermes vanilla ne doivent pas permettre de contourner l'économie maritime.
+
+## Quêtes et contrats
+
+- FTB Quests sert de livre visuel pour l'onboarding et les paliers uniques.
+- Les contrats répétables restent gérés par Tidebound Core et l'intendant du port.
+- Les récompenses FTB appellent les commandes serveur Tidebound avec `{p}`, permission 2 et un reçu unique.
 
 ## Architecture
 

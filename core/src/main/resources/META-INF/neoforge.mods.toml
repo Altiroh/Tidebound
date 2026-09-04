@@ -4,7 +4,7 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="tidebound"
-version="0.5.0-alpha"
+version="0.6.0-alpha"
 displayName="Tidebound Core"
 authors="Tidebound"
 description='''

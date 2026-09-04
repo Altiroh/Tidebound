@@ -4,6 +4,10 @@ plugins {
     id 'idea'
 }
 
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
 version = mod_version
 group = mod_group_id
 
@@ -51,6 +55,11 @@ tasks.register('domainSelfTest', JavaExec) {
     dependsOn testClasses
     classpath = sourceSets.test.runtimeClasspath
     mainClass = 'dev.tidebound.core.data.DomainSelfTest'
+}
+
+tasks.withType(Test).configureEach {
+    // DomainSelfTest is an intentional standalone main class, not a JUnit test class.
+    failOnNoDiscoveredTests = false
 }
 
 tasks.named('check') {

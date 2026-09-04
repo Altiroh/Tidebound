@@ -6,14 +6,14 @@ Le projet n'est pas un mode histoire : les paliers et contrats récompensent l'a
 
 ## État actuel
 
-- version du mod : `0.5.0-alpha` ;
-- dernier ticket terminé : `TB-CORE-005A` ;
+- version du mod : `0.6.0-alpha` ;
+- dernier ticket terminé : `TB-CORE-005B` ;
 - cible : Minecraft `1.21.1`, NeoForge `21.1.249`, Java `21` ;
 - tests de domaine autonomes validés ;
 - compilation NeoForge complète encore à exécuter avec un JDK 21 et Gradle.
 
 Le code actuel contient la monnaie, les métiers, les paliers, les contrats répétables, l'intendant de port,
-l'enregistrement d'une barque vanilla et un Compas de sillage pour retrouver le navire personnel.
+l'enregistrement d'une barque vanilla, un Compas de sillage, ainsi que les achats et réparations du navire.
 
 ## Reprendre le projet
 
@@ -33,6 +33,8 @@ Tidebound/
 ├── core/                 Mod NeoForge et tests
 ├── docs/design/          GDD courant
 ├── docs/technical/       Matrice technique
+├── docs/TESTING.md       Compilation, profil et smoke tests
+├── modpack/              Manifeste CurseForge minimal
 ├── docs/DECISIONS.md     Décisions de conception
 ├── HANDOFF.md            Transmission toujours à jour
 ├── ROADMAP.md            Prochaines étapes
@@ -45,8 +47,9 @@ Depuis `core/` :
 
 ```bash
 python tools/validate_content.py
-gradle check
-gradle build
+./gradlew check
+./gradlew build
 ```
 
-Le JAR attendu est `core/build/libs/tidebound-0.5.0-alpha.jar`.
+Le JAR attendu est `core/build/libs/tidebound-0.6.0-alpha.jar`. Le workflow GitHub Actions publie
+également ce JAR comme artifact à chaque push et pull request.

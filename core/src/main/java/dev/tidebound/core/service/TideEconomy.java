@@ -26,4 +26,8 @@ public final class TideEconomy {
         player.setData(TideboundAttachments.TIDE_WALLET, current.debit(amount));
         return true;
     }
+
+    static void set(ServerPlayer player, TideWallet wallet) {
+        player.setData(TideboundAttachments.TIDE_WALLET, wallet);
+    }
 }
