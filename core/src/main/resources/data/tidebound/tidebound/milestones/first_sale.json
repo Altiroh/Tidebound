@@ -1,0 +1,10 @@
+{
+  "title": "Première vente",
+  "trigger": "first_sale",
+  "reward": {
+    "tides": 40,
+    "skill_xp": {
+      "trade": 60
+    }
+  }
+}

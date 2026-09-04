@@ -1,0 +1,24 @@
+{
+  "title": "Caisse de saumons",
+  "cooldown_ticks": 24000,
+  "requires": {
+    "skill": "fishing",
+    "level": 2
+  },
+  "requirement": {
+    "item": "minecraft:salmon",
+    "count": 8
+  },
+  "reward": {
+    "tides": 55,
+    "skill_xp": {
+      "fishing": 30
+    },
+    "items": [
+      {
+        "item": "minecraft:cooked_cod",
+        "count": 2
+      }
+    ]
+  }
+}

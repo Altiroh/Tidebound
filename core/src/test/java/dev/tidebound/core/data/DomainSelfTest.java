@@ -1,0 +1,131 @@
+package dev.tidebound.core.data;
+
+import java.util.Map;
+import java.util.UUID;
+import dev.tidebound.core.progression.SkillProgression;
+
+/**
+ * Dependency-free smoke test. It can be executed with the JDK alone; see README.md.
+ */
+public final class DomainSelfTest {
+    private DomainSelfTest() {
+    }
+
+    public static void main(String[] args) {
+        walletCreditsAndDebits();
+        walletRejectsInvalidOperations();
+        vesselUnlockAndUpgrades();
+        vesselRejectsInvalidState();
+        rewardsAreIdempotent();
+        contractsRespectCooldowns();
+        skillLevelsFollowCurve();
+        vesselRuntimeLinksAreValidated();
+        System.out.println("DomainSelfTest: OK");
+    }
+
+    private static void walletCreditsAndDebits() {
+        TideWallet wallet = TideWallet.empty().credit(125).debit(25);
+        check(wallet.balance() == 100, "wallet balance");
+        check(wallet.canAfford(100), "wallet exact affordability");
+        check(!wallet.canAfford(101), "wallet insufficient affordability");
+    }
+
+    private static void walletRejectsInvalidOperations() {
+        expect(IllegalArgumentException.class, () -> TideWallet.empty().credit(0));
+        expect(IllegalStateException.class, () -> TideWallet.empty().debit(1));
+        expect(IllegalArgumentException.class, () -> new TideWallet(TideWallet.MAX_BALANCE).credit(1));
+    }
+
+    private static void vesselUnlockAndUpgrades() {
+        PlayerVessel locked = PlayerVessel.locked();
+        check(!locked.unlocked(), "locked vessel");
+
+        PlayerVessel vessel = PlayerVessel.unlock("  L'Écumeur  ", UUID.randomUUID())
+                .upgradeHull()
+                .upgradeMotor()
+                .upgradeHold()
+                .addModuleSlot();
+        check(vessel.name().equals("L'Écumeur"), "normalized vessel name");
+        check(vessel.hullTier() == 2, "hull upgrade");
+        check(vessel.motorTier() == 2, "motor upgrade");
+        check(vessel.holdTier() == 2, "hold upgrade");
+        check(vessel.moduleSlots() == 2, "module slot upgrade");
+    }
+
+    private static void vesselRejectsInvalidState() {
+        expect(IllegalStateException.class, () -> PlayerVessel.locked().upgradeHull());
+        expect(IllegalArgumentException.class,
+                () -> new PlayerVessel("", "Invalide", true, 1, 1, 1, 1));
+        expect(IllegalArgumentException.class,
+                () -> PlayerVessel.unlock(" ", UUID.randomUUID()));
+    }
+
+    private static void rewardsAreIdempotent() {
+        PlayerProgress progress = PlayerProgress.empty()
+                .claimReceipt("ftb:first_sale")
+                .addSkillXp(Map.of("trade", 50L));
+        check(progress.hasReceipt("ftb:first_sale"), "claimed reward receipt");
+        check(progress.skillXp("trade") == 50, "skill XP reward");
+        expect(IllegalStateException.class, () -> progress.claimReceipt("ftb:first_sale"));
+
+        PlayerProgress milestone = progress.completeMilestone("tidebound:first_sale");
+        check(milestone.hasCompletedMilestone("tidebound:first_sale"), "completed milestone");
+        expect(IllegalStateException.class,
+                () -> milestone.completeMilestone("tidebound:first_sale"));
+    }
+
+    private static void contractsRespectCooldowns() {
+        PlayerProgress first = PlayerProgress.empty()
+                .completeContract("tidebound:coastal_delivery", 1_000, 24_000);
+        ContractProgress state = first.contract("tidebound:coastal_delivery");
+        check(state.completionCount() == 1, "contract completion count");
+        check(!state.isAvailable(24_999), "contract cooldown active");
+        check(state.isAvailable(25_000), "contract cooldown elapsed");
+        expect(IllegalStateException.class,
+                () -> first.completeContract("tidebound:coastal_delivery", 24_999, 24_000));
+    }
+
+    private static void skillLevelsFollowCurve() {
+        check(SkillProgression.levelForXp(0) == 1, "initial skill level");
+        check(SkillProgression.levelForXp(99) == 1, "level one ceiling");
+        check(SkillProgression.levelForXp(100) == 2, "level two threshold");
+        check(SkillProgression.levelForXp(4_700) == 10, "maximum skill level");
+        check(SkillProgression.xpUntilNextLevel(249) == 1, "XP to next level");
+        check(SkillProgression.xpUntilNextLevel(4_700) == 0, "maximum level progress");
+    }
+
+    private static void vesselRuntimeLinksAreValidated() {
+        UUID owner = UUID.randomUUID();
+        UUID vessel = UUID.randomUUID();
+        VesselEntityLink link = VesselEntityLink.linked(owner, vessel.toString());
+        check(link.linked(), "physical vessel link");
+        check(link.belongsTo(owner), "physical vessel ownership");
+        check(!link.belongsTo(UUID.randomUUID()), "physical vessel ownership rejection");
+
+        VesselDeployment deployment = VesselDeployment.active(
+                UUID.randomUUID(), "minecraft:overworld", 12, -4);
+        check(deployment.active(), "active vessel deployment");
+        check(!VesselDeployment.docked().active(), "docked vessel deployment");
+        expect(IllegalArgumentException.class,
+                () -> new VesselDeployment(UUID.randomUUID().toString(), "", 0, 0));
+    }
+
+    private static void check(boolean condition, String label) {
+        if (!condition) {
+            throw new AssertionError(label);
+        }
+    }
+
+    private static void expect(Class<? extends Throwable> expected, Runnable action) {
+        try {
+            action.run();
+        } catch (Throwable actual) {
+            if (expected.isInstance(actual)) {
+                return;
+            }
+            throw new AssertionError("Expected " + expected.getSimpleName() + " but got "
+                    + actual.getClass().getSimpleName(), actual);
+        }
+        throw new AssertionError("Expected " + expected.getSimpleName());
+    }
+}

@@ -1,0 +1,10 @@
+{
+  "title": "Premier poisson",
+  "trigger": "first_catch",
+  "reward": {
+    "tides": 25,
+    "skill_xp": {
+      "fishing": 50
+    }
+  }
+}

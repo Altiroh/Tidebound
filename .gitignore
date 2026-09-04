@@ -1,0 +1,26 @@
+# Gradle / Java
+.gradle/
+**/build/
+out/
+*.class
+
+# Minecraft development runs
+**/run/
+**/logs/
+**/crash-reports/
+
+# IDEs and operating systems
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# Python validation cache
+__pycache__/
+*.py[cod]
+
+# Generated archives and temporary files
+*.zip
+*.tmp
+*.bak

@@ -1,0 +1,16 @@
+{
+  "title": "Vers le large",
+  "trigger": "first_ocean_voyage",
+  "reward": {
+    "tides": 75,
+    "skill_xp": {
+      "navigation": 100
+    },
+    "items": [
+      {
+        "item": "minecraft:compass",
+        "count": 1
+      }
+    ]
+  }
+}

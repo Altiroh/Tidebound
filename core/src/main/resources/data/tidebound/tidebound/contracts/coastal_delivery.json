@@ -1,0 +1,21 @@
+{
+  "title": "Livraison côtière",
+  "cooldown_ticks": 24000,
+  "requirement": {
+    "item": "minecraft:cod",
+    "count": 12
+  },
+  "reward": {
+    "tides": 45,
+    "skill_xp": {
+      "trade": 20,
+      "fishing": 10
+    },
+    "items": [
+      {
+        "item": "minecraft:bread",
+        "count": 2
+      }
+    ]
+  }
+}

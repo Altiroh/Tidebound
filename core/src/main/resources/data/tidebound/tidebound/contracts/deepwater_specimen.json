@@ -1,0 +1,25 @@
+{
+  "title": "Spécimens du large",
+  "cooldown_ticks": 48000,
+  "requires": {
+    "skill": "fishing",
+    "level": 3
+  },
+  "requirement": {
+    "item": "minecraft:pufferfish",
+    "count": 3
+  },
+  "reward": {
+    "tides": 90,
+    "skill_xp": {
+      "fishing": 70,
+      "navigation": 20
+    },
+    "items": [
+      {
+        "item": "minecraft:prismarine_shard",
+        "count": 1
+      }
+    ]
+  }
+}

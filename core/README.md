@@ -1,0 +1,172 @@
+# Tidebound Core — TB-CORE-004
+
+Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
+
+## Ce qui est implémenté
+
+- portefeuille personnel de **Tides**, persistant et conservé après la mort ;
+- fiche `PlayerVessel` persistante : identité, nom, coque, moteur, cale et emplacements de modules ;
+- déblocage idempotent du bateau, prêt à être appelé par un PNJ ou un palier de succès ;
+- façade serveur `TideboundApi` pour raccorder plus tard contrats, PNJ, KubeJS et récompenses ;
+- registre persistant de reçus empêchant une récompense unique d'être versée deux fois ;
+- paliers uniques et contrats répétables chargés depuis des fichiers JSON de datapack ;
+- consommation des denrées demandées, délais par contrat et récompenses en Tides, objets et XP ;
+- quatre métiers à dix niveaux : pêche, navigation, commerce et récupération ;
+- déclencheurs automatiques pour la pêche, la navigation océanique et la première livraison ;
+- contrats pouvant exiger un niveau de métier ;
+- villageois-intendant affichant un tableau de contrats cliquable ;
+- navire physique personnel basé sur un bateau-coffre, lié à son propriétaire ;
+- réclamation, mise à l'eau, localisation et renommage auprès de la capitainerie ;
+- position du navire persistante entre les sessions et protection contre les autres joueurs ;
+- effets physiques légers des améliorations de coque et de moteur ;
+- ponts prêts à copier pour KubeJS et FTB Quests ;
+- commandes de diagnostic et d'administration ;
+- tests autonomes du domaine économique, du bateau et de la progression.
+
+Le navire utilise volontairement l'entité bateau-coffre vanilla comme première coque jouable. La source de vérité
+serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Les objectifs ne forment
+pas une histoire linéaire : ils peuvent être découverts et validés dans n'importe quel ordre.
+
+## Versions verrouillées
+
+- Minecraft `1.21.1`
+- NeoForge `21.1.249`
+- ModDevGradle `2.0.146`
+- Java `21`
+- Parchment `2024.11.17`
+
+## Commandes
+
+Commandes joueur :
+
+- `/tidebound tide balance`
+- `/tidebound vessel inspect`
+- `/tidebound vessel claim [name]` — près d'un intendant
+- `/tidebound vessel deploy` — près d'un intendant et d'une zone d'eau
+- `/tidebound vessel locate`
+- `/tidebound vessel rename <name>` — près d'un intendant
+- `/tidebound progression inspect`
+- `/tidebound skills`
+- `/tidebound progression content summary`
+- `/tidebound progression content milestones`
+- `/tidebound progression content contracts`
+- `/tidebound progression contract status <id>`
+- `/tidebound contracts` — uniquement près d'un intendant de port
+- `/tidebound contracts deliver <id>` — uniquement près d'un intendant de port
+
+Commandes administrateur, niveau de permission 2 :
+
+- `/tidebound tide balance <player>`
+- `/tidebound tide grant <player> <amount>`
+- `/tidebound tide spend <player> <amount>`
+- `/tidebound vessel inspect <player>`
+- `/tidebound vessel unlock <player> [name]`
+- `/tidebound vessel upgrade <player> <hull|motor|hold|module>`
+- `/tidebound progression inspect <player>`
+- `/tidebound progression reward-once <player> <receipt> <tides>`
+- `/tidebound progression skill grant <player> <skill> <xp>`
+- `/tidebound progression milestone complete <player> <id>`
+- `/tidebound progression contract complete <player> <id>`
+- `/tidebound skills <player>`
+- `/tidebound harbor register <villager>`
+- `/tidebound harbor unregister <villager>`
+
+La limite d'une transaction de diagnostic est de 1 000 000 Tides. Le portefeuille utilise un `long`
+et refuse les valeurs négatives ou supérieures à 1 000 000 000 000.
+
+## Compiler le mod
+
+Le projet suit le MDK ModDevGradle officiel. Le JDK 21 et Gradle doivent être disponibles localement.
+Depuis ce dossier :
+
+```bash
+gradle build
+```
+
+Le JAR est produit dans `build/libs/tidebound-0.4.0-alpha.jar`.
+
+Pour ajouter le Gradle Wrapper à un clone de travail :
+
+```bash
+gradle wrapper
+./gradlew build
+```
+
+## Lancer le test autonome
+
+Ce test ne dépend ni de Minecraft ni de NeoForge :
+
+```bash
+mkdir -p build/domain-self-test
+javac --release 17 -d build/domain-self-test \
+  src/main/java/dev/tidebound/core/data/TideWallet.java \
+  src/main/java/dev/tidebound/core/data/PlayerVessel.java \
+  src/main/java/dev/tidebound/core/data/ContractProgress.java \
+  src/main/java/dev/tidebound/core/data/PlayerProgress.java \
+  src/main/java/dev/tidebound/core/data/VesselEntityLink.java \
+  src/main/java/dev/tidebound/core/data/VesselDeployment.java \
+  src/main/java/dev/tidebound/core/progression/SkillProgression.java \
+  src/test/java/dev/tidebound/core/data/DomainSelfTest.java
+java -cp build/domain-self-test dev.tidebound.core.data.DomainSelfTest
+```
+
+## Points d'intégration
+
+Les intégrations ne doivent pas modifier les attachments directement. Utiliser :
+
+```java
+TideboundApi.grantTides(player, amount);
+TideboundApi.spendTides(player, amount);
+TideboundApi.wallet(player);
+TideboundApi.unlockVessel(player, vesselName);
+TideboundApi.vessel(player);
+TideboundApi.upgradeVessel(player, VesselUpgrade.HULL);
+TideboundApi.renameVessel(player, vesselName);
+TideboundApi.vesselDeployment(player);
+TideboundApi.deployVessel(player);
+TideboundApi.locateVessel(player);
+TideboundApi.grantTidesOnce(player, receiptId, amount);
+TideboundApi.completeMilestone(player, milestoneId);
+TideboundApi.completeContract(player, contractId);
+TideboundApi.grantSkillXp(player, skillId, amount);
+```
+
+## Contenu JSON
+
+Les définitions sont placées dans :
+
+- `data/<namespace>/tidebound/milestones/*.json` ;
+- `data/<namespace>/tidebound/contracts/*.json`.
+
+Le nom du fichier devient son identifiant. Par exemple
+`data/tidebound/tidebound/contracts/coastal_delivery.json` devient
+`tidebound:coastal_delivery`. La commande vanilla `/reload` recharge atomiquement les catalogues.
+
+Avant de lancer Minecraft, valider les fichiers avec :
+
+```bash
+python tools/validate_content.py
+```
+
+Les six exemples fournis utilisent uniquement des objets Vanilla afin de démarrer sans dépendance.
+Ils pourront être remplacés dans le modpack par les poissons d'Aquaculture 2.
+
+## Démarrage rapide du tableau de contrats
+
+Placer un villageois, puis exécuter en administrateur :
+
+```text
+/tidebound harbor register @e[type=minecraft:villager,sort=nearest,limit=1]
+```
+
+Ou créer directement un intendant à la position d'exécution :
+
+```text
+/function tidebound:create_harbor_intendant
+```
+
+Un clic droit sur cet **Intendant du port** affiche la capitainerie, le navire personnel, les contrats
+et leurs boutons d'action. Voir `TB-CORE-004.md` pour la boucle du navire et `examples/` pour les ponts.
+
+La prochaine brique recommandée est `TB-CORE-005` : coûts d'amélioration, modules équipables,
+réparations au port et vraie capacité de cale progressive.

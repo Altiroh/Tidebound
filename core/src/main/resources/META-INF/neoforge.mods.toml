@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="tidebound"
+version="0.4.0-alpha"
+displayName="Tidebound Core"
+authors="Tidebound"
+description='''
+Socle serveur de Tidebound : métiers, Tides, contrats et navire physique personnel persistant.
+'''
+
+[[dependencies.tidebound]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.249,21.2)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.tidebound]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1]"
+ordering="NONE"
+side="BOTH"
+
+[features.tidebound]
+javaVersion="[21,)"
