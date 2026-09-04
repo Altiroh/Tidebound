@@ -2,6 +2,7 @@ package dev.tidebound.core.data;
 
 import java.util.Map;
 import java.util.UUID;
+import dev.tidebound.core.navigation.WakeBearing;
 import dev.tidebound.core.progression.SkillProgression;
 
 /**
@@ -20,6 +21,7 @@ public final class DomainSelfTest {
         contractsRespectCooldowns();
         skillLevelsFollowCurve();
         vesselRuntimeLinksAreValidated();
+        wakeCompassBearingIsStable();
         System.out.println("DomainSelfTest: OK");
     }
 
@@ -103,11 +105,25 @@ public final class DomainSelfTest {
         check(!link.belongsTo(UUID.randomUUID()), "physical vessel ownership rejection");
 
         VesselDeployment deployment = VesselDeployment.active(
-                UUID.randomUUID(), "minecraft:overworld", 12, -4);
+                UUID.randomUUID(), "minecraft:overworld", 200, 63, -60, 12, -4);
         check(deployment.active(), "active vessel deployment");
+        check(deployment.hasKnownPosition(), "known vessel position");
+        check(deployment.markMissing().state() == VesselDeploymentState.MISSING,
+                "missing vessel keeps last position");
+        check(deployment.markDestroyed().state() == VesselDeploymentState.DESTROYED,
+                "destroyed vessel keeps last position");
         check(!VesselDeployment.docked().active(), "docked vessel deployment");
         expect(IllegalArgumentException.class,
-                () -> new VesselDeployment(UUID.randomUUID().toString(), "", 0, 0));
+                () -> new VesselDeployment(UUID.randomUUID().toString(), "",
+                        0, 0, 0, 0, 0, VesselDeploymentState.DEPLOYED));
+    }
+
+    private static void wakeCompassBearingIsStable() {
+        check(WakeBearing.direction(0, -10).equals("nord"), "north bearing");
+        check(WakeBearing.direction(10, 0).equals("est"), "east bearing");
+        check(WakeBearing.direction(-10, 10).equals("sud-ouest"), "south-west bearing");
+        check(WakeBearing.direction(0, 0).equals("ici"), "same-position bearing");
+        check(WakeBearing.distance(3, 4) == 5, "horizontal compass distance");
     }
 
     private static void check(boolean condition, String label) {

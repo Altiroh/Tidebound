@@ -6,10 +6,10 @@
 - [x] `TB-CORE-002` — paliers, contrats JSON et récompenses idempotentes ;
 - [x] `TB-CORE-003` — métiers, déclencheurs automatiques et intendant ;
 - [x] `TB-CORE-004` — bateau-coffre personnel, déploiement et suivi.
+- [x] `TB-CORE-005A` — Compas de sillage, barque vanilla de secours et enregistrement au port.
 
 ## En cours ensuite
 
-- [ ] `TB-CORE-005A` — Compas de sillage, barque vanilla de secours et enregistrement au port ;
 - [ ] `TB-CORE-005B` — coûts d'amélioration, réparations, capacité de cale et prérequis ;
 - [ ] `TB-CORE-005C` — modules v1 : projecteur, sonar, treuil et filet.
 

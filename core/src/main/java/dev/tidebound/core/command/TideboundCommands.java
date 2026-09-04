@@ -85,7 +85,19 @@ public final class TideboundCommands {
                 .then(Commands.literal("deploy")
                         .executes(context -> deployVessel(
                                 context.getSource(), context.getSource().getPlayerOrException())))
+                .then(Commands.literal("register")
+                        .executes(context -> registerVessel(
+                                context.getSource(), context.getSource().getPlayerOrException(), "Ma Barque"))
+                        .then(Commands.argument("name", StringArgumentType.greedyString())
+                                .executes(context -> registerVessel(
+                                        context.getSource(),
+                                        context.getSource().getPlayerOrException(),
+                                        StringArgumentType.getString(context, "name")))))
+                .then(Commands.literal("compass")
+                        .executes(context -> issueWakeCompass(
+                                context.getSource(), context.getSource().getPlayerOrException())))
                 .then(Commands.literal("locate")
+                        .requires(source -> source.hasPermission(ADMIN_PERMISSION))
                         .executes(context -> locateVessel(
                                 context.getSource(), context.getSource().getPlayerOrException())))
                 .then(Commands.literal("rename")
@@ -281,14 +293,46 @@ public final class TideboundCommands {
         }
         try {
             PlayerVessel vessel = TideboundApi.unlockVessel(player, name);
+            TideboundApi.giveWakeCompass(player);
             source.sendSuccess(() -> Component.literal("L'intendant vous confie " + vessel.name()
-                    + ". Vous pouvez maintenant le déployer près du quai.")
+                    + " et un Compas de sillage. Vous pouvez maintenant mettre le navire à l'eau près du quai.")
                     .withStyle(ChatFormatting.GOLD), false);
             return 1;
         } catch (IllegalArgumentException exception) {
             source.sendFailure(Component.literal(exception.getMessage()));
             return 0;
         }
+    }
+
+    private static int registerVessel(CommandSourceStack source, ServerPlayer player, String name) {
+        try {
+            var boat = TideboundApi.registerNearbyVanillaBoat(player, name);
+            PlayerVessel vessel = TideboundApi.vessel(player);
+            source.sendSuccess(() -> Component.literal("La barque vanilla devient " + vessel.name()
+                    + ". L'intendant vous remet son Compas de sillage.")
+                    .withStyle(ChatFormatting.GOLD), false);
+            return boat.isAlive() ? 1 : 0;
+        } catch (IllegalArgumentException | IllegalStateException exception) {
+            source.sendFailure(Component.literal(exception.getMessage()));
+            return 0;
+        }
+    }
+
+    private static int issueWakeCompass(CommandSourceStack source, ServerPlayer player) {
+        if (!HarborBoardService.isNearBoard(player)) {
+            source.sendFailure(Component.literal("Le compas de remplacement est remis uniquement au port."));
+            return 0;
+        }
+        if (!TideboundApi.vessel(player).unlocked()) {
+            source.sendFailure(Component.literal("Enregistrez d'abord un navire Tidebound."));
+            return 0;
+        }
+        boolean issued = TideboundApi.giveWakeCompass(player);
+        source.sendSuccess(() -> Component.literal(issued
+                ? "L'intendant vous remet un Compas de sillage."
+                : "Vous possédez déjà un Compas de sillage.")
+                .withStyle(issued ? ChatFormatting.GREEN : ChatFormatting.GRAY), false);
+        return 1;
     }
 
     private static int deployVessel(CommandSourceStack source, ServerPlayer player) {

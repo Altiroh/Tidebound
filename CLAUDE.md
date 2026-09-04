@@ -15,6 +15,7 @@ Commencer par lire `HANDOFF.md`, puis `ROADMAP.md`, `docs/DECISIONS.md` et `core
 
 ## Travail courant
 
-La prochaine unité de travail est `TB-CORE-005A`, décrite dans `HANDOFF.md`. L'objet de localisation et le démarrage sans intendant sont décidés mais pas encore codés.
+La prochaine unité de travail est `TB-CORE-005B`, décrite dans `HANDOFF.md`. Le Compas de sillage et
+l'enregistrement d'une barque vanilla sont implémentés ; les coûts, réparations et capacités restent à faire.
 
 Après toute modification matérielle, mettre à jour `HANDOFF.md`, `ROADMAP.md`, `CHANGELOG.md` et la note de ticket correspondante avant de committer.

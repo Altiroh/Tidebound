@@ -14,10 +14,12 @@ import dev.tidebound.core.service.RewardService;
 import dev.tidebound.core.service.TideEconomy;
 import dev.tidebound.core.service.VesselService;
 import dev.tidebound.core.service.VesselDeploymentService;
+import dev.tidebound.core.service.WakeCompassService;
 import java.util.List;
 import java.util.Map;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.vehicle.ChestBoat;
+import net.minecraft.world.entity.vehicle.Boat;
 
 /**
  * Stable server-side entry points for Tidebound gameplay integrations.
@@ -63,6 +65,14 @@ public final class TideboundApi {
 
     public static ChestBoat deployVessel(ServerPlayer player) {
         return VesselDeploymentService.deploy(player);
+    }
+
+    public static Boat registerNearbyVanillaBoat(ServerPlayer player, String name) {
+        return VesselDeploymentService.registerNearbyVanillaBoat(player, name);
+    }
+
+    public static boolean giveWakeCompass(ServerPlayer player) {
+        return WakeCompassService.giveIfMissing(player);
     }
 
     public static String locateVessel(ServerPlayer player) {

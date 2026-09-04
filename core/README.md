@@ -1,4 +1,4 @@
-# Tidebound Core — TB-CORE-004
+# Tidebound Core — TB-CORE-005A
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -19,6 +19,10 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - réclamation, mise à l'eau, localisation et renommage auprès de la capitainerie ;
 - position du navire persistante entre les sessions et protection contre les autres joueurs ;
 - effets physiques légers des améliorations de coque et de moteur ;
+- enregistrement d'une barque vanilla existante auprès d'un intendant ;
+- Compas de sillage remis gratuitement au premier navire et reproductible ;
+- lecture par clic droit de la direction, de la distance et de la dernière position connue ;
+- suivi des états déployé, disparu, détruit et sans position ;
 - ponts prêts à copier pour KubeJS et FTB Quests ;
 - commandes de diagnostic et d'administration ;
 - tests autonomes du domaine économique, du bateau et de la progression.
@@ -42,8 +46,9 @@ Commandes joueur :
 - `/tidebound tide balance`
 - `/tidebound vessel inspect`
 - `/tidebound vessel claim [name]` — près d'un intendant
+- `/tidebound vessel register [name]` — enregistre la barque vanilla montée ou la plus proche
 - `/tidebound vessel deploy` — près d'un intendant et d'une zone d'eau
-- `/tidebound vessel locate`
+- `/tidebound vessel compass` — remplace gratuitement un Compas de sillage perdu au port
 - `/tidebound vessel rename <name>` — près d'un intendant
 - `/tidebound progression inspect`
 - `/tidebound skills`
@@ -60,6 +65,7 @@ Commandes administrateur, niveau de permission 2 :
 - `/tidebound tide grant <player> <amount>`
 - `/tidebound tide spend <player> <amount>`
 - `/tidebound vessel inspect <player>`
+- `/tidebound vessel locate`
 - `/tidebound vessel unlock <player> [name]`
 - `/tidebound vessel upgrade <player> <hull|motor|hold|module>`
 - `/tidebound progression inspect <player>`
@@ -83,7 +89,7 @@ Depuis ce dossier :
 gradle build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.4.0-alpha.jar`.
+Le JAR est produit dans `build/libs/tidebound-0.5.0-alpha.jar`.
 
 Pour ajouter le Gradle Wrapper à un clone de travail :
 
@@ -104,7 +110,9 @@ javac --release 17 -d build/domain-self-test \
   src/main/java/dev/tidebound/core/data/ContractProgress.java \
   src/main/java/dev/tidebound/core/data/PlayerProgress.java \
   src/main/java/dev/tidebound/core/data/VesselEntityLink.java \
+  src/main/java/dev/tidebound/core/data/VesselDeploymentState.java \
   src/main/java/dev/tidebound/core/data/VesselDeployment.java \
+  src/main/java/dev/tidebound/core/navigation/WakeBearing.java \
   src/main/java/dev/tidebound/core/progression/SkillProgression.java \
   src/test/java/dev/tidebound/core/data/DomainSelfTest.java
 java -cp build/domain-self-test dev.tidebound.core.data.DomainSelfTest
@@ -124,6 +132,8 @@ TideboundApi.upgradeVessel(player, VesselUpgrade.HULL);
 TideboundApi.renameVessel(player, vesselName);
 TideboundApi.vesselDeployment(player);
 TideboundApi.deployVessel(player);
+TideboundApi.registerNearbyVanillaBoat(player, vesselName);
+TideboundApi.giveWakeCompass(player);
 TideboundApi.locateVessel(player);
 TideboundApi.grantTidesOnce(player, receiptId, amount);
 TideboundApi.completeMilestone(player, milestoneId);
@@ -166,7 +176,20 @@ Ou créer directement un intendant à la position d'exécution :
 ```
 
 Un clic droit sur cet **Intendant du port** affiche la capitainerie, le navire personnel, les contrats
-et leurs boutons d'action. Voir `TB-CORE-004.md` pour la boucle du navire et `examples/` pour les ponts.
+et leurs boutons d'action. Voir `TB-CORE-005A.md` pour la boucle de départ et `examples/` pour les ponts.
 
-La prochaine brique recommandée est `TB-CORE-005` : coûts d'amélioration, modules équipables,
-réparations au port et vraie capacité de cale progressive.
+## Boucle de départ sans intendant au spawn
+
+Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle suivante :
+
+1. récolter du bois sur son île procédurale ;
+2. fabriquer une barque vanilla ;
+3. naviguer jusqu'à un port contenant un intendant Tidebound ;
+4. rester dans la barque ou la placer à moins de huit blocs de l'intendant ;
+5. utiliser `[ENREGISTRER LA BARQUE]` pour en faire son navire personnel ;
+6. employer le Compas de sillage remis par l'intendant pour la retrouver.
+
+Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
+
+La prochaine brique recommandée est `TB-CORE-005B` : coûts d'amélioration, réparations au port,
+prérequis de métiers et vraie capacité de cale progressive.

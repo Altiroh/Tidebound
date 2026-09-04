@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_ROOT = ROOT / "src/main/resources/data"
+RESOURCE_ROOT = ROOT / "src/main/resources"
 ITEM_ID = re.compile(r"^[a-z0-9_.-]+:[a-z0-9_./-]+$")
 SKILL_ID = re.compile(r"^[a-z0-9_.:/-]+$")
 
@@ -78,6 +79,25 @@ def validate_file(path: Path, kind: str) -> None:
         validate_item_amount(data.get("requirement"), path, "requirement")
 
 
+def validate_resource_json() -> int:
+    paths = sorted(RESOURCE_ROOT.rglob("*.json"))
+    pack_meta = RESOURCE_ROOT / "pack.mcmeta"
+    if pack_meta.exists():
+        paths.append(pack_meta)
+    for path in paths:
+        with path.open(encoding="utf-8") as handle:
+            json.load(handle)
+
+    wake_recipe = DATA_ROOT / "tidebound/recipe/wake_compass.json"
+    require(wake_recipe in paths, "Missing Wake Compass recipe")
+    with wake_recipe.open(encoding="utf-8") as handle:
+        recipe = json.load(handle)
+    require(recipe.get("type") == "minecraft:crafting_shaped", "Invalid Wake Compass recipe type")
+    require(recipe.get("result", {}).get("id") == "tidebound:wake_compass",
+            "Invalid Wake Compass recipe result")
+    return len(paths)
+
+
 def main() -> int:
     files: list[tuple[Path, str]] = []
     files.extend((path, "milestone") for path in DATA_ROOT.glob("*/tidebound/milestones/**/*.json"))
@@ -85,9 +105,11 @@ def main() -> int:
     require(bool(files), "No Tidebound definitions found")
     for path, kind in sorted(files):
         validate_file(path, kind)
+    resource_count = validate_resource_json()
     milestones = sum(kind == "milestone" for _, kind in files)
     contracts = sum(kind == "contract" for _, kind in files)
-    print(f"Tidebound content: OK ({milestones} milestones, {contracts} contracts)")
+    print(f"Tidebound content: OK ({milestones} milestones, {contracts} contracts, "
+          f"{resource_count} resource files)")
     return 0
 
 

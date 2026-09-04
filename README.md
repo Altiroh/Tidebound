@@ -6,13 +6,14 @@ Le projet n'est pas un mode histoire : les paliers et contrats récompensent l'a
 
 ## État actuel
 
-- version du mod : `0.4.0-alpha` ;
-- dernier ticket terminé : `TB-CORE-004` ;
+- version du mod : `0.5.0-alpha` ;
+- dernier ticket terminé : `TB-CORE-005A` ;
 - cible : Minecraft `1.21.1`, NeoForge `21.1.249`, Java `21` ;
 - tests de domaine autonomes validés ;
 - compilation NeoForge complète encore à exécuter avec un JDK 21 et Gradle.
 
-Le code actuel contient la monnaie, les métiers, les paliers, les contrats répétables, l'intendant de port et un premier navire personnel fondé sur le bateau-coffre vanilla.
+Le code actuel contient la monnaie, les métiers, les paliers, les contrats répétables, l'intendant de port,
+l'enregistrement d'une barque vanilla et un Compas de sillage pour retrouver le navire personnel.
 
 ## Reprendre le projet
 
@@ -48,4 +49,4 @@ gradle check
 gradle build
 ```
 
-Le JAR attendu est `core/build/libs/tidebound-0.4.0-alpha.jar`.
+Le JAR attendu est `core/build/libs/tidebound-0.5.0-alpha.jar`.

@@ -4,7 +4,7 @@ Dernière mise à jour : **4 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-004` / `0.4.0-alpha`
+État importé : `TB-CORE-005A` / `0.5.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -31,38 +31,40 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - navire personnel physique basé sur `ChestBoat` ;
 - propriété, position, renommage, déploiement et protection du navire ;
 - effets légers des niveaux de coque et de moteur ;
+- enregistrement d'une barque vanilla existante comme navire personnel ;
+- Compas de sillage utilisable pour direction, distance et dernière position ;
+- états persistants déployé, disparu, détruit et sans position ;
 - exemples de ponts KubeJS et FTB Quests ;
 - tests Java autonomes du domaine.
 
-Les détails et commandes sont dans `core/README.md` et `core/TB-CORE-001.md` à `core/TB-CORE-004.md`.
+Les détails et commandes sont dans `core/README.md` et `core/TB-CORE-001.md` à `core/TB-CORE-005A.md`.
 
 ## Ce qui n'est pas encore implémenté
 
 Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pas être présentés comme fonctionnels :
 
-1. **Objet de localisation du navire.** La commande `/tidebound vessel locate` existe, mais doit devenir une commande de diagnostic. Le joueur utilisera un objet physique, provisoirement nommé **Compas de sillage**.
-2. **Départ sans intendant.** Le spawn n'a pas à garantir un loueur. Le joueur doit pouvoir récolter du bois, fabriquer une barque vanilla, atteindre un port, puis enregistrer ou remplacer cette barque par son navire Tidebound.
-3. **Économie des améliorations.** Les coûts en Tides et matériaux, les réparations et les prérequis de métier restent à coder.
-4. **Cale progressive.** Les 27 emplacements vanilla sont encore disponibles à tous les niveaux.
-5. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
-6. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
-7. **Compilation en jeu.** Le mod complet n'a pas encore été compilé ni lancé dans un client NeoForge 1.21.1.
+1. **Économie des améliorations.** Les coûts en Tides et matériaux, les réparations et les prérequis de métier restent à coder.
+2. **Cale progressive.** Les 27 emplacements vanilla sont encore disponibles à tous les niveaux.
+3. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
+4. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
+5. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
+6. **Compilation en jeu.** Le mod complet n'a pas encore été compilé ni lancé dans un client NeoForge 1.21.1.
 
 ## Prochaine tâche recommandée
 
-### TB-CORE-005A — Autonomie de départ et repérage
+### TB-CORE-005B — Économie et entretien du navire
 
-À réaliser avant l'économie avancée :
+À réaliser maintenant :
 
-- enregistrer un bateau vanilla auprès d'un intendant comme premier navire Tidebound ;
-- permettre la fabrication ou la remise d'un **Acte de navigation** si une interaction sans PNJ est nécessaire ;
-- ajouter le **Compas de sillage**, qui pointe vers la dernière position connue du navire ;
-- prévoir les états navire absent, autre dimension, détruit et position inconnue ;
-- conserver `/tidebound vessel locate` pour les administrateurs et le débogage ;
-- ajouter recettes, traductions, textures provisoires et tests de domaine ;
-- documenter puis valider la boucle : bois → barque vanilla → premier port → enregistrement → navire personnel.
+- définir les coûts par niveau de coque, moteur, cale et emplacement de module ;
+- débiter atomiquement Tides et matériaux ;
+- ajouter la réparation au port avec un prix dépendant des dégâts ;
+- poser les premiers prérequis de métiers ;
+- rendre la capacité de cale progressive sans perdre les objets existants ;
+- exposer ces services dans la capitainerie et dans `TideboundApi` ;
+- tester les refus, remboursements et doubles clics.
 
-Ensuite seulement, poursuivre avec `TB-CORE-005B` : prix, réparations, cale et premiers modules.
+Ensuite, poursuivre avec `TB-CORE-005C` : projecteur, sonar, treuil et filet.
 
 ## Architecture et sources de vérité
 

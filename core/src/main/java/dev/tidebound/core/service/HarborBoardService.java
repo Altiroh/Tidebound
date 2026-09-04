@@ -86,9 +86,11 @@ public final class HarborBoardService {
         player.sendSystemMessage(Component.literal("=== CAPITAINERIE TIDEBOUND ===")
                 .withStyle(ChatFormatting.DARK_AQUA, ChatFormatting.BOLD));
         if (!vessel.unlocked()) {
-            player.sendSystemMessage(Component.literal("Aucun navire enregistré. ")
+            player.sendSystemMessage(Component.literal("Amenez votre barque vanilla au quai pour l'enregistrer. ")
                     .withStyle(ChatFormatting.GRAY)
-                    .append(commandButton("[RÉCLAMER LA BARQUE]", "/tidebound vessel claim")));
+                    .append(commandButton("[ENREGISTRER LA BARQUE]", "/tidebound vessel register"))
+                    .append(Component.literal("  "))
+                    .append(commandButton("[OBTENIR UNE BARQUE]", "/tidebound vessel claim")));
             return;
         }
 
@@ -97,9 +99,14 @@ public final class HarborBoardService {
                 + ", Moteur " + vessel.motorTier() + ", Cale " + vessel.holdTier()
                 + ", Modules " + vessel.moduleSlots() + "  ").withStyle(ChatFormatting.AQUA);
         if (deployment.active()) {
-            line.append(commandButton("[LOCALISER]", "/tidebound vessel locate"));
+            line.append(Component.literal("Utilisez le Compas de sillage pour le retrouver.")
+                    .withStyle(ChatFormatting.GRAY));
         } else {
             line.append(commandButton("[METTRE À L'EAU]", "/tidebound vessel deploy"));
+        }
+        if (!WakeCompassService.hasCompass(player)) {
+            line.append(Component.literal("  "))
+                    .append(commandButton("[COMPAS DE REMPLACEMENT]", "/tidebound vessel compass"));
         }
         player.sendSystemMessage(line);
     }

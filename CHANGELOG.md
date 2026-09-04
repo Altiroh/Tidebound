@@ -4,9 +4,16 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 ## Non publié
 
-- dépôt Git unifié avec documentation de transmission ;
-- besoin confirmé d'un objet de localisation en jeu ;
-- boucle de secours confirmée : barque vanilla avant le premier port.
+- aucune modification en attente.
+
+## 0.5.0-alpha — TB-CORE-005A
+
+- dépôt GitHub public initialisé avec la documentation de transmission ;
+- ajout du Compas de sillage, remis au premier enregistrement et reproductible ;
+- direction, distance et dernière position du navire accessibles par clic droit ;
+- états persistants déployé, disparu, détruit et sans position connue ;
+- enregistrement au port d'une barque vanilla existante ;
+- commande de localisation réservée aux administrateurs.
 
 ## 0.4.0-alpha — TB-CORE-004
 

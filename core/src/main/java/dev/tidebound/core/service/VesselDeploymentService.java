@@ -4,6 +4,7 @@ import dev.tidebound.core.data.PlayerVessel;
 import dev.tidebound.core.data.VesselDeployment;
 import dev.tidebound.core.data.VesselEntityLink;
 import dev.tidebound.core.registry.TideboundAttachments;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
@@ -37,6 +39,7 @@ public final class VesselDeploymentService {
     public static void register(IEventBus gameBus) {
         gameBus.addListener(VesselDeploymentService::onPlayerTick);
         gameBus.addListener(VesselDeploymentService::onEntityInteract);
+        gameBus.addListener(VesselDeploymentService::onEntityLeaveLevel);
     }
 
     public static VesselDeployment deployment(ServerPlayer player) {
@@ -63,15 +66,28 @@ public final class VesselDeploymentService {
                         + WATER_SEARCH_RADIUS + " blocs"));
         ChestBoat boat = new ChestBoat(level, water.getX() + 0.5, water.getY() + 1.0, water.getZ() + 0.5);
         boat.setVariant(Boat.Type.OAK);
-        boat.addTag(PHYSICAL_VESSEL_TAG);
-        boat.setCustomName(Component.literal(displayName(vessel)).withStyle(ChatFormatting.AQUA));
-        boat.setCustomNameVisible(true);
-        boat.setData(TideboundAttachments.VESSEL_ENTITY_LINK,
-                VesselEntityLink.linked(player.getUUID(), vessel.vesselId()));
+        configureOwnedBoat(player, boat, vessel);
         if (!level.addFreshEntity(boat)) {
             throw new IllegalStateException("Le bateau n'a pas pu être déployé");
         }
         setDeployment(player, deploymentFor(boat));
+        return boat;
+    }
+
+    public static Boat registerNearbyVanillaBoat(ServerPlayer player, String name) {
+        if (!HarborBoardService.isNearBoard(player)) {
+            throw new IllegalStateException("Approchez-vous d'un intendant de port pour enregistrer la barque");
+        }
+        if (VesselService.vessel(player).unlocked()) {
+            throw new IllegalStateException("Vous possédez déjà un navire Tidebound");
+        }
+
+        Boat boat = nearestUnownedBoat(player).orElseThrow(() -> new IllegalStateException(
+                "Aucune barque vanilla libre trouvée dans un rayon de 8 blocs"));
+        PlayerVessel vessel = VesselService.unlock(player, name);
+        configureOwnedBoat(player, boat, vessel);
+        setDeployment(player, deploymentFor(boat));
+        WakeCompassService.giveIfMissing(player);
         return boat;
     }
 
@@ -92,7 +108,7 @@ public final class VesselDeploymentService {
         }
         Entity entity = level.getEntity(UUID.fromString(deployment.entityId()));
         if (!(entity instanceof Boat) || !isOwnedBy(entity, player.getUUID())) {
-            setDeployment(player, VesselDeployment.docked());
+            setDeployment(player, deployment.markMissing());
             return Optional.empty();
         }
         return Optional.of(entity);
@@ -100,8 +116,15 @@ public final class VesselDeploymentService {
 
     public static String locate(ServerPlayer player) {
         Optional<Entity> entity = findActive(player);
-        return entity.map(VesselDeploymentService::position)
-                .orElse("aucun bateau actuellement déployé");
+        if (entity.isPresent()) {
+            return position(entity.orElseThrow());
+        }
+        VesselDeployment deployment = deployment(player);
+        if (deployment.hasKnownPosition()) {
+            return deployment.state().id() + " — " + deployment.dimensionId() + " — "
+                    + deployment.blockX() + ", " + deployment.blockY() + ", " + deployment.blockZ();
+        }
+        return "aucune position de bateau connue";
     }
 
     public static void syncLoaded(ServerPlayer player) {
@@ -143,9 +166,59 @@ public final class VesselDeploymentService {
         }
     }
 
+    private static void onEntityLeaveLevel(EntityLeaveLevelEvent event) {
+        if (!(event.getEntity() instanceof Boat boat)
+                || boat.getRemovalReason() != Entity.RemovalReason.KILLED
+                || !boat.hasData(TideboundAttachments.VESSEL_ENTITY_LINK)) {
+            return;
+        }
+        VesselEntityLink link = boat.getData(TideboundAttachments.VESSEL_ENTITY_LINK);
+        if (!link.linked() || !(boat.level() instanceof ServerLevel level)) {
+            return;
+        }
+        ServerPlayer owner = level.getServer().getPlayerList().getPlayer(UUID.fromString(link.ownerId()));
+        if (owner == null) {
+            return;
+        }
+        VesselDeployment current = deployment(owner);
+        if (current.entityId().equals(boat.getUUID().toString())) {
+            setDeployment(owner, deploymentFor(boat).markDestroyed());
+            owner.sendSystemMessage(Component.literal("Votre navire a été détruit. Le Compas de sillage conserve "
+                    + "sa dernière position.").withStyle(ChatFormatting.RED));
+        }
+    }
+
     private static boolean isOwnedBy(Entity entity, UUID playerId) {
         return entity.hasData(TideboundAttachments.VESSEL_ENTITY_LINK)
                 && entity.getData(TideboundAttachments.VESSEL_ENTITY_LINK).belongsTo(playerId);
+    }
+
+    private static Optional<Boat> nearestUnownedBoat(ServerPlayer player) {
+        if (player.getVehicle() instanceof Boat ridden && isRegistrationCandidate(ridden)) {
+            return Optional.of(ridden);
+        }
+        return player.serverLevel().getEntitiesOfClass(
+                        Boat.class,
+                        player.getBoundingBox().inflate(8.0),
+                        VesselDeploymentService::isRegistrationCandidate
+                ).stream()
+                .min(Comparator.comparingDouble(player::distanceToSqr));
+    }
+
+    private static boolean isRegistrationCandidate(Boat boat) {
+        if (!boat.isAlive()) {
+            return false;
+        }
+        return !boat.hasData(TideboundAttachments.VESSEL_ENTITY_LINK)
+                || !boat.getData(TideboundAttachments.VESSEL_ENTITY_LINK).linked();
+    }
+
+    private static void configureOwnedBoat(ServerPlayer player, Boat boat, PlayerVessel vessel) {
+        boat.addTag(PHYSICAL_VESSEL_TAG);
+        boat.setCustomName(Component.literal(displayName(vessel)).withStyle(ChatFormatting.AQUA));
+        boat.setCustomNameVisible(true);
+        boat.setData(TideboundAttachments.VESSEL_ENTITY_LINK,
+                VesselEntityLink.linked(player.getUUID(), vessel.vesselId()));
     }
 
     private static void syncEntity(ServerPlayer player, Entity entity) {
@@ -195,9 +268,13 @@ public final class VesselDeploymentService {
     }
 
     private static VesselDeployment deploymentFor(Entity entity) {
+        BlockPos position = entity.blockPosition();
         return VesselDeployment.active(
                 entity.getUUID(),
                 entity.level().dimension().location().toString(),
+                position.getX(),
+                position.getY(),
+                position.getZ(),
                 entity.chunkPosition().x,
                 entity.chunkPosition().z
         );
