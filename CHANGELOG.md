@@ -6,6 +6,17 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 - aucune modification en attente.
 
+## 0.6.0-alpha — TB-CORE-005B
+
+- achats d'améliorations au port avec Tides, matériaux et prérequis de métier ;
+- transactions serveur protégées contre les doubles clics et restaurées en cas d'échec ;
+- réparation payante d'un navire physiquement ramené au quai ;
+- capacité de cale progressive de 9, 18 puis 27 emplacements sans suppression d'objets ;
+- conversion d'une barque enregistrée en bateau-coffre lors de l'amélioration de cale ;
+- Gradle Wrapper officiel et workflow GitHub Actions Java 21 ;
+- guide de test complet et manifeste de modpack CurseForge minimal ;
+- pont FTB Quests corrigé avec `{p}` et permission 2.
+
 ## 0.5.0-alpha — TB-CORE-005A
 
 - dépôt GitHub public initialisé avec la documentation de transmission ;

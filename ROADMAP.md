@@ -10,7 +10,7 @@
 
 ## En cours ensuite
 
-- [ ] `TB-CORE-005B` — coûts d'amélioration, réparations, capacité de cale et prérequis ;
+- [x] `TB-CORE-005B` — coûts d'amélioration, réparations, capacité de cale et prérequis ;
 - [ ] `TB-CORE-005C` — modules v1 : projecteur, sonar, treuil et filet.
 
 ## Prototype vertical

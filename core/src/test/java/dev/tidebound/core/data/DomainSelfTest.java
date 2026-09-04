@@ -22,6 +22,9 @@ public final class DomainSelfTest {
         skillLevelsFollowCurve();
         vesselRuntimeLinksAreValidated();
         wakeCompassBearingIsStable();
+        vesselUpgradeQuotesFollowProgression();
+        vesselHoldCapacityIsProgressive();
+        repairQuotesScaleWithDamage();
         System.out.println("DomainSelfTest: OK");
     }
 
@@ -124,6 +127,38 @@ public final class DomainSelfTest {
         check(WakeBearing.direction(-10, 10).equals("sud-ouest"), "south-west bearing");
         check(WakeBearing.direction(0, 0).equals("ici"), "same-position bearing");
         check(WakeBearing.distance(3, 4) == 5, "horizontal compass distance");
+    }
+
+    private static void vesselUpgradeQuotesFollowProgression() {
+        PlayerVessel vessel = PlayerVessel.unlock("La Vigie", UUID.randomUUID());
+        VesselUpgradeQuote hull = VesselUpgradeQuote.next(vessel, VesselUpgrade.HULL);
+        check(hull.targetTier() == 2, "hull quote target");
+        check(hull.tideCost() == 120, "hull quote tides");
+        check(hull.materialItemId().equals("minecraft:oak_planks"), "hull quote material");
+        check(hull.requiredSkill().equals("navigation") && hull.requiredSkillLevel() == 2,
+                "hull quote skill");
+
+        VesselUpgradeQuote hold = VesselUpgradeQuote.next(vessel.upgradeHold(), VesselUpgrade.HOLD);
+        check(hold.targetTier() == 3 && hold.tideCost() == 275, "second hold quote");
+
+        PlayerVessel maximum = vessel.upgradeHull().upgradeHull().upgradeHull().upgradeHull();
+        expect(IllegalStateException.class, () -> VesselUpgradeQuote.next(maximum, VesselUpgrade.HULL));
+    }
+
+    private static void vesselHoldCapacityIsProgressive() {
+        check(VesselHoldPolicy.usableSlots(1) == 9, "hold tier one slots");
+        check(VesselHoldPolicy.usableSlots(2) == 18, "hold tier two slots");
+        check(VesselHoldPolicy.usableSlots(3) == 27, "hold tier three slots");
+        check(VesselHoldPolicy.usableSlots(5) == 27, "hold tier five vanilla ceiling");
+        expect(IllegalArgumentException.class, () -> VesselHoldPolicy.usableSlots(0));
+    }
+
+    private static void repairQuotesScaleWithDamage() {
+        VesselRepairQuote light = VesselRepairQuote.forDamage(1.0F);
+        check(light.tideCost() == 10 && light.materialCount() == 1, "light repair quote");
+        VesselRepairQuote heavy = VesselRepairQuote.forDamage(26.0F);
+        check(heavy.tideCost() == 60 && heavy.materialCount() == 3, "heavy repair quote");
+        expect(IllegalArgumentException.class, () -> VesselRepairQuote.forDamage(0));
     }
 
     private static void check(boolean condition, String label) {

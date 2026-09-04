@@ -1,4 +1,4 @@
-# Tidebound Core — TB-CORE-005A
+# Tidebound Core — TB-CORE-005B
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -26,6 +26,9 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - ponts prêts à copier pour KubeJS et FTB Quests ;
 - commandes de diagnostic et d'administration ;
 - tests autonomes du domaine économique, du bateau et de la progression.
+- achats au port avec coûts en Tides, matériaux et niveaux de métier ;
+- réparation du navire au quai et remboursement sur échec ;
+- cale progressive de 9, 18 puis 27 emplacements utilisables.
 
 Le navire utilise volontairement l'entité bateau-coffre vanilla comme première coque jouable. La source de vérité
 serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Les objectifs ne forment
@@ -50,6 +53,8 @@ Commandes joueur :
 - `/tidebound vessel deploy` — près d'un intendant et d'une zone d'eau
 - `/tidebound vessel compass` — remplace gratuitement un Compas de sillage perdu au port
 - `/tidebound vessel rename <name>` — près d'un intendant
+- `/tidebound vessel purchase <hull|motor|hold|module>` — achat au port, navire présent
+- `/tidebound vessel repair` — réparation au port, navire présent
 - `/tidebound progression inspect`
 - `/tidebound skills`
 - `/tidebound progression content summary`
@@ -82,21 +87,21 @@ et refuse les valeurs négatives ou supérieures à 1 000 000 000 000.
 
 ## Compiler le mod
 
-Le projet suit le MDK ModDevGradle officiel. Le JDK 21 et Gradle doivent être disponibles localement.
-Depuis ce dossier :
+Le projet suit le MDK ModDevGradle officiel. Installer un JDK 21 ; le Gradle Wrapper est inclus.
+Depuis ce dossier, sous Windows :
 
 ```bash
-gradle build
+.\gradlew.bat build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.5.0-alpha.jar`.
-
-Pour ajouter le Gradle Wrapper à un clone de travail :
+Sous Linux ou macOS :
 
 ```bash
-gradle wrapper
 ./gradlew build
 ```
+
+Le JAR est produit dans `build/libs/tidebound-0.6.0-alpha.jar`. Pour lancer un client de développement,
+utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
 
@@ -112,6 +117,10 @@ javac --release 17 -d build/domain-self-test \
   src/main/java/dev/tidebound/core/data/VesselEntityLink.java \
   src/main/java/dev/tidebound/core/data/VesselDeploymentState.java \
   src/main/java/dev/tidebound/core/data/VesselDeployment.java \
+  src/main/java/dev/tidebound/core/data/VesselUpgrade.java \
+  src/main/java/dev/tidebound/core/data/VesselUpgradeQuote.java \
+  src/main/java/dev/tidebound/core/data/VesselRepairQuote.java \
+  src/main/java/dev/tidebound/core/data/VesselHoldPolicy.java \
   src/main/java/dev/tidebound/core/navigation/WakeBearing.java \
   src/main/java/dev/tidebound/core/progression/SkillProgression.java \
   src/test/java/dev/tidebound/core/data/DomainSelfTest.java
@@ -129,6 +138,9 @@ TideboundApi.wallet(player);
 TideboundApi.unlockVessel(player, vesselName);
 TideboundApi.vessel(player);
 TideboundApi.upgradeVessel(player, VesselUpgrade.HULL);
+TideboundApi.nextVesselUpgrade(player, VesselUpgrade.HULL);
+TideboundApi.purchaseVesselUpgrade(player, VesselUpgrade.HULL);
+TideboundApi.repairVessel(player);
 TideboundApi.renameVessel(player, vesselName);
 TideboundApi.vesselDeployment(player);
 TideboundApi.deployVessel(player);
@@ -191,5 +203,4 @@ Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle sui
 
 Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
 
-La prochaine brique recommandée est `TB-CORE-005B` : coûts d'amélioration, réparations au port,
-prérequis de métiers et vraie capacité de cale progressive.
+La prochaine brique recommandée est `TB-CORE-005C` : projecteur, sonar, treuil et filet équipables.

@@ -11,6 +11,7 @@ import dev.tidebound.core.data.PlayerVessel;
 import dev.tidebound.core.data.PlayerProgress;
 import dev.tidebound.core.data.TideWallet;
 import dev.tidebound.core.data.VesselUpgrade;
+import dev.tidebound.core.data.VesselTransactionResult;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.service.HarborBoardService;
@@ -106,6 +107,15 @@ public final class TideboundCommands {
                                         context.getSource(),
                                         context.getSource().getPlayerOrException(),
                                         StringArgumentType.getString(context, "name")))))
+                .then(Commands.literal("purchase")
+                        .then(purchaseUpgradeNode("hull", VesselUpgrade.HULL))
+                        .then(purchaseUpgradeNode("motor", VesselUpgrade.MOTOR))
+                        .then(purchaseUpgradeNode("hold", VesselUpgrade.HOLD))
+                        .then(purchaseUpgradeNode("module", VesselUpgrade.MODULE_SLOT)))
+                .then(Commands.literal("repair")
+                        .executes(context -> showVesselTransaction(
+                                context.getSource(), TideboundApi.repairVessel(
+                                        context.getSource().getPlayerOrException()))))
                 .then(Commands.literal("inspect")
                         .executes(context -> inspectVessel(
                                 context.getSource(), context.getSource().getPlayerOrException()))
@@ -135,6 +145,13 @@ public final class TideboundCommands {
     private static LiteralArgumentBuilder<CommandSourceStack> vesselUpgradeNode(String name, VesselUpgrade upgrade) {
         return Commands.literal(name).executes(context -> upgradeVessel(
                 context.getSource(), EntityArgument.getPlayer(context, "player"), upgrade));
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> purchaseUpgradeNode(
+            String name, VesselUpgrade upgrade) {
+        return Commands.literal(name).executes(context -> showVesselTransaction(
+                context.getSource(), TideboundApi.purchaseVesselUpgrade(
+                        context.getSource().getPlayerOrException(), upgrade)));
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> progressionNode() {
@@ -516,6 +533,17 @@ public final class TideboundCommands {
                 .withStyle(result.success() ? ChatFormatting.GREEN : ChatFormatting.RED);
         if (result.success()) {
             source.sendSuccess(() -> message, true);
+            return 1;
+        }
+        source.sendFailure(message);
+        return 0;
+    }
+
+    private static int showVesselTransaction(CommandSourceStack source, VesselTransactionResult result) {
+        Component message = Component.literal(result.message())
+                .withStyle(result.success() ? ChatFormatting.GREEN : ChatFormatting.RED);
+        if (result.success()) {
+            source.sendSuccess(() -> message, false);
             return 1;
         }
         source.sendFailure(message);
