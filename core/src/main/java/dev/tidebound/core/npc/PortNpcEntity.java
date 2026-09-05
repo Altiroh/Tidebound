@@ -27,7 +27,7 @@ public final class PortNpcEntity extends Villager {
     }
 
     @Override
-    protected InteractionResult mobInteract(Player player, InteractionHand hand) {
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
         if (hand != InteractionHand.MAIN_HAND) {
             return InteractionResult.PASS;
         }
