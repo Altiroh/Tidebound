@@ -21,6 +21,7 @@ import dev.tidebound.core.service.ArchipelagoSurveyService;
 import dev.tidebound.core.service.ProgressionService;
 import dev.tidebound.core.world.ArchipelagoSurvey;
 import dev.tidebound.core.world.StarterPortPlan;
+import dev.tidebound.core.world.PortPlan;
 import java.util.Locale;
 import java.util.List;
 import net.minecraft.ChatFormatting;
@@ -278,7 +279,25 @@ public final class TideboundCommands {
                         .then(Commands.argument("radius", IntegerArgumentType.integer(64, 256))
                                 .executes(context -> diagnoseWorld(
                                         context.getSource(),
-                                        IntegerArgumentType.getInteger(context, "radius")))));
+                                        IntegerArgumentType.getInteger(context, "radius")))))
+                .then(Commands.literal("port-plan")
+                        .executes(context -> showPortPlan(context.getSource())));
+    }
+
+    private static int showPortPlan(CommandSourceStack source) {
+        ServerPlayer player;
+        try {
+            player = source.getPlayerOrException();
+        } catch (Exception exception) {
+            source.sendFailure(Component.literal("Cette commande doit être exécutée par un joueur."));
+            return 0;
+        }
+        int regionX = Math.floorDiv(player.getBlockX(), 512);
+        int regionZ = Math.floorDiv(player.getBlockZ(), 512);
+        PortPlan plan = PortPlan.at(player.serverLevel().getSeed(), regionX, regionZ);
+        source.sendSuccess(() -> Component.literal("Plan portuaire régional — " + plan.archetype().name()
+                + " — services : " + plan.services()).withStyle(ChatFormatting.AQUA), false);
+        return 1;
     }
 
     private static int diagnoseWorld(CommandSourceStack source, int radius) {

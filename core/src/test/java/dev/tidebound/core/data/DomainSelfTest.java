@@ -14,6 +14,9 @@ import dev.tidebound.core.navigation.WakeBearing;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.world.ArchipelagoSurvey;
 import dev.tidebound.core.world.StarterPortPlan;
+import dev.tidebound.core.world.PortArchetype;
+import dev.tidebound.core.world.PortPlan;
+import dev.tidebound.core.world.PortService;
 import dev.tidebound.core.vessel.VesselVisualProfile;
 
 /**
@@ -42,6 +45,7 @@ public final class DomainSelfTest {
         vanillaFishProfilesAreComplete();
         archipelagoSurveyRejectsContinentsAndBarrenSpawns();
         starterPortRollIsDeterministicAndOptional();
+        portPlansAreVariedAndRespectServiceRules();
         vesselVisualProfileTracksEveryUpgrade();
         System.out.println("DomainSelfTest: OK");
     }
@@ -267,6 +271,29 @@ public final class DomainSelfTest {
             }
         }
         check(selected > 0 && selected < 41, "starter port is optional across seeds");
+    }
+
+    private static void portPlansAreVariedAndRespectServiceRules() {
+        java.util.EnumSet<PortArchetype> archetypes = java.util.EnumSet.noneOf(PortArchetype.class);
+        int intendants = 0;
+        int createPorts = 0;
+        for (int region = 0; region < 500; region++) {
+            PortPlan plan = PortPlan.at(42L, region - 250, region * 17);
+            check(plan.equals(PortPlan.at(42L, region - 250, region * 17)), "stable port plan");
+            check(plan.services().containsAll(plan.archetype().baseServices()), "port base services");
+            long npcCount = plan.services().stream().filter(service -> switch (service) {
+                case INTENDANT, SHIPWRIGHT, FISHMONGER, NATURALIST, LIGHTHOUSE_KEEPER -> true;
+                default -> false;
+            }).count();
+            check(npcCount >= 1 && npcCount < 5, "port never exposes every NPC");
+            archetypes.add(plan.archetype());
+            intendants += plan.services().contains(PortService.INTENDANT) ? 1 : 0;
+            createPorts += plan.services().contains(PortService.CREATE_MECHANISM) ? 1 : 0;
+        }
+        check(archetypes.size() == PortArchetype.values().length, "all port archetypes occur");
+        check(intendants > 0 && intendants < 500, "intendant is useful but not guaranteed");
+        check(createPorts > 0 && createPorts < 100, "Create mechanisms remain occasional");
+        check(PortPlan.starter(1L).equals(PortPlan.starter(1L)), "starter port plan is stable");
     }
 
     private static void check(boolean condition, String label) {
