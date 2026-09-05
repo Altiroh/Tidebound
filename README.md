@@ -6,7 +6,7 @@ Le projet n'est pas un mode histoire. Le livre **Le Voyage** fournit un fil dire
 
 ## État actuel
 
-- version du projet : `0.8.0-alpha` ;
+- version du projet : `0.9.0-alpha` ;
 - dernier ticket terminé : `TB-FISH-001` ;
 - cible : Minecraft `1.21.1`, NeoForge `21.1.249`, Java `21` ;
 - tests de domaine et validation du contenu automatisés par Gradle et la CI GitHub.
@@ -54,5 +54,5 @@ python tools/validate_content.py
 ./gradlew build
 ```
 
-Le JAR attendu est `core/build/libs/tidebound-0.8.0-alpha.jar`. Le workflow GitHub Actions publie
+Le JAR attendu est `core/build/libs/tidebound-0.9.0-alpha.jar`. Le workflow GitHub Actions publie
 également ce JAR comme artifact à chaque push et pull request.

@@ -6,6 +6,17 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 - aucune modification en attente.
 
+## 0.9.0-alpha — TB-UX-001
+
+- ajout d'une icône Tidebound dans l'inventaire du joueur ;
+- ajout d'un carnet de bord visuel présentant la boucle du prototype ;
+- remplacement du tableau textuel de l'intendant par un menu serveur/client synchronisé ;
+- affichage graphique des Tides, de l'état du navire et des niveaux coque/moteur/cale/modules ;
+- boutons pour enregistrer, mettre à l'eau, retrouver, réparer et améliorer le navire ;
+- intégration de l'interface d'intendant et du Compas de sillage issus du pack artistique ;
+- catalogue des PNJ, interfaces, poissons, modules, objets et stations déjà créés ;
+- conservation d'une référence optimisée du futur skin d'intendant, sans déclarer encore une entité dédiée.
+
 ## 0.8.0-alpha — TB-FISH-001
 
 - ajout du Data Component persistant et synchronisé `tidebound:catch_data` ;

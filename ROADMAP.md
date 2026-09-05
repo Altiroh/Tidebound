@@ -11,14 +11,16 @@
 - [x] `TB-DESIGN-001` — lore canonique, tonalité et structure facultative du Voyage ;
 - [x] `TB-QUEST-001` — livre FTB Quests `Naufragé` et `Premier port`.
 - [x] `TB-FISH-001` — prises vanilla enrichies : poids, qualité, fraîcheur, origine, anomalie et valeur.
+- [x] `TB-UX-001` — carnet dans l'inventaire, menu visuel de l'intendant et premier raccord des assets.
 
 ## Prochaine tranche du prototype vertical
 
 - [ ] `TB-ECON-001` — vente physique au port et équilibrage des Tides ;
 - [ ] `TB-WORLD-001` — génération d'une île de départ viable et variable ;
 - [ ] `TB-PORT-001` — structure de port, intendant et services générés ;
+- [ ] `TB-NPC-001` — entité d'intendant originale et conversion de son skin ;
 - [ ] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet ;
-- [ ] `TB-VESSEL-001` — choix de l'entité ou du mod de bateau définitif ;
+- [ ] `TB-VESSEL-001` — véritable navire Tidebound modulaire, améliorable visuellement, avec migration des barques ;
 - [ ] `TB-QA-001` — partie neuve de 30 minutes sur plusieurs seeds.
 
 ## Après validation du prototype
