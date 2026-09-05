@@ -229,7 +229,7 @@ public final class DomainSelfTest {
         check(!viable.continentLike(), "island is not a continent");
 
         ArchipelagoSurvey continent = new ArchipelagoSurvey(100, 70, 25, 5, 4);
-        check(continent.playable(), "resource-rich continent is otherwise playable");
+        check(!continent.playable(), "continent fails the water requirement");
         check(continent.continentLike(), "continent detection");
 
         ArchipelagoSurvey barren = new ArchipelagoSurvey(100, 20, 75, 8, 0);
