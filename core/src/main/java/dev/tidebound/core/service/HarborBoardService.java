@@ -18,6 +18,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Item;
@@ -82,6 +83,14 @@ public final class HarborBoardService {
         for (String id : ids) {
             TideboundContentManager.contract(id).ifPresent(definition -> showContract(player, definition));
         }
+    }
+
+    public static void open(ServerPlayer player) {
+        player.openMenu(new SimpleMenuProvider(
+                (containerId, inventory, ignored) ->
+                        new dev.tidebound.core.menu.HarborMenu(containerId, inventory, player),
+                Component.translatable("menu.tidebound.harbor")
+        ));
     }
 
     private static void showVesselActions(ServerPlayer player) {
@@ -155,7 +164,7 @@ public final class HarborBoardService {
         event.setCanceled(true);
         event.setCancellationResult(InteractionResult.SUCCESS);
         if (event.getHand() == InteractionHand.MAIN_HAND && event.getEntity() instanceof ServerPlayer player) {
-            show(player);
+            open(player);
         }
     }
 
