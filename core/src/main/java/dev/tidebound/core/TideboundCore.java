@@ -4,6 +4,7 @@ import dev.tidebound.core.command.TideboundCommands;
 import dev.tidebound.core.content.TideboundContentManager;
 import dev.tidebound.core.event.TideboundGameplayEvents;
 import dev.tidebound.core.registry.TideboundAttachments;
+import dev.tidebound.core.registry.TideboundDataComponents;
 import dev.tidebound.core.registry.TideboundItems;
 import dev.tidebound.core.service.HarborBoardService;
 import dev.tidebound.core.service.VesselDeploymentService;
@@ -17,6 +18,7 @@ public final class TideboundCore {
 
     public TideboundCore(IEventBus modBus) {
         TideboundAttachments.register(modBus);
+        TideboundDataComponents.register(modBus);
         TideboundItems.register(modBus);
         NeoForge.EVENT_BUS.addListener(TideboundCommands::register);
         NeoForge.EVENT_BUS.addListener(TideboundContentManager::register);

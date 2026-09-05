@@ -10,10 +10,10 @@
 - [x] `TB-CORE-005B` — coûts d'amélioration, réparations, capacité de cale et prérequis ;
 - [x] `TB-DESIGN-001` — lore canonique, tonalité et structure facultative du Voyage ;
 - [x] `TB-QUEST-001` — livre FTB Quests `Naufragé` et `Premier port`.
+- [x] `TB-FISH-001` — prises vanilla enrichies : poids, qualité, fraîcheur, origine, anomalie et valeur.
 
 ## Prochaine tranche du prototype vertical
 
-- [ ] `TB-FISH-001` — capture avec poids, qualité, fraîcheur, origine et valeur ;
 - [ ] `TB-ECON-001` — vente physique au port et équilibrage des Tides ;
 - [ ] `TB-WORLD-001` — génération d'une île de départ viable et variable ;
 - [ ] `TB-PORT-001` — structure de port, intendant et services générés ;

@@ -17,7 +17,7 @@ Commencer par lire `HANDOFF.md`, puis `docs/design/Tidebound_Lore.md`, `ROADMAP.
 
 ## Travail courant
 
-La prochaine unité de travail est `TB-FISH-001`, décrite dans `HANDOFF.md`. Le lore canonique et les
-deux premiers chapitres FTB Quests sont implémentés dans `TB-DESIGN-001` et `TB-QUEST-001`.
+La prochaine unité de travail est `TB-ECON-001`, décrite dans `HANDOFF.md`. Les prises persistantes,
+leur fraîcheur et leur valeur sont implémentées dans `TB-FISH-001` sans remplacer les items vanilla.
 
 Après toute modification matérielle, mettre à jour `HANDOFF.md`, `ROADMAP.md`, `CHANGELOG.md` et la note de ticket correspondante avant de committer.

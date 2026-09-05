@@ -6,6 +6,17 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 - aucune modification en attente.
 
+## 0.8.0-alpha — TB-FISH-001
+
+- ajout du Data Component persistant et synchronisé `tidebound:catch_data` ;
+- enrichissement des morues, saumons, poissons tropicaux et poissons-globes réellement pêchés ;
+- poids, qualité, biome d'origine, instant de capture et anomalies rares ;
+- fraîcheur dynamique sans scan ni tick d'inventaire ;
+- estimation serveur de la valeur selon tous les attributs de la prise ;
+- tooltips français/anglais, résumé de capture et commande `/tidebound catch inspect` ;
+- le palier et l'XP de première prise ignorent désormais les déchets de pêche ;
+- tests de génération déterministe, vieillissement, profils et multiplicateurs de valeur.
+
 ## 0.7.0-alpha — TB-DESIGN-001 / TB-QUEST-001
 
 - intégration d'un lore canonique compatible avec le sandbox et d'un fil directeur facultatif `Le Voyage` ;

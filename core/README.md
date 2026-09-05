@@ -1,4 +1,4 @@
-# Tidebound Core — 0.7.0-alpha
+# Tidebound Core — 0.8.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -30,6 +30,10 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - achats au port avec coûts en Tides, matériaux et niveaux de métier ;
 - réparation du navire au quai et remboursement sur échec ;
 - cale progressive de 9, 18 puis 27 emplacements utilisables.
+- Data Component persistant sur les quatre poissons vanilla obtenus à la pêche ;
+- poids, qualité, fraîcheur dynamique, biome d'origine, anomalie rare et valeur estimée ;
+- affichage de la prise dans la barre d'action et dans son tooltip ;
+- première capture limitée aux vrais poissons, sans récompense sur les déchets de pêche.
 
 Le navire utilise volontairement l'entité bateau-coffre vanilla comme première coque jouable. La source de vérité
 serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Le livre `Le Voyage`
@@ -48,6 +52,7 @@ guide le joueur sans verrouiller le sandbox : ses objectifs actuels sont visible
 Commandes joueur :
 
 - `/tidebound tide balance`
+- `/tidebound catch inspect` — inspecte la prise tenue en main principale
 - `/tidebound vessel inspect`
 - `/tidebound vessel claim [name]` — près d'un intendant
 - `/tidebound vessel register [name]` — enregistre la barque vanilla montée ou la plus proche
@@ -101,7 +106,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.7.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.8.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -122,6 +127,14 @@ javac --release 17 -d build/domain-self-test \
   src/main/java/dev/tidebound/core/data/VesselUpgradeQuote.java \
   src/main/java/dev/tidebound/core/data/VesselRepairQuote.java \
   src/main/java/dev/tidebound/core/data/VesselHoldPolicy.java \
+  src/main/java/dev/tidebound/core/fishing/CatchAnomaly.java \
+  src/main/java/dev/tidebound/core/fishing/CatchData.java \
+  src/main/java/dev/tidebound/core/fishing/CatchFreshness.java \
+  src/main/java/dev/tidebound/core/fishing/CatchGenerator.java \
+  src/main/java/dev/tidebound/core/fishing/CatchProfile.java \
+  src/main/java/dev/tidebound/core/fishing/CatchProfiles.java \
+  src/main/java/dev/tidebound/core/fishing/CatchQuality.java \
+  src/main/java/dev/tidebound/core/fishing/CatchValuation.java \
   src/main/java/dev/tidebound/core/navigation/WakeBearing.java \
   src/main/java/dev/tidebound/core/progression/SkillProgression.java \
   src/test/java/dev/tidebound/core/data/DomainSelfTest.java
@@ -205,5 +218,13 @@ Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle sui
 
 Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
 
-La prochaine brique recommandée est `TB-FISH-001` : prises persistantes avec espèce, poids, qualité,
-fraîcheur et valeur. Les modules du navire reprendront après la disponibilité des API de pêche et de monde.
+## Prises Tidebound
+
+Une prise conserve son item vanilla et reçoit le composant `tidebound:catch_data`. La valeur estimée
+dépend du profil de l'espèce, du poids, de la qualité, de l'anomalie et de la fraîcheur actuelle.
+Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante jusqu'à 72 000, passée
+jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
+l'instant de capture.
+
+La prochaine brique recommandée est `TB-ECON-001` : poissonnier de port, vente physique des prises et
+versement transactionnel des Tides. Les modules du navire reprendront après les API de pêche et de monde.
