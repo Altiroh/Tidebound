@@ -1,6 +1,6 @@
 # TB-VESSEL-001 — Navire Tidebound modulaire
 
-Version : `0.11.0-alpha`  
+Version : `0.11.1-alpha`
 État : implémenté, compilation CI et test manuel en jeu requis
 
 ## Résultat
@@ -23,8 +23,8 @@ ou à la logique du navire.
 
 ## Migration
 
-- une barque vanilla nouvellement enregistrée est immédiatement transformée au port ;
-- les anciennes sauvegardes conservent leur bateau jusqu'à l'action **Chantier naval** ;
+- une barque vanilla nouvellement enregistrée reste une **Barque de fortune**, localisable mais non améliorable ;
+- le chantier naval est la transition explicite vers le véritable navire Tidebound ;
 - `/tidebound vessel refit` offre le même chemin de secours ;
 - UUID métier `PlayerVessel`, propriétaire, nom, position, rotation, mouvement, dégâts, contenu de cale et passagers
   sont conservés ;

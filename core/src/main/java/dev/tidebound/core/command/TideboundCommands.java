@@ -398,8 +398,9 @@ public final class TideboundCommands {
         try {
             var boat = TideboundApi.registerNearbyVanillaBoat(player, name);
             PlayerVessel vessel = TideboundApi.vessel(player);
-            source.sendSuccess(() -> Component.literal("La barque vanilla devient " + vessel.name()
-                    + ". L'intendant vous remet son Compas de sillage.")
+            source.sendSuccess(() -> Component.literal("La barque de fortune " + vessel.name()
+                    + " est enregistrée. Elle reste une barque simple, sans améliorations. "
+                    + "L'intendant vous remet son Compas de sillage.")
                     .withStyle(ChatFormatting.GOLD), false);
             return boat.isAlive() ? 1 : 0;
         } catch (IllegalArgumentException | IllegalStateException exception) {
@@ -411,8 +412,8 @@ public final class TideboundCommands {
     private static int refitVessel(CommandSourceStack source, ServerPlayer player) {
         try {
             var vessel = TideboundApi.refitVessel(player);
-            source.sendSuccess(() -> Component.literal("Le chantier naval a transformé votre ancienne barque en "
-                    + TideboundApi.vessel(player).name() + " sans perdre sa cale ni ses améliorations.")
+            source.sendSuccess(() -> Component.literal("Le chantier naval a remplacé votre barque de fortune par "
+                    + TideboundApi.vessel(player).name() + ", un véritable navire Tidebound améliorable.")
                     .withStyle(ChatFormatting.AQUA), false);
             return vessel.isAlive() ? 1 : 0;
         } catch (IllegalArgumentException | IllegalStateException exception) {

@@ -4,7 +4,9 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 ## Non publié
 
-- aucune modification en attente.
+- l'enregistrement conserve la barque vanilla comme **Barque de fortune** ;
+- les améliorations sont refusées avant la construction du navire Tidebound au chantier ;
+- l'interface masque les jauges de la barque et explique visuellement la transition.
 
 ## 0.11.0-alpha — TB-VESSEL-001
 
@@ -13,7 +15,7 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 - quatre places à bord avec positions séparées ;
 - renforts de coque, cale fermée, moteur et supports de modules visibles selon la progression ;
 - synchronisation client des quatre axes visuels et persistance NBT de secours ;
-- transformation immédiate de toute nouvelle barque enregistrée au port ;
+- construction explicite du navire Tidebound au chantier après l'enregistrement d'une Barque de fortune ;
 - action **Chantier naval** et commande `/tidebound vessel refit` pour les anciennes sauvegardes ;
 - conservation du propriétaire, du nom, des dégâts, du mouvement, des passagers et du contenu lors de la migration ;
 - architecture de rendu isolée pour permettre le remplacement ultérieur par un modèle Blockbench.

@@ -37,18 +37,23 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
         addRenderableWidget(new Hotspot(leftPos + 134, topPos + 170, 55, 39,
                 Component.translatable("menu.tidebound.voyage"), this::openVoyage));
 
-        addRenderableWidget(new Hotspot(leftPos + 178, topPos + 86, 59, 12,
+        Hotspot hull = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 86, 59, 12,
                 Component.translatable("menu.tidebound.upgrade.hull"),
                 () -> press(HarborMenu.ACTION_HULL)));
-        addRenderableWidget(new Hotspot(leftPos + 178, topPos + 110, 59, 12,
+        Hotspot motor = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 110, 59, 12,
                 Component.translatable("menu.tidebound.upgrade.motor"),
                 () -> press(HarborMenu.ACTION_MOTOR)));
-        addRenderableWidget(new Hotspot(leftPos + 178, topPos + 134, 59, 12,
+        Hotspot hold = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 134, 59, 12,
                 Component.translatable("menu.tidebound.upgrade.hold"),
                 () -> press(HarborMenu.ACTION_HOLD)));
-        addRenderableWidget(new Hotspot(leftPos + 178, topPos + 151, 59, 11,
+        Hotspot module = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 151, 59, 11,
                 Component.translatable("menu.tidebound.upgrade.module"),
                 () -> press(HarborMenu.ACTION_MODULE)));
+        boolean upgradesAvailable = menu.tideboundVessel();
+        hull.active = upgradesAvailable;
+        motor.active = upgradesAvailable;
+        hold.active = upgradesAvailable;
+        module.active = upgradesAvailable;
 
         int actionY = topPos + 248;
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
@@ -88,12 +93,18 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
         int x = leftPos + 121;
         int y = topPos + 40;
         graphics.fill(x, y, x + 124, y + 124, PANEL);
-        graphics.drawString(font, Component.translatable("menu.tidebound.my_vessel"), x + 8, y + 7, INK, false);
+        graphics.drawString(font, Component.translatable(menu.tideboundVessel()
+                ? "menu.tidebound.my_vessel" : "menu.tidebound.simple_boat"), x + 8, y + 7, INK, false);
         drawVesselSilhouette(graphics, x + 10, y + 27);
-        drawTier(graphics, Component.translatable("menu.tidebound.hull"), menu.hullTier(), x + 8, y + 49);
-        drawTier(graphics, Component.translatable("menu.tidebound.motor"), menu.motorTier(), x + 8, y + 73);
-        drawTier(graphics, Component.translatable("menu.tidebound.hold"), menu.holdTier(), x + 8, y + 97);
-        drawTier(graphics, Component.translatable("menu.tidebound.modules"), menu.moduleSlots(), x + 8, y + 114);
+        if (menu.tideboundVessel()) {
+            drawTier(graphics, Component.translatable("menu.tidebound.hull"), menu.hullTier(), x + 8, y + 49);
+            drawTier(graphics, Component.translatable("menu.tidebound.motor"), menu.motorTier(), x + 8, y + 73);
+            drawTier(graphics, Component.translatable("menu.tidebound.hold"), menu.holdTier(), x + 8, y + 97);
+            drawTier(graphics, Component.translatable("menu.tidebound.modules"), menu.moduleSlots(), x + 8, y + 114);
+        } else {
+            graphics.drawWordWrap(font, Component.translatable("menu.tidebound.simple_boat.help"),
+                    x + 8, y + 55, 108, 0xFF6B3F2B);
+        }
 
         graphics.fill(leftPos + 14, topPos + 214, leftPos + 244, topPos + 244, 0xE6192528);
         graphics.drawString(font, Component.translatable("menu.tidebound.tides", menu.tides()),

@@ -80,7 +80,7 @@ public final class VesselDeploymentService {
         return boat;
     }
 
-    public static TideboundVesselEntity registerNearbyVanillaBoat(ServerPlayer player, String name) {
+    public static Boat registerNearbyVanillaBoat(ServerPlayer player, String name) {
         if (!HarborBoardService.isNearBoard(player)) {
             throw new IllegalStateException("Approchez-vous d'un intendant de port pour enregistrer la barque");
         }
@@ -93,9 +93,10 @@ public final class VesselDeploymentService {
         PlayerVessel before = VesselService.vessel(player);
         PlayerVessel vessel = VesselService.unlock(player, name);
         try {
-            TideboundVesselEntity refitted = migrate(player, boat, vessel);
+            configureOwnedBoat(player, boat, vessel);
+            setDeployment(player, deploymentFor(boat));
             WakeCompassService.giveIfMissing(player);
-            return refitted;
+            return boat;
         } catch (RuntimeException exception) {
             player.setData(TideboundAttachments.PLAYER_VESSEL, before);
             throw exception;
@@ -332,6 +333,9 @@ public final class VesselDeploymentService {
     }
 
     private static void applyRuntimeUpgrades(ServerPlayer player, Boat boat) {
+        if (!(boat instanceof TideboundVesselEntity)) {
+            return;
+        }
         PlayerVessel vessel = VesselService.vessel(player);
         Vec3 movement = boat.getDeltaMovement();
         if (movement.horizontalDistanceSqr() > 0.0001) {

@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-VESSEL-001` / `0.11.0-alpha`
+État importé : `TB-VESSEL-001` / `0.11.1-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -32,7 +32,8 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - icône d'ancre dans l'inventaire et carnet de bord visuel ;
 - entité physique `tidebound:vessel`, fondée sur la physique de `ChestBoat` mais dotée de son propre rendu ;
 - quatre places et silhouette voxel modulaire avec progression visible ;
-- migration au port des barques enregistrées, avec conservation de la cale, des dégâts et de l'identité ;
+- barque vanilla enregistrée comme **Barque de fortune** détectable mais jamais améliorable ;
+- construction explicite du navire Tidebound au chantier, avec conservation de la cale, des dégâts et de l'identité ;
 - propriété, position, renommage, déploiement et protection du navire ;
 - effets légers des niveaux de coque et de moteur ;
 - enregistrement d'une barque vanilla existante comme navire personnel ;

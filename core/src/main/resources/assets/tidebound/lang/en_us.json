@@ -31,6 +31,8 @@
   "menu.tidebound.contracts": "Contracts",
   "menu.tidebound.voyage": "The Voyage",
   "menu.tidebound.my_vessel": "My vessel",
+  "menu.tidebound.simple_boat": "Makeshift boat",
+  "menu.tidebound.simple_boat.help": "Registered boat: navigation and compass only. Use the shipyard to unlock upgrades.",
   "menu.tidebound.hull": "Hull",
   "menu.tidebound.motor": "Engine",
   "menu.tidebound.hold": "Hold",

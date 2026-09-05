@@ -31,6 +31,8 @@
   "menu.tidebound.contracts": "Contrats",
   "menu.tidebound.voyage": "Le Voyage",
   "menu.tidebound.my_vessel": "Mon navire",
+  "menu.tidebound.simple_boat": "Barque de fortune",
+  "menu.tidebound.simple_boat.help": "Barque enregistrée : navigation et compas uniquement. Passez par le chantier naval pour débloquer les améliorations.",
   "menu.tidebound.hull": "Coque",
   "menu.tidebound.motor": "Moteur",
   "menu.tidebound.hold": "Cale",
