@@ -15,12 +15,14 @@
 - [x] `TB-WORLD-001` — preset d'archipel par défaut, île boisée ciblée et diagnostic de spawn.
 - [x] `TB-VESSEL-001` — entité de navire modulaire, quatre places, rendu progressif et migration des barques.
 - [x] `TB-PACK-001` — socle cosy : Create, stockage, carte, voyage, ambiance, objets physiques et shaders.
+- [x] `TB-DESIGN-002` — lore vanilla-friendly, familles d'îles, rôles portuaires, abysses et vitalité.
+- [x] `TB-NPC-001` — cinq PNJ portuaires dédiés, skins et écrans visuels par métier.
 
 ## Prochaine tranche du prototype vertical
 
-- [ ] `TB-NPC-001` — entité d'intendant originale et conversion de son skin ;
 - [ ] `TB-ECON-001` — vente physique au port et équilibrage des Tides ;
-- [ ] `TB-PORT-001` — structure de port, intendant et services générés ;
+- [ ] `TB-PORT-001` — structures de ports variables, services facultatifs et placement procédural ;
+- [ ] `TB-NAV-001` — Compas des Havres trouvant un Intendant non découvert ;
 - [ ] `TB-SMELT-001` — enchantement de fonte rapide compatible avec l'économie et Create ;
 - [ ] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet ;
 - [ ] `TB-QA-001` — partie neuve de 30 minutes sur plusieurs seeds.

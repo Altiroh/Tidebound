@@ -1,243 +1,250 @@
-# Tidebound — Vision, lore et progression
+# Tidebound — Lore, progression et logique du monde
 
 Statut : **référence canonique de conception**  
 Dernière mise à jour : **5 septembre 2026**
 
-Ce document intègre la note de continuité du projet et précise comment sa ligne directrice cohabite
-avec le sandbox procédural. Les systèmes réellement implémentés restent décrits dans `HANDOFF.md`.
+Les systèmes réellement implémentés restent décrits dans `HANDOFF.md`. Ce document fixe la vision
+cible et remplace les versions antérieures du lore.
 
-## Promesse
+## 1. Vision générale
 
-Tidebound est un jeu maritime construit dans Minecraft. Le joueur survit, pêche, commerce, aménage
-un refuge et développe un navire personnel dans un monde d'îles générées selon la seed.
-
-L'expérience repose sur quatre couches complémentaires :
-
-- une vie maritime cosy et contemplative ;
-- une progression simple par métiers, équipement et infrastructures ;
-- une exploration libre soutenue par des contrats répétables ;
-- une horreur lovecraftienne rare, lente et fragmentaire.
+Tidebound est un modpack maritime cosy, orienté exploration, pêche, navigation, découverte et
+progression lente vers un imaginaire lovecraftien. Le monde semble d'abord accueillant, vivant et
+presque banal. Le joueur peut survivre, construire, pêcher, commercer, explorer et améliorer son
+quotidien sans suivre activement le lore.
 
 > **Plus le joueur comprend la mer, moins elle paraît normale.**
 
-## Sandbox guidé, pas campagne imposée
+Le surnaturel apparaît progressivement par des anomalies rares, des découvertes profondes, des
+reliques, des espèces impossibles et des lieux qui ne devraient pas exister. Cthulhu, ou son
+équivalent mythologique, n'est jamais un simple boss : c'est une présence, une vérité enfouie et un
+horizon narratif.
 
-Tidebound possède une ligne directrice appelée **Le Voyage**. Elle présente les systèmes dans un
-ordre lisible et récompense leur découverte, mais elle n'est pas un scénario obligatoire.
+## 2. Principe vanilla-friendly
 
-Les règles suivantes sont non négociables :
+Chaque système Tidebound important possède une utilité sandbox indépendante du lore :
 
-- aucune quête ne choisit le personnage ou la manière de construire du joueur ;
-- les îles, ports et rencontres ne suivent pas une route canonique ;
-- une étape du Voyage ne verrouille pas artificiellement l'exploration disponible ;
-- les restrictions viennent du navire, de l'équipement et du danger réel de la mer ;
-- le joueur peut ignorer le livre de quêtes et continuer sa partie ;
-- les contrats répétables restent indépendants du Voyage.
+- le navire transporte le joueur, des ressources, du stockage et des cargaisons ;
+- les poissons servent à l'alimentation, au commerce et à la collection ;
+- les ports sont des hubs pratiques et les îles spécialisées fournissent des ressources vanilla ;
+- fumoir, table de découpe, vivier et aquarium prolongent les usages de Minecraft ;
+- sonar et dragage servent d'abord l'exploration et le loot ordinaires ;
+- les reliques donnent aussi de vrais bénéfices permanents.
 
-FTB Quests sert de journal visuel. Tidebound Core conserve l'autorité sur les Tides, métiers,
-contrats, découvertes et systèmes lovecraftiens.
+> **Comment Minecraft vanilla ferait-il cela ?**
 
-## Le Voyage
+Cette question précède toujours l'ajout de la couche propre à Tidebound. Les ressources vanilla
+gardent leur importance ; un objet Tidebound n'existe que lorsqu'il apporte une fonction nouvelle.
 
-### Chapitre 1 — Naufragé
+## 3. Un archipel vivant
 
-Le départ ne dépend jamais d'une bonne seed. Une île sans port reste jouable grâce aux ressources et
-outils vanilla.
+Le monde normal de Tidebound est un archipel composé d'une infinité apparente de petites terres.
+Le bateau et la navigation doivent conserver leur importance.
 
-Premiers repères :
+- **Îlot** : décor, halte ou ressource très ciblée.
+- **Île** : biome, ressource ou petite structure principale.
+- **Grande île** : plus rare ; plusieurs zones, village ou port possible.
 
-- trouver du bois et préparer sa survie ;
-- obtenir une barque vanilla ;
-- pêcher une première prise ;
-- quitter la côte ;
-- découvrir une île habitée ou un port.
+Beaucoup d'îles restent simples. La rareté des lieux remarquables fait leur valeur.
 
-La première récompense importante doit être un objet de navigation intégré au gameplay. Le Compas
-de sillage remplit ce rôle après l'enregistrement du bateau.
+## 4. Biomes réinventés en îles
 
-### Chapitre 2 — Premier port
+Le joueur navigue jusqu'à reconnaître l'île correspondant à ce qu'il cherche : cuivrée,
+ferrugineuse, carbonifère, aurifère, calciteuse, argileuse, sable rouge, granite, diorite, andésite,
+forestière, bambou, fleurie, marécageuse, gelée, rocheuse, volcanique, champignon ou sauvage.
 
-Le premier port enseigne la boucle économique sans tutoriel lourd :
+La géologie et la végétation vanilla portent l'essentiel de cette identité. Couleur de roche,
+falaises, plages, relief et flore sont des indices lisibles depuis la mer.
 
-- enregistrer et nommer son navire ;
-- rencontrer l'intendant ou le chantier naval ;
-- consulter un tableau de contrats ;
-- vendre ou livrer une première cargaison ;
-- réparer ou améliorer le bateau ;
-- utiliser un stockage maritime.
+## 5. Familles d'îles
 
-### Chapitre 3 — Les eaux côtières
+### Îles de ressources
 
-Le joueur découvre les premiers systèmes de pêche :
+Cuivre, fer, charbon, or, argile, sable, gravier, bois, bambou, glace, pierre spécifique ou calcite.
+Elles servent d'abord le sandbox.
 
-- prises classiques et espèces de biome ;
-- casiers et bancs de poissons ;
-- espèces nocturnes ;
-- variations de poids, qualité et fraîcheur ;
-- premières espèces rares.
+### Îles habitées
 
-Une première rencontre étrange peut avoir lieu, sans exiger de combat.
+Village de pêcheurs, cabane, ferme côtière, petit quai, chantier naval, naturaliste isolé, phare,
+port marchand, refuge ou hameau. Une île habitée ne possède pas forcément un Intendant.
 
-### Chapitre 4 — Quelque chose sous l'eau
+### Îles hostiles
 
-L'anormal devient matériel : poissons aberrants, brouillard, sons immergés, silhouettes, épaves
-inhabituelles et premières reliques. Les rencontres restent rares et mémorables.
+Pillards, morts-vivants, grottes ouvertes, ruines infestées, nids de monstres, relief dangereux ou
+créatures marines proches.
 
-### Chapitre 5 — Plus loin que les cartes
+### Îles étranges
 
-La distance donne un sens aux améliorations du bateau : moteur, cale, éclairage, autonomie et
-équipement de pêche. Le joueur atteint des îles lointaines et des zones océaniques plus dangereuses.
+Arbres morts, plages noires, eau sombre, statues, épaves inhabituelles, sanctuaires, ruines
+impossibles, falaises marquées et accès aux fosses. Certains phénomènes n'apparaissent qu'avec la
+progression du joueur.
 
-### Chapitre 6 — Les profondeurs
+## 6. Create dans le monde
 
-Le dragage, le sonar, le treuil, la pêche abyssale et la recherche maritime donnent accès aux fosses,
-artefacts et espèces profondes. Des spécialistes peuvent apparaître dans certains ports.
+Create reste léger, maritime et lisible. Il anime les quais et prolonge Minecraft sans transformer
+le pack en usine lourde : grues, treuils, convoyeurs courts, ateliers, moulins côtiers, pompes,
+monte-charges, carrières légères, ascenseurs de falaise, mécanismes de phare, dragage, petites
+exploitations minières et chantiers navals.
 
-### Chapitre 7 — Ce que la mer garde
+## 7. Le premier Intendant
 
-Les journaux, bateaux disparus, phares abandonnés, cartes incomplètes, structures englouties et
-traces de cultes composent une histoire que le joueur reconstruit lui-même.
+Le joueur ne trouve pas nécessairement un port principal au début. Il peut d'abord rencontrer un
+phare, une cabane, un chantier, une île sauvage ou hostile, un quai abandonné, un poissonnier ou un
+naturaliste. **L'Intendant est quelque chose que l'on cherche.**
 
-> Un bateau dérive au large. La coque est intacte. Les voiles sont levées. Personne n'est à bord.
+Le **Compas des Havres** empêche un mauvais tirage de worldgen de bloquer la progression. Sa recette
+utilise bois, cuivre, fer, redstone, or et boussole vanilla : il devient accessible après les toutes
+premières minutes, mais pas immédiatement. Il pointe vers un Intendant pertinent encore non
+découvert.
 
-## Les contrats
+Le Compas des Havres est distinct du **Compas de sillage**, qui retrouve le navire personnel.
 
-Les contrats sont des activités répétables proposées dans les ports et îles de pêche. Ils occupent
-le joueur, alimentent l'économie et créent des raisons de revenir dans différentes régions.
+## 8. Le navire Tidebound
 
-Exemples :
+Le navire Tidebound est un meilleur outil d'exploration qu'une barque vanilla, même sans lore :
+transport, stockage, ports, îles de ressources, pêche au large, dragage, sonar et accès aux zones
+profondes.
 
-- livraison côtière ou urgente ;
-- caisse d'une espèce précise ;
-- spécimens du large ;
-- collecte scientifique ;
-- pêche nocturne ;
-- capture d'une aberration ;
-- récupération de cargaison ou relique.
+Ses améliorations sont visibles : coque, moteur, cale, éclairage, sonar et treuil.
 
-Les récompenses possibles sont les Tides, denrées, matériaux, plans et objets rares. Les contrats
-sont validés côté serveur, consomment réellement les objets et possèdent leurs propres cooldowns.
+La barque fabriquée par le joueur reste une **Barque de fortune** : elle peut être enregistrée et
+retrouvée, mais n'est jamais un navire Tidebound améliorable. Le chantier naval construit ou remet
+explicitement le véritable navire Tidebound.
 
-## Journal du marin
+## 9. Ports et lieux habités
 
-Le Journal du marin est une progression de collection distincte du Voyage :
+Les ports sont des hubs différents les uns des autres. Un petit port peut n'avoir qu'un quai, des
+maisons, un poissonnier et un atelier. Un autre peut proposer Intendant, chantier naval, contrats,
+naturaliste, phare, stockage, mécanismes Create et services rares. Le joueur ne connaît pas tous
+les services avant d'accoster.
 
-- **Poissons** : côtiers, océaniques, nocturnes, abyssaux et rares ;
-- **Aberrations** : mutations et espèces anormales ;
-- **Créatures** : silhouettes puis descriptions progressivement complétées ;
-- **Lieux** : ports, phares, épaves, fosses, sanctuaires et zones interdites ;
-- **Reliques** : objets issus du dragage, des ruines, épaves ou prises.
+## 10. PNJ principaux
 
-Certaines entrées commencent par `???`. La connaissance transforme progressivement une observation
-incompréhensible en information exploitable.
+Les PNJ conservent une silhouette et un langage visuel proches des villageois Minecraft.
 
-## Un port à soi
+| Rôle | Services |
+| --- | --- |
+| **Intendant du port** | Enregistrement et nom du navire, renseignements sur les ports, services administratifs et progression maritime. |
+| **Charpentier naval / mécanicien** | Construction, réparation et améliorations de coque, moteur, cale, lumière, sonar, treuil et équipements. |
+| **Poissonnier** | Achat physique des prises, demandes particulières et réactions aux espèces rares ou aberrantes. |
+| **Naturaliste / chercheur** | Identification, Journal du marin, aberrations, reliques, découvertes abyssales et bénéfices permanents. |
+| **Gardien de phare** | Météo, état de la mer, dangers, événements, rumeurs et indices narratifs. |
 
-Le cosy est une progression secondaire facultative, pas uniquement une décoration. Le joueur doit
-pouvoir rentrer d'une expédition inquiétante, cuisiner sous la pluie et améliorer un lieu chaleureux.
+La logique métier reste côté Tidebound Core et ne dépend jamais du modèle visuel d'un PNJ.
 
-Étapes possibles :
+## 11. Pêche et économie
 
-- cabane et coffre ;
-- ponton et maison de pêcheur ;
-- cuisine, fumoir et entrepôt ;
-- atelier et équipements de quai ;
-- aquarium, jardin et décoration nautique ;
-- phare personnel.
+> **Pêcher → revenir au port → vendre → améliorer → repartir plus loin**
 
-Les récompenses de cette branche privilégient plans, meubles, lanternes, aquariums et confort. Elle
-ne doit jamais être requise pour accéder au contenu horrifique.
+Les prises se répartissent entre côtières, large, nocturnes, profondes, rares, crustacés,
+mollusques et autres prises marines. Une espèce possède habitat, heure, profondeur, rareté, poids,
+valeur, méthode de capture et éventuellement une version aberrante.
 
-> **Le cosy doit donner envie de revenir au port.**
+Elles servent aussi à cuisiner, nourrir, fumer, découper, conserver, exposer, préparer des appâts,
+remplir des contrats et enrichir le Journal.
 
-## Socle lovecraftien
+## 12. Contrats
 
-Cthulhu est l'horizon mythologique de Tidebound, pas un boss à vaincre. Son existence n'est pas
-annoncée au joueur au début et son nom peut n'apparaître que très tard.
+Les contrats sont secondaires, répétables et trouvés dans les ports, villages de pêcheurs ou lieux
+isolés : pêche, livraison, recherche, exploration, récupération, cargaison, prime maritime,
+capture nocturne, spécimen rare et aberration. Ils donnent de bonnes raisons de naviguer, sans
+devenir le scénario principal.
 
-Selon les ports et traditions, la présence reçoit différents noms :
+## 13. Journal du marin
 
-- le Dormeur ;
-- Celui sous les marées ;
-- le Roi noyé ;
-- Celui qui rêve sous la mer ;
-- Cthulhu.
+Le Journal est le grand système de collection et de connaissance : poissons, aberrations,
+créatures, reliques et lieux. Une entrée commence parfois par une silhouette inconnue puis révèle
+nom, habitat, profondeur, période, poids record, captures, notes et comportement.
 
-Tidebound conserve ses propres lieux, peuples, symboles et créatures. Les références directes au
-mythe restent rares afin que le projet possède une identité autonome.
+## 14. Aberrations
 
-### Progression de l'horreur
+Les aberrations sont rares et mémorables. Leur apparition dépend de la profondeur, l'heure, la zone,
+les anomalies, certains lieux et la Connaissance interdite. Elles ont une valeur économique, une
+utilité scientifique et narrative, et peuvent être requises par des contrats spécifiques.
 
-**Folklore de marins.** Mauvaises eaux, poissons à rejeter, cloches sous-marines, horaires de pêche
-interdits et règles absurdes peuvent encore passer pour de la superstition.
+## 15. Exploration profonde et dragage
 
-**Preuves physiques.** Aberrations, reliques, symboles récurrents, statues, bas-reliefs, ruines,
-épaves et créatures immenses commencent à former un ensemble cohérent.
+Le dragage récupère cargaisons, loot vanilla, outils abîmés, minerais, pièces mécaniques, journaux,
+reliques, objets étranges et restes d'épaves.
 
-**Révélation.** Plusieurs ports connaissent le même mythe. Certaines traditions ont une fonction
-réelle. Les phares ne servent peut-être pas seulement à guider les navires. Des cultes et anciennes
-civilisations ont essayé de contenir quelque chose.
+Le sonar détecte d'abord bancs, profondeur, épaves et structures, puis anomalies, grandes formes et
+zones inhabituelles. Son utilité normale précède sa fonction surnaturelle.
 
-## Folklore et infrastructures
+## 16. Les abysses
 
-Éléments récurrents à distribuer procéduralement :
+Les abysses sont rares, difficiles d'accès et riches en contenu unique : espèces profondes,
+aberrations, reliques, épaves très anciennes, sanctuaires, structures enfouies, fragments du passé
+et matériaux inconnus. La descente marque le basculement principal du cosy vers l'inquiétant.
 
-- phares maintenant potentiellement une présence à distance ;
-- cloches marines et chants partagés entre plusieurs îles ;
-- pierres gravées, statues et sanctuaires immergés ;
-- ports abandonnés et villages aux règles particulières ;
-- pêcheurs qui refusent certains noms ou certaines heures ;
-- ruines englouties et routes absentes des cartes.
+## 17. Reliques abyssales et vitalité
 
-Le lore reste fragmentaire. Aucun PNJ ne connaît toute la vérité.
+Une découverte exceptionnelle peut donner un bénéfice permanent après analyse par le Naturaliste,
+notamment **+1 cœur permanent**. Ces récompenses viennent de fosses, sanctuaires, épaves profondes,
+créatures très rares ou anomalies sonar.
 
-## Créatures
+- cible : 3 à 5 gains de cœur maximum par partie complète ;
+- chaque récompense est unique et non farmable ;
+- la relique est consommée ou transformée pendant l'analyse ;
+- le bénéfice reste utile hors du lore.
 
-Tidebound n'est pas un modpack de combat. Les créatures sont rares, parfois non hostiles et parfois
-impossibles à combattre.
+## 18. Connaissance interdite
 
-- **Le Fouisseur** suit le bateau sous l'eau et provoque des remous.
+La progression surnaturelle n'est pas une jauge de folie. Plus le joueur comprend la mer, plus il
+perçoit symboles, silhouettes, anomalies sonar, portes, marques, lieux, réactions et passages
+auparavant invisibles. Le joueur ne devient pas seulement plus fou : **il devient plus conscient**.
+
+## 19. Créatures et présence sous-marine
+
+- **Le Fouisseur** suit le navire sous l'eau et provoque des remous.
 - **La Gueule-Lanterne** apparaît surtout la nuit et réagit aux sources lumineuses.
 - **Le Banc Creux** imite un banc de poissons avant de révéler sa nature.
-- **Le Dormeur** est une masse immense détectable au sonar, sans attaque systématique.
+- **Le Dormeur** est une présence immense comprise très progressivement.
 
-Une silhouette ou un événement sonore peut être plus efficace qu'un mob permanent.
+Ce sont parfois des événements, silhouettes ou phénomènes plutôt que des mobs à combattre.
 
-> **L'horreur doit être rare pour rester mémorable.**
+## 20. Progression vers le mythe
 
-## Connaissance interdite
+### Début
 
-La Connaissance interdite remplace une jauge de folie classique. Elle augmente lorsque le joueur
-découvre des aberrations, reliques, textes, sanctuaires, ruines et créatures.
+Survie, construction, pêche, exploration, ressources, recherche d'un Intendant, obtention du navire
+et découverte des ports.
 
-Elle donne accès à de nouvelles informations et interactions, mais retire aussi le filtre qui
-protégeait le joueur :
+### Milieu
 
-- une porte immergée devient visible dans une falaise connue ;
-- des symboles apparaissent sur une structure déjà visitée ;
-- une forme devient perceptible dans le brouillard ;
-- le sonar révèle quelque chose qu'il ignorait auparavant.
+Amélioration du navire, profondeur, sonar, dragage, Journal, aberrations, reliques et lieux étranges.
 
-La connaissance n'est ni une punition automatique ni une maladie. Elle change ce que le joueur est
-capable de voir.
+### Fin
 
-## Rêves et événements
+Le joueur comprend que certaines traditions et certains phares ont une fonction ancienne, que les
+mêmes symboles apparaissent sur des îles éloignées et que quelque chose existe sous l'archipel.
+Cthulhu, ou son équivalent, reste une vérité extrêmement tardive.
 
-Après une aberration, une relique, un sanctuaire ou une nuit passée en mer, un événement rare peut
-produire des sons étouffés, silhouettes, coordonnées étranges, faux messages, rêves ou altérations
-temporaires. Les jumpscares répétés sont exclus.
+## 21. Philosophie générale
 
-## Philosophie du modpack
+Le lore n'est jamais obligatoire. Le joueur peut construire, aménager un port, utiliser Create,
+pêcher, commercer, explorer, collectionner et transporter des ressources. Plus il voyage loin et
+profondément, plus il risque de découvrir ce qui se cache sous la surface.
 
-Le pack reste léger, lisible et peu technique. Create représente le plafond de complexité acceptable
-et sert surtout aux grues, treuils, moulins, quais et petits ateliers visuels. Les grandes usines et
-écosystèmes énergétiques obligatoires sont exclus.
+> **Minecraft maritime → exploration → maîtrise de l'archipel → profondeur → anomalies → connaissance → mythe**
 
-Un mod n'entre dans Tidebound que s'il améliore au moins un de ces axes : mer, exploration, pêche,
-ambiance, construction cosy, qualité de vie ou narration environnementale.
+## 22. Règles de design
 
-La cible finale est d'environ 50 à 80 mods dépendances comprises, avec l'impression de n'utiliser
-qu'une trentaine de systèmes cohérents.
+1. Vanilla-friendly avant tout.
+2. Create reste léger, fonctionnel et décoratif.
+3. Les îles sont nombreuses, variées et généralement petites.
+4. Toutes les îles n'ont ni port ni Intendant.
+5. Toute exploration possède une utilité sandbox.
+6. Les ressources vanilla gardent leur importance.
+7. Un objet Tidebound doit apporter une fonction nouvelle.
+8. Les ports diffèrent les uns des autres.
+9. Le surnaturel reste rare au début.
+10. Les aberrations restent mémorables.
+11. Les abysses sont difficiles à atteindre et riches en récompenses uniques.
+12. Les gains permanents de vitalité sont extrêmement rares.
+13. La Connaissance interdite révèle le monde plutôt qu'elle ne punit le joueur.
+14. Cthulhu n'est pas un boss classique.
+15. Le navire est utile sans quête.
+16. La mer devient moins rassurante à mesure que le joueur la comprend.
 
 ## Structure cible du livre
 
@@ -271,23 +278,6 @@ TIDEBOUND
 
 > **Les contrats occupent le joueur ; Le Voyage lui donne une direction.**
 
-> **Le joueur découvre les mods à travers le monde et les besoins du gameplay.**
-
 > **Cthulhu est un horizon mythologique, pas un boss de milieu de jeu.**
 
 > **Tidebound doit ressembler à un jeu construit dans Minecraft, pas à une collection de mods.**
-
-## Verticale de référence
-
-```text
-Spawn variable
-→ survie initiale
-→ barque vanilla
-→ première pêche
-→ premier port
-→ enregistrement du navire
-→ vente ou contrat
-→ amélioration
-→ première anomalie
-→ retour au port
-```

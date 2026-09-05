@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import struct
 import sys
 from pathlib import Path
 
@@ -105,7 +106,36 @@ def validate_resource_json() -> int:
     require(recipe.get("result", {}).get("id") == "tidebound:wake_compass",
             "Invalid Wake Compass recipe result")
     validate_worldgen()
+    validate_visual_assets()
     return len(paths)
+
+
+def png_dimensions(path: Path) -> tuple[int, int]:
+    require(path.is_file(), f"Missing visual asset: {path}")
+    with path.open("rb") as handle:
+        header = handle.read(24)
+    require(header[:8] == b"\x89PNG\r\n\x1a\n" and header[12:16] == b"IHDR",
+            f"{path}: invalid PNG header")
+    return struct.unpack(">II", header[16:24])
+
+
+def validate_visual_assets() -> None:
+    asset_root = RESOURCE_ROOT / "assets/tidebound/textures"
+    npc_root = asset_root / "entity/port_npc"
+    for role in ("intendant", "shipwright", "fishmonger", "naturalist", "lighthouse_keeper"):
+        require(png_dimensions(npc_root / f"{role}.png") == (1254, 1254),
+                f"Unexpected {role} entity atlas dimensions")
+
+    expected_guis = {
+        "harbor_intendant.png": (529, 573),
+        "harbor_shipwright.png": (522, 573),
+        "harbor_fishmonger.png": (515, 573),
+        "harbor_naturalist.png": (783, 466),
+        "harbor_lighthouse_keeper.png": (768, 466),
+    }
+    for filename, dimensions in expected_guis.items():
+        require(png_dimensions(asset_root / "gui" / filename) == dimensions,
+                f"Unexpected {filename} dimensions")
 
 
 def validate_worldgen() -> None:

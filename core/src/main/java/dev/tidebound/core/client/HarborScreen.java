@@ -2,6 +2,7 @@ package dev.tidebound.core.client;
 
 import dev.tidebound.core.TideboundCore;
 import dev.tidebound.core.menu.HarborMenu;
+import dev.tidebound.core.npc.PortNpcRole;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -12,8 +13,6 @@ import net.minecraft.world.entity.player.Inventory;
 
 /** First visual harbour pass, skinned from the Tidebound art pack. */
 public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
-    private static final ResourceLocation BACKGROUND = ResourceLocation.fromNamespaceAndPath(
-            TideboundCore.MOD_ID, "textures/gui/harbor_intendant.png");
     private static final float ART_SCALE = 0.5F;
     private static final int PANEL = 0xF2D8BD8C;
     private static final int INK = 0xFF241D18;
@@ -31,38 +30,52 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     @Override
     protected void init() {
         super.init();
-        addRenderableWidget(new Hotspot(leftPos + 13, topPos + 170, 56, 39,
+        int artX = artX(menu.role());
+        if (menu.role() == PortNpcRole.INTENDANT) {
+            initIntendant(artX);
+        } else if (menu.role() == PortNpcRole.SHIPWRIGHT) {
+            initShipwright(artX);
+        }
+    }
+
+    private void initIntendant(int artX) {
+        addRenderableWidget(new Hotspot(artX + 13, topPos + 170, 56, 39,
                 Component.translatable("menu.tidebound.contracts"),
                 () -> press(HarborMenu.ACTION_CONTRACTS)));
-        addRenderableWidget(new Hotspot(leftPos + 134, topPos + 170, 55, 39,
+        addRenderableWidget(new Hotspot(artX + 134, topPos + 170, 55, 39,
                 Component.translatable("menu.tidebound.voyage"), this::openVoyage));
-
-        Hotspot hull = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 86, 59, 12,
-                Component.translatable("menu.tidebound.upgrade.hull"),
-                () -> press(HarborMenu.ACTION_HULL)));
-        Hotspot motor = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 110, 59, 12,
-                Component.translatable("menu.tidebound.upgrade.motor"),
-                () -> press(HarborMenu.ACTION_MOTOR)));
-        Hotspot hold = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 134, 59, 12,
-                Component.translatable("menu.tidebound.upgrade.hold"),
-                () -> press(HarborMenu.ACTION_HOLD)));
-        Hotspot module = addRenderableWidget(new Hotspot(leftPos + 178, topPos + 151, 59, 11,
-                Component.translatable("menu.tidebound.upgrade.module"),
-                () -> press(HarborMenu.ACTION_MODULE)));
-        boolean upgradesAvailable = menu.tideboundVessel();
-        hull.active = upgradesAvailable;
-        motor.active = upgradesAvailable;
-        hold.active = upgradesAvailable;
-        module.active = upgradesAvailable;
-
         int actionY = topPos + 248;
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                 primaryActionLabel(), button -> press(primaryAction()))
-                .bounds(leftPos + 13, actionY, 112, 20).build());
+                .bounds(artX + 13, actionY, 112, 20).build());
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
-                Component.translatable(secondaryActionKey()),
-                button -> press(secondaryAction()))
-                .bounds(leftPos + 132, actionY, 112, 20).build());
+                Component.translatable("menu.tidebound.compass"),
+                button -> press(HarborMenu.ACTION_COMPASS))
+                .bounds(artX + 132, actionY, 112, 20).build());
+    }
+
+    private void initShipwright(int artX) {
+        boolean enabled = menu.tideboundVessel();
+        Hotspot motor = addRenderableWidget(new Hotspot(artX + 105, topPos + 45, 38, 45,
+                Component.translatable("menu.tidebound.upgrade.motor"), () -> press(HarborMenu.ACTION_MOTOR)));
+        Hotspot hull = addRenderableWidget(new Hotspot(artX + 102, topPos + 91, 40, 43,
+                Component.translatable("menu.tidebound.upgrade.hull"), () -> press(HarborMenu.ACTION_HULL)));
+        Hotspot hold = addRenderableWidget(new Hotspot(artX + 196, topPos + 91, 40, 43,
+                Component.translatable("menu.tidebound.upgrade.hold"), () -> press(HarborMenu.ACTION_HOLD)));
+        Hotspot module = addRenderableWidget(new Hotspot(artX + 105, topPos + 136, 132, 30,
+                Component.translatable("menu.tidebound.upgrade.module"), () -> press(HarborMenu.ACTION_MODULE)));
+        motor.active = enabled;
+        hull.active = enabled;
+        hold.active = enabled;
+        module.active = enabled;
+
+        addRenderableWidget(new Hotspot(artX + 18, topPos + 170, 73, 38,
+                Component.translatable("menu.tidebound.repair"), () -> press(HarborMenu.ACTION_REPAIR)));
+        if (menu.refitAvailable()) {
+            addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                    Component.translatable("menu.tidebound.refit"), button -> press(HarborMenu.ACTION_REFIT))
+                    .bounds(artX + 169, topPos + 247, 78, 20).build());
+        }
     }
 
     @Override
@@ -83,14 +96,20 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
 
     @Override
     protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
+        Art art = art(menu.role());
+        int artX = artX(menu.role());
         graphics.pose().pushPose();
-        graphics.pose().translate(leftPos, topPos, 0);
+        graphics.pose().translate(artX, topPos, 0);
         graphics.pose().scale(ART_SCALE, ART_SCALE, 1.0F);
-        graphics.blit(BACKGROUND, 0, 0, 0, 0, 529, 573, 529, 573);
+        graphics.blit(art.texture(), 0, 0, 0, 0, art.width(), art.height(), art.width(), art.height());
         graphics.pose().popPose();
 
+        if (menu.role() != PortNpcRole.INTENDANT) {
+            return;
+        }
+
         // Replace the static mock-up values with synchronized state while retaining its frame and portrait.
-        int x = leftPos + 121;
+        int x = artX + 121;
         int y = topPos + 40;
         graphics.fill(x, y, x + 124, y + 124, PANEL);
         graphics.drawString(font, Component.translatable(menu.tideboundVessel()
@@ -106,12 +125,12 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
                     x + 8, y + 55, 108, 0xFF6B3F2B);
         }
 
-        graphics.fill(leftPos + 14, topPos + 214, leftPos + 244, topPos + 244, 0xE6192528);
+        graphics.fill(artX + 14, topPos + 214, artX + 244, topPos + 244, 0xE6192528);
         graphics.drawString(font, Component.translatable("menu.tidebound.tides", menu.tides()),
-                leftPos + 22, topPos + 225, 0xFFFFD36A, false);
+                artX + 22, topPos + 225, 0xFFFFD36A, false);
         graphics.drawString(font, Component.translatable(menu.deployed()
                         ? "menu.tidebound.status.at_sea" : "menu.tidebound.status.at_harbor"),
-                leftPos + 145, topPos + 225, 0xFFB9D8D0, false);
+                artX + 145, topPos + 225, 0xFFB9D8D0, false);
     }
 
     private void drawTier(GuiGraphics graphics, Component label, int tier, int x, int y) {
@@ -146,20 +165,6 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
                 ? "menu.tidebound.locate_boat" : "menu.tidebound.launch_boat");
     }
 
-    private int secondaryAction() {
-        if (menu.refitAvailable()) {
-            return HarborMenu.ACTION_REFIT;
-        }
-        return menu.repairAvailable() ? HarborMenu.ACTION_REPAIR : HarborMenu.ACTION_COMPASS;
-    }
-
-    private String secondaryActionKey() {
-        if (menu.refitAvailable()) {
-            return "menu.tidebound.refit";
-        }
-        return menu.repairAvailable() ? "menu.tidebound.repair" : "menu.tidebound.compass";
-    }
-
     private void press(int action) {
         if (minecraft != null && minecraft.gameMode != null) {
             minecraft.gameMode.handleInventoryButtonClick(menu.containerId, action);
@@ -169,6 +174,27 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     private void openVoyage() {
         if (minecraft != null && minecraft.player != null) {
             minecraft.player.connection.sendCommand("ftbquests open_book");
+        }
+    }
+
+    private int artX(PortNpcRole role) {
+        return leftPos + Math.round((imageWidth - art(role).width() * ART_SCALE) / 2.0F);
+    }
+
+    private static Art art(PortNpcRole role) {
+        return switch (role) {
+            case INTENDANT -> new Art("harbor_intendant.png", 529, 573);
+            case SHIPWRIGHT -> new Art("harbor_shipwright.png", 522, 573);
+            case FISHMONGER -> new Art("harbor_fishmonger.png", 515, 573);
+            case NATURALIST -> new Art("harbor_naturalist.png", 783, 466);
+            case LIGHTHOUSE_KEEPER -> new Art("harbor_lighthouse_keeper.png", 768, 466);
+        };
+    }
+
+    private record Art(ResourceLocation texture, int width, int height) {
+        private Art(String filename, int width, int height) {
+            this(ResourceLocation.fromNamespaceAndPath(TideboundCore.MOD_ID, "textures/gui/" + filename),
+                    width, height);
         }
     }
 

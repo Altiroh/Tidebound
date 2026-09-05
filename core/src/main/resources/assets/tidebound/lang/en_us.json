@@ -1,4 +1,9 @@
 {
+  "entity.tidebound.port_npc.intendant": "Harbour intendant",
+  "entity.tidebound.port_npc.shipwright": "Shipwright",
+  "entity.tidebound.port_npc.fishmonger": "Fishmonger",
+  "entity.tidebound.port_npc.naturalist": "Naturalist",
+  "entity.tidebound.port_npc.lighthouse_keeper": "Lighthouse keeper",
   "item.tidebound.wake_compass": "Wake Compass",
   "item.tidebound.repair_kit": "Repair Kit",
   "item.tidebound.caulking_kit": "Caulking Kit",

@@ -1,4 +1,4 @@
-# Tidebound Core — 0.12.0-alpha
+# Tidebound Core — 0.13.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -113,7 +113,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.12.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.13.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -207,15 +207,15 @@ Placer un villageois, puis exécuter en administrateur :
 /tidebound harbor register @e[type=minecraft:villager,sort=nearest,limit=1]
 ```
 
-Ou créer directement un intendant à la position d'exécution :
+Ou créer les cinq rôles du port autour du joueur :
 
 ```text
-/function tidebound:create_harbor_intendant
+/function tidebound:create_test_harbor
 ```
 
-Un clic droit sur cet **Intendant du port** ouvre l'interface de capitainerie. Les boutons de navire
-pilotent les mêmes services serveur que les commandes ; l'onglet Contrats ouvre encore provisoirement
-la liste textuelle. Voir `TB-CORE-005A.md` et `../docs/ux/TB-UX-001.md`.
+Un clic droit sur l'**Intendant du port** ouvre la capitainerie. Le **charpentier naval** possède son
+propre écran et devient le seul service autorisé à construire, réparer ou améliorer le navire. Les
+trois autres rôles exposent déjà leur écran visuel, sans action serveur fictive. Voir `TB-NPC-001.md`.
 
 ## Boucle de départ sans intendant au spawn
 
@@ -255,6 +255,5 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-NPC-001` : convertir les planches artistiques des cinq rôles
-du port en véritables modèles et textures d'entités, en commençant par l'intendant. `TB-ECON-001`
-s'appuiera ensuite sur le poissonnier pour vendre physiquement les prises depuis une interface visuelle.
+La prochaine brique recommandée est `TB-ECON-001` : vendre physiquement les prises depuis l'interface
+du poissonnier, avec estimation puis transaction atomique côté serveur.

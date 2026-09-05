@@ -15,21 +15,25 @@ leur présence dans ce document ne signifie pas encore que l'objet ou le PNJ est
 | `ferrures_cale.png` | Améliorations de cale | `tidebound:hold_fittings` |
 | `plaque_coque.png` | Améliorations de coque | `tidebound:hull_plate` |
 | `huile_mecanique.png` | Composant moteur futur | `tidebound:mechanical_oil` |
+| `tidebound_pnj_intendant_port.png` | Texture de l'Intendant du port | `tidebound:harbor_intendant` |
+| `tidebound_pnj_charpentier_mecanicien.png` | Texture du charpentier naval | `tidebound:shipwright` |
+| `tidebound_pnj_poissonnier.png` | Texture du poissonnier | `tidebound:fishmonger` |
+| `tidebound_pnj_naturaliste_chercheur.png` | Texture du naturaliste | `tidebound:naturalist` |
+| `tidebound_pnj_gardien_phare.png` | Texture du gardien de phare | `tidebound:lighthouse_keeper` |
+| `tidebound_gui_charpentier_mecanicien.png` | Chantier naval visuel et actions d'amélioration | `textures/gui/harbor_shipwright.png` |
+| `tidebound_gui_poissonnier.png` | Interface visuelle du poissonnier | raccord économique prévu par `TB-ECON-001` |
+| `tidebound_gui_naturaliste_chercheur.png` | Interface visuelle du Journal | raccord encyclopédie/reliques à venir |
+| `tidebound_gui_gardien_phare.png` | Interface visuelle du phare | raccord météo/rumeurs à venir |
 
 ## Sources importées, conversion requise
 
-| Asset | Usage prévu | Travail restant |
-| --- | --- | --- |
-| `tidebound_pnj_intendant_port.png` | PNJ d'intendance distinct | convertir la planche 1254×1254 en texture compatible avec le modèle retenu |
-
-Une référence de travail optimisée est conservée sous
-`docs/assets/source/harbor_intendant_skin_reference.png` et n'est pas embarquée dans le JAR. La source
-originale 1254×1254 reste conservée avec le pack artistique.
+Les cinq atlas 1254×1254 sont désormais utilisés directement par un modèle de villageois dédié.
+Leur découpage UV et leur rendu à distance doivent encore être contrôlés en jeu ; la CI ne valide que
+leur présence et leur chargement dans le JAR.
 
 ## Pack identifié, à importer par ticket
 
-- interfaces : intendant, charpentier/mécanicien, poissonnier, naturaliste/chercheur, gardien de phare ;
-- PNJ : les cinq rôles correspondants ;
+- finitions d'interface : zones interactives, textes traduisibles et animation des cinq écrans ;
 - poissons côtiers : maquereau, sardine, morue, hareng, bar, lieu jaune, rouget, anchois ;
 - grands poissons : thon, bonite, espadon, dorade coryphène, flétan, merlu ;
 - profondeurs et raretés : chauliodus, poisson-dragon, poisson-vipère, grenadier, poisson-ogre,

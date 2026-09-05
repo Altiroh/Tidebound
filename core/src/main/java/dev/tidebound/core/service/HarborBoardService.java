@@ -10,6 +10,8 @@ import dev.tidebound.core.data.VesselHoldPolicy;
 import dev.tidebound.core.data.VesselUpgrade;
 import dev.tidebound.core.data.VesselUpgradeQuote;
 import dev.tidebound.core.progression.SkillProgression;
+import dev.tidebound.core.npc.PortNpcEntity;
+import dev.tidebound.core.npc.PortNpcRole;
 import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.ClickEvent;
@@ -53,10 +55,22 @@ public final class HarborBoardService {
     }
 
     public static boolean isNearBoard(ServerPlayer player) {
-        return !player.serverLevel().getEntitiesOfClass(
+        return isNearRole(player, PortNpcRole.INTENDANT) || !player.serverLevel().getEntitiesOfClass(
                 Villager.class,
                 player.getBoundingBox().inflate(BOARD_RANGE),
                 HarborBoardService::isBoard
+        ).isEmpty();
+    }
+
+    public static boolean isNearShipwright(ServerPlayer player) {
+        return isNearRole(player, PortNpcRole.SHIPWRIGHT);
+    }
+
+    public static boolean isNearRole(ServerPlayer player, PortNpcRole role) {
+        return !player.serverLevel().getEntitiesOfClass(
+                PortNpcEntity.class,
+                player.getBoundingBox().inflate(BOARD_RANGE),
+                npc -> npc.role() == role
         ).isEmpty();
     }
 
@@ -86,10 +100,14 @@ public final class HarborBoardService {
     }
 
     public static void open(ServerPlayer player) {
+        open(player, PortNpcRole.INTENDANT);
+    }
+
+    public static void open(ServerPlayer player, PortNpcRole role) {
         player.openMenu(new SimpleMenuProvider(
                 (containerId, inventory, ignored) ->
-                        new dev.tidebound.core.menu.HarborMenu(containerId, inventory, player),
-                Component.translatable("menu.tidebound.harbor")
+                        new dev.tidebound.core.menu.HarborMenu(containerId, inventory, player, role),
+                Component.translatable(role.translationKey())
         ));
     }
 

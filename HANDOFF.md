@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-PACK-001` / `0.12.0-alpha`
+État importé : `TB-NPC-001` / `0.13.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -49,6 +49,11 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - Devpack CurseForge avec FTB Quests/Ultimine, Create, JEI, Tom's Storage, JourneyMap, Waystones,
   ambiance sonore, physique des objets, Sodium, Iris et leurs dépendances ;
 - Waystones configuré sans coût d'expérience et validation des références épinglées ;
+- cinq entités portuaires dédiées utilisant les atlas du pack artistique : Intendant, charpentier,
+  poissonnier, naturaliste et gardien de phare ;
+- séparation des responsabilités : l'Intendant gère le navire administratif, le charpentier est le
+  seul service d'amélioration/réparation/construction ;
+- écran illustré propre à chaque rôle, avec actions serveur uniquement lorsqu'elles existent ;
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
@@ -81,7 +86,8 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 7. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
 8. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
 9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
-10. **PNJ original.** Le skin de l'intendant existe comme référence artistique mais n'est pas encore converti en texture d'entité compatible.
+10. **PNJ : validation visuelle.** Les cinq atlas sont branchés au modèle villageois, mais leur UV et
+    leur lisibilité à plusieurs distances doivent encore être confirmés dans un vrai client.
 11. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
 12. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
 13. **Fast Smelting.** Aucun enchantement NeoForge 1.21.1 vérifié n'est encore intégré ; ne pas confondre
@@ -89,15 +95,15 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-NPC-001 — Intendant original et rôles du port
+### TB-ECON-001 — Vente physique au poissonnier
 
 À réaliser maintenant :
 
-- créer une entité Tidebound dédiée pour remplacer le villageois étiqueté ;
-- convertir les cinq planches artistiques en textures et modèles réellement compatibles ;
-- distinguer visuellement intendant, charpentier/mécanicien, poissonnier, naturaliste et gardien de phare ;
-- conserver le menu graphique et les services serveur indépendants du modèle de PNJ ;
-- préparer le poissonnier pour `TB-ECON-001`, sans annoncer la vente avant son implémentation.
+- ajouter un inventaire de vente physique dans l'écran du poissonnier ;
+- calculer la valeur serveur des prises déposées et afficher l'estimation ;
+- consommer atomiquement les prises puis créditer les Tides et l'XP de Commerce ;
+- ne jamais vendre un objet non estampillé comme prise Tidebound ;
+- préparer les demandes du jour sans les annoncer comme terminées.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.
