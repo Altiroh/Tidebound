@@ -1,4 +1,4 @@
-# Tidebound Core — 0.9.0-alpha
+# Tidebound Core — 0.10.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -35,6 +35,8 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - poids, qualité, fraîcheur dynamique, biome d'origine, anomalie rare et valeur estimée ;
 - affichage de la prise dans la barre d'action et dans son tooltip ;
 - première capture limitée aux vrais poissons, sans récompense sur les déchets de pêche.
+- archipel appliqué par défaut aux nouvelles sauvegardes, avec îles boisées séparées par l'océan ;
+- diagnostic administrateur de la viabilité du spawn et tirage stable du futur port initial.
 
 Le navire utilise volontairement l'entité bateau-coffre vanilla comme première coque jouable. La source de vérité
 serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Le livre `Le Voyage`
@@ -88,6 +90,7 @@ Commandes administrateur, niveau de permission 2 :
 - `/tidebound skills <player>`
 - `/tidebound harbor register <villager>`
 - `/tidebound harbor unregister <villager>`
+- `/tidebound world diagnose [radius]` — analyse le spawn sur 64 à 256 blocs
 
 La limite d'une transaction de diagnostic est de 1 000 000 Tides. Le portefeuille utilise un `long`
 et refuse les valeurs négatives ou supérieures à 1 000 000 000 000.
@@ -107,7 +110,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.9.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.10.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -138,6 +141,8 @@ javac --release 17 -d build/domain-self-test \
   src/main/java/dev/tidebound/core/fishing/CatchValuation.java \
   src/main/java/dev/tidebound/core/navigation/WakeBearing.java \
   src/main/java/dev/tidebound/core/progression/SkillProgression.java \
+  src/main/java/dev/tidebound/core/world/ArchipelagoSurvey.java \
+  src/main/java/dev/tidebound/core/world/StarterPortPlan.java \
   src/test/java/dev/tidebound/core/data/DomainSelfTest.java
 java -cp build/domain-self-test dev.tidebound.core.data.DomainSelfTest
 ```
@@ -218,6 +223,23 @@ Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle sui
 5. utiliser `[ENREGISTRER LA BARQUE]` pour en faire son navire personnel ;
 6. employer le Compas de sillage remis par l'intendant pour la retrouver.
 
+## Génération de l'archipel
+
+Toute nouvelle sauvegarde créée avec Tidebound remplace le preset normal par l'archipel. Le preset
+`Tidebound — Archipel` est également exposé dans la liste des types de monde. Le spawn cible une zone
+forestière entourée de plages et d'océan ; les dimensions du Nether et de l'End restent vanilla.
+
+Ne pas ouvrir une ancienne sauvegarde importante sans copie : les chunks déjà présents restent intacts,
+mais les nouveaux chunks suivront le relief insulaire et peuvent former une frontière visible. Pour
+contrôler une seed neuve avec les commandes autorisées :
+
+```mcfunction
+/tidebound world diagnose 128
+```
+
+Le futur port initial est seulement planifié par seed dans cette version. Sa structure arrivera avec
+`TB-PORT-001` ; une île sans port doit toujours permettre de fabriquer une barque vanilla.
+
 Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
 
 ## Prises Tidebound
@@ -228,6 +250,5 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-WORLD-001` : preset d'archipel et île de départ viable. Le
-poissonnier, les autres interfaces et le véritable navire Tidebound réutiliseront le socle graphique créé
-par `TB-UX-001`.
+La prochaine brique recommandée est `TB-VESSEL-001` : remplacer la coque vanilla par un véritable
+navire Tidebound modulaire sans perdre l'identité ni les améliorations déjà sauvegardées.

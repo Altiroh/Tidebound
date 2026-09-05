@@ -1,0 +1,97 @@
+{
+  "dimensions": {
+    "minecraft:overworld": {
+      "type": "minecraft:overworld",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "biomes": [
+            {
+              "biome": "minecraft:deep_ocean",
+              "parameters": {
+                "temperature": [-1.0, 1.0],
+                "humidity": [-1.0, 1.0],
+                "continentalness": [-1.0, -0.35],
+                "erosion": [-1.0, 1.0],
+                "weirdness": [-1.0, 1.0],
+                "depth": [-1.0, 1.0],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "minecraft:ocean",
+              "parameters": {
+                "temperature": [-1.0, 1.0],
+                "humidity": [-1.0, 1.0],
+                "continentalness": [-0.35, 0.05],
+                "erosion": [-1.0, 1.0],
+                "weirdness": [-1.0, 1.0],
+                "depth": [-1.0, 1.0],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "minecraft:beach",
+              "parameters": {
+                "temperature": [-1.0, 1.0],
+                "humidity": [-1.0, 1.0],
+                "continentalness": [0.05, 0.16],
+                "erosion": [-1.0, 1.0],
+                "weirdness": [-1.0, 1.0],
+                "depth": [-1.0, 1.0],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "minecraft:plains",
+              "parameters": {
+                "temperature": [-1.0, 1.0],
+                "humidity": [-1.0, 1.0],
+                "continentalness": [0.16, 0.46],
+                "erosion": [-1.0, 1.0],
+                "weirdness": [-1.0, 1.0],
+                "depth": [-1.0, 1.0],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "minecraft:forest",
+              "parameters": {
+                "temperature": [-1.0, 1.0],
+                "humidity": [-1.0, 1.0],
+                "continentalness": [0.46, 1.0],
+                "erosion": [-1.0, 1.0],
+                "weirdness": [-1.0, 1.0],
+                "depth": [-1.0, 1.0],
+                "offset": 0.0
+              }
+            }
+          ]
+        },
+        "settings": "minecraft:overworld"
+      }
+    },
+    "minecraft:the_end": {
+      "type": "minecraft:the_end",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:the_end"
+        },
+        "settings": "minecraft:end"
+      }
+    },
+    "minecraft:the_nether": {
+      "type": "minecraft:the_nether",
+      "generator": {
+        "type": "minecraft:noise",
+        "biome_source": {
+          "type": "minecraft:multi_noise",
+          "preset": "minecraft:nether"
+        },
+        "settings": "minecraft:nether"
+      }
+    }
+  }
+}

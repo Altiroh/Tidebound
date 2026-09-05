@@ -6,6 +6,18 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 - aucune modification en attente.
 
+## 0.10.0-alpha — TB-WORLD-001
+
+- remplacement du monde normal des nouvelles sauvegardes par le générateur d'archipel Tidebound ;
+- preset explicite `tidebound:archipelago` disponible dans l'écran de création ;
+- relief insulaire et continentalité partagés entre terrain et biomes ;
+- océans profonds, océans, plages, plaines et cœurs forestiers garantissant la boucle bois → barque ;
+- cible de spawn déplacée vers l'intérieur boisé des îles ;
+- commande `/tidebound world diagnose [radius]` pour mesurer terre, eau, rivages et bois ;
+- tirage déterministe d'un futur port de départ sur environ une seed sur trois ;
+- smoke test CI démarrant un serveur et générant réellement un monde neuf ;
+- avertissement de compatibilité : monde neuf requis pour éviter les raccords de chunks.
+
 ## 0.9.0-alpha — TB-UX-001
 
 - ajout d'une icône Tidebound dans l'inventaire du joueur ;

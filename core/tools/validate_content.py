@@ -103,7 +103,50 @@ def validate_resource_json() -> int:
     require(recipe.get("type") == "minecraft:crafting_shaped", "Invalid Wake Compass recipe type")
     require(recipe.get("result", {}).get("id") == "tidebound:wake_compass",
             "Invalid Wake Compass recipe result")
+    validate_worldgen()
     return len(paths)
+
+
+def validate_worldgen() -> None:
+    vanilla_settings = DATA_ROOT / "minecraft/worldgen/noise_settings/overworld.json"
+    archipelago_preset = DATA_ROOT / "tidebound/worldgen/world_preset/archipelago.json"
+    default_preset = DATA_ROOT / "minecraft/worldgen/world_preset/normal.json"
+    preset_tag = DATA_ROOT / "minecraft/tags/worldgen/world_preset/normal.json"
+    island_base = DATA_ROOT / "tidebound/worldgen/density_function/world/island_base.json"
+    island_continents = DATA_ROOT / "tidebound/worldgen/density_function/world/island_continentalness.json"
+    island_noise = DATA_ROOT / "tidebound/worldgen/noise/island_shape.json"
+    required = [vanilla_settings, archipelago_preset, default_preset, preset_tag,
+                island_base, island_continents, island_noise]
+    require(all(path.is_file() for path in required), "Tidebound archipelago worldgen is incomplete")
+
+    settings = json.loads(vanilla_settings.read_text(encoding="utf-8"))
+    router = settings.get("noise_router", {})
+    require(router.get("continents") == "tidebound:world/island_continentalness",
+            "Default overworld does not use Tidebound island continentalness")
+    require(router.get("initial_density_without_jaggedness") == "tidebound:world/island_base",
+            "Default overworld does not use Tidebound island density")
+    require("tidebound:world/island_base" in json.dumps(router.get("final_density")),
+            "Final density is not connected to Tidebound islands")
+    targets = settings.get("spawn_target", [])
+    require(bool(targets) and targets[0].get("continentalness", [0])[0] >= 0.5,
+            "Spawn target must select the wooded interior of an island")
+
+    tidebound = json.loads(archipelago_preset.read_text(encoding="utf-8"))
+    default = json.loads(default_preset.read_text(encoding="utf-8"))
+    require(default == tidebound, "Default world preset must match Tidebound Archipelago")
+    overworld = tidebound.get("dimensions", {}).get("minecraft:overworld", {})
+    generator = overworld.get("generator", {})
+    biomes = generator.get("biome_source", {}).get("biomes", [])
+    biome_ids = {entry.get("biome") for entry in biomes}
+    require({"minecraft:deep_ocean", "minecraft:ocean", "minecraft:beach",
+             "minecraft:plains", "minecraft:forest"}.issubset(biome_ids),
+            "Archipelago preset is missing required ocean or starter-island biomes")
+    require(generator.get("settings") == "minecraft:overworld",
+            "Archipelago preset must use the overridden overworld settings")
+
+    tag = json.loads(preset_tag.read_text(encoding="utf-8"))
+    require("tidebound:archipelago" in tag.get("values", []),
+            "Archipelago preset is not exposed in the world creation menu")
 
 
 def validate_snbt_balance(path: Path) -> str:

@@ -34,6 +34,10 @@ jobs:
         working-directory: core
         run: ./gradlew build --no-daemon
 
+      - name: Smoke-test default archipelago world
+        working-directory: core
+        run: bash tools/smoke_test_worldgen.sh
+
       - name: Package CurseForge development profile
         run: bash modpack/package.sh
 
