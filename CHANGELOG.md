@@ -4,6 +4,18 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 ## Non publié
 
+## 0.12.0-alpha — TB-PACK-001
+
+- extension du Devpack à Create, JEI, Tom's Simple Storage, JourneyMap, Waystones et FTB Ultimine ;
+- ajout d'AmbientSounds, ItemPhysic, Sodium, Iris et ImmediatelyFast pour l'ambiance et le rendu ;
+- ajout explicite de Balm et CreativeCore, dépendances requises ;
+- téléportations Waystones configurées sans coût d'expérience ;
+- validation statique des dix-sept références CurseForge et de la configuration du pack ;
+- documentation de la séparation client/serveur, du test des shaders et du choix de remplacer NEI par JEI ;
+- enchantement Fast Smelting différé faute de candidat NeoForge 1.21.1 vérifié.
+
+## 0.11.1-alpha — Correctif de classification des navires
+
 - l'enregistrement conserve la barque vanilla comme **Barque de fortune** ;
 - les améliorations sont refusées avant la construction du navire Tidebound au chantier ;
 - l'interface masque les jauges de la barque et explique visuellement la transition.

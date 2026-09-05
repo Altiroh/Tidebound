@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-VESSEL-001` / `0.11.1-alpha`
+État importé : `TB-PACK-001` / `0.12.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -46,7 +46,9 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - réparations payantes uniquement lorsque le navire est ramené au port ;
 - capacité de cale progressive : 9, 18 puis 27 emplacements, sans suppression du surplus ;
 - Gradle Wrapper, workflow GitHub Actions et guide de test reproductible ;
-- manifeste CurseForge minimal avec FTB Library, Teams et Quests ;
+- Devpack CurseForge avec FTB Quests/Ultimine, Create, JEI, Tom's Storage, JourneyMap, Waystones,
+  ambiance sonore, physique des objets, Sodium, Iris et leurs dépendances ;
+- Waystones configuré sans coût d'expérience et validation des références épinglées ;
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
@@ -78,23 +80,24 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 6. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
 7. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
 8. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
-9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
+9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
 10. **PNJ original.** Le skin de l'intendant existe comme référence artistique mais n'est pas encore converti en texture d'entité compatible.
 11. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
 12. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
+13. **Fast Smelting.** Aucun enchantement NeoForge 1.21.1 vérifié n'est encore intégré ; ne pas confondre
+    ce besoin avec `FastFurnace`, qui optimise le code des fours sans ajouter d'enchantement.
 
 ## Prochaine tâche recommandée
 
-### TB-ECON-001 — Vente physique des prises
+### TB-NPC-001 — Intendant original et rôles du port
 
 À réaliser maintenant :
 
-- ajouter un poissonnier ou une station de vente avec une interface visuelle ;
-- consommer physiquement les prises Tidebound déposées par le joueur ;
-- créditer exactement leur valeur actuelle en Tides dans une transaction atomique ;
-- attribuer l'XP de Commerce et raccorder la première vente au Voyage ;
-- afficher avant validation le total, la fraîcheur et les prises sélectionnées ;
-- préparer les prix régionaux sans les activer avant l'existence de plusieurs ports.
+- créer une entité Tidebound dédiée pour remplacer le villageois étiqueté ;
+- convertir les cinq planches artistiques en textures et modèles réellement compatibles ;
+- distinguer visuellement intendant, charpentier/mécanicien, poissonnier, naturaliste et gardien de phare ;
+- conserver le menu graphique et les services serveur indépendants du modèle de PNJ ;
+- préparer le poissonnier pour `TB-ECON-001`, sans annoncer la vente avant son implémentation.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

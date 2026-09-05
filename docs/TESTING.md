@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.11.1-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.12.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.11.1-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.12.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,13 +62,27 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.11.1-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.12.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
-Le dossier `modpack/` contient aussi un manifeste CurseForge de développement qui installe les trois
-mods FTB compatibles. Dans l'archive produite par GitHub Actions, Tidebound Core est déjà placé dans
+Le dossier `modpack/` contient aussi un manifeste CurseForge de développement qui installe les mods
+FTB et le socle cosy, exploration et performances. Dans l'archive produite par GitHub Actions, Tidebound Core est déjà placé dans
 `overrides/mods` ; lors d'un import manuel du manifeste seul, il faut encore ajouter le JAR.
+
+Après import du Devpack avec **All Files**, vérifier dans le menu **Mods** la présence du logo Tidebound,
+puis les intégrations suivantes :
+
+- ouvrir JEI et JourneyMap ;
+- utiliser FTB Ultimine sur un arbre ou un petit filon de test ;
+- connecter quelques coffres avec Tom's Simple Storage ;
+- construire une roue à eau ou un petit mécanisme Create ;
+- activer deux Waystones, noter son niveau, se téléporter et confirmer qu'aucun XP n'est consommé ;
+- jeter un objet au sol et écouter les transitions d'ambiance entre plage, forêt et océan ;
+- ouvrir les options vidéo Iris et tester un shader léger adapté au GPU.
+
+Sodium, Iris, JourneyMap et AmbientSounds sont des fonctions client. Pour un serveur dédié, conserver
+les mods communs nécessaires au gameplay mais suivre les indications client/serveur de chaque projet.
 
 ## 5. Tester l'archipel sur un monde neuf
 
@@ -117,10 +131,10 @@ Tester le départ de secours :
 4. vérifier la réception du Compas de sillage ;
 5. éloigner le bateau et utiliser le compas par clic droit.
 
-L'enregistrement doit remplacer visuellement la barque par un navire Tidebound plus large. Monter à quatre joueurs
-et vérifier que les quatre places sont utilisables. Une sauvegarde créée avant cette version conserve son ancien
-bateau : l'interface doit l'identifier comme **Barque de fortune** et refuser ses améliorations. Pour obtenir le
-navire Tidebound, la ramener au quai et utiliser **Chantier naval**, ou `/tidebound vessel refit`. Avant la conversion,
+L'enregistrement doit conserver physiquement la barque vanilla et l'interface doit l'identifier comme
+**Barque de fortune**. Toutes les améliorations doivent rester masquées ou désactivées. Pour obtenir le navire Tidebound
+plus large et ses quatre places, ramener la barque au quai et utiliser **Chantier naval**, ou
+`/tidebound vessel refit`. Avant la conversion,
 placer quelques objets dans sa cale et l'endommager légèrement ; contenu, dégâts, nom et niveaux doivent être conservés.
 
 Préparer le premier achat de coque :
