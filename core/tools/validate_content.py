@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import struct
+import zlib
 import sys
 from pathlib import Path
 
@@ -112,10 +113,27 @@ def validate_resource_json() -> int:
 
 def png_dimensions(path: Path) -> tuple[int, int]:
     require(path.is_file(), f"Missing visual asset: {path}")
-    with path.open("rb") as handle:
-        header = handle.read(24)
+    payload = path.read_bytes()
+    header = payload[:24]
     require(header[:8] == b"\x89PNG\r\n\x1a\n" and header[12:16] == b"IHDR",
             f"{path}: invalid PNG header")
+    offset = 8
+    found_end = False
+    while offset < len(payload):
+        require(offset + 12 <= len(payload), f"{path}: truncated PNG chunk header")
+        length = struct.unpack(">I", payload[offset:offset + 4])[0]
+        end = offset + 12 + length
+        require(end <= len(payload), f"{path}: truncated PNG chunk")
+        chunk_type = payload[offset + 4:offset + 8]
+        chunk_data = payload[offset + 8:offset + 8 + length]
+        expected_crc = struct.unpack(">I", payload[offset + 8 + length:end])[0]
+        require(zlib.crc32(chunk_type + chunk_data) & 0xFFFFFFFF == expected_crc,
+                f"{path}: invalid PNG chunk checksum")
+        offset = end
+        if chunk_type == b"IEND":
+            found_end = True
+            break
+    require(found_end and offset == len(payload), f"{path}: missing PNG end or trailing data")
     return struct.unpack(">II", header[16:24])
 
 
@@ -123,7 +141,7 @@ def validate_visual_assets() -> None:
     asset_root = RESOURCE_ROOT / "assets/tidebound/textures"
     npc_root = asset_root / "entity/port_npc"
     for role in ("intendant", "shipwright", "fishmonger", "naturalist", "lighthouse_keeper"):
-        require(png_dimensions(npc_root / f"{role}.png") == (1254, 1254),
+        require(png_dimensions(npc_root / f"{role}.png") == (512, 512),
                 f"Unexpected {role} entity atlas dimensions")
 
     expected_guis = {

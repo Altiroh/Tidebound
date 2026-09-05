@@ -7,6 +7,9 @@ import dev.tidebound.core.service.TideEconomy;
 import dev.tidebound.core.service.VesselDeploymentService;
 import dev.tidebound.core.service.VesselMaintenanceService;
 import dev.tidebound.core.service.VesselService;
+import dev.tidebound.core.service.FishmongerService;
+import net.minecraft.network.chat.Component;
+import net.minecraft.ChatFormatting;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -22,7 +25,7 @@ import dev.tidebound.core.npc.PortNpcRole;
  * all mutations still go through the existing command/API validation path.
  */
 public final class HarborMenu extends AbstractContainerMenu {
-    public static final int DATA_COUNT = 11;
+    public static final int DATA_COUNT = 13;
 
     public static final int ACTION_CLAIM = 0;
     public static final int ACTION_REGISTER = 1;
@@ -35,6 +38,7 @@ public final class HarborMenu extends AbstractContainerMenu {
     public static final int ACTION_MOTOR = 11;
     public static final int ACTION_HOLD = 12;
     public static final int ACTION_MODULE = 13;
+    public static final int ACTION_SELL_ALL = 20;
 
     private final ContainerData data;
     private final ServerPlayer serverPlayer;
@@ -78,6 +82,19 @@ public final class HarborMenu extends AbstractContainerMenu {
     public boolean clickMenuButton(Player player, int action) {
         if (!(player instanceof ServerPlayer server) || !nearCorrectRole(server) || !allowedForRole(action)) {
             return false;
+        }
+        if (action == ACTION_SELL_ALL) {
+            try {
+                var sale = FishmongerService.sellInventory(server);
+                server.displayClientMessage(Component.translatable("message.tidebound.sale.completed",
+                        sale.catches(), sale.tides(), sale.tradeXp()).withStyle(ChatFormatting.GOLD), true);
+                broadcastChanges();
+                return true;
+            } catch (IllegalArgumentException | IllegalStateException exception) {
+                server.displayClientMessage(Component.literal(exception.getMessage())
+                        .withStyle(ChatFormatting.RED), true);
+                return false;
+            }
         }
         String command = commandFor(action);
         if (command == null) {
@@ -135,6 +152,14 @@ public final class HarborMenu extends AbstractContainerMenu {
         return PortNpcRole.fromNetworkId(data.get(10));
     }
 
+    public int saleValue() {
+        return data.get(11);
+    }
+
+    public int saleCount() {
+        return data.get(12);
+    }
+
     private static String commandFor(int action) {
         return switch (action) {
             case ACTION_CLAIM -> "tidebound vessel claim";
@@ -148,6 +173,7 @@ public final class HarborMenu extends AbstractContainerMenu {
             case ACTION_MOTOR -> "tidebound vessel purchase motor";
             case ACTION_HOLD -> "tidebound vessel purchase hold";
             case ACTION_MODULE -> "tidebound vessel purchase module";
+            case ACTION_SELL_ALL -> null;
             default -> null;
         };
     }
@@ -164,7 +190,8 @@ public final class HarborMenu extends AbstractContainerMenu {
             case SHIPWRIGHT -> action == ACTION_REPAIR || action == ACTION_REFIT
                     || action == ACTION_HULL || action == ACTION_MOTOR
                     || action == ACTION_HOLD || action == ACTION_MODULE;
-            case FISHMONGER, NATURALIST, LIGHTHOUSE_KEEPER -> false;
+            case FISHMONGER -> action == ACTION_SELL_ALL;
+            case NATURALIST, LIGHTHOUSE_KEEPER -> false;
         };
     }
 
@@ -188,6 +215,10 @@ public final class HarborMenu extends AbstractContainerMenu {
                     case 9 -> VesselDeploymentService.findActive(player)
                             .filter(TideboundVesselEntity.class::isInstance).isPresent() ? 1 : 0;
                     case 10 -> role.networkId();
+                    case 11 -> role == PortNpcRole.FISHMONGER
+                            ? (int) Math.min(Integer.MAX_VALUE, FishmongerService.estimateInventory(player).tides()) : 0;
+                    case 12 -> role == PortNpcRole.FISHMONGER
+                            ? FishmongerService.estimateInventory(player).catches() : 0;
                     default -> 0;
                 };
             }

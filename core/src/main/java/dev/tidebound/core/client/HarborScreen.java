@@ -18,6 +18,7 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     private static final int INK = 0xFF241D18;
     private static final int TRACK = 0xFF313A3C;
     private static final int FILL = 0xFF6FA55F;
+    private PortNpcRole initializedRole;
 
     public HarborScreen(HarborMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -30,12 +31,24 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     @Override
     protected void init() {
         super.init();
+        initializedRole = menu.role();
         int artX = artX(menu.role());
         if (menu.role() == PortNpcRole.INTENDANT) {
             initIntendant(artX);
         } else if (menu.role() == PortNpcRole.SHIPWRIGHT) {
             initShipwright(artX);
+        } else if (menu.role() == PortNpcRole.FISHMONGER) {
+            initFishmonger(artX);
         }
+    }
+
+    private void initFishmonger(int artX) {
+        addRenderableWidget(new Hotspot(artX + 17, topPos + 170, 78, 39,
+                Component.translatable("menu.tidebound.sell_all"),
+                () -> press(HarborMenu.ACTION_SELL_ALL)));
+        addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
+                Component.translatable("menu.tidebound.sell_all"), button -> press(HarborMenu.ACTION_SELL_ALL))
+                .bounds(artX + 199, topPos + 248, 49, 20).build());
     }
 
     private void initIntendant(int artX) {
@@ -81,9 +94,9 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     @Override
     public void containerTick() {
         super.containerTick();
-        // Rebuild the small action row when synchronized vessel state changes after a click.
-        if (getFocused() == null) {
-            // State bars are rendered live; buttons remain valid server-side even before a rebuild.
+        if (initializedRole != menu.role()) {
+            clearWidgets();
+            init();
         }
     }
 
@@ -105,6 +118,12 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
         graphics.pose().popPose();
 
         if (menu.role() != PortNpcRole.INTENDANT) {
+            if (menu.role() == PortNpcRole.FISHMONGER) {
+                graphics.fill(artX + 159, topPos + 214, artX + 250, topPos + 244, 0xE6192528);
+                graphics.drawString(font, Component.translatable("menu.tidebound.sale.estimate",
+                                menu.saleCount(), menu.saleValue()),
+                        artX + 164, topPos + 225, 0xFFFFD36A, false);
+            }
             return;
         }
 

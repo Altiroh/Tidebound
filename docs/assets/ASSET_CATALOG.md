@@ -27,9 +27,9 @@ leur présence dans ce document ne signifie pas encore que l'objet ou le PNJ est
 
 ## Sources importées, conversion requise
 
-Les cinq atlas 1254×1254 sont désormais utilisés directement par un modèle de villageois dédié.
-Leur découpage UV et leur rendu à distance doivent encore être contrôlés en jeu ; la CI ne valide que
-leur présence et leur chargement dans le JAR.
+Les cinq atlas source 1254×1254 sont réduits par voisin le plus proche en textures runtime 512×512,
+sans modifier leur découpage UV. Leur rendu à distance doit encore être contrôlé en jeu. Le validateur
+contrôle désormais chaque chunk PNG jusqu'à `IEND`, afin qu'un transfert tronqué ne puisse plus passer.
 
 ## Pack identifié, à importer par ticket
 

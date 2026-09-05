@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.14.0-alpha — TB-ECON-001
+
+- affiche chez le poissonnier le nombre et la valeur actuelle des prises vendables ;
+- ajoute une action visuelle **Tout vendre** exécutée uniquement près du poissonnier ;
+- consomme exclusivement les prises estampillées à valeur positive ;
+- crédite les Tides et l'XP Commerce dans une transaction non duplicable ;
+- laisse intacts les poissons vanilla ordinaires et les prises sans valeur.
+- répare les cinq atlas PNJ tronqués lors de leur premier transport et valide désormais tous les
+  chunks PNG jusqu'à leur marque de fin.
+
 ## 0.13.0-alpha — TB-DESIGN-002 / TB-NPC-001
 
 - adopte le lore canonique vanilla-friendly : archipel vivant, îles spécialisées, abysses,
