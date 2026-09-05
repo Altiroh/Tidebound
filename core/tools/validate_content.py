@@ -14,6 +14,7 @@ REPO_ROOT = ROOT.parent
 DATA_ROOT = ROOT / "src/main/resources/data"
 RESOURCE_ROOT = ROOT / "src/main/resources"
 FTB_QUEST_ROOT = REPO_ROOT / "modpack/overrides/config/ftbquests/quests"
+MODPACK_ROOT = REPO_ROOT / "modpack"
 ITEM_ID = re.compile(r"^[a-z0-9_.-]+:[a-z0-9_./-]+$")
 SKILL_ID = re.compile(r"^[a-z0-9_.:/-]+$")
 HEX_ID = re.compile(r"^[0-9A-F]{16}$")
@@ -257,6 +258,58 @@ def validate_ftb_questbook() -> tuple[int, int, int, int]:
     return len(chapter_paths), len(locale_sets[0][1]), len(commands), len(paths)
 
 
+def validate_modpack() -> int:
+    manifest_path = MODPACK_ROOT / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    require(manifest.get("manifestType") == "minecraftModpack", "Invalid CurseForge manifest type")
+    require(manifest.get("minecraft", {}).get("version") == "1.21.1",
+            "The Devpack must target Minecraft 1.21.1")
+    loaders = manifest.get("minecraft", {}).get("modLoaders", [])
+    require(loaders == [{"id": "neoforge-21.1.249", "primary": True}],
+            "The Devpack must use the locked NeoForge loader")
+
+    expected = {
+        419699: 8492726,  # Architectury
+        404465: 8569579,  # FTB Library
+        404468: 8724782,  # FTB Teams
+        289412: 8730556,  # FTB Quests
+        386134: 8231400,  # FTB Ultimine
+        328085: 7963363,  # Create
+        238222: 8792638,  # JEI
+        378609: 7917007,  # Tom's Simple Storage
+        32274: 8116777,   # JourneyMap
+        531761: 7264790,  # Balm
+        245755: 8056467,  # Waystones
+        257814: 8699787,  # CreativeCore
+        254284: 8043019,  # AmbientSounds
+        258587: 5709378,  # ItemPhysic Full
+        394468: 6382651,  # Sodium
+        455508: 6213632,  # Iris
+        686911: 7349649,  # ImmediatelyFast
+    }
+    entries = manifest.get("files", [])
+    require(isinstance(entries, list), "CurseForge manifest files must be an array")
+    actual: dict[int, int] = {}
+    for entry in entries:
+        require(isinstance(entry, dict), "Every CurseForge file entry must be an object")
+        project_id = entry.get("projectID")
+        file_id = entry.get("fileID")
+        require(isinstance(project_id, int) and isinstance(file_id, int),
+                "CurseForge projectID and fileID must be integers")
+        require(entry.get("required") is True, f"CurseForge project {project_id} must be required")
+        require(project_id not in actual, f"Duplicate CurseForge project {project_id}")
+        actual[project_id] = file_id
+    require(actual == expected, "The Devpack mod selection or one of its pinned files has changed")
+
+    waystones_config = MODPACK_ROOT / "overrides/config/waystones-common.toml"
+    text = waystones_config.read_text(encoding="utf-8")
+    require(re.search(r"(?m)^\[teleports\]\s*$", text) is not None,
+            "Waystones teleports section is missing")
+    require(re.search(r"(?m)^enableCosts\s*=\s*false\s*$", text) is not None,
+            "Waystones XP costs must be disabled")
+    return len(entries)
+
+
 def main() -> int:
     files: list[tuple[Path, str]] = []
     files.extend((path, "milestone") for path in DATA_ROOT.glob("*/tidebound/milestones/**/*.json"))
@@ -266,11 +319,12 @@ def main() -> int:
         validate_file(path, kind)
     resource_count = validate_resource_json()
     chapters, quests, quest_rewards, snbt_files = validate_ftb_questbook()
+    mod_count = validate_modpack()
     milestones = sum(kind == "milestone" for _, kind in files)
     contracts = sum(kind == "contract" for _, kind in files)
     print(f"Tidebound content: OK ({milestones} milestones, {contracts} contracts, "
           f"{resource_count} resource files; FTB Quests: {chapters} chapters, {quests} quests, "
-          f"{quest_rewards} rewards, {snbt_files} SNBT files)")
+          f"{quest_rewards} rewards, {snbt_files} SNBT files; Devpack: {mod_count} pinned mods)")
     return 0
 
 

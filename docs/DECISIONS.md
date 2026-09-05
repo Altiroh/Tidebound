@@ -26,6 +26,8 @@
 - Le navire Tidebound appartient au joueur, possède un nom et conserve son identité.
 - Le premier prototype emploie un bateau-coffre vanilla ; cette entité pourra être remplacée sans perdre les données du navire.
 - Une barque vanilla doit pouvoir servir avant le premier port, puis être enregistrée ou remplacée.
+- Une barque vanilla enregistrée reste une **Barque de fortune** : elle est localisable et réparable,
+  mais ne peut recevoir aucune amélioration. Le chantier construit explicitement le navire Tidebound.
 - La localisation normale passe par un objet de jeu. La commande reste réservée au diagnostic et à l'administration.
 
 ## Progression
@@ -74,6 +76,9 @@
 - Viser un pack lisible et léger, idéalement 50 à 80 mods dépendances comprises.
 - Ajouter les mods par fonction démontrée ; `Create` représente le plafond de complexité acceptable.
 - Le contenu maritime propriétaire doit primer sur l'empilement de systèmes généralistes.
+- Le premier socle externe utilise JEI plutôt que NEI, Create comme plafond technique, Tom's Storage
+  pour les coffres, JourneyMap/Waystones pour l'exploration et Sodium/Iris pour le rendu.
+- Les téléportations Waystones ne coûtent pas d'XP ; leur découverte reste nécessaire.
 
 ## Architecture
 

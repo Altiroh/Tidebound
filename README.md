@@ -6,14 +6,16 @@ Le projet n'est pas un mode histoire. Le livre **Le Voyage** fournit un fil dire
 
 ## État actuel
 
-- version du projet : `0.11.1-alpha` ;
-- dernier ticket terminé : `TB-WORLD-001` ;
+- version du projet : `0.12.0-alpha` ;
+- dernier ticket terminé : `TB-PACK-001` ;
 - cible : Minecraft `1.21.1`, NeoForge `21.1.249`, Java `21` ;
 - tests de domaine et validation du contenu automatisés par Gradle et la CI GitHub.
 
 Le code actuel contient la monnaie, les métiers, les paliers, les contrats répétables, l'intendant de port,
 l'enregistrement d'une barque vanilla, un Compas de sillage, ainsi que les achats et réparations du navire.
 Le Devpack fournit également les chapitres FTB Quests **Naufragé** et **Premier port**.
+Il inclut désormais une première sélection cohérente pour Create, JEI, Tom's Storage, JourneyMap,
+Waystones sans coût d'XP, Ultimine, l'ambiance sonore, les objets physiques et les shaders.
 Les morues, saumons, poissons tropicaux et poissons-globes pêchés portent désormais un poids, une
 qualité, une fraîcheur, une origine, une valeur et parfois une anomalie rare.
 Toute nouvelle sauvegarde utilise désormais un archipel avec un spawn ciblé sur une île boisée ; le
@@ -56,5 +58,5 @@ python tools/validate_content.py
 ./gradlew build
 ```
 
-Le JAR attendu est `core/build/libs/tidebound-0.11.1-alpha.jar`. Le workflow GitHub Actions publie
+Le JAR attendu est `core/build/libs/tidebound-0.12.0-alpha.jar`. Le workflow GitHub Actions publie
 également ce JAR comme artifact à chaque push et pull request.

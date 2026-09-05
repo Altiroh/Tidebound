@@ -1,4 +1,4 @@
-# Tidebound Core — 0.11.1-alpha
+# Tidebound Core — 0.12.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -113,7 +113,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.11.1-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.12.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -255,5 +255,6 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-ECON-001` : vendre physiquement les prises au port depuis
-une interface visuelle et créditer leur valeur actuelle de façon atomique.
+La prochaine brique recommandée est `TB-NPC-001` : convertir les planches artistiques des cinq rôles
+du port en véritables modèles et textures d'entités, en commençant par l'intendant. `TB-ECON-001`
+s'appuiera ensuite sur le poissonnier pour vendre physiquement les prises depuis une interface visuelle.
