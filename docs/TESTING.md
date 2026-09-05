@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.6.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.7.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.6.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.7.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.6.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.7.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
@@ -115,7 +115,7 @@ l'inventaire, ou déposé près du navire si l'inventaire est plein.
 Pour tester la réparation, frapper légèrement le navire, le laisser près de l'intendant et rouvrir le
 tableau. Le bouton **RÉPARER LE NAVIRE** apparaît si des dégâts sont détectés.
 
-## 6. Ajouter FTB Quests
+## 6. Tester le livre FTB Quests fourni
 
 Installer dans le même profil, côté client et serveur :
 
@@ -123,23 +123,31 @@ Installer dans le même profil, côté client et serveur :
 - FTB Teams `2101.1.11` ;
 - FTB Quests `2101.1.34`.
 
-Dans le monde de test :
+Le Devpack contient déjà le livre `Le Voyage`. Dans un monde neuf :
 
 ```mcfunction
-/ftbquests editing_mode true
 /ftbquests open_book
 ```
 
-Créer un chapitre **Paliers Tidebound**, puis une quête avec une tâche d'objet, par exemple un poisson.
-Ajouter une récompense **Command** avec :
+Vérifier les chapitres **Naufragé** et **Premier port**. Tous les objectifs restent visibles et aucun ne
+verrouille l'exploration. La première boucle de test est :
+
+1. fabriquer une table de craft — validation d'objet automatique ;
+2. obtenir une barque vanilla — case à cocher temporaire ;
+3. obtenir une morue — validation d'objet automatique ;
+4. atteindre ou créer un port — case à cocher temporaire ;
+5. enregistrer le navire, recevoir le Compas de sillage et ouvrir le tableau de contrats ;
+6. livrer un contrat puis améliorer ou réparer le navire.
+
+Les objectifs automatiques versent leur récompense avec une commande de cette forme :
 
 ```mcfunction
 /tidebound progression reward-once {p} ftb:first_catch 25
 ```
 
-Configurer la récompense avec **Permission Level = 2**. Le placeholder correct de FTB Quests 1.21.1
-est `{p}`. Le reçu `ftb:first_catch` doit être unique : même si la commande est rejouée, Tidebound ne
-verse pas deux fois les 25 Tides.
+Le livre fourni utilise **Permission Level = 2**, le placeholder `{p}` et neuf reçus uniques. Même si
+une commande est rejouée, Tidebound ne verse pas deux fois la récompense. Les deux chapitres distribuent
+au maximum 105 Tides pour accélérer le départ sans financer toutes les améliorations.
 
 Vérifier le résultat avec :
 
@@ -147,11 +155,16 @@ Vérifier le résultat avec :
 /tidebound tide balance
 ```
 
-FTB Quests sert ici de journal visuel et d'onboarding. Les contrats répétables restent dans les JSON
-Tidebound et dans le tableau de l'intendant, où le serveur contrôle la livraison et le cooldown.
+FTB Quests sert de journal visuel et d'onboarding. Les cases manuelles sont provisoires jusqu'à l'ajout
+de déclencheurs Core dédiés. Les contrats répétables restent dans les JSON Tidebound et dans le tableau
+de l'intendant, où le serveur contrôle la livraison et le cooldown.
 
-Quand le livre est prêt, copier le dossier généré `config/ftbquests/quests/` dans
-`modpack/overrides/config/ftbquests/quests/`, puis le committer.
+Pour modifier le livre, activer `/ftbquests editing_mode true`, éditer dans un monde jetable, puis recopier
+le dossier généré `config/ftbquests/quests/` dans `modpack/overrides/config/ftbquests/quests/`. Exécuter
+ensuite `python core/tools/validate_content.py` avant de committer.
+
+Limitation actuelle : les ports ne sont pas encore générés. Créer l'intendant avec la fonction décrite
+dans le smoke test pour valider le chapitre `Premier port`.
 
 ## 7. Informations à fournir en cas de bug
 

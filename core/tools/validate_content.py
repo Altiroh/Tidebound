@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Tidebound milestone and contract JSON without starting Minecraft."""
+"""Validate Tidebound datapack content and the bundled FTB Quests book."""
 
 from __future__ import annotations
 
@@ -10,10 +10,18 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = ROOT.parent
 DATA_ROOT = ROOT / "src/main/resources/data"
 RESOURCE_ROOT = ROOT / "src/main/resources"
+FTB_QUEST_ROOT = REPO_ROOT / "modpack/overrides/config/ftbquests/quests"
 ITEM_ID = re.compile(r"^[a-z0-9_.-]+:[a-z0-9_./-]+$")
 SKILL_ID = re.compile(r"^[a-z0-9_.:/-]+$")
+HEX_ID = re.compile(r"^[0-9A-F]{16}$")
+OBJECT_ID = re.compile(r'\bid:\s*"([0-9A-F]{16})"')
+REWARD_COMMAND = re.compile(
+    r'command:\s*"/tidebound progression reward-once \{p\} '
+    r'(ftb:[a-z0-9_./-]+) ([1-9][0-9]*)"'
+)
 
 
 def require(condition: bool, message: str) -> None:
@@ -98,6 +106,114 @@ def validate_resource_json() -> int:
     return len(paths)
 
 
+def validate_snbt_balance(path: Path) -> str:
+    text = path.read_text(encoding="utf-8")
+    stack: list[str] = []
+    pairs = {"}": "{", "]": "["}
+    in_string = False
+    escaped = False
+
+    for index, character in enumerate(text):
+        if in_string:
+            if escaped:
+                escaped = False
+            elif character == "\\":
+                escaped = True
+            elif character == '"':
+                in_string = False
+            continue
+        if character == '"':
+            in_string = True
+        elif character in "[{":
+            stack.append(character)
+        elif character in "]}":
+            require(bool(stack) and stack.pop() == pairs[character],
+                    f"{path}: unmatched {character!r} at character {index}")
+
+    require(not in_string, f"{path}: unterminated string")
+    unclosed = stack[-1] if stack else ""
+    require(not stack, f"{path}: unclosed SNBT delimiter {unclosed!r}")
+    return text
+
+
+def translation_ids(text: str, kind: str) -> set[str]:
+    pattern = re.compile(rf'^\s*{kind}\.([0-9A-F]{{16}})\.title:', re.MULTILINE)
+    return set(pattern.findall(text))
+
+
+def validate_ftb_questbook() -> tuple[int, int, int, int]:
+    require(FTB_QUEST_ROOT.is_dir(), "Missing bundled FTB Quests directory")
+    paths = sorted(FTB_QUEST_ROOT.rglob("*.snbt"))
+    require(bool(paths), "No bundled FTB Quests SNBT files found")
+    documents = {path: validate_snbt_balance(path) for path in paths}
+
+    data_path = FTB_QUEST_ROOT / "data.snbt"
+    groups_path = FTB_QUEST_ROOT / "chapter_groups.snbt"
+    chapter_dir = FTB_QUEST_ROOT / "chapters"
+    language_dir = FTB_QUEST_ROOT / "lang"
+    require(data_path in documents, "FTB Quests data.snbt is missing")
+    require(groups_path in documents, "FTB Quests chapter_groups.snbt is missing")
+    require('version: 13' in documents[data_path], "FTB Quests book must use SNBT version 13")
+    require('progression_mode: "flexible"' in documents[data_path],
+            "FTB Quests book must preserve flexible sandbox progression")
+    require('fallback_locale: "fr_fr"' in documents[data_path],
+            "FTB Quests fallback locale must be fr_fr")
+
+    chapter_paths = sorted(chapter_dir.glob("*.snbt"))
+    require(len(chapter_paths) == 2, "The first Tidebound quest book must contain exactly two chapters")
+    chapter_text = "\n".join(documents[path] for path in chapter_paths)
+
+    group_ids = OBJECT_ID.findall(documents[groups_path])
+    require(len(group_ids) == 1 and HEX_ID.fullmatch(group_ids[0]) is not None,
+            "FTB Quests chapter group must have one valid ID")
+    chapter_ids = {OBJECT_ID.findall(documents[path])[0] for path in chapter_paths}
+    require(len(chapter_ids) == 2, "FTB Quests chapter IDs must be unique")
+    for path in chapter_paths:
+        require(f'group: "{group_ids[0]}"' in documents[path],
+                f"{path}: chapter is not assigned to The Voyage")
+
+    object_ids = group_ids[:]
+    for path in chapter_paths:
+        object_ids.extend(OBJECT_ID.findall(documents[path]))
+    require(len(object_ids) == len(set(object_ids)), "FTB Quests object IDs must be globally unique")
+    require(len(object_ids) == 30,
+            f"Unexpected FTB Quests object count: {len(object_ids)} instead of 30")
+
+    commands = REWARD_COMMAND.findall(chapter_text)
+    require(len(commands) == 9, f"Expected 9 Tide rewards, found {len(commands)}")
+    receipts = [receipt for receipt, _ in commands]
+    require(len(receipts) == len(set(receipts)), "FTB reward receipts must be unique")
+    require(chapter_text.count('permission_level: 2') == 9,
+            "Every FTB command reward must use permission level 2")
+    require(chapter_text.count('type: "command"') == 9,
+            "Every Tide reward must be a command reward")
+    require(chapter_text.count('auto: "enabled"') == 9,
+            "Every onboarding reward must be auto-claimed")
+    require(chapter_text.count('tasks: [') == 9, "Expected one task list per onboarding quest")
+    require(chapter_text.count('type: "item"') == 3, "Expected three automatic item tasks")
+    require(chapter_text.count('type: "checkmark"') == 6, "Expected six explicit checkmark tasks")
+
+    locale_paths = [language_dir / "fr_fr.snbt", language_dir / "en_us.snbt"]
+    require(all(path in documents for path in locale_paths), "French and English quest translations are required")
+    locale_sets: list[tuple[set[str], set[str], set[str], set[str]]] = []
+    for path in locale_paths:
+        text = documents[path]
+        groups = translation_ids(text, "chapter_group")
+        chapters = translation_ids(text, "chapter")
+        quests = translation_ids(text, "quest")
+        tasks = translation_ids(text, "task")
+        rewards = translation_ids(text, "reward")
+        require(groups == set(group_ids), f"{path}: chapter group translations are incomplete")
+        require(chapters == chapter_ids, f"{path}: chapter translations are incomplete")
+        require(len(quests) == 9, f"{path}: expected 9 translated quests")
+        require(len(tasks) == 9, f"{path}: expected 9 translated tasks")
+        require(len(rewards) == 9, f"{path}: expected 9 translated rewards")
+        locale_sets.append((chapters, quests, tasks, rewards))
+    require(locale_sets[0] == locale_sets[1], "French and English translation IDs differ")
+
+    return len(chapter_paths), len(locale_sets[0][1]), len(commands), len(paths)
+
+
 def main() -> int:
     files: list[tuple[Path, str]] = []
     files.extend((path, "milestone") for path in DATA_ROOT.glob("*/tidebound/milestones/**/*.json"))
@@ -106,10 +222,12 @@ def main() -> int:
     for path, kind in sorted(files):
         validate_file(path, kind)
     resource_count = validate_resource_json()
+    chapters, quests, quest_rewards, snbt_files = validate_ftb_questbook()
     milestones = sum(kind == "milestone" for _, kind in files)
     contracts = sum(kind == "contract" for _, kind in files)
     print(f"Tidebound content: OK ({milestones} milestones, {contracts} contracts, "
-          f"{resource_count} resource files)")
+          f"{resource_count} resource files; FTB Quests: {chapters} chapters, {quests} quests, "
+          f"{quest_rewards} rewards, {snbt_files} SNBT files)")
     return 0
 
 

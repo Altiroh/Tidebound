@@ -1,0 +1,91 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "circle"
+	filename: "naufrage"
+	group: "0A11CE0000000001"
+	icon: { id: "minecraft:oak_boat" }
+	id: "0A11CE0000000010"
+	images: [ ]
+	order_index: 0
+	quest_links: [ ]
+	quests: [
+		{
+			icon: { id: "minecraft:crafting_table" }
+			id: "0A11CE0000000101"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:naufrage_resources 5"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002101"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001101"
+				item: { id: "minecraft:crafting_table" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "minecraft:oak_boat" }
+			id: "0A11CE0000000102"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:naufrage_boat 10"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002102"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001102"
+				type: "checkmark"
+			}]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "minecraft:cod" }
+			id: "0A11CE0000000103"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:naufrage_first_catch 10"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002103"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001103"
+				item: { id: "minecraft:cod" }
+				type: "item"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "minecraft:lantern" }
+			id: "0A11CE0000000104"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:naufrage_first_port 20"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002104"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001104"
+				type: "checkmark"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+	]
+}

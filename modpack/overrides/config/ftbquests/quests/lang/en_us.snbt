@@ -1,0 +1,84 @@
+{
+	chapter.0A11CE0000000010.title: "Castaway"
+	chapter.0A11CE0000000020.title: "First Harbour"
+	chapter_group.0A11CE0000000001.title: "&3⚓ The Voyage"
+	file.0000000000000001.title: "&3Tidebound"
+
+	quest.0A11CE0000000101.title: "What the Sea Leaves Behind"
+	quest.0A11CE0000000101.quest_desc: [
+		"Start with whatever the island offers. Cut any kind of wood and craft a crafting table."
+		""
+		"A Tidebound start must never depend on spawning beside a harbour."
+	]
+	quest.0A11CE0000000102.title: "Any Hull Will Do"
+	quest.0A11CE0000000102.quest_desc: [
+		"Craft a vanilla boat from the wood you found. Every wood type is valid."
+		""
+		"Check this step when your boat is ready. It can become your personal vessel at the first harbour."
+	]
+	quest.0A11CE0000000103.title: "First Catch"
+	quest.0A11CE0000000103.quest_desc: [
+		"The sea feeds you before it frightens you. For this first journal, bring back one cod."
+		""
+		"Tidebound Core also rewards your first catch with Fishing experience."
+	]
+	quest.0A11CE0000000104.title: "A Light on the Horizon"
+	quest.0A11CE0000000104.quest_desc: [
+		"Leave the coast and look for a harbour, dock or inhabited island."
+		""
+		"Check this step beside a harbourmaster. Procedural harbours will arrive in a later version."
+		""
+		"Some sailors insist that a light does not always mark land."
+	]
+
+	quest.0A11CE0000000201.title: "Give the Hull a Name"
+	quest.0A11CE0000000201.quest_desc: [
+		"Place your boat within eight blocks of the harbourmaster, open the board and choose REGISTER BOAT."
+		""
+		"Check this step once the vessel name and tiers appear above the hull."
+	]
+	quest.0A11CE0000000202.title: "The Wake Compass"
+	quest.0A11CE0000000202.quest_desc: [
+		"The harbourmaster gives you a free Wake Compass after registration."
+		""
+		"Right-click it to read the direction, distance and last known position of your vessel."
+	]
+	quest.0A11CE0000000203.title: "The Contract Board"
+	quest.0A11CE0000000203.quest_desc: [
+		"Review the harbourmaster's offers. Contracts are repeatable and independent from The Voyage."
+		""
+		"Check this step after choosing your first delivery."
+	]
+	quest.0A11CE0000000204.title: "A First Delivery"
+	quest.0A11CE0000000204.quest_desc: [
+		"Gather the requested goods and deliver them physically to the harbourmaster."
+		""
+		"The server consumes the cargo, pays the Tides and starts the contract cooldown. Then check this step."
+	]
+	quest.0A11CE0000000205.title: "A Vessel of Your Own"
+	quest.0A11CE0000000205.quest_desc: [
+		"Bring your vessel back to the dock and purchase an upgrade or perform a repair."
+		""
+		"Tides earned through The Voyage are a head start, not an endless wage."
+	]
+
+	task.0A11CE0000001101.title: "Craft a crafting table"
+	task.0A11CE0000001102.title: "I obtained a boat"
+	task.0A11CE0000001103.title: "Bring back one cod"
+	task.0A11CE0000001104.title: "I found a harbour"
+	task.0A11CE0000001201.title: "I registered my vessel"
+	task.0A11CE0000001202.title: "Own the Wake Compass"
+	task.0A11CE0000001203.title: "I reviewed the contracts"
+	task.0A11CE0000001204.title: "I delivered a contract"
+	task.0A11CE0000001205.title: "I maintained my vessel"
+
+	reward.0A11CE0000002101.title: "+5 Tides"
+	reward.0A11CE0000002102.title: "+10 Tides"
+	reward.0A11CE0000002103.title: "+10 Tides"
+	reward.0A11CE0000002104.title: "+20 Tides"
+	reward.0A11CE0000002201.title: "+10 Tides"
+	reward.0A11CE0000002202.title: "+5 Tides"
+	reward.0A11CE0000002203.title: "+5 Tides"
+	reward.0A11CE0000002204.title: "+15 Tides"
+	reward.0A11CE0000002205.title: "+25 Tides"
+}

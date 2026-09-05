@@ -3,6 +3,10 @@
 FTB Quests fournit le livre, les chapitres et les tâches d'onboarding. Tidebound Core reste la source
 de vérité des Tides, métiers et contrats répétables.
 
+Le livre réellement distribué se trouve dans
+`modpack/overrides/config/ftbquests/quests/`. Il contient déjà les chapitres `Naufragé` et
+`Premier port`; ce dossier d'exemples documente surtout les commandes d'intégration.
+
 Versions de développement vérifiées pour Minecraft 1.21.1 / NeoForge :
 
 - FTB Library `2101.1.35` ;
@@ -40,5 +44,6 @@ automatiquement par Tidebound.
 Ne pas faire des contrats répétables des quêtes FTB obligatoires. Ils restent protégés par la présence
 physique d'un intendant, la consommation serveur des denrées et leur cooldown propre.
 
-Après édition, copier `config/ftbquests/quests/` dans
-`modpack/overrides/config/ftbquests/quests/` pour l'intégrer au pack.
+Après édition dans un monde jetable, recopier `config/ftbquests/quests/` dans
+`modpack/overrides/config/ftbquests/quests/`, puis lancer `python tools/validate_content.py` depuis
+`core/` avant de committer.
