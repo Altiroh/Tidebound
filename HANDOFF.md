@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-001` / `0.10.0-alpha`
+État importé : `TB-VESSEL-001` / `0.11.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -30,7 +30,9 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - XP automatique de pêche et de navigation ;
 - intendant de port ouvrant un menu graphique synchronisé ;
 - icône d'ancre dans l'inventaire et carnet de bord visuel ;
-- navire personnel physique basé sur `ChestBoat` ;
+- entité physique `tidebound:vessel`, fondée sur la physique de `ChestBoat` mais dotée de son propre rendu ;
+- quatre places et silhouette voxel modulaire avec progression visible ;
+- migration au port des barques enregistrées, avec conservation de la cale, des dégâts et de l'identité ;
 - propriété, position, renommage, déploiement et protection du navire ;
 - effets légers des niveaux de coque et de moteur ;
 - enregistrement d'une barque vanilla existante comme navire personnel ;
@@ -53,6 +55,8 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - tooltip bilingue, résumé de capture et commande `/tidebound catch inspect` ;
 - tests Java autonomes du domaine ;
 - première intégration du pack artistique : interface d'intendant, Compas de sillage et catalogue.
+- six composants de maintenance issus du pack artistique, avec items, modèles et recettes ;
+- profil CurseForge `Tidebound — Into the Deep` incluant désormais Architectury API ;
 - preset normal remplacé par un archipel pour toute nouvelle sauvegarde ;
 - relief insulaire partagé par le terrain et les biomes, avec cœur forestier ciblé au spawn ;
 - diagnostic serveur terre/eau/rivage/bois et détection de masse continentale ;
@@ -75,22 +79,21 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 8. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
 9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
 10. **PNJ original.** Le skin de l'intendant existe comme référence artistique mais n'est pas encore converti en texture d'entité compatible.
-11. **Navire Tidebound.** Le modèle persistant existe, mais l'entité physique reste une barque ou un bateau-coffre vanilla.
+11. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
 12. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
 
 ## Prochaine tâche recommandée
 
-### TB-VESSEL-001 — Véritable navire Tidebound
+### TB-ECON-001 — Vente physique des prises
 
 À réaliser maintenant :
 
-- enregistrer une entité de navire propre à Tidebound et son rendu initial ;
-- migrer au port la barque déjà enregistrée sans changer l'identité `PlayerVessel` ;
-- conserver propriétaire, nom, cale, position, dégâts et niveaux d'amélioration ;
-- rendre visibles les changements de coque, moteur, cale et emplacements de modules ;
-- prévoir plusieurs places à bord sans transformer le navire en structure multibloc fragile ;
-- réutiliser les interfaces et modules recensés dans `docs/assets/ASSET_CATALOG.md` ;
-- garder la barque vanilla comme solution avant le premier port.
+- ajouter un poissonnier ou une station de vente avec une interface visuelle ;
+- consommer physiquement les prises Tidebound déposées par le joueur ;
+- créditer exactement leur valeur actuelle en Tides dans une transaction atomique ;
+- attribuer l'XP de Commerce et raccorder la première vente au Voyage ;
+- afficher avant validation le total, la fraîcheur et les prises sélectionnées ;
+- préparer les prix régionaux sans les activer avant l'existence de plusieurs ports.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

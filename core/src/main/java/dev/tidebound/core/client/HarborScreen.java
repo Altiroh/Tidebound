@@ -55,10 +55,8 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
                 primaryActionLabel(), button -> press(primaryAction()))
                 .bounds(leftPos + 13, actionY, 112, 20).build());
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
-                Component.translatable(menu.repairAvailable()
-                        ? "menu.tidebound.repair" : "menu.tidebound.compass"),
-                button -> press(menu.repairAvailable()
-                        ? HarborMenu.ACTION_REPAIR : HarborMenu.ACTION_COMPASS))
+                Component.translatable(secondaryActionKey()),
+                button -> press(secondaryAction()))
                 .bounds(leftPos + 132, actionY, 112, 20).build());
     }
 
@@ -135,6 +133,20 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
         }
         return Component.translatable(menu.deployed()
                 ? "menu.tidebound.locate_boat" : "menu.tidebound.launch_boat");
+    }
+
+    private int secondaryAction() {
+        if (menu.refitAvailable()) {
+            return HarborMenu.ACTION_REFIT;
+        }
+        return menu.repairAvailable() ? HarborMenu.ACTION_REPAIR : HarborMenu.ACTION_COMPASS;
+    }
+
+    private String secondaryActionKey() {
+        if (menu.refitAvailable()) {
+            return "menu.tidebound.refit";
+        }
+        return menu.repairAvailable() ? "menu.tidebound.repair" : "menu.tidebound.compass";
     }
 
     private void press(int action) {

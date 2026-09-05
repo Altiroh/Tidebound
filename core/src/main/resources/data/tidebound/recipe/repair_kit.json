@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "tidebound:caulking_kit"},
+    {"item": "tidebound:hull_plate"},
+    {"item": "minecraft:oak_planks"}
+  ],
+  "result": {"id": "tidebound:repair_kit", "count": 1}
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {"item": "minecraft:paper"},
+    {"item": "minecraft:slime_ball"},
+    {"item": "minecraft:string"}
+  ],
+  "result": {"id": "tidebound:caulking_kit", "count": 1}
+}

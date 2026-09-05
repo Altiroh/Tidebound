@@ -1,4 +1,4 @@
-# Tidebound Core — 0.10.0-alpha
+# Tidebound Core — 0.11.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -16,11 +16,11 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - contrats pouvant exiger un niveau de métier ;
 - intendant ouvrant un véritable menu graphique et synchronisé ;
 - carnet de bord accessible par une icône dans l'inventaire ;
-- navire physique personnel basé sur un bateau-coffre, lié à son propriétaire ;
+- entité de navire Tidebound dédiée, avec coque voxel et quatre places, liée à son propriétaire ;
 - réclamation, mise à l'eau, localisation et renommage auprès de la capitainerie ;
 - position du navire persistante entre les sessions et protection contre les autres joueurs ;
 - effets physiques légers des améliorations de coque et de moteur ;
-- enregistrement d'une barque vanilla existante auprès d'un intendant ;
+- transformation au port d'une barque vanilla en navire Tidebound, sans perte d'identité ni de cale ;
 - Compas de sillage remis gratuitement au premier navire et reproductible ;
 - lecture par clic droit de la direction, de la distance et de la dernière position connue ;
 - suivi des états déployé, disparu, détruit et sans position ;
@@ -36,11 +36,13 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - affichage de la prise dans la barre d'action et dans son tooltip ;
 - première capture limitée aux vrais poissons, sans récompense sur les déchets de pêche.
 - archipel appliqué par défaut aux nouvelles sauvegardes, avec îles boisées séparées par l'océan ;
-- diagnostic administrateur de la viabilité du spawn et tirage stable du futur port initial.
+- diagnostic administrateur de la viabilité du spawn et tirage stable du futur port initial ;
+- apparence synchronisée de la coque, du moteur, de la cale et des supports de modules.
+- six composants Tidebound illustrés, avec recettes et utilisation par le chantier naval.
 
-Le navire utilise volontairement l'entité bateau-coffre vanilla comme première coque jouable. La source de vérité
-serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Le livre `Le Voyage`
-guide le joueur sans verrouiller le sandbox : ses objectifs actuels sont visibles et sans dépendances obligatoires.
+Le navire physique possède désormais son propre type d'entité. Il réutilise la physique éprouvée du bateau-coffre,
+mais son rendu, son équipage et ses niveaux visuels appartiennent à Tidebound. Le livre `Le Voyage` guide le joueur
+sans verrouiller le sandbox : ses objectifs actuels sont visibles et sans dépendances obligatoires.
 
 ## Versions verrouillées
 
@@ -59,6 +61,7 @@ Commandes joueur :
 - `/tidebound vessel inspect`
 - `/tidebound vessel claim [name]` — près d'un intendant
 - `/tidebound vessel register [name]` — enregistre la barque vanilla montée ou la plus proche
+- `/tidebound vessel refit` — migre au port un ancien bateau enregistré vers l'entité Tidebound
 - `/tidebound vessel deploy` — près d'un intendant et d'une zone d'eau
 - `/tidebound vessel compass` — remplace gratuitement un Compas de sillage perdu au port
 - `/tidebound vessel rename <name>` — près d'un intendant
@@ -110,7 +113,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.10.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.11.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -143,6 +146,7 @@ javac --release 17 -d build/domain-self-test \
   src/main/java/dev/tidebound/core/progression/SkillProgression.java \
   src/main/java/dev/tidebound/core/world/ArchipelagoSurvey.java \
   src/main/java/dev/tidebound/core/world/StarterPortPlan.java \
+  src/main/java/dev/tidebound/core/vessel/VesselVisualProfile.java \
   src/test/java/dev/tidebound/core/data/DomainSelfTest.java
 java -cp build/domain-self-test dev.tidebound.core.data.DomainSelfTest
 ```
@@ -165,6 +169,7 @@ TideboundApi.renameVessel(player, vesselName);
 TideboundApi.vesselDeployment(player);
 TideboundApi.deployVessel(player);
 TideboundApi.registerNearbyVanillaBoat(player, vesselName);
+TideboundApi.refitVessel(player);
 TideboundApi.giveWakeCompass(player);
 TideboundApi.locateVessel(player);
 TideboundApi.grantTidesOnce(player, receiptId, amount);
@@ -250,5 +255,5 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-VESSEL-001` : remplacer la coque vanilla par un véritable
-navire Tidebound modulaire sans perdre l'identité ni les améliorations déjà sauvegardées.
+La prochaine brique recommandée est `TB-ECON-001` : vendre physiquement les prises au port depuis
+une interface visuelle et créditer leur valeur actuelle de façon atomique.
