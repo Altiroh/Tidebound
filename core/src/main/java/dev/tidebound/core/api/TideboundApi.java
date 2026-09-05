@@ -8,8 +8,10 @@ import dev.tidebound.core.data.VesselUpgrade;
 import dev.tidebound.core.data.VesselDeployment;
 import dev.tidebound.core.data.VesselTransactionResult;
 import dev.tidebound.core.data.VesselUpgradeQuote;
+import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.service.ContractService;
+import dev.tidebound.core.service.CatchService;
 import dev.tidebound.core.service.MilestoneService;
 import dev.tidebound.core.service.ProgressionService;
 import dev.tidebound.core.service.RewardService;
@@ -21,9 +23,11 @@ import dev.tidebound.core.service.WakeCompassService;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.OptionalLong;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.ItemStack;
 
 /**
  * Stable server-side entry points for Tidebound gameplay integrations.
@@ -114,5 +118,13 @@ public final class TideboundApi {
 
     public static ProgressionResult completeContract(ServerPlayer player, String contractId) {
         return ContractService.complete(player, contractId);
+    }
+
+    public static Optional<CatchData> catchData(ItemStack stack) {
+        return CatchService.data(stack);
+    }
+
+    public static OptionalLong catchValue(ItemStack stack, long currentGameTime) {
+        return CatchService.value(stack, currentGameTime);
     }
 }

@@ -1,4 +1,24 @@
 {
   "item.tidebound.wake_compass": "Compas de sillage",
-  "mod.tidebound.name": "Tidebound Core"
+  "mod.tidebound.name": "Tidebound Core",
+  "tooltip.tidebound.catch.weight": "Poids : %s g",
+  "tooltip.tidebound.catch.quality": "Qualité : %s",
+  "tooltip.tidebound.catch.freshness": "Fraîcheur : %s",
+  "tooltip.tidebound.catch.origin": "Origine : %s",
+  "tooltip.tidebound.catch.value": "Valeur estimée : %s Tides",
+  "tooltip.tidebound.catch.anomaly": "Anomalie : %s",
+  "catch_quality.tidebound.common": "ordinaire",
+  "catch_quality.tidebound.fine": "belle",
+  "catch_quality.tidebound.exceptional": "exceptionnelle",
+  "catch_quality.tidebound.legendary": "légendaire",
+  "catch_freshness.tidebound.fresh": "fraîche",
+  "catch_freshness.tidebound.aged": "vieillissante",
+  "catch_freshness.tidebound.stale": "passée",
+  "catch_freshness.tidebound.spoiled": "avariée",
+  "catch_anomaly.tidebound.ashen": "cendrée",
+  "catch_anomaly.tidebound.hollow_eyed": "aux yeux creux",
+  "catch_anomaly.tidebound.ink_veined": "veinée d'encre",
+  "message.tidebound.catch.caught": "%1$s — %2$s g — %3$s — env. %4$s Tides — +%5$s XP Pêche",
+  "message.tidebound.catch.anomalous": "Quelque chose ne va pas avec cette prise : %s.",
+  "message.tidebound.catch.legendary": "Prise légendaire : %1$s, %2$s g !"
 }

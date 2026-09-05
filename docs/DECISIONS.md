@@ -37,6 +37,15 @@
 - La cale du prototype utilise 9, 18 puis 27 cases ; les cases verrouillées ne détruisent jamais leur contenu.
 - Les émeraudes et fermes vanilla ne doivent pas permettre de contourner l'économie maritime.
 
+## Pêche
+
+- Une prise reste un ItemStack du poisson d'origine et reçoit le Data Component `tidebound:catch_data`.
+- Le prototype couvre morue, saumon, poisson tropical et poisson-globe obtenus par la pêche.
+- Le poids et la qualité sont fixés à la capture ; la fraîcheur est calculée depuis le temps du monde.
+- La valeur combine espèce, poids, qualité, anomalie et fraîcheur, toujours côté serveur lors d'une vente.
+- Les anomalies restent rares : environ 0,08 % normalement et 0,35 % la nuit en biome océan.
+- Une prise unique peut ne plus s'empiler ; les casiers, viviers et caisses devront résoudre ce coût d'inventaire.
+
 ## Quêtes et contrats
 
 - FTB Quests sert de livre visuel pour l'onboarding et les paliers uniques.

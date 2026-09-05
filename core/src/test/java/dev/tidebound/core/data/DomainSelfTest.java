@@ -2,6 +2,14 @@ package dev.tidebound.core.data;
 
 import java.util.Map;
 import java.util.UUID;
+import dev.tidebound.core.fishing.CatchAnomaly;
+import dev.tidebound.core.fishing.CatchData;
+import dev.tidebound.core.fishing.CatchFreshness;
+import dev.tidebound.core.fishing.CatchGenerator;
+import dev.tidebound.core.fishing.CatchProfile;
+import dev.tidebound.core.fishing.CatchProfiles;
+import dev.tidebound.core.fishing.CatchQuality;
+import dev.tidebound.core.fishing.CatchValuation;
 import dev.tidebound.core.navigation.WakeBearing;
 import dev.tidebound.core.progression.SkillProgression;
 
@@ -25,6 +33,10 @@ public final class DomainSelfTest {
         vesselUpgradeQuotesFollowProgression();
         vesselHoldCapacityIsProgressive();
         repairQuotesScaleWithDamage();
+        catchGenerationIsDeterministic();
+        catchFreshnessAgesWithoutTicking();
+        catchValueUsesEveryMultiplier();
+        vanillaFishProfilesAreComplete();
         System.out.println("DomainSelfTest: OK");
     }
 
@@ -159,6 +171,52 @@ public final class DomainSelfTest {
         VesselRepairQuote heavy = VesselRepairQuote.forDamage(26.0F);
         check(heavy.tideCost() == 60 && heavy.materialCount() == 3, "heavy repair quote");
         expect(IllegalArgumentException.class, () -> VesselRepairQuote.forDamage(0));
+    }
+
+    private static void catchGenerationIsDeterministic() {
+        CatchProfile cod = CatchProfiles.find("minecraft:cod").orElseThrow();
+        CatchData first = CatchGenerator.generate(cod, "minecraft:ocean", 42_000, 123_456_789L, 4, true);
+        CatchData second = CatchGenerator.generate(cod, "minecraft:ocean", 42_000, 123_456_789L, 4, true);
+        check(first.equals(second), "deterministic catch generation");
+        check(first.weightGrams() >= cod.minWeightGrams()
+                && first.weightGrams() <= cod.maxWeightGrams(), "generated catch weight range");
+        check(first.speciesId().equals("minecraft:cod"), "generated catch species");
+        check(first.originBiomeId().equals("minecraft:ocean"), "generated catch origin");
+        expect(IllegalArgumentException.class,
+                () -> CatchGenerator.generate(cod, "minecraft:ocean", 1, 2, 0, false));
+    }
+
+    private static void catchFreshnessAgesWithoutTicking() {
+        CatchData data = new CatchData("minecraft:cod", 1_800, CatchQuality.COMMON,
+                1_000, "minecraft:ocean", CatchAnomaly.NONE);
+        check(data.freshness(1_000) == CatchFreshness.FRESH, "fresh catch");
+        check(data.freshness(25_000) == CatchFreshness.AGED, "aging catch");
+        check(data.freshness(73_000) == CatchFreshness.STALE, "stale catch");
+        check(data.freshness(145_000) == CatchFreshness.SPOILED, "spoiled catch");
+        check(data.freshness(0) == CatchFreshness.FRESH, "time rollback does not spoil catches");
+    }
+
+    private static void catchValueUsesEveryMultiplier() {
+        CatchProfile profile = new CatchProfile("tidebound:test_fish", 500, 2_000, 1_000, 20);
+        CatchData ordinary = new CatchData("tidebound:test_fish", 1_000, CatchQuality.COMMON,
+                0, "minecraft:ocean", CatchAnomaly.NONE);
+        CatchData remarkable = new CatchData("tidebound:test_fish", 1_000, CatchQuality.EXCEPTIONAL,
+                0, "minecraft:ocean", CatchAnomaly.INK_VEINED);
+        check(CatchValuation.value(profile, ordinary, 0) == 20, "ordinary catch value");
+        check(CatchValuation.value(profile, remarkable, 0) == 105, "quality and anomaly value");
+        check(CatchValuation.value(profile, remarkable, CatchFreshness.FRESH_TICKS) == 89,
+                "freshness value loss");
+        expect(IllegalArgumentException.class,
+                () -> CatchValuation.value(CatchProfiles.find("minecraft:cod").orElseThrow(), ordinary, 0));
+    }
+
+    private static void vanillaFishProfilesAreComplete() {
+        check(CatchProfiles.all().size() == 4, "vanilla fish profile count");
+        check(CatchProfiles.find("minecraft:cod").isPresent(), "cod profile");
+        check(CatchProfiles.find("minecraft:salmon").isPresent(), "salmon profile");
+        check(CatchProfiles.find("minecraft:tropical_fish").isPresent(), "tropical fish profile");
+        check(CatchProfiles.find("minecraft:pufferfish").isPresent(), "pufferfish profile");
+        check(CatchProfiles.find("minecraft:stick").isEmpty(), "non-fish profile rejection");
     }
 
     private static void check(boolean condition, String label) {

@@ -13,10 +13,10 @@ comme profil personnalisé. Le manifeste installe :
 - FTB Quests `2101.1.34`.
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
-`tidebound-0.7.0-alpha.jar` dans le dossier `mods` de l'instance.
+`tidebound-0.8.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.7.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.8.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 Pour fabriquer la même archive localement après `./gradlew build` :
 

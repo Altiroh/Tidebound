@@ -2,8 +2,23 @@ package dev.tidebound.core.data;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import dev.tidebound.core.fishing.CatchAnomaly;
+import dev.tidebound.core.fishing.CatchData;
+import dev.tidebound.core.fishing.CatchQuality;
 
 public final class TideboundCodecs {
+    public static final Codec<CatchData> CATCH_DATA = RecordCodecBuilder.create(instance -> instance.group(
+            Codec.STRING.fieldOf("species").forGetter(CatchData::speciesId),
+            Codec.INT.fieldOf("weight_grams").forGetter(CatchData::weightGrams),
+            Codec.STRING.xmap(CatchQuality::fromId, CatchQuality::id)
+                    .fieldOf("quality").forGetter(CatchData::quality),
+            Codec.LONG.fieldOf("caught_at").forGetter(CatchData::caughtAtGameTime),
+            Codec.STRING.fieldOf("origin_biome").forGetter(CatchData::originBiomeId),
+            Codec.STRING.xmap(CatchAnomaly::fromId, CatchAnomaly::id)
+                    .optionalFieldOf("anomaly", CatchAnomaly.NONE)
+                    .forGetter(CatchData::anomaly)
+    ).apply(instance, CatchData::new));
+
     public static final Codec<TideWallet> TIDE_WALLET = RecordCodecBuilder.create(instance -> instance.group(
             Codec.LONG.optionalFieldOf("balance", 0L).forGetter(TideWallet::balance)
     ).apply(instance, TideWallet::new));

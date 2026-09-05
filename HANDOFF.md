@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-DESIGN-001` + `TB-QUEST-001` / `0.7.0-alpha`
+État importé : `TB-FISH-001` / `0.8.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -46,40 +46,48 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
+- composant persistant `tidebound:catch_data` posé sur les quatre poissons vanilla réellement pêchés ;
+- génération serveur du poids, de la qualité, du biome d'origine et d'une anomalie très rare ;
+- fraîcheur calculée depuis l'instant de capture et valeur estimée évolutive ;
+- tooltip bilingue, résumé de capture et commande `/tidebound catch inspect` ;
 - tests Java autonomes du domaine.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-005B.md` et `docs/quests/TB-QUEST-001.md`.
+`core/TB-CORE-005B.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
 Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pas être présentés comme fonctionnels :
 
-1. **Pêche Tidebound.** Les prises ne portent pas encore poids, qualité, fraîcheur, valeur ou mutation.
-2. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
-3. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
-4. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
-5. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
-6. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
-7. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
+1. **Vente des prises.** La valeur est calculée, mais aucun poissonnier ne consomme encore les poissons contre des Tides.
+2. **Catalogue par datapack.** Les quatre profils vanilla sont encore définis dans le code ; les poissons de mods ne sont pas intégrés.
+3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
+4. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
+5. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
+6. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
+7. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
+8. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
+9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
 
 ## Prochaine tâche recommandée
 
-### TB-FISH-001 — Modèle de prise Tidebound
+### TB-ECON-001 — Poissonnier et vente physique
 
 À réaliser maintenant :
 
-- définir les données d'une prise : espèce, poids, qualité, fraîcheur, origine et anomalie ;
-- stocker ces données sur l'ItemStack sans créer un item par combinaison ;
-- convertir la première capture vanilla en prise Tidebound ;
-- calculer une valeur serveur déterministe et exposer l'affichage joueur ;
-- fournir des tests de sérialisation, de valeur et de compatibilité des sauvegardes ;
-- préparer les points d'intégration pour la vente au port et le Journal.
+- ajouter un rôle de poissonnier distinct de l'intendant ou un service clairement identifié ;
+- lister les prises vendables et leur valeur actuelle ;
+- consommer physiquement la quantité choisie avant de créditer les Tides ;
+- rendre la transaction atomique et résistante au double clic ;
+- attribuer l'XP de Commerce et le palier de première vente ;
+- conserver les poissons vanilla sans composant comme denrées ordinaires à faible valeur ;
+- préparer un prix configurable par profil pour les futurs poissons de mods.
 
 ## Architecture et sources de vérité
 
 - `core/src/main/java/dev/tidebound/core/data/` : modèles persistants ;
 - `core/src/main/java/dev/tidebound/core/service/` : logique serveur ;
+- `core/src/main/java/dev/tidebound/core/fishing/` : modèle, génération, fraîcheur et valeur des prises ;
 - `core/src/main/java/dev/tidebound/core/api/TideboundApi.java` : façade publique ;
 - `core/src/main/java/dev/tidebound/core/event/` : événements NeoForge ;
 - `core/src/main/resources/data/` : contenu datapack ;

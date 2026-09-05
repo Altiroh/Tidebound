@@ -12,6 +12,7 @@ import dev.tidebound.core.data.PlayerProgress;
 import dev.tidebound.core.data.TideWallet;
 import dev.tidebound.core.data.VesselUpgrade;
 import dev.tidebound.core.data.VesselTransactionResult;
+import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.service.HarborBoardService;
@@ -25,6 +26,7 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 public final class TideboundCommands {
@@ -39,6 +41,7 @@ public final class TideboundCommands {
                 .then(tideNode())
                 .then(vesselNode())
                 .then(progressionNode())
+                .then(catchNode())
                 .then(skillsNode())
                 .then(contractBoardNode())
                 .then(harborNode()));
@@ -227,6 +230,13 @@ public final class TideboundCommands {
                                 context.getSource(), EntityArgument.getPlayer(context, "player"))));
     }
 
+    private static LiteralArgumentBuilder<CommandSourceStack> catchNode() {
+        return Commands.literal("catch")
+                .then(Commands.literal("inspect")
+                        .executes(context -> inspectCatch(
+                                context.getSource(), context.getSource().getPlayerOrException())));
+    }
+
     private static LiteralArgumentBuilder<CommandSourceStack> contractBoardNode() {
         return Commands.literal("contracts")
                 .executes(context -> HarborBoardService.showNearbyBoard(
@@ -256,6 +266,25 @@ public final class TideboundCommands {
         TideWallet wallet = TideboundApi.wallet(player);
         source.sendSuccess(() -> Component.literal(player.getGameProfile().getName() + " possède "
                 + wallet.balance() + " Tide(s).").withStyle(ChatFormatting.AQUA), false);
+        return 1;
+    }
+
+    private static int inspectCatch(CommandSourceStack source, ServerPlayer player) {
+        ItemStack stack = player.getMainHandItem();
+        CatchData data = TideboundApi.catchData(stack).orElse(null);
+        if (data == null) {
+            source.sendFailure(Component.literal("Tenez une prise Tidebound dans votre main principale."));
+            return 0;
+        }
+        long gameTime = player.getServer().overworld().getGameTime();
+        long value = TideboundApi.catchValue(stack, gameTime).orElse(0L);
+        source.sendSuccess(() -> Component.literal(stack.getHoverName().getString()
+                + " — " + data.weightGrams() + " g — qualité " + data.quality().id()
+                + " — fraîcheur " + data.freshness(gameTime).id()
+                + " — origine " + data.originBiomeId()
+                + " — anomalie " + data.anomaly().id()
+                + " — valeur estimée " + value + " Tides")
+                .withStyle(ChatFormatting.AQUA), false);
         return 1;
     }
 

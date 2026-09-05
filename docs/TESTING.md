@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.7.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.8.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.7.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.8.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.7.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.8.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
@@ -115,7 +115,32 @@ l'inventaire, ou déposé près du navire si l'inventaire est plein.
 Pour tester la réparation, frapper légèrement le navire, le laisser près de l'intendant et rouvrir le
 tableau. Le bouton **RÉPARER LE NAVIRE** apparaît si des dégâts sont détectés.
 
-## 6. Tester le livre FTB Quests fourni
+## 6. Tester les prises Tidebound
+
+Pêcher normalement avec une canne vanilla. Une morue, un saumon, un poisson tropical ou un
+poisson-globe doit afficher immédiatement son poids, sa qualité, sa valeur estimée et le gain d'XP.
+Les bâtons, bols et autres déchets ne doivent recevoir aucune donnée et ne valident pas la première prise.
+
+Dans l'inventaire, survoler le poisson et vérifier :
+
+- poids en grammes ;
+- qualité colorée ;
+- fraîcheur ;
+- identifiant du biome d'origine ;
+- valeur estimée en Tides ;
+- anomalie uniquement sur une prise exceptionnellement rare.
+
+Tenir ensuite le poisson dans la main principale :
+
+```mcfunction
+/tidebound catch inspect
+```
+
+La commande doit afficher les mêmes données. Conserver une prise pendant au moins 24 000 ticks ou
+utiliser `/time add 24000` pour vérifier le passage de `fraîche` à `vieillissante` et la baisse de valeur.
+Le poisson reste utilisable par les recettes et contrats vanilla, car son type d'item n'est pas remplacé.
+
+## 7. Tester le livre FTB Quests fourni
 
 Installer dans le même profil, côté client et serveur :
 
@@ -166,7 +191,7 @@ ensuite `python core/tools/validate_content.py` avant de committer.
 Limitation actuelle : les ports ne sont pas encore générés. Créer l'intendant avec la fonction décrite
 dans le smoke test pour valider le chapitre `Premier port`.
 
-## 7. Informations à fournir en cas de bug
+## 8. Informations à fournir en cas de bug
 
 - le commit ou la version du JAR ;
 - la liste exacte des mods et leurs versions ;
