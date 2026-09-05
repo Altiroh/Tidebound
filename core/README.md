@@ -1,4 +1,4 @@
-# Tidebound Core — 0.11.0-alpha
+# Tidebound Core — 0.11.1-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -61,7 +61,7 @@ Commandes joueur :
 - `/tidebound vessel inspect`
 - `/tidebound vessel claim [name]` — près d'un intendant
 - `/tidebound vessel register [name]` — enregistre la barque vanilla montée ou la plus proche
-- `/tidebound vessel refit` — migre au port un ancien bateau enregistré vers l'entité Tidebound
+- `/tidebound vessel refit` — construit au port le navire Tidebound à partir de la Barque de fortune
 - `/tidebound vessel deploy` — près d'un intendant et d'une zone d'eau
 - `/tidebound vessel compass` — remplace gratuitement un Compas de sillage perdu au port
 - `/tidebound vessel rename <name>` — près d'un intendant
@@ -113,7 +113,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.11.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.11.1-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome

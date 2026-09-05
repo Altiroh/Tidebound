@@ -50,6 +50,10 @@ public final class VesselMaintenanceService {
             if (physical == null) {
                 return failure("vessel_not_at_harbor", "Amenez votre navire au quai avant de l'améliorer.");
             }
+            if (!(physical instanceof dev.tidebound.core.vessel.TideboundVesselEntity)) {
+                return failure("simple_boat", "Cette barque de fortune ne peut pas être améliorée. "
+                        + "Faites construire un navire Tidebound au chantier naval.");
+            }
 
             PlayerVessel beforeVessel = VesselService.vessel(player);
             VesselUpgradeQuote quote;

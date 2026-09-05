@@ -21,7 +21,7 @@ import dev.tidebound.core.vessel.TideboundVesselEntity;
  * all mutations still go through the existing command/API validation path.
  */
 public final class HarborMenu extends AbstractContainerMenu {
-    public static final int DATA_COUNT = 9;
+    public static final int DATA_COUNT = 10;
 
     public static final int ACTION_CLAIM = 0;
     public static final int ACTION_REGISTER = 1;
@@ -118,6 +118,10 @@ public final class HarborMenu extends AbstractContainerMenu {
         return data.get(8) != 0;
     }
 
+    public boolean tideboundVessel() {
+        return data.get(9) != 0;
+    }
+
     private static String commandFor(int action) {
         return switch (action) {
             case ACTION_CLAIM -> "tidebound vessel claim";
@@ -152,6 +156,8 @@ public final class HarborMenu extends AbstractContainerMenu {
                             .filter(boat -> boat.getDamage() > 0.01F).isPresent() ? 1 : 0;
                     case 8 -> VesselMaintenanceService.nearbyPhysicalVessel(player)
                             .filter(boat -> !(boat instanceof TideboundVesselEntity)).isPresent() ? 1 : 0;
+                    case 9 -> VesselDeploymentService.findActive(player)
+                            .filter(TideboundVesselEntity.class::isInstance).isPresent() ? 1 : 0;
                     default -> 0;
                 };
             }
