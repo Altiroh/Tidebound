@@ -51,5 +51,6 @@
   "screen.tidebound.step.2": "Port",
   "screen.tidebound.step.3": "Fish",
   "screen.tidebound.step.4": "Sell",
-  "screen.tidebound.step.5": "Strange"
+  "screen.tidebound.step.5": "Strange",
+  "generator.tidebound.archipelago": "Tidebound — Archipelago"
 }

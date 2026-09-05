@@ -2,6 +2,7 @@ package dev.tidebound.core.command;
 
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.arguments.LongArgumentType;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.tidebound.core.api.TideboundApi;
 import dev.tidebound.core.content.ContractDefinition;
@@ -16,7 +17,10 @@ import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.service.HarborBoardService;
+import dev.tidebound.core.service.ArchipelagoSurveyService;
 import dev.tidebound.core.service.ProgressionService;
+import dev.tidebound.core.world.ArchipelagoSurvey;
+import dev.tidebound.core.world.StarterPortPlan;
 import java.util.Locale;
 import java.util.List;
 import net.minecraft.ChatFormatting;
@@ -44,7 +48,8 @@ public final class TideboundCommands {
                 .then(catchNode())
                 .then(skillsNode())
                 .then(contractBoardNode())
-                .then(harborNode()));
+                .then(harborNode())
+                .then(worldNode()));
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> tideNode() {
@@ -260,6 +265,42 @@ public final class TideboundCommands {
                         .then(Commands.argument("villager", EntityArgument.entity())
                                 .executes(context -> configureHarborBoard(
                                         context.getSource(), EntityArgument.getEntity(context, "villager"), false))));
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> worldNode() {
+        return Commands.literal("world")
+                .requires(source -> source.hasPermission(ADMIN_PERMISSION))
+                .then(Commands.literal("diagnose")
+                        .executes(context -> diagnoseWorld(context.getSource(), 128))
+                        .then(Commands.argument("radius", IntegerArgumentType.integer(64, 256))
+                                .executes(context -> diagnoseWorld(
+                                        context.getSource(),
+                                        IntegerArgumentType.getInteger(context, "radius")))));
+    }
+
+    private static int diagnoseWorld(CommandSourceStack source, int radius) {
+        ServerPlayer player;
+        try {
+            player = source.getPlayerOrException();
+        } catch (Exception exception) {
+            source.sendFailure(Component.literal("Cette commande doit être exécutée par un joueur."));
+            return 0;
+        }
+        ArchipelagoSurvey survey = ArchipelagoSurveyService.survey(
+                player.serverLevel(), player.serverLevel().getSharedSpawnPos(), radius);
+        boolean portRoll = StarterPortPlan.shouldGenerate(player.serverLevel().getSeed());
+        int landPercent = (int) Math.round(survey.landRatio() * 100.0);
+        int waterPercent = (int) Math.round(survey.waterRatio() * 100.0);
+        source.sendSuccess(() -> Component.literal("Diagnostic Tidebound — rayon " + radius
+                + " : terre " + landPercent + " %, eau " + waterPercent + " %, rivages "
+                + survey.shoreSamples() + ", bois " + survey.logSamples() + ".")
+                .withStyle(ChatFormatting.AQUA), false);
+        source.sendSuccess(() -> Component.literal("Spawn " + (survey.playable() ? "JOUABLE" : "À REJETER")
+                + (survey.continentLike() ? " — masse continentale détectée" : " — archipel confirmé")
+                + " — tirage du port initial : " + (portRoll ? "oui" : "non"))
+                .withStyle(survey.playable() && !survey.continentLike()
+                        ? ChatFormatting.GREEN : ChatFormatting.RED), false);
+        return survey.playable() && !survey.continentLike() ? 1 : 0;
     }
 
     private static int showBalance(CommandSourceStack source, ServerPlayer player) {

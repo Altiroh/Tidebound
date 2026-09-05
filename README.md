@@ -6,8 +6,8 @@ Le projet n'est pas un mode histoire. Le livre **Le Voyage** fournit un fil dire
 
 ## État actuel
 
-- version du projet : `0.9.0-alpha` ;
-- dernier ticket terminé : `TB-FISH-001` ;
+- version du projet : `0.10.0-alpha` ;
+- dernier ticket terminé : `TB-WORLD-001` ;
 - cible : Minecraft `1.21.1`, NeoForge `21.1.249`, Java `21` ;
 - tests de domaine et validation du contenu automatisés par Gradle et la CI GitHub.
 
@@ -16,6 +16,8 @@ l'enregistrement d'une barque vanilla, un Compas de sillage, ainsi que les achat
 Le Devpack fournit également les chapitres FTB Quests **Naufragé** et **Premier port**.
 Les morues, saumons, poissons tropicaux et poissons-globes pêchés portent désormais un poids, une
 qualité, une fraîcheur, une origine, une valeur et parfois une anomalie rare.
+Toute nouvelle sauvegarde utilise désormais un archipel avec un spawn ciblé sur une île boisée ; le
+Nether et l'End restent inchangés.
 
 ## Reprendre le projet
 
@@ -54,5 +56,5 @@ python tools/validate_content.py
 ./gradlew build
 ```
 
-Le JAR attendu est `core/build/libs/tidebound-0.9.0-alpha.jar`. Le workflow GitHub Actions publie
+Le JAR attendu est `core/build/libs/tidebound-0.10.0-alpha.jar`. Le workflow GitHub Actions publie
 également ce JAR comme artifact à chaque push et pull request.

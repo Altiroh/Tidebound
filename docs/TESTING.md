@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.9.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.10.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.9.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.10.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.9.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.10.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
@@ -70,7 +70,31 @@ Le dossier `modpack/` contient aussi un manifeste CurseForge de développement q
 mods FTB compatibles. Dans l'archive produite par GitHub Actions, Tidebound Core est déjà placé dans
 `overrides/mods` ; lors d'un import manuel du manifeste seul, il faut encore ajouter le JAR.
 
-## 5. Smoke test Tidebound Core
+## 5. Tester l'archipel sur un monde neuf
+
+Ne pas réutiliser un monde créé avant la `0.10.0-alpha`. Créer un monde normal : Tidebound remplace
+automatiquement son relief par l'archipel. Le preset explicite **Tidebound — Archipel** peut aussi être
+sélectionné dans les options avancées et doit produire le même résultat.
+
+Avec les commandes autorisées, exécuter au spawn :
+
+```mcfunction
+/tidebound world diagnose 128
+```
+
+Le résultat attendu est `Spawn JOUABLE — archipel confirmé`, avec du bois et au moins un rivage. Vérifier
+visuellement que le joueur apparaît sur une île, que l'océan est accessible sans creuser et qu'aucune
+masse continentale ne remplit l'horizon proche.
+
+Pour la matrice d'acceptation, créer vingt mondes avec les seeds `tidebound-01` à `tidebound-20`, lancer
+le diagnostic dans chacun et noter : verdict, proportion de terre/eau, rivages, bois et tirage du port.
+La cible est 20/20 spawns jouables et 0/20 masse continentale. Le tirage du port ne place encore aucune
+structure : il prépare `TB-PORT-001`.
+
+Le workflow GitHub lance aussi `tools/smoke_test_worldgen.sh`. Ce contrôle crée un monde par défaut et
+attend que le serveur atteigne son état prêt, ce qui détecte les références ou codecs worldgen invalides.
+
+## 6. Smoke test Tidebound Core
 
 Créer l'intendant :
 
@@ -122,7 +146,7 @@ l'inventaire, ou déposé près du navire si l'inventaire est plein.
 Pour tester la réparation, frapper légèrement le navire, le laisser près de l'intendant et rouvrir le
 tableau. Le bouton **RÉPARER LE NAVIRE** apparaît si des dégâts sont détectés.
 
-## 6. Tester les prises Tidebound
+## 7. Tester les prises Tidebound
 
 Pêcher normalement avec une canne vanilla. Une morue, un saumon, un poisson tropical ou un
 poisson-globe doit afficher immédiatement son poids, sa qualité, sa valeur estimée et le gain d'XP.
@@ -147,7 +171,7 @@ La commande doit afficher les mêmes données. Conserver une prise pendant au mo
 utiliser `/time add 24000` pour vérifier le passage de `fraîche` à `vieillissante` et la baisse de valeur.
 Le poisson reste utilisable par les recettes et contrats vanilla, car son type d'item n'est pas remplacé.
 
-## 7. Tester le livre FTB Quests fourni
+## 8. Tester le livre FTB Quests fourni
 
 Installer dans le même profil, côté client et serveur :
 
@@ -198,7 +222,7 @@ ensuite `python core/tools/validate_content.py` avant de committer.
 Limitation actuelle : les ports ne sont pas encore générés. Créer l'intendant avec la fonction décrite
 dans le smoke test pour valider le chapitre `Premier port`.
 
-## 8. Informations à fournir en cas de bug
+## 9. Informations à fournir en cas de bug
 
 - le commit ou la version du JAR ;
 - la liste exacte des mods et leurs versions ;

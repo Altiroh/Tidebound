@@ -12,6 +12,8 @@ import dev.tidebound.core.fishing.CatchQuality;
 import dev.tidebound.core.fishing.CatchValuation;
 import dev.tidebound.core.navigation.WakeBearing;
 import dev.tidebound.core.progression.SkillProgression;
+import dev.tidebound.core.world.ArchipelagoSurvey;
+import dev.tidebound.core.world.StarterPortPlan;
 
 /**
  * Dependency-free smoke test. It can be executed with the JDK alone; see README.md.
@@ -37,6 +39,8 @@ public final class DomainSelfTest {
         catchFreshnessAgesWithoutTicking();
         catchValueUsesEveryMultiplier();
         vanillaFishProfilesAreComplete();
+        archipelagoSurveyRejectsContinentsAndBarrenSpawns();
+        starterPortRollIsDeterministicAndOptional();
         System.out.println("DomainSelfTest: OK");
     }
 
@@ -217,6 +221,33 @@ public final class DomainSelfTest {
         check(CatchProfiles.find("minecraft:tropical_fish").isPresent(), "tropical fish profile");
         check(CatchProfiles.find("minecraft:pufferfish").isPresent(), "pufferfish profile");
         check(CatchProfiles.find("minecraft:stick").isEmpty(), "non-fish profile rejection");
+    }
+
+    private static void archipelagoSurveyRejectsContinentsAndBarrenSpawns() {
+        ArchipelagoSurvey viable = new ArchipelagoSurvey(100, 25, 70, 9, 3);
+        check(viable.playable(), "viable island spawn");
+        check(!viable.continentLike(), "island is not a continent");
+
+        ArchipelagoSurvey continent = new ArchipelagoSurvey(100, 70, 25, 5, 4);
+        check(!continent.playable(), "continent fails the water requirement");
+        check(continent.continentLike(), "continent detection");
+
+        ArchipelagoSurvey barren = new ArchipelagoSurvey(100, 20, 75, 8, 0);
+        check(!barren.playable(), "barren island rejection");
+        expect(IllegalArgumentException.class,
+                () -> new ArchipelagoSurvey(0, 0, 0, 0, 0));
+    }
+
+    private static void starterPortRollIsDeterministicAndOptional() {
+        int selected = 0;
+        for (long seed = -20; seed <= 20; seed++) {
+            check(StarterPortPlan.shouldGenerate(seed) == StarterPortPlan.shouldGenerate(seed),
+                    "stable starter port roll");
+            if (StarterPortPlan.shouldGenerate(seed)) {
+                selected++;
+            }
+        }
+        check(selected > 0 && selected < 41, "starter port is optional across seeds");
     }
 
     private static void check(boolean condition, String label) {

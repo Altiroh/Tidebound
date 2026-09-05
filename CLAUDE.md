@@ -17,10 +17,14 @@ Commencer par lire `HANDOFF.md`, puis `docs/design/Tidebound_Lore.md`, `ROADMAP.
 
 ## Travail courant
 
-La prochaine unité de travail est `TB-WORLD-001`, décrite dans `HANDOFF.md`. Les prises persistantes,
+La prochaine unité de travail est `TB-VESSEL-001`, décrite dans `HANDOFF.md`. Les prises persistantes,
 leur fraîcheur et leur valeur sont implémentées dans `TB-FISH-001` sans remplacer les items vanilla.
 La direction visuelle est désormais canonique : consulter `docs/assets/ASSET_CATALOG.md` avant de créer
 un nouvel asset. Ne pas présenter le skin d'intendant ni le navire Tidebound comme implémentés tant que
 leurs tickets respectifs n'ont pas été validés en jeu.
+
+Le preset normal est volontairement remplacé par l'archipel de `TB-WORLD-001`. Ne jamais annoncer la
+matrice 20/20 comme validée sans avoir créé et diagnostiqué vingt mondes neufs. Tout changement de
+density function nécessite aussi le smoke test serveur de la CI.
 
 Après toute modification matérielle, mettre à jour `HANDOFF.md`, `ROADMAP.md`, `CHANGELOG.md` et la note de ticket correspondante avant de committer.

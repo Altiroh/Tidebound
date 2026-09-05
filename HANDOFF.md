@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-UX-001` / `0.9.0-alpha`
+État importé : `TB-WORLD-001` / `0.10.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -53,6 +53,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - tooltip bilingue, résumé de capture et commande `/tidebound catch inspect` ;
 - tests Java autonomes du domaine ;
 - première intégration du pack artistique : interface d'intendant, Compas de sillage et catalogue.
+- preset normal remplacé par un archipel pour toute nouvelle sauvegarde ;
+- relief insulaire partagé par le terrain et les biomes, avec cœur forestier ciblé au spawn ;
+- diagnostic serveur terre/eau/rivage/bois et détection de masse continentale ;
+- tirage stable du futur port initial et smoke test CI créant réellement un monde neuf.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
 `core/TB-CORE-005B.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
@@ -64,7 +68,7 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 1. **Vente des prises.** La valeur est calculée, mais aucun poissonnier ne consomme encore les poissons contre des Tides.
 2. **Catalogue par datapack.** Les quatre profils vanilla sont encore définis dans le code ; les poissons de mods ne sont pas intégrés.
 3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
-4. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ ; un monde neuf reste un Overworld normal.
+4. **Contenu procédural.** L'archipel et l'île de départ existent, mais ports, épaves, phares et autres points d'intérêt ne sont pas encore placés.
 5. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
 6. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
 7. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
@@ -76,17 +80,20 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-WORLD-001 — Île de départ et preset d'archipel
+### TB-VESSEL-001 — Véritable navire Tidebound
 
 À réaliser maintenant :
 
-- créer un preset de monde Tidebound orienté océan et archipels ;
-- garantir une île de départ viable avec bois, nourriture et accès à l'eau ;
-- éviter toute grande masse continentale dans la zone de départ ;
-- prévoir une probabilité de port sans rendre le port obligatoire au spawn ;
-- conserver la boucle de secours bois → barque → navigation → premier port ;
-- ajouter des diagnostics de seed et préparer le test 20/20 spawns jouables ;
-- ne pas saturer la mer : les découvertes devront ensuite viser un rythme de 3 à 6 minutes.
+- enregistrer une entité de navire propre à Tidebound et son rendu initial ;
+- migrer au port la barque déjà enregistrée sans changer l'identité `PlayerVessel` ;
+- conserver propriétaire, nom, cale, position, dégâts et niveaux d'amélioration ;
+- rendre visibles les changements de coque, moteur, cale et emplacements de modules ;
+- prévoir plusieurs places à bord sans transformer le navire en structure multibloc fragile ;
+- réutiliser les interfaces et modules recensés dans `docs/assets/ASSET_CATALOG.md` ;
+- garder la barque vanilla comme solution avant le premier port.
+
+La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
+du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.
 
 ## Architecture et sources de vérité
 

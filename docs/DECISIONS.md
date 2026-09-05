@@ -14,6 +14,12 @@
 - Un démarrage doit toutefois fournir une voie praticable : obtenir du bois, fabriquer une barque vanilla et rejoindre un port.
 - Les premières quêtes apprennent les systèmes et rendent le joueur efficace ; elles ne lui dictent pas sa partie.
 - Le confort du port sert de contraste et donne envie de revenir entre deux expéditions.
+- Le preset normal d'une nouvelle sauvegarde Tidebound est remplacé par l'archipel ; une ancienne
+  sauvegarde n'est jamais convertie silencieusement.
+- Le premier profil d'archipel privilégie océan profond, océan, plage, plaine et forêt afin de garantir
+  eau, rivage et bois sans réintroduire de continent.
+- Un futur port initial est réservé par seed avec une probabilité d'environ un tiers ; son absence ne
+  bloque jamais la boucle bois → barque → premier port.
 
 ## Navire
 

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "minecraft:mul",
+    "argument1": 0.8,
+    "argument2": "tidebound:world/island_continentalness"
+  },
+  "argument2": {
+    "type": "minecraft:y_clamped_gradient",
+    "from_y": -64,
+    "to_y": 112,
+    "from_value": 1.8,
+    "to_value": -0.8
+  }
+}
