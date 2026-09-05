@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-NPC-001` / `0.13.0-alpha`
+État importé : `TB-ECON-001` / `0.14.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -54,6 +54,8 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - séparation des responsabilités : l'Intendant gère le navire administratif, le charpentier est le
   seul service d'amélioration/réparation/construction ;
 - écran illustré propre à chaque rôle, avec actions serveur uniquement lorsqu'elles existent ;
+- estimation en direct et vente physique des prises estampillées auprès du poissonnier ;
+- transaction de vente non duplicable créditant Tides et XP Commerce sans toucher aux poissons vanilla ;
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
@@ -77,7 +79,8 @@ Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-00
 
 Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pas être présentés comme fonctionnels :
 
-1. **Vente des prises.** La valeur est calculée, mais aucun poissonnier ne consomme encore les poissons contre des Tides.
+1. **Demandes du poissonnier.** La vente générale fonctionne ; les prix du jour et commandes spéciales
+   affichés dans la maquette restent à rendre dynamiques.
 2. **Catalogue par datapack.** Les quatre profils vanilla sont encore définis dans le code ; les poissons de mods ne sont pas intégrés.
 3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
 4. **Contenu procédural.** L'archipel et l'île de départ existent, mais ports, épaves, phares et autres points d'intérêt ne sont pas encore placés.
@@ -95,15 +98,15 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-ECON-001 — Vente physique au poissonnier
+### TB-PORT-001 — Ports variables et services procéduraux
 
 À réaliser maintenant :
 
-- ajouter un inventaire de vente physique dans l'écran du poissonnier ;
-- calculer la valeur serveur des prises déposées et afficher l'estimation ;
-- consommer atomiquement les prises puis créditer les Tides et l'XP de Commerce ;
-- ne jamais vendre un objet non estampillé comme prise Tidebound ;
-- préparer les demandes du jour sans les annoncer comme terminées.
+- définir plusieurs gabarits de petit port, quai, atelier et phare ;
+- choisir les services par seed sans garantir un Intendant sur chaque île habitée ;
+- placer au moins un port atteignable sans marche continentale ;
+- conserver le Compas des Havres comme garde-fou ultérieur ;
+- intégrer Create uniquement dans les variantes où ses mécanismes servent réellement le lieu.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

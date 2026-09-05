@@ -7,7 +7,8 @@ Statut : implémenté, compilation NeoForge et validation visuelle en attente de
 
 - cinq entités dédiées : Intendant, charpentier naval, poissonnier, naturaliste et gardien de phare ;
 - modèle conservant la silhouette familière du villageois vanilla ;
-- cinq atlas UV originaux et cinq maquettes d'interface issus du pack artistique Tidebound ;
+- cinq atlas UV issus du pack artistique Tidebound, réduits en 512×512 par voisin le plus proche,
+  et cinq maquettes d'interface ;
 - écran de l'Intendant limité à l'enregistrement, la navigation, le Compas et les contrats ;
 - écran du charpentier autorisant construction, réparation et améliorations ;
 - interfaces du poissonnier, du Naturaliste et du Gardien visibles mais sans mutation serveur fictive ;

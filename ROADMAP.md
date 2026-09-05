@@ -17,10 +17,10 @@
 - [x] `TB-PACK-001` — socle cosy : Create, stockage, carte, voyage, ambiance, objets physiques et shaders.
 - [x] `TB-DESIGN-002` — lore vanilla-friendly, familles d'îles, rôles portuaires, abysses et vitalité.
 - [x] `TB-NPC-001` — cinq PNJ portuaires dédiés, skins et écrans visuels par métier.
+- [x] `TB-ECON-001` — estimation et vente atomique des prises auprès du poissonnier.
 
 ## Prochaine tranche du prototype vertical
 
-- [ ] `TB-ECON-001` — vente physique au port et équilibrage des Tides ;
 - [ ] `TB-PORT-001` — structures de ports variables, services facultatifs et placement procédural ;
 - [ ] `TB-NAV-001` — Compas des Havres trouvant un Intendant non découvert ;
 - [ ] `TB-SMELT-001` — enchantement de fonte rapide compatible avec l'économie et Create ;
