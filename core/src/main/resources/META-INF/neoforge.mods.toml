@@ -4,11 +4,11 @@ license="All Rights Reserved"
 
 [[mods]]
 modId="tidebound"
-version="0.8.0-alpha"
+version="0.9.0-alpha"
 displayName="Tidebound Core"
 authors="Tidebound"
 description='''
-Socle serveur de Tidebound : métiers, Tides, contrats et navire physique personnel persistant.
+Socle de Tidebound : progression maritime, prises persistantes, navire personnel et interfaces de port.
 '''
 
 [[dependencies.tidebound]]

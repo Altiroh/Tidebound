@@ -1,4 +1,4 @@
-# Tidebound Core — 0.8.0-alpha
+# Tidebound Core — 0.9.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -14,7 +14,8 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - quatre métiers à dix niveaux : pêche, navigation, commerce et récupération ;
 - déclencheurs automatiques pour la pêche, la navigation océanique et la première livraison ;
 - contrats pouvant exiger un niveau de métier ;
-- villageois-intendant affichant un tableau de contrats cliquable ;
+- intendant ouvrant un véritable menu graphique et synchronisé ;
+- carnet de bord accessible par une icône dans l'inventaire ;
 - navire physique personnel basé sur un bateau-coffre, lié à son propriétaire ;
 - réclamation, mise à l'eau, localisation et renommage auprès de la capitainerie ;
 - position du navire persistante entre les sessions et protection contre les autres joueurs ;
@@ -106,7 +107,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.8.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.9.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -202,8 +203,9 @@ Ou créer directement un intendant à la position d'exécution :
 /function tidebound:create_harbor_intendant
 ```
 
-Un clic droit sur cet **Intendant du port** affiche la capitainerie, le navire personnel, les contrats
-et leurs boutons d'action. Voir `TB-CORE-005A.md` pour la boucle de départ et `examples/` pour les ponts.
+Un clic droit sur cet **Intendant du port** ouvre l'interface de capitainerie. Les boutons de navire
+pilotent les mêmes services serveur que les commandes ; l'onglet Contrats ouvre encore provisoirement
+la liste textuelle. Voir `TB-CORE-005A.md` et `../docs/ux/TB-UX-001.md`.
 
 ## Boucle de départ sans intendant au spawn
 
@@ -226,5 +228,6 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-ECON-001` : poissonnier de port, vente physique des prises et
-versement transactionnel des Tides. Les modules du navire reprendront après les API de pêche et de monde.
+La prochaine brique recommandée est `TB-WORLD-001` : preset d'archipel et île de départ viable. Le
+poissonnier, les autres interfaces et le véritable navire Tidebound réutiliseront le socle graphique créé
+par `TB-UX-001`.
