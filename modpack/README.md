@@ -15,6 +15,15 @@ comme profil personnalisé. Le manifeste installe :
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import, copier
 `tidebound-0.6.0-alpha.jar` dans le dossier `mods` de l'instance.
 
+Le workflow GitHub Actions automatise cette étape : son artifact contient
+`Tidebound_Devpack_0.6.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+
+Pour fabriquer la même archive localement après `./gradlew build` :
+
+```bash
+bash modpack/package.sh
+```
+
 ## Pourquoi ce pack reste petit
 
 Cette première instance sert à valider la boucle Tidebound sans masquer les erreurs derrière des

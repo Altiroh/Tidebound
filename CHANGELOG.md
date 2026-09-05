@@ -15,6 +15,7 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 - conversion d'une barque enregistrée en bateau-coffre lors de l'amélioration de cale ;
 - Gradle Wrapper officiel et workflow GitHub Actions Java 21 ;
 - guide de test complet et manifeste de modpack CurseForge minimal ;
+- artifact CI contenant un Devpack CurseForge directement importable ;
 - pont FTB Quests corrigé avec `{p}` et permission 2.
 
 ## 0.5.0-alpha — TB-CORE-005A
