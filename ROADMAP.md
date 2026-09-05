@@ -18,10 +18,11 @@
 - [x] `TB-DESIGN-002` — lore vanilla-friendly, familles d'îles, rôles portuaires, abysses et vitalité.
 - [x] `TB-NPC-001` — cinq PNJ portuaires dédiés, skins et écrans visuels par métier.
 - [x] `TB-ECON-001` — estimation et vente atomique des prises auprès du poissonnier.
+- [x] `TB-PORT-001A` — planificateur par seed des archétypes et services portuaires.
 
 ## Prochaine tranche du prototype vertical
 
-- [ ] `TB-PORT-001` — structures de ports variables, services facultatifs et placement procédural ;
+- [ ] `TB-PORT-001B` — structures physiques, sélection du rivage et invocation des services planifiés ;
 - [ ] `TB-NAV-001` — Compas des Havres trouvant un Intendant non découvert ;
 - [ ] `TB-SMELT-001` — enchantement de fonte rapide compatible avec l'économie et Create ;
 - [ ] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet ;

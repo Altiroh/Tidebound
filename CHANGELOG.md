@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.15.0-alpha — TB-PORT-001A
+
+- ajoute cinq archétypes pondérés de ports et avant-postes ;
+- choisit par seed/région un roster stable de services ;
+- garantit qu'un port ne contient jamais automatiquement les cinq PNJ ;
+- limite les mécanismes Create aux variantes cohérentes et occasionnelles ;
+- ajoute `/tidebound world port-plan` pour inspecter le futur site sans le placer.
+
 ## 0.14.0-alpha — TB-ECON-001
 
 - affiche chez le poissonnier le nombre et la valeur actuelle des prises vendables ;

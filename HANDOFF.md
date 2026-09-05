@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-ECON-001` / `0.14.0-alpha`
+État importé : `TB-PORT-001A` / `0.15.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -56,6 +56,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - écran illustré propre à chaque rôle, avec actions serveur uniquement lorsqu'elles existent ;
 - estimation en direct et vente physique des prises estampillées auprès du poissonnier ;
 - transaction de vente non duplicable créditant Tides et XP Commerce sans toucher aux poissons vanilla ;
+- planificateur stable des ports par seed/région, avec cinq archétypes pondérés et services facultatifs ;
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
@@ -98,15 +99,16 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-PORT-001 — Ports variables et services procéduraux
+### TB-PORT-001B — Placement physique des ports
 
 À réaliser maintenant :
 
-- définir plusieurs gabarits de petit port, quai, atelier et phare ;
-- choisir les services par seed sans garantir un Intendant sur chaque île habitée ;
-- placer au moins un port atteignable sans marche continentale ;
+- construire les gabarits du hameau, quai, phare, marché et station ;
+- choisir un rivage viable puis consommer le `PortPlan` de la région ;
+- invoquer uniquement les PNJ et services annoncés par le plan ;
+- placer au moins un port atteignable sans marche continentale lorsqu'un site est tiré ;
 - conserver le Compas des Havres comme garde-fou ultérieur ;
-- intégrer Create uniquement dans les variantes où ses mécanismes servent réellement le lieu.
+- intégrer Create uniquement lorsque `CREATE_MECHANISM` est présent.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

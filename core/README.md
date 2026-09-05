@@ -1,4 +1,4 @@
-# Tidebound Core — 0.14.0-alpha
+# Tidebound Core — 0.15.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -113,7 +113,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.14.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.15.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -146,6 +146,9 @@ javac --release 17 -d build/domain-self-test \
   src/main/java/dev/tidebound/core/progression/SkillProgression.java \
   src/main/java/dev/tidebound/core/world/ArchipelagoSurvey.java \
   src/main/java/dev/tidebound/core/world/StarterPortPlan.java \
+  src/main/java/dev/tidebound/core/world/PortService.java \
+  src/main/java/dev/tidebound/core/world/PortArchetype.java \
+  src/main/java/dev/tidebound/core/world/PortPlan.java \
   src/main/java/dev/tidebound/core/vessel/VesselVisualProfile.java \
   src/test/java/dev/tidebound/core/data/DomainSelfTest.java
 java -cp build/domain-self-test dev.tidebound.core.data.DomainSelfTest
@@ -255,5 +258,5 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-PORT-001` : générer des ports variables dont les services
-dépendent de la seed, sans garantir un Intendant sur chaque île habitée.
+La prochaine brique recommandée est `TB-PORT-001B` : placer physiquement les gabarits de ports sur un
+rivage viable et invoquer uniquement les services choisis par `PortPlan`.

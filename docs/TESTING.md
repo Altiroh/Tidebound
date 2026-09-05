@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.14.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.15.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.14.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.15.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.14.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.15.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
