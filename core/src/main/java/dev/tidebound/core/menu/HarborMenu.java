@@ -15,13 +15,14 @@ import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import dev.tidebound.core.vessel.TideboundVesselEntity;
+import dev.tidebound.core.npc.PortNpcRole;
 
 /**
  * Server-authoritative backend for the harbour screen. It deliberately exposes only compact visual state;
  * all mutations still go through the existing command/API validation path.
  */
 public final class HarborMenu extends AbstractContainerMenu {
-    public static final int DATA_COUNT = 10;
+    public static final int DATA_COUNT = 11;
 
     public static final int ACTION_CLAIM = 0;
     public static final int ACTION_REGISTER = 1;
@@ -37,27 +38,35 @@ public final class HarborMenu extends AbstractContainerMenu {
 
     private final ContainerData data;
     private final ServerPlayer serverPlayer;
+    private final PortNpcRole serverRole;
 
     /** Client constructor used by the registered MenuType. */
     public HarborMenu(int containerId, Inventory inventory) {
-        this(containerId, inventory, new SimpleContainerData(DATA_COUNT), null);
+        this(containerId, inventory, new SimpleContainerData(DATA_COUNT), null, PortNpcRole.INTENDANT);
     }
 
     public HarborMenu(int containerId, Inventory inventory, ServerPlayer player) {
-        this(containerId, inventory, createServerData(player), player);
+        this(containerId, inventory, player, PortNpcRole.INTENDANT);
     }
 
-    private HarborMenu(int containerId, Inventory inventory, ContainerData data, ServerPlayer player) {
+    public HarborMenu(int containerId, Inventory inventory, ServerPlayer player, PortNpcRole role) {
+        this(containerId, inventory, createServerData(player, role), player, role);
+    }
+
+    private HarborMenu(int containerId, Inventory inventory, ContainerData data, ServerPlayer player,
+            PortNpcRole role) {
         super(TideboundMenus.HARBOR.get(), containerId);
         checkContainerDataCount(data, DATA_COUNT);
         this.data = data;
         this.serverPlayer = player;
+        this.serverRole = role;
         addDataSlots(data);
     }
 
     @Override
     public boolean stillValid(Player player) {
-        return serverPlayer == null || HarborBoardService.isNearBoard(serverPlayer);
+        return serverPlayer == null || HarborBoardService.isNearRole(serverPlayer, serverRole)
+                || serverRole == PortNpcRole.INTENDANT && HarborBoardService.isNearBoard(serverPlayer);
     }
 
     @Override
@@ -67,7 +76,7 @@ public final class HarborMenu extends AbstractContainerMenu {
 
     @Override
     public boolean clickMenuButton(Player player, int action) {
-        if (!(player instanceof ServerPlayer server) || !HarborBoardService.isNearBoard(server)) {
+        if (!(player instanceof ServerPlayer server) || !nearCorrectRole(server) || !allowedForRole(action)) {
             return false;
         }
         String command = commandFor(action);
@@ -122,6 +131,10 @@ public final class HarborMenu extends AbstractContainerMenu {
         return data.get(9) != 0;
     }
 
+    public PortNpcRole role() {
+        return PortNpcRole.fromNetworkId(data.get(10));
+    }
+
     private static String commandFor(int action) {
         return switch (action) {
             case ACTION_CLAIM -> "tidebound vessel claim";
@@ -139,7 +152,23 @@ public final class HarborMenu extends AbstractContainerMenu {
         };
     }
 
-    private static ContainerData createServerData(ServerPlayer player) {
+    private boolean nearCorrectRole(ServerPlayer player) {
+        return HarborBoardService.isNearRole(player, serverRole)
+                || serverRole == PortNpcRole.INTENDANT && HarborBoardService.isNearBoard(player);
+    }
+
+    private boolean allowedForRole(int action) {
+        return switch (serverRole) {
+            case INTENDANT -> action == ACTION_CLAIM || action == ACTION_REGISTER
+                    || action == ACTION_DEPLOY || action == ACTION_COMPASS || action == ACTION_CONTRACTS;
+            case SHIPWRIGHT -> action == ACTION_REPAIR || action == ACTION_REFIT
+                    || action == ACTION_HULL || action == ACTION_MOTOR
+                    || action == ACTION_HOLD || action == ACTION_MODULE;
+            case FISHMONGER, NATURALIST, LIGHTHOUSE_KEEPER -> false;
+        };
+    }
+
+    private static ContainerData createServerData(ServerPlayer player, PortNpcRole role) {
         return new ContainerData() {
             @Override
             public int get(int index) {
@@ -158,6 +187,7 @@ public final class HarborMenu extends AbstractContainerMenu {
                             .filter(boat -> !(boat instanceof TideboundVesselEntity)).isPresent() ? 1 : 0;
                     case 9 -> VesselDeploymentService.findActive(player)
                             .filter(TideboundVesselEntity.class::isInstance).isPresent() ? 1 : 0;
+                    case 10 -> role.networkId();
                     default -> 0;
                 };
             }

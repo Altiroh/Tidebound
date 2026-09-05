@@ -22,5 +22,10 @@ public final class TideboundClientModEvents {
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(TideboundEntities.VESSEL.get(), TideboundVesselRenderer::new);
+        event.registerEntityRenderer(TideboundEntities.HARBOR_INTENDANT.get(), PortNpcRenderer::new);
+        event.registerEntityRenderer(TideboundEntities.SHIPWRIGHT.get(), PortNpcRenderer::new);
+        event.registerEntityRenderer(TideboundEntities.FISHMONGER.get(), PortNpcRenderer::new);
+        event.registerEntityRenderer(TideboundEntities.NATURALIST.get(), PortNpcRenderer::new);
+        event.registerEntityRenderer(TideboundEntities.LIGHTHOUSE_KEEPER.get(), PortNpcRenderer::new);
     }
 }

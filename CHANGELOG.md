@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.13.0-alpha — TB-DESIGN-002 / TB-NPC-001
+
+- adopte le lore canonique vanilla-friendly : archipel vivant, îles spécialisées, abysses,
+  Connaissance interdite et bénéfices uniques de reliques ;
+- distingue définitivement Compas des Havres et Compas de sillage ;
+- ajoute cinq entités de PNJ portuaires proches du villageois vanilla, avec leurs textures dédiées ;
+- branche les cinq maquettes d'interface du pack artistique ;
+- réserve enregistrement/navigation à l'Intendant et construction/améliorations au charpentier ;
+- ajoute `/function tidebound:create_test_harbor` pour tester les cinq rôles.
+
 Toutes les évolutions notables de Tidebound sont consignées ici.
 
 ## Non publié

@@ -145,8 +145,8 @@ public final class VesselDeploymentService {
 
     /** Replaces a legacy registered boat at the harbour while retaining its persistent identity. */
     public static TideboundVesselEntity refitAtHarbor(ServerPlayer player) {
-        if (!HarborBoardService.isNearBoard(player)) {
-            throw new IllegalStateException("Approchez-vous d'un intendant pour transformer le navire");
+        if (!HarborBoardService.isNearShipwright(player)) {
+            throw new IllegalStateException("Approchez-vous du charpentier naval pour construire le navire");
         }
         PlayerVessel vessel = VesselService.vessel(player);
         if (!vessel.unlocked()) {

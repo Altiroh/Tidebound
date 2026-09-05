@@ -38,8 +38,8 @@ public final class VesselMaintenanceService {
     }
 
     public static VesselTransactionResult purchaseUpgrade(ServerPlayer player, VesselUpgrade upgrade) {
-        if (!HarborBoardService.isNearBoard(player)) {
-            return failure("not_at_harbor", "Approchez-vous d'un intendant de port.");
+        if (!HarborBoardService.isNearShipwright(player)) {
+            return failure("not_at_shipwright", "Approchez-vous du charpentier naval.");
         }
         if (!begin(player)) {
             return failure("transaction_busy", "Une transaction est déjà en cours.");
@@ -114,8 +114,8 @@ public final class VesselMaintenanceService {
     }
 
     public static VesselTransactionResult repair(ServerPlayer player) {
-        if (!HarborBoardService.isNearBoard(player)) {
-            return failure("not_at_harbor", "Approchez-vous d'un intendant de port.");
+        if (!HarborBoardService.isNearShipwright(player)) {
+            return failure("not_at_shipwright", "Approchez-vous du charpentier naval.");
         }
         if (!begin(player)) {
             return failure("transaction_busy", "Une transaction est déjà en cours.");
