@@ -12,11 +12,11 @@ comme profil personnalisé. Le manifeste installe :
 - FTB Teams `2101.1.11` ;
 - FTB Quests `2101.1.34`.
 
-Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import, copier
-`tidebound-0.6.0-alpha.jar` dans le dossier `mods` de l'instance.
+Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
+`tidebound-0.7.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.6.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.7.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 Pour fabriquer la même archive localement après `./gradlew build` :
 
@@ -32,5 +32,15 @@ ajoutés par lots après le premier lancement réel.
 
 KubeJS n'est pas nécessaire pour tester le cœur. Lorsqu'il sera ajouté, le pont d'exemple se trouve
 dans `core/examples/kubejs/server_scripts/tidebound_bridge.js`.
+
+Le profil fournit déjà un livre FTB Quests bilingue sous `overrides/config/ftbquests/quests/` :
+
+- groupe `Le Voyage` ;
+- chapitre `Naufragé` ;
+- chapitre `Premier port` ;
+- 9 objectifs et 105 Tides de récompenses de démarrage ;
+- aucune dépendance de quête imposant une progression linéaire.
+
+Les contrats répétables ne sont pas dupliqués dans le livre : ils restent gérés par Tidebound Core.
 
 Le guide complet est `docs/TESTING.md`.

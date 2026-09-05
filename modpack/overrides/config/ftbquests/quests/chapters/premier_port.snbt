@@ -1,0 +1,109 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "circle"
+	filename: "premier_port"
+	group: "0A11CE0000000001"
+	icon: { id: "minecraft:bell" }
+	id: "0A11CE0000000020"
+	images: [ ]
+	order_index: 1
+	quest_links: [ ]
+	quests: [
+		{
+			icon: { id: "minecraft:name_tag" }
+			id: "0A11CE0000000201"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:port_registered_vessel 10"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002201"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001201"
+				type: "checkmark"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "tidebound:wake_compass" }
+			id: "0A11CE0000000202"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:port_wake_compass 5"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002202"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001202"
+				item: { id: "tidebound:wake_compass" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "minecraft:paper" }
+			id: "0A11CE0000000203"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:port_contract_board 5"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002203"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001203"
+				type: "checkmark"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "minecraft:barrel" }
+			id: "0A11CE0000000204"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:port_first_contract 15"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002204"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001204"
+				type: "checkmark"
+			}]
+			x: 6.0d
+			y: 0.0d
+		}
+		{
+			icon: { id: "minecraft:anvil" }
+			id: "0A11CE0000000205"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:port_first_upgrade 25"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002205"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001205"
+				type: "checkmark"
+			}]
+			x: 8.0d
+			y: 0.0d
+		}
+	]
+}

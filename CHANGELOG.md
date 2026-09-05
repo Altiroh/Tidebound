@@ -6,6 +6,16 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 - aucune modification en attente.
 
+## 0.7.0-alpha — TB-DESIGN-001 / TB-QUEST-001
+
+- intégration d'un lore canonique compatible avec le sandbox et d'un fil directeur facultatif `Le Voyage` ;
+- définition des sept chapitres à long terme, du Journal et de la Connaissance interdite ;
+- ajout du vrai livre FTB Quests SNBT v13 dans le Devpack ;
+- chapitres `Naufragé` et `Premier port`, neuf objectifs bilingues et 105 Tides de démarrage ;
+- récompenses automatiques idempotentes avec `{p}` et permission 2 ;
+- aucun verrouillage narratif entre les objectifs ;
+- validation statique des identifiants, tâches, récompenses, traductions et délimiteurs SNBT.
+
 ## 0.6.0-alpha — TB-CORE-005B
 
 - achats d'améliorations au port avec Tides, matériaux et prérequis de métier ;

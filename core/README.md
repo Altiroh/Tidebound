@@ -1,4 +1,4 @@
-# Tidebound Core — TB-CORE-005B
+# Tidebound Core — 0.7.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -24,6 +24,7 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - lecture par clic droit de la direction, de la distance et de la dernière position connue ;
 - suivi des états déployé, disparu, détruit et sans position ;
 - ponts prêts à copier pour KubeJS et FTB Quests ;
+- livre FTB Quests fourni par le Devpack avec les chapitres `Naufragé` et `Premier port` ;
 - commandes de diagnostic et d'administration ;
 - tests autonomes du domaine économique, du bateau et de la progression.
 - achats au port avec coûts en Tides, matériaux et niveaux de métier ;
@@ -31,8 +32,8 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - cale progressive de 9, 18 puis 27 emplacements utilisables.
 
 Le navire utilise volontairement l'entité bateau-coffre vanilla comme première coque jouable. La source de vérité
-serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Les objectifs ne forment
-pas une histoire linéaire : ils peuvent être découverts et validés dans n'importe quel ordre.
+serveur survivra ainsi au futur remplacement du modèle ou du moteur par une entité propriétaire. Le livre `Le Voyage`
+guide le joueur sans verrouiller le sandbox : ses objectifs actuels sont visibles et sans dépendances obligatoires.
 
 ## Versions verrouillées
 
@@ -100,7 +101,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.6.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.7.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -171,7 +172,8 @@ python tools/validate_content.py
 ```
 
 Les six exemples fournis utilisent uniquement des objets Vanilla afin de démarrer sans dépendance.
-Ils pourront être remplacés dans le modpack par les poissons d'Aquaculture 2.
+Ils pourront être remplacés dans le modpack par les poissons Tidebound. Le même validateur contrôle aussi
+la structure SNBT et les traductions du livre FTB Quests placé sous `../modpack/overrides/config/ftbquests/quests/`.
 
 ## Démarrage rapide du tableau de contrats
 
@@ -203,4 +205,5 @@ Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle sui
 
 Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
 
-La prochaine brique recommandée est `TB-CORE-005C` : projecteur, sonar, treuil et filet équipables.
+La prochaine brique recommandée est `TB-FISH-001` : prises persistantes avec espèce, poids, qualité,
+fraîcheur et valeur. Les modules du navire reprendront après la disponibilité des API de pêche et de monde.

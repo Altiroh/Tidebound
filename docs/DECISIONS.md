@@ -4,7 +4,8 @@
 
 - Nom de travail retenu : **Tidebound**.
 - Le projet reste une aventure Minecraft sandbox.
-- Aucune campagne principale ou suite de quêtes narrative n'est obligatoire.
+- `Le Voyage` est une progression principale facultative : il oriente sans verrouiller le sandbox.
+- La phrase directrice est : **« Plus le joueur comprend la mer, moins elle paraît normale. »**
 
 ## Monde et démarrage
 
@@ -12,6 +13,7 @@
 - L'île de départ n'a pas besoin de contenir immédiatement un loueur ou un intendant.
 - Un démarrage doit toutefois fournir une voie praticable : obtenir du bois, fabriquer une barque vanilla et rejoindre un port.
 - Les premières quêtes apprennent les systèmes et rendent le joueur efficace ; elles ne lui dictent pas sa partie.
+- Le confort du port sert de contraste et donne envie de revenir entre deux expéditions.
 
 ## Navire
 
@@ -38,8 +40,25 @@
 ## Quêtes et contrats
 
 - FTB Quests sert de livre visuel pour l'onboarding et les paliers uniques.
+- Le livre versionné commence par `Naufragé` et `Premier port` ; tous les objectifs restent visibles et sans dépendance obligatoire.
+- Les récompenses de ces deux chapitres totalisent 105 Tides et utilisent des reçus idempotents.
+- Les tâches non observables par le Core utilisent temporairement une validation manuelle clairement indiquée.
 - Les contrats répétables restent gérés par Tidebound Core et l'intendant du port.
 - Les récompenses FTB appellent les commandes serveur Tidebound avec `{p}`, permission 2 et un reçu unique.
+
+## Lore et horreur
+
+- Aucun PNJ ne possède toute la vérité ; les fragments et témoignages peuvent se contredire.
+- Cthulhu reste un horizon mythologique tardif et ambigu, pas un boss à invoquer ou vaincre.
+- L'horreur doit rester rare, mémorable et partiellement inexpliquée.
+- La future Connaissance interdite fera apparaître de nouveaux signes et phénomènes à mesure que le joueur comprend la mer.
+- Le Journal séparera poissons, aberrations, créatures, lieux et reliques.
+
+## Philosophie du modpack
+
+- Viser un pack lisible et léger, idéalement 50 à 80 mods dépendances comprises.
+- Ajouter les mods par fonction démontrée ; `Create` représente le plafond de complexité acceptable.
+- Le contenu maritime propriétaire doit primer sur l'empilement de systèmes généralistes.
 
 ## Architecture
 

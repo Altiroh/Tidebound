@@ -1,0 +1,84 @@
+{
+	chapter.0A11CE0000000010.title: "Naufragé"
+	chapter.0A11CE0000000020.title: "Premier port"
+	chapter_group.0A11CE0000000001.title: "&3⚓ Le Voyage"
+	file.0000000000000001.title: "&3Tidebound"
+
+	quest.0A11CE0000000101.title: "Ce que la mer laisse"
+	quest.0A11CE0000000101.quest_desc: [
+		"Commence avec ce que l'île t'offre. Coupe n'importe quel bois et fabrique un établi."
+		""
+		"Le départ de Tidebound ne doit jamais dépendre de la présence d'un port."
+	]
+	quest.0A11CE0000000102.title: "Une coque suffit"
+	quest.0A11CE0000000102.quest_desc: [
+		"Fabrique une barque vanilla avec le bois disponible. Toutes les essences conviennent."
+		""
+		"Coche cette étape lorsque ta barque est prête. Elle pourra devenir ton navire personnel au premier port."
+	]
+	quest.0A11CE0000000103.title: "Première prise"
+	quest.0A11CE0000000103.quest_desc: [
+		"La mer nourrit avant d'inquiéter. Pour ce premier carnet, ramène une morue."
+		""
+		"Tidebound Core récompense aussi automatiquement ta première prise avec de l'expérience de Pêche."
+	]
+	quest.0A11CE0000000104.title: "Une lumière au loin"
+	quest.0A11CE0000000104.quest_desc: [
+		"Quitte la côte et cherche un port, un quai ou une île habitée."
+		""
+		"Coche cette étape devant un intendant. Les ports procéduraux arriveront dans une prochaine version."
+		""
+		"Certains marins prétendent qu'une lumière n'indique pas toujours la terre."
+	]
+
+	quest.0A11CE0000000201.title: "Donner un nom à sa coque"
+	quest.0A11CE0000000201.quest_desc: [
+		"Pose ta barque à moins de huit blocs de l'intendant, ouvre son tableau puis choisis ENREGISTRER LA BARQUE."
+		""
+		"Coche cette étape lorsque le nom et les niveaux du navire apparaissent au-dessus de la coque."
+	]
+	quest.0A11CE0000000202.title: "Le Compas de sillage"
+	quest.0A11CE0000000202.quest_desc: [
+		"L'intendant remet gratuitement un Compas de sillage après l'enregistrement."
+		""
+		"Utilise-le par clic droit pour connaître la direction, la distance et la dernière position de ton navire."
+	]
+	quest.0A11CE0000000203.title: "Le tableau des contrats"
+	quest.0A11CE0000000203.quest_desc: [
+		"Consulte les offres de l'intendant. Les contrats sont répétables et indépendants du Voyage."
+		""
+		"Coche cette étape après avoir choisi une première livraison."
+	]
+	quest.0A11CE0000000204.title: "Une première livraison"
+	quest.0A11CE0000000204.quest_desc: [
+		"Rassemble les denrées demandées puis livre-les physiquement auprès de l'intendant."
+		""
+		"Le serveur consomme la cargaison, verse les Tides et applique le délai du contrat. Coche ensuite cette étape."
+	]
+	quest.0A11CE0000000205.title: "Un navire à soi"
+	quest.0A11CE0000000205.quest_desc: [
+		"Ramène ton navire au quai puis achète une amélioration ou effectue une réparation."
+		""
+		"Les Tides gagnés dans le Voyage constituent une première avance, pas un salaire infini."
+	]
+
+	task.0A11CE0000001101.title: "Fabriquer un établi"
+	task.0A11CE0000001102.title: "J'ai obtenu une barque"
+	task.0A11CE0000001103.title: "Rapporter une morue"
+	task.0A11CE0000001104.title: "J'ai trouvé un port"
+	task.0A11CE0000001201.title: "J'ai enregistré mon navire"
+	task.0A11CE0000001202.title: "Posséder le Compas de sillage"
+	task.0A11CE0000001203.title: "J'ai consulté les contrats"
+	task.0A11CE0000001204.title: "J'ai livré un contrat"
+	task.0A11CE0000001205.title: "J'ai entretenu mon navire"
+
+	reward.0A11CE0000002101.title: "+5 Tides"
+	reward.0A11CE0000002102.title: "+10 Tides"
+	reward.0A11CE0000002103.title: "+10 Tides"
+	reward.0A11CE0000002104.title: "+20 Tides"
+	reward.0A11CE0000002201.title: "+10 Tides"
+	reward.0A11CE0000002202.title: "+5 Tides"
+	reward.0A11CE0000002203.title: "+5 Tides"
+	reward.0A11CE0000002204.title: "+15 Tides"
+	reward.0A11CE0000002205.title: "+25 Tides"
+}

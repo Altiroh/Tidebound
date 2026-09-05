@@ -1,17 +1,18 @@
 # Transmission Tidebound
 
-Dernière mise à jour : **4 septembre 2026**
+Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-005B` / `0.6.0-alpha`
+État importé : `TB-DESIGN-001` + `TB-QUEST-001` / `0.7.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
 ## Vision à préserver
 
-Tidebound est une aventure Minecraft maritime **sandbox et procédurale**, pas une campagne scénarisée. Le monde, les îles et les ports varient selon la seed. Les quêtes prennent deux formes :
+Tidebound est une aventure Minecraft maritime **sandbox et procédurale**, pas une campagne scénarisée. Le monde, les îles et les ports varient selon la seed. Le livre facultatif **Le Voyage** donne une direction, un rythme et des récompenses sans bloquer les autres activités. Les objectifs prennent trois formes :
 
+- des étapes du Voyage, visibles et non obligatoires ;
 - des paliers uniques proches de succès, qui récompensent la progression ;
 - des contrats répétables, qui fournissent Tides, denrées et matériaux.
 
@@ -42,32 +43,38 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - capacité de cale progressive : 9, 18 puis 27 emplacements, sans suppression du surplus ;
 - Gradle Wrapper, workflow GitHub Actions et guide de test reproductible ;
 - manifeste CurseForge minimal avec FTB Library, Teams et Quests ;
+- livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
+- neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
+- lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
 - tests Java autonomes du domaine.
 
-Les détails et commandes sont dans `core/README.md` et `core/TB-CORE-001.md` à `core/TB-CORE-005A.md`.
+Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
+`core/TB-CORE-005B.md` et `docs/quests/TB-QUEST-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
 Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pas être présentés comme fonctionnels :
 
-1. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
-2. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
-3. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
-4. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
-5. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
+1. **Pêche Tidebound.** Les prises ne portent pas encore poids, qualité, fraîcheur, valeur ou mutation.
+2. **Génération procédurale Tidebound.** Le mod ne génère pas encore les archipels, ports, épaves et îles de départ.
+3. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
+4. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
+5. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
+6. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
+7. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel client/serveur et le smoke test de `docs/TESTING.md` restent indispensables.
 
 ## Prochaine tâche recommandée
 
-### TB-CORE-005C — Modules du navire v1
+### TB-FISH-001 — Modèle de prise Tidebound
 
 À réaliser maintenant :
 
-- définir l'inventaire persistant des modules équipés ;
-- rendre le projecteur, le sonar, le treuil et le filet fabricables ou achetables ;
-- limiter le nombre de modules aux emplacements débloqués ;
-- donner à chaque module un premier effet serveur mesurable ;
-- exposer installation, retrait et inspection dans la capitainerie et `TideboundApi` ;
-- préserver les sauvegardes `0.6.0-alpha`.
+- définir les données d'une prise : espèce, poids, qualité, fraîcheur, origine et anomalie ;
+- stocker ces données sur l'ItemStack sans créer un item par combinaison ;
+- convertir la première capture vanilla en prise Tidebound ;
+- calculer une valeur serveur déterministe et exposer l'affichage joueur ;
+- fournir des tests de sérialisation, de valeur et de compatibilité des sauvegardes ;
+- préparer les points d'intégration pour la vente au port et le Journal.
 
 ## Architecture et sources de vérité
 
@@ -77,10 +84,14 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 - `core/src/main/java/dev/tidebound/core/event/` : événements NeoForge ;
 - `core/src/main/resources/data/` : contenu datapack ;
 - `core/src/test/` : tests autonomes ;
+- `modpack/overrides/config/ftbquests/quests/` : livre FTB Quests versionné ;
+- `docs/design/Tidebound_Lore.md` : lore, tonalité et progression canoniques ;
 - `docs/design/Tidebound_GDD_Prototype_v0.3.docx` : conception produit ;
 - `docs/technical/Tidebound_Matrice_Technique_v0.1.xlsx` : choix des mods et versions.
 
-Ne pas faire dépendre la logique métier de FTB Quests, KubeJS ou d'un PNJ précis. Ces éléments consomment l'API Tidebound ; ils ne sont pas la source de vérité.
+Ne pas faire dépendre la logique métier de FTB Quests, KubeJS ou d'un PNJ précis. Ces éléments consomment
+l'API Tidebound ; ils ne sont pas la source de vérité. Le Voyage peut guider et récompenser, mais ne doit
+pas devenir une condition générale d'accès au sandbox.
 
 ## Vérification attendue
 

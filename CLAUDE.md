@@ -1,21 +1,23 @@
 # Instructions de reprise pour Claude
 
-Commencer par lire `HANDOFF.md`, puis `ROADMAP.md`, `docs/DECISIONS.md` et `core/README.md`.
+Commencer par lire `HANDOFF.md`, puis `docs/design/Tidebound_Lore.md`, `ROADMAP.md`,
+`docs/DECISIONS.md` et `core/README.md`.
 
 ## Règles du projet
 
-- Tidebound est un sandbox procédural, pas un mode histoire.
+- Tidebound est un sandbox procédural, pas un mode histoire. `Le Voyage` est un guide facultatif.
 - Le code cible Minecraft 1.21.1, NeoForge 21.1.249 et Java 21.
 - La logique métier reste dans `core/` et derrière `TideboundApi`.
 - FTB Quests, KubeJS, les PNJ et le chat sont des façades d'intégration.
 - Ne pas remplacer la source de vérité serveur par des données uniquement côté client.
 - Ne pas déclarer une fonctionnalité testée en jeu sans compilation et lancement réels.
 - Préserver les sauvegardes et l'identité du navire lors de toute évolution d'entité ou de rendu.
-- Ne pas introduire d'ordre narratif obligatoire entre les paliers.
+- Ne pas rendre les chapitres FTB Quests obligatoires pour accéder aux systèmes sandbox.
+- Préserver la règle de ton : plus le joueur comprend la mer, moins elle paraît normale.
 
 ## Travail courant
 
-La prochaine unité de travail est `TB-CORE-005C`, décrite dans `HANDOFF.md`. Les achats, réparations,
-prérequis de métier et capacités progressives de cale sont implémentés dans `TB-CORE-005B`.
+La prochaine unité de travail est `TB-FISH-001`, décrite dans `HANDOFF.md`. Le lore canonique et les
+deux premiers chapitres FTB Quests sont implémentés dans `TB-DESIGN-001` et `TB-QUEST-001`.
 
 Après toute modification matérielle, mettre à jour `HANDOFF.md`, `ROADMAP.md`, `CHANGELOG.md` et la note de ticket correspondante avant de committer.
