@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": ["INI", "I I", "INI"],
+  "key": {
+    "I": {"item": "minecraft:iron_nugget"},
+    "N": {"item": "minecraft:iron_ingot"}
+  },
+  "result": {"id": "tidebound:hold_fittings", "count": 2}
+}

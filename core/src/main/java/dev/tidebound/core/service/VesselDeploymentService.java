@@ -5,6 +5,9 @@ import dev.tidebound.core.data.VesselDeployment;
 import dev.tidebound.core.data.VesselEntityLink;
 import dev.tidebound.core.data.VesselHoldPolicy;
 import dev.tidebound.core.registry.TideboundAttachments;
+import dev.tidebound.core.registry.TideboundEntities;
+import dev.tidebound.core.vessel.TideboundVesselEntity;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +32,7 @@ import net.neoforged.neoforge.event.entity.EntityLeaveLevelEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
-/** Materializes the persistent PlayerVessel as one owned vanilla chest boat. */
+/** Materializes PlayerVessel as Tidebound's dedicated physical vessel and migrates legacy boats. */
 public final class VesselDeploymentService {
     public static final String PHYSICAL_VESSEL_TAG = "tidebound_owned_vessel";
     private static final int WATER_SEARCH_RADIUS = 6;
@@ -48,7 +51,7 @@ public final class VesselDeploymentService {
         return player.getData(TideboundAttachments.VESSEL_DEPLOYMENT);
     }
 
-    public static ChestBoat deploy(ServerPlayer player) {
+    public static TideboundVesselEntity deploy(ServerPlayer player) {
         if (!HarborBoardService.isNearBoard(player)) {
             throw new IllegalStateException("Approchez-vous d'un intendant de port pour déployer le bateau");
         }
@@ -66,7 +69,8 @@ public final class VesselDeploymentService {
         BlockPos water = findWater(level, player.blockPosition())
                 .orElseThrow(() -> new IllegalStateException("Aucune eau libre trouvée dans un rayon de "
                         + WATER_SEARCH_RADIUS + " blocs"));
-        ChestBoat boat = new ChestBoat(level, water.getX() + 0.5, water.getY() + 1.0, water.getZ() + 0.5);
+        TideboundVesselEntity boat = createVessel(level);
+        boat.moveTo(water.getX() + 0.5, water.getY() + 1.0, water.getZ() + 0.5);
         boat.setVariant(Boat.Type.OAK);
         configureOwnedBoat(player, boat, vessel);
         if (!level.addFreshEntity(boat)) {
@@ -76,7 +80,7 @@ public final class VesselDeploymentService {
         return boat;
     }
 
-    public static Boat registerNearbyVanillaBoat(ServerPlayer player, String name) {
+    public static TideboundVesselEntity registerNearbyVanillaBoat(ServerPlayer player, String name) {
         if (!HarborBoardService.isNearBoard(player)) {
             throw new IllegalStateException("Approchez-vous d'un intendant de port pour enregistrer la barque");
         }
@@ -86,11 +90,16 @@ public final class VesselDeploymentService {
 
         Boat boat = nearestUnownedBoat(player).orElseThrow(() -> new IllegalStateException(
                 "Aucune barque vanilla libre trouvée dans un rayon de 8 blocs"));
+        PlayerVessel before = VesselService.vessel(player);
         PlayerVessel vessel = VesselService.unlock(player, name);
-        configureOwnedBoat(player, boat, vessel);
-        setDeployment(player, deploymentFor(boat));
-        WakeCompassService.giveIfMissing(player);
-        return boat;
+        try {
+            TideboundVesselEntity refitted = migrate(player, boat, vessel);
+            WakeCompassService.giveIfMissing(player);
+            return refitted;
+        } catch (RuntimeException exception) {
+            player.setData(TideboundAttachments.PLAYER_VESSEL, before);
+            throw exception;
+        }
     }
 
     public static Optional<Entity> findActive(ServerPlayer player) {
@@ -133,33 +142,45 @@ public final class VesselDeploymentService {
         findActive(player).ifPresent(entity -> syncEntity(player, entity));
     }
 
-    /** Converts a registered vanilla boat into a chest boat when the first hold upgrade is bought. */
+    /** Replaces a legacy registered boat at the harbour while retaining its persistent identity. */
+    public static TideboundVesselEntity refitAtHarbor(ServerPlayer player) {
+        if (!HarborBoardService.isNearBoard(player)) {
+            throw new IllegalStateException("Approchez-vous d'un intendant pour transformer le navire");
+        }
+        PlayerVessel vessel = VesselService.vessel(player);
+        if (!vessel.unlocked()) {
+            throw new IllegalStateException("Enregistrez d'abord une barque");
+        }
+        Entity entity = findActive(player)
+                .orElseThrow(() -> new IllegalStateException("Amenez votre navire au quai avant la transformation"));
+        if (entity.distanceToSqr(player) > 12.0 * 12.0) {
+            throw new IllegalStateException("Amenez votre navire au quai avant la transformation");
+        }
+        if (entity instanceof TideboundVesselEntity tidebound) {
+            tidebound.syncVisuals(vessel);
+            return tidebound;
+        }
+        if (!(entity instanceof Boat boat)) {
+            throw new IllegalStateException("Le navire physique ne peut pas être transformé");
+        }
+        return migrate(player, boat, vessel);
+    }
+
+    /** Ensures the physical vessel provides a cargo inventory after legacy-save migration. */
     public static ChestBoat ensureCargoVessel(ServerPlayer player, PlayerVessel vessel) {
         Entity entity = findActive(player)
                 .orElseThrow(() -> new IllegalStateException("Le navire physique est introuvable"));
         if (entity instanceof ChestBoat chestBoat) {
+            if (chestBoat instanceof TideboundVesselEntity tidebound) {
+                tidebound.syncVisuals(vessel);
+            }
             enforceHoldCapacity(player, chestBoat);
             return chestBoat;
         }
-        if (!(entity instanceof Boat boat) || !(boat.level() instanceof ServerLevel level)) {
+        if (!(entity instanceof Boat boat)) {
             throw new IllegalStateException("Le navire ne peut pas recevoir de cale");
         }
-        if (!boat.getPassengers().isEmpty()) {
-            throw new IllegalStateException("Descendez du navire avant d'installer la cale");
-        }
-
-        ChestBoat cargoBoat = new ChestBoat(level, boat.getX(), boat.getY(), boat.getZ());
-        cargoBoat.setVariant(boat.getVariant());
-        cargoBoat.setYRot(boat.getYRot());
-        cargoBoat.setXRot(boat.getXRot());
-        cargoBoat.setDeltaMovement(boat.getDeltaMovement());
-        cargoBoat.setDamage(boat.getDamage());
-        configureOwnedBoat(player, cargoBoat, vessel);
-        if (!level.addFreshEntity(cargoBoat)) {
-            throw new IllegalStateException("La cale n'a pas pu être installée");
-        }
-        boat.discard();
-        setDeployment(player, deploymentFor(cargoBoat));
+        ChestBoat cargoBoat = migrate(player, boat, vessel);
         enforceHoldCapacity(player, cargoBoat);
         return cargoBoat;
     }
@@ -256,6 +277,9 @@ public final class VesselDeploymentService {
         boat.setCustomNameVisible(true);
         boat.setData(TideboundAttachments.VESSEL_ENTITY_LINK,
                 VesselEntityLink.linked(player.getUUID(), vessel.vesselId()));
+        if (boat instanceof TideboundVesselEntity tidebound) {
+            tidebound.syncVisuals(vessel);
+        }
     }
 
     private static void syncEntity(ServerPlayer player, Entity entity) {
@@ -263,7 +287,48 @@ public final class VesselDeploymentService {
         if (vessel.unlocked()) {
             entity.setCustomName(Component.literal(displayName(vessel)).withStyle(ChatFormatting.AQUA));
             entity.setCustomNameVisible(true);
+            if (entity instanceof TideboundVesselEntity tidebound) {
+                tidebound.syncVisuals(vessel);
+            }
         }
+    }
+
+    private static TideboundVesselEntity migrate(ServerPlayer player, Boat source, PlayerVessel vessel) {
+        if (!(source.level() instanceof ServerLevel level)) {
+            throw new IllegalStateException("Le navire ne peut être transformé que côté serveur");
+        }
+        TideboundVesselEntity target = createVessel(level);
+        target.moveTo(source.getX(), source.getY(), source.getZ(), source.getYRot(), source.getXRot());
+        target.setVariant(source.getVariant());
+        target.setDeltaMovement(source.getDeltaMovement());
+        target.setDamage(source.getDamage());
+        configureOwnedBoat(player, target, vessel);
+
+        var passengers = new ArrayList<>(source.getPassengers());
+        passengers.forEach(Entity::stopRiding);
+        if (!level.addFreshEntity(target)) {
+            passengers.forEach(passenger -> passenger.startRiding(source, true));
+            throw new IllegalStateException("Le chantier naval n'a pas pu mettre le nouveau navire à l'eau");
+        }
+        if (source instanceof ChestBoat cargo) {
+            for (int slot = 0; slot < Math.min(cargo.getContainerSize(), target.getContainerSize()); slot++) {
+                target.setItem(slot, cargo.getItem(slot).copy());
+                cargo.setItem(slot, ItemStack.EMPTY);
+            }
+        }
+        passengers.forEach(passenger -> passenger.startRiding(target, true));
+        source.discard();
+        setDeployment(player, deploymentFor(target));
+        enforceHoldCapacity(player, target);
+        return target;
+    }
+
+    private static TideboundVesselEntity createVessel(ServerLevel level) {
+        TideboundVesselEntity vessel = TideboundEntities.VESSEL.get().create(level);
+        if (vessel == null) {
+            throw new IllegalStateException("Le type de navire Tidebound n'a pas pu être créé");
+        }
+        return vessel;
     }
 
     private static void applyRuntimeUpgrades(ServerPlayer player, Boat boat) {

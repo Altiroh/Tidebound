@@ -6,6 +6,22 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 - aucune modification en attente.
 
+## 0.11.0-alpha — TB-VESSEL-001
+
+- ajout du type d'entité `tidebound:vessel`, distinct des barques vanilla ;
+- première coque voxel Tidebound, plus large et dotée d'un pont, d'un mât et d'une voile ;
+- quatre places à bord avec positions séparées ;
+- renforts de coque, cale fermée, moteur et supports de modules visibles selon la progression ;
+- synchronisation client des quatre axes visuels et persistance NBT de secours ;
+- transformation immédiate de toute nouvelle barque enregistrée au port ;
+- action **Chantier naval** et commande `/tidebound vessel refit` pour les anciennes sauvegardes ;
+- conservation du propriétaire, du nom, des dégâts, du mouvement, des passagers et du contenu lors de la migration ;
+- architecture de rendu isolée pour permettre le remplacement ultérieur par un modèle Blockbench.
+- intégration de six composants illustrés : kit de réparation, calfatage, pièces moteur, ferrures, plaques et huile ;
+- recettes vanilla de transition et utilisation des composants par les réparations et améliorations ;
+- logo Tidebound affiché dans la fiche du mod et nom **Into the Deep** dans le profil de développement ;
+- ajout d'Architectury API au manifeste, corrigeant le démarrage de FTB Library, Teams et Quests.
+
 ## 0.10.0-alpha — TB-WORLD-001
 
 - remplacement du monde normal des nouvelles sauvegardes par le générateur d'archipel Tidebound ;

@@ -14,6 +14,7 @@ import dev.tidebound.core.navigation.WakeBearing;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.world.ArchipelagoSurvey;
 import dev.tidebound.core.world.StarterPortPlan;
+import dev.tidebound.core.vessel.VesselVisualProfile;
 
 /**
  * Dependency-free smoke test. It can be executed with the JDK alone; see README.md.
@@ -41,7 +42,24 @@ public final class DomainSelfTest {
         vanillaFishProfilesAreComplete();
         archipelagoSurveyRejectsContinentsAndBarrenSpawns();
         starterPortRollIsDeterministicAndOptional();
+        vesselVisualProfileTracksEveryUpgrade();
         System.out.println("DomainSelfTest: OK");
+    }
+
+    private static void vesselVisualProfileTracksEveryUpgrade() {
+        PlayerVessel base = PlayerVessel.unlock("La Mouette", UUID.randomUUID());
+        VesselVisualProfile first = VesselVisualProfile.from(base);
+        check(!first.reinforcedHull(), "tier one hull is timber only");
+        check(!first.poweredEngine(), "tier one engine is not rendered");
+        check(!first.enclosedHold(), "tier one hold stays open");
+
+        VesselVisualProfile upgraded = VesselVisualProfile.from(
+                base.upgradeHull().upgradeMotor().upgradeHold().addModuleSlot());
+        check(upgraded.reinforcedHull(), "reinforced hull is visible");
+        check(upgraded.poweredEngine(), "engine upgrade is visible");
+        check(upgraded.enclosedHold(), "hold upgrade is visible");
+        check(upgraded.moduleSlots() == 2, "module mounts follow progression");
+        expect(IllegalArgumentException.class, () -> VesselVisualProfile.from(PlayerVessel.locked()));
     }
 
     private static void walletCreditsAndDebits() {
@@ -150,7 +168,7 @@ public final class DomainSelfTest {
         VesselUpgradeQuote hull = VesselUpgradeQuote.next(vessel, VesselUpgrade.HULL);
         check(hull.targetTier() == 2, "hull quote target");
         check(hull.tideCost() == 120, "hull quote tides");
-        check(hull.materialItemId().equals("minecraft:oak_planks"), "hull quote material");
+        check(hull.materialItemId().equals("tidebound:hull_plate"), "hull quote material");
         check(hull.requiredSkill().equals("navigation") && hull.requiredSkillLevel() == 2,
                 "hull quote skill");
 
@@ -171,7 +189,8 @@ public final class DomainSelfTest {
 
     private static void repairQuotesScaleWithDamage() {
         VesselRepairQuote light = VesselRepairQuote.forDamage(1.0F);
-        check(light.tideCost() == 10 && light.materialCount() == 1, "light repair quote");
+        check(light.tideCost() == 10 && light.materialCount() == 1
+                && light.materialItemId().equals("tidebound:repair_kit"), "light repair quote");
         VesselRepairQuote heavy = VesselRepairQuote.forDamage(26.0F);
         check(heavy.tideCost() == 60 && heavy.materialCount() == 3, "heavy repair quote");
         expect(IllegalArgumentException.class, () -> VesselRepairQuote.forDamage(0));

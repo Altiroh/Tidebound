@@ -18,6 +18,12 @@ public final class TideboundItems {
             WakeCompassItem::new,
             new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)
     );
+    public static final Supplier<Item> REPAIR_KIT = component("repair_kit", 16);
+    public static final Supplier<Item> CAULKING_KIT = component("caulking_kit", 16);
+    public static final Supplier<Item> ENGINE_PARTS = component("engine_parts", 32);
+    public static final Supplier<Item> HOLD_FITTINGS = component("hold_fittings", 32);
+    public static final Supplier<Item> HULL_PLATE = component("hull_plate", 32);
+    public static final Supplier<Item> MECHANICAL_OIL = component("mechanical_oil", 16);
 
     private TideboundItems() {
     }
@@ -30,6 +36,16 @@ public final class TideboundItems {
     private static void addToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(WAKE_COMPASS.get());
+            event.accept(REPAIR_KIT.get());
+            event.accept(CAULKING_KIT.get());
+            event.accept(ENGINE_PARTS.get());
+            event.accept(HOLD_FITTINGS.get());
+            event.accept(HULL_PLATE.get());
+            event.accept(MECHANICAL_OIL.get());
         }
+    }
+
+    private static Supplier<Item> component(String id, int stackSize) {
+        return ITEMS.registerSimpleItem(id, new Item.Properties().stacksTo(stackSize));
     }
 }

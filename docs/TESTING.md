@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.10.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.11.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.10.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.11.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.10.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.11.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
@@ -117,34 +117,44 @@ Tester le départ de secours :
 4. vérifier la réception du Compas de sillage ;
 5. éloigner le bateau et utiliser le compas par clic droit.
 
+L'enregistrement doit remplacer visuellement la barque par un navire Tidebound plus large. Monter à quatre joueurs
+et vérifier que les quatre places sont utilisables. Une sauvegarde créée avant cette version conserve son ancien
+bateau : le ramener au quai et utiliser **Chantier naval**, ou `/tidebound vessel refit`. Avant la conversion,
+placer quelques objets dans sa cale et l'endommager légèrement ; contenu, dégâts, nom et niveaux doivent être conservés.
+
 Préparer le premier achat de coque :
 
 ```mcfunction
 /tidebound tide grant @s 1000
 /tidebound progression skill grant @s navigation 100
-/give @s minecraft:oak_planks 16
+/give @s tidebound:hull_plate 4
 ```
 
 Ramener le navire au quai, cliquer l'intendant, puis acheter **COQUE 2**. Vérifier ensuite :
 
-- retrait de 120 Tides et de 16 planches ;
+- retrait de 120 Tides et de 4 plaques de coque ;
 - refus si les Tides, matériaux ou le niveau sont insuffisants ;
 - absence de second débit lors d'un double clic ;
 - niveau visible dans le nom du navire.
+- renforts cuivrés visibles à partir de Coque 2.
 
 Pour la cale 2 :
 
 ```mcfunction
 /tidebound progression skill grant @s trade 100
-/give @s minecraft:chest 2
+/give @s tidebound:hold_fittings 2
 ```
 
 La cale utilise 9 emplacements au niveau 1, 18 au niveau 2 et 27 à partir du niveau 3. Le menu vanilla
 affiche provisoirement les 27 cases : tout objet placé dans une case verrouillée est rendu dans
 l'inventaire, ou déposé près du navire si l'inventaire est plein.
 
-Pour tester la réparation, frapper légèrement le navire, le laisser près de l'intendant et rouvrir le
-tableau. Le bouton **RÉPARER LE NAVIRE** apparaît si des dégâts sont détectés.
+Après Cale 2, un baril fermé doit apparaître sur le pont. Après Moteur 2, un bloc moteur doit apparaître à l'arrière.
+Chaque emplacement de module ajoute un support lumineux visible ; les véritables fonctions de ces supports seront
+raccordées dans `TB-CORE-005C`.
+
+Pour tester la réparation, donner `/give @s tidebound:repair_kit`, frapper légèrement le navire, le laisser
+près de l'intendant et rouvrir le tableau. Le bouton **RÉPARER LE NAVIRE** apparaît si des dégâts sont détectés.
 
 ## 7. Tester les prises Tidebound
 
@@ -178,6 +188,10 @@ Installer dans le même profil, côté client et serveur :
 - FTB Library `2101.1.35` ;
 - FTB Teams `2101.1.11` ;
 - FTB Quests `2101.1.34`.
+
+Le manifeste installe également **Architectury API 13.0.11**, dépendance requise par cette branche de FTB.
+À l'import CurseForge, accepter les fichiers externes avec **All Files** : choisir **CurseForge Files Only**
+supprime le JAR Tidebound et provoque un profil où le mod n'apparaît pas.
 
 Le Devpack contient déjà le livre `Le Voyage`. Dans un monde neuf :
 

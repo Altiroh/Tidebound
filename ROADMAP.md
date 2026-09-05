@@ -13,6 +13,7 @@
 - [x] `TB-FISH-001` — prises vanilla enrichies : poids, qualité, fraîcheur, origine, anomalie et valeur.
 - [x] `TB-UX-001` — carnet dans l'inventaire, menu visuel de l'intendant et premier raccord des assets.
 - [x] `TB-WORLD-001` — preset d'archipel par défaut, île boisée ciblée et diagnostic de spawn.
+- [x] `TB-VESSEL-001` — entité de navire modulaire, quatre places, rendu progressif et migration des barques.
 
 ## Prochaine tranche du prototype vertical
 
@@ -20,7 +21,6 @@
 - [ ] `TB-PORT-001` — structure de port, intendant et services générés ;
 - [ ] `TB-NPC-001` — entité d'intendant originale et conversion de son skin ;
 - [ ] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet ;
-- [ ] `TB-VESSEL-001` — véritable navire Tidebound modulaire, améliorable visuellement, avec migration des barques ;
 - [ ] `TB-QA-001` — partie neuve de 30 minutes sur plusieurs seeds.
 
 ## Après validation du prototype

@@ -45,24 +45,24 @@ public record VesselUpgradeQuote(
         }
         return switch (upgrade) {
             case HULL -> switch (target) {
-                case 2 -> quote(upgrade, target, 120, "minecraft:oak_planks", 16, "navigation", 2);
-                case 3 -> quote(upgrade, target, 300, "minecraft:iron_ingot", 8, "navigation", 4);
-                case 4 -> quote(upgrade, target, 650, "minecraft:prismarine_bricks", 12, "navigation", 6);
-                case 5 -> quote(upgrade, target, 1_200, "minecraft:dark_prismarine", 16, "navigation", 8);
+                case 2 -> quote(upgrade, target, 120, "tidebound:hull_plate", 4, "navigation", 2);
+                case 3 -> quote(upgrade, target, 300, "tidebound:hull_plate", 8, "navigation", 4);
+                case 4 -> quote(upgrade, target, 650, "tidebound:hull_plate", 12, "navigation", 6);
+                case 5 -> quote(upgrade, target, 1_200, "tidebound:hull_plate", 16, "navigation", 8);
                 default -> throw unsupported(target);
             };
             case MOTOR -> switch (target) {
-                case 2 -> quote(upgrade, target, 150, "minecraft:copper_ingot", 8, "navigation", 2);
-                case 3 -> quote(upgrade, target, 375, "minecraft:iron_ingot", 8, "navigation", 4);
-                case 4 -> quote(upgrade, target, 800, "minecraft:redstone", 16, "navigation", 6);
-                case 5 -> quote(upgrade, target, 1_500, "minecraft:heart_of_the_sea", 1, "navigation", 9);
+                case 2 -> quote(upgrade, target, 150, "tidebound:engine_parts", 2, "navigation", 2);
+                case 3 -> quote(upgrade, target, 375, "tidebound:engine_parts", 4, "navigation", 4);
+                case 4 -> quote(upgrade, target, 800, "tidebound:engine_parts", 6, "navigation", 6);
+                case 5 -> quote(upgrade, target, 1_500, "tidebound:engine_parts", 10, "navigation", 9);
                 default -> throw unsupported(target);
             };
             case HOLD -> switch (target) {
-                case 2 -> quote(upgrade, target, 100, "minecraft:chest", 2, "trade", 2);
-                case 3 -> quote(upgrade, target, 275, "minecraft:barrel", 4, "trade", 4);
-                case 4 -> quote(upgrade, target, 600, "minecraft:iron_ingot", 12, "trade", 6);
-                case 5 -> quote(upgrade, target, 1_100, "minecraft:shulker_shell", 2, "trade", 8);
+                case 2 -> quote(upgrade, target, 100, "tidebound:hold_fittings", 2, "trade", 2);
+                case 3 -> quote(upgrade, target, 275, "tidebound:hold_fittings", 4, "trade", 4);
+                case 4 -> quote(upgrade, target, 600, "tidebound:hold_fittings", 8, "trade", 6);
+                case 5 -> quote(upgrade, target, 1_100, "tidebound:hold_fittings", 12, "trade", 8);
                 default -> throw unsupported(target);
             };
             case MODULE_SLOT -> switch (target) {

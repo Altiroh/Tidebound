@@ -9,6 +9,12 @@ leur présence dans ce document ne signifie pas encore que l'objet ou le PNJ est
 | --- | --- | --- |
 | `tidebound_gui_intendant_port.png` | Habillage du menu de l'intendant | intégré dans `textures/gui/harbor_intendant.png` |
 | `compas_de_sillage.png` | Texture du Compas de sillage | intégré dans `textures/item/wake_compass.png` |
+| `kit_reparation.png` | Réparations au port | `tidebound:repair_kit` |
+| `necessaire_calfatage.png` | Recette du kit de réparation | `tidebound:caulking_kit` |
+| `pieces_moteur.png` | Améliorations de moteur | `tidebound:engine_parts` |
+| `ferrures_cale.png` | Améliorations de cale | `tidebound:hold_fittings` |
+| `plaque_coque.png` | Améliorations de coque | `tidebound:hull_plate` |
+| `huile_mecanique.png` | Composant moteur futur | `tidebound:mechanical_oil` |
 
 ## Sources importées, conversion requise
 

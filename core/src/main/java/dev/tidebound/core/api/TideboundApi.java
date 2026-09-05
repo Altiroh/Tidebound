@@ -27,6 +27,7 @@ import java.util.OptionalLong;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.entity.vehicle.Boat;
+import dev.tidebound.core.vessel.TideboundVesselEntity;
 import net.minecraft.world.item.ItemStack;
 
 /**
@@ -89,6 +90,10 @@ public final class TideboundApi {
 
     public static Boat registerNearbyVanillaBoat(ServerPlayer player, String name) {
         return VesselDeploymentService.registerNearbyVanillaBoat(player, name);
+    }
+
+    public static TideboundVesselEntity refitVessel(ServerPlayer player) {
+        return VesselDeploymentService.refitAtHarbor(player);
     }
 
     public static boolean giveWakeCompass(ServerPlayer player) {

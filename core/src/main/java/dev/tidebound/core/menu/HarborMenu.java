@@ -14,13 +14,14 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
+import dev.tidebound.core.vessel.TideboundVesselEntity;
 
 /**
  * Server-authoritative backend for the harbour screen. It deliberately exposes only compact visual state;
  * all mutations still go through the existing command/API validation path.
  */
 public final class HarborMenu extends AbstractContainerMenu {
-    public static final int DATA_COUNT = 8;
+    public static final int DATA_COUNT = 9;
 
     public static final int ACTION_CLAIM = 0;
     public static final int ACTION_REGISTER = 1;
@@ -28,6 +29,7 @@ public final class HarborMenu extends AbstractContainerMenu {
     public static final int ACTION_COMPASS = 3;
     public static final int ACTION_REPAIR = 4;
     public static final int ACTION_CONTRACTS = 5;
+    public static final int ACTION_REFIT = 6;
     public static final int ACTION_HULL = 10;
     public static final int ACTION_MOTOR = 11;
     public static final int ACTION_HOLD = 12;
@@ -112,6 +114,10 @@ public final class HarborMenu extends AbstractContainerMenu {
         return data.get(7) != 0;
     }
 
+    public boolean refitAvailable() {
+        return data.get(8) != 0;
+    }
+
     private static String commandFor(int action) {
         return switch (action) {
             case ACTION_CLAIM -> "tidebound vessel claim";
@@ -120,6 +126,7 @@ public final class HarborMenu extends AbstractContainerMenu {
             case ACTION_COMPASS -> "tidebound vessel compass";
             case ACTION_REPAIR -> "tidebound vessel repair";
             case ACTION_CONTRACTS -> "tidebound contracts";
+            case ACTION_REFIT -> "tidebound vessel refit";
             case ACTION_HULL -> "tidebound vessel purchase hull";
             case ACTION_MOTOR -> "tidebound vessel purchase motor";
             case ACTION_HOLD -> "tidebound vessel purchase hold";
@@ -143,6 +150,8 @@ public final class HarborMenu extends AbstractContainerMenu {
                     case 6 -> VesselDeploymentService.deployment(player).active() ? 1 : 0;
                     case 7 -> VesselMaintenanceService.nearbyPhysicalVessel(player)
                             .filter(boat -> boat.getDamage() > 0.01F).isPresent() ? 1 : 0;
+                    case 8 -> VesselMaintenanceService.nearbyPhysicalVessel(player)
+                            .filter(boat -> !(boat instanceof TideboundVesselEntity)).isPresent() ? 1 : 0;
                     default -> 0;
                 };
             }

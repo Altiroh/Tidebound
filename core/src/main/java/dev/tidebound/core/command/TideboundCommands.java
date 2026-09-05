@@ -102,6 +102,9 @@ public final class TideboundCommands {
                                         context.getSource(),
                                         context.getSource().getPlayerOrException(),
                                         StringArgumentType.getString(context, "name")))))
+                .then(Commands.literal("refit")
+                        .executes(context -> refitVessel(
+                                context.getSource(), context.getSource().getPlayerOrException())))
                 .then(Commands.literal("compass")
                         .executes(context -> issueWakeCompass(
                                 context.getSource(), context.getSource().getPlayerOrException())))
@@ -399,6 +402,19 @@ public final class TideboundCommands {
                     + ". L'intendant vous remet son Compas de sillage.")
                     .withStyle(ChatFormatting.GOLD), false);
             return boat.isAlive() ? 1 : 0;
+        } catch (IllegalArgumentException | IllegalStateException exception) {
+            source.sendFailure(Component.literal(exception.getMessage()));
+            return 0;
+        }
+    }
+
+    private static int refitVessel(CommandSourceStack source, ServerPlayer player) {
+        try {
+            var vessel = TideboundApi.refitVessel(player);
+            source.sendSuccess(() -> Component.literal("Le chantier naval a transformé votre ancienne barque en "
+                    + TideboundApi.vessel(player).name() + " sans perdre sa cale ni ses améliorations.")
+                    .withStyle(ChatFormatting.AQUA), false);
+            return vessel.isAlive() ? 1 : 0;
         } catch (IllegalArgumentException | IllegalStateException exception) {
             source.sendFailure(Component.literal(exception.getMessage()));
             return 0;

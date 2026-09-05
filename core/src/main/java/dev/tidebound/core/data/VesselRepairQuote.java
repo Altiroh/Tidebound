@@ -19,7 +19,7 @@ public record VesselRepairQuote(float damage, long tideCost, String materialItem
             throw new IllegalArgumentException("Le navire n'a pas besoin de réparation");
         }
         int workUnits = Math.max(1, (int) Math.ceil(damage / 5.0F));
-        int planks = Math.max(1, (int) Math.ceil(damage / 10.0F));
-        return new VesselRepairQuote(damage, workUnits * 10L, "minecraft:oak_planks", planks);
+        int kits = Math.max(1, (int) Math.ceil(damage / 10.0F));
+        return new VesselRepairQuote(damage, workUnits * 10L, "tidebound:repair_kit", kits);
     }
 }
