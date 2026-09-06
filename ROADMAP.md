@@ -38,6 +38,8 @@
 - [x] `TB-QUEST-002` — livre FTB Quests durci : cinq tâches passent d'une case manuelle à un vrai
   avancement déclenché par Core, troisième chapitre « Les eaux côtières », dépendances explicites
   entre quêtes.
+- [x] `TB-CORE-010` — catalogue des profils de prise migré du code vers le datapack, même mécanisme
+  que paliers et contrats ; ajouter un poisson de mod ne demande plus de code.
 
 ## En cours
 

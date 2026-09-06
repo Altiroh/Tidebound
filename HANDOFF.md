@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-009` (infrastructure compas animés, art en attente) / `0.28.0-alpha`
+État importé : `TB-CORE-010` (catalogue de prises en datapack) / `0.29.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -111,10 +111,14 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   dépendances explicites entre quêtes au sein de et entre chapitres, mode `flexible` conservé ;
   infrastructure d'aiguille de compas animée (cible persistante `COMPASS_TARGET`, calcul de cap
   client) prête côté code mais sans effet visuel tant que l'aiguille dessinée séparément n'est pas
-  fournie (`TB-CORE-009`).
+  fournie (`TB-CORE-009`) ;
+- catalogue des quatre profils de prise vanilla migré du code vers le datapack
+  (`data/tidebound/tidebound/catch_profiles/*.json`), chargé par `TideboundContentManager` comme les
+  paliers et contrats — ajouter un poisson de mod ne nécessite plus de modification de code
+  (`TB-CORE-010`).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-008.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-010.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
@@ -123,7 +127,9 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 1. **Demandes du poissonnier.** La vente générale fonctionne ; les prix du jour et commandes spéciales
    affichés dans la maquette restent à rendre dynamiques.
-2. **Catalogue par datapack.** Les quatre profils vanilla sont encore définis dans le code ; les poissons de mods ne sont pas intégrés.
+2. **Catalogue par datapack.** Fait (`TB-CORE-010`) : les quatre profils vanilla sont désormais des
+   fichiers JSON, chargés comme les paliers et contrats. Les poissons de mods restent à ajouter (un
+   fichier JSON par espèce suffit, aucun code supplémentaire requis).
 3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
 4. **Contenu procédural.** Le port initial se matérialise désormais automatiquement près du spawn
    quand le tirage par seed le réserve (`TB-WORLD-002` tranche 1) ; épaves, phares et autres points

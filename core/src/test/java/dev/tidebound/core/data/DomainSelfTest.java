@@ -7,7 +7,6 @@ import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.fishing.CatchFreshness;
 import dev.tidebound.core.fishing.CatchGenerator;
 import dev.tidebound.core.fishing.CatchProfile;
-import dev.tidebound.core.fishing.CatchProfiles;
 import dev.tidebound.core.fishing.CatchQuality;
 import dev.tidebound.core.fishing.CatchValuation;
 import dev.tidebound.core.navigation.WakeBearing;
@@ -42,7 +41,6 @@ public final class DomainSelfTest {
         catchGenerationIsDeterministic();
         catchFreshnessAgesWithoutTicking();
         catchValueUsesEveryMultiplier();
-        vanillaFishProfilesAreComplete();
         archipelagoSurveyRejectsContinentsAndBarrenSpawns();
         starterPortRollIsDeterministicAndOptional();
         portPlansAreVariedAndRespectServiceRules();
@@ -201,7 +199,7 @@ public final class DomainSelfTest {
     }
 
     private static void catchGenerationIsDeterministic() {
-        CatchProfile cod = CatchProfiles.find("minecraft:cod").orElseThrow();
+        CatchProfile cod = new CatchProfile("minecraft:cod", 500, 5_000, 1_800, 12);
         CatchData first = CatchGenerator.generate(cod, "minecraft:ocean", 42_000, 123_456_789L, 4, true);
         CatchData second = CatchGenerator.generate(cod, "minecraft:ocean", 42_000, 123_456_789L, 4, true);
         check(first.equals(second), "deterministic catch generation");
@@ -233,17 +231,9 @@ public final class DomainSelfTest {
         check(CatchValuation.value(profile, remarkable, 0) == 105, "quality and anomaly value");
         check(CatchValuation.value(profile, remarkable, CatchFreshness.FRESH_TICKS) == 89,
                 "freshness value loss");
+        CatchProfile mismatchedProfile = new CatchProfile("minecraft:cod", 500, 5_000, 1_800, 12);
         expect(IllegalArgumentException.class,
-                () -> CatchValuation.value(CatchProfiles.find("minecraft:cod").orElseThrow(), ordinary, 0));
-    }
-
-    private static void vanillaFishProfilesAreComplete() {
-        check(CatchProfiles.all().size() == 4, "vanilla fish profile count");
-        check(CatchProfiles.find("minecraft:cod").isPresent(), "cod profile");
-        check(CatchProfiles.find("minecraft:salmon").isPresent(), "salmon profile");
-        check(CatchProfiles.find("minecraft:tropical_fish").isPresent(), "tropical fish profile");
-        check(CatchProfiles.find("minecraft:pufferfish").isPresent(), "pufferfish profile");
-        check(CatchProfiles.find("minecraft:stick").isEmpty(), "non-fish profile rejection");
+                () -> CatchValuation.value(mismatchedProfile, ordinary, 0));
     }
 
     private static void archipelagoSurveyRejectsContinentsAndBarrenSpawns() {

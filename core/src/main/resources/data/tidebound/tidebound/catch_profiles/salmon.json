@@ -1,0 +1,7 @@
+{
+  "species": "minecraft:salmon",
+  "min_weight_grams": 1200,
+  "max_weight_grams": 10000,
+  "reference_weight_grams": 4500,
+  "base_value_tides": 20
+}

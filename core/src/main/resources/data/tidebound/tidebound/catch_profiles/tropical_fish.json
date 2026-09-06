@@ -1,0 +1,7 @@
+{
+  "species": "minecraft:tropical_fish",
+  "min_weight_grams": 80,
+  "max_weight_grams": 700,
+  "reference_weight_grams": 250,
+  "base_value_tides": 24
+}

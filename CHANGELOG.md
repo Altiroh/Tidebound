@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.29.0-alpha — TB-CORE-010 : catalogue de prises en datapack
+
+- les quatre profils de prise vanilla (morue, saumon, poisson tropical, poisson-globe) passent du
+  code Java à `data/tidebound/tidebound/catch_profiles/*.json`, chargés par
+  `TideboundContentManager` au même titre que les paliers et les contrats ; `CatchProfiles` devient
+  une simple façade de lecture, aucun appelant n'a changé ;
+- intégrer un poisson d'un autre mod ne nécessite plus de modification de code, un fichier JSON
+  suffit désormais ;
+- `validate_content.py` valide la structure et l'unicité des espèces de chaque profil ;
+- `DomainSelfTest` ne peut plus tester le contenu du catalogue directement (pas de `ResourceManager`
+  en JVM pure, comme pour paliers/contrats déjà) : le test retiré est remplacé par une couverture
+  équivalente côté `validate_content.py` et démarrage serveur réel, sans perte de garantie.
+
+Build, `validate_content.py` et démarrage serveur réel vérifiés — les mêmes quatre profils se
+chargent avec des valeurs strictement identiques à avant la migration, aucun changement de
+comportement en jeu.
+
 ## 0.28.0-alpha — TB-CORE-009 : infrastructure des compas animés
 
 - nouveau composant persistant/synchronisé `COMPASS_TARGET` (`GlobalPos`) rafraîchi automatiquement

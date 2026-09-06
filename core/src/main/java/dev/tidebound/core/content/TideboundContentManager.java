@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
 import com.mojang.logging.LogUtils;
+import dev.tidebound.core.fishing.CatchProfile;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.ArrayList;
@@ -28,10 +29,12 @@ public final class TideboundContentManager implements ResourceManagerReloadListe
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final String MILESTONE_DIRECTORY = "tidebound/milestones";
     private static final String CONTRACT_DIRECTORY = "tidebound/contracts";
+    private static final String CATCH_PROFILE_DIRECTORY = "tidebound/catch_profiles";
     private static final TideboundContentManager INSTANCE = new TideboundContentManager();
 
     private volatile Map<String, MilestoneDefinition> milestones = Map.of();
     private volatile Map<String, ContractDefinition> contracts = Map.of();
+    private volatile Map<String, CatchProfile> catchProfiles = Map.of();
 
     private TideboundContentManager() {
     }
@@ -46,6 +49,14 @@ public final class TideboundContentManager implements ResourceManagerReloadListe
 
     public static Optional<ContractDefinition> contract(String id) {
         return Optional.ofNullable(INSTANCE.contracts.get(normalizeLookupId(id)));
+    }
+
+    public static Optional<CatchProfile> catchProfile(String speciesId) {
+        return Optional.ofNullable(INSTANCE.catchProfiles.get(normalizeLookupId(speciesId)));
+    }
+
+    public static Map<String, CatchProfile> catchProfiles() {
+        return INSTANCE.catchProfiles;
     }
 
     public static int milestoneCount() {
@@ -68,10 +79,12 @@ public final class TideboundContentManager implements ResourceManagerReloadListe
     public void onResourceManagerReload(ResourceManager resourceManager) {
         Map<String, MilestoneDefinition> loadedMilestones = loadMilestones(resourceManager);
         Map<String, ContractDefinition> loadedContracts = loadContracts(resourceManager);
+        Map<String, CatchProfile> loadedCatchProfiles = loadCatchProfiles(resourceManager);
         milestones = immutableSorted(loadedMilestones);
         contracts = immutableSorted(loadedContracts);
-        LOGGER.info("Loaded {} Tidebound milestones and {} repeatable contracts",
-                milestones.size(), contracts.size());
+        catchProfiles = immutableSorted(loadedCatchProfiles);
+        LOGGER.info("Loaded {} Tidebound milestones, {} repeatable contracts and {} catch profiles",
+                milestones.size(), contracts.size(), catchProfiles.size());
     }
 
     private static Map<String, MilestoneDefinition> loadMilestones(ResourceManager manager) {
@@ -113,6 +126,25 @@ public final class TideboundContentManager implements ResourceManagerReloadListe
             );
             rejectDuplicate(loaded, id, entry.getKey());
             loaded.put(id, definition);
+        }
+        return loaded;
+    }
+
+    private static Map<String, CatchProfile> loadCatchProfiles(ResourceManager manager) {
+        Map<String, CatchProfile> loaded = new LinkedHashMap<>();
+        for (Map.Entry<ResourceLocation, Resource> entry
+                : jsonResources(manager, CATCH_PROFILE_DIRECTORY).entrySet()) {
+            JsonObject json = readObject(entry.getKey(), entry.getValue());
+            String species = normalizeLookupId(requiredString(json, "species"));
+            CatchProfile profile = new CatchProfile(
+                    species,
+                    requiredInt(json, "min_weight_grams"),
+                    requiredInt(json, "max_weight_grams"),
+                    requiredInt(json, "reference_weight_grams"),
+                    requiredInt(json, "base_value_tides")
+            );
+            rejectDuplicate(loaded, species, entry.getKey());
+            loaded.put(species, profile);
         }
         return loaded;
     }

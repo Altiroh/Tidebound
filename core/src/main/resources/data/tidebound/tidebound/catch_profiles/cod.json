@@ -1,0 +1,7 @@
+{
+  "species": "minecraft:cod",
+  "min_weight_grams": 500,
+  "max_weight_grams": 5000,
+  "reference_weight_grams": 1800,
+  "base_value_tides": 12
+}

@@ -90,6 +90,27 @@ def validate_file(path: Path, kind: str) -> None:
         validate_item_amount(data.get("requirement"), path, "requirement")
 
 
+def validate_catch_profile(path: Path) -> None:
+    with path.open(encoding="utf-8") as handle:
+        data = json.load(handle)
+    require(isinstance(data, dict), f"{path}: root must be an object")
+    species = data.get("species")
+    require(isinstance(species, str) and bool(ITEM_ID.fullmatch(species)),
+            f"{path}: invalid species id")
+    min_weight = data.get("min_weight_grams")
+    max_weight = data.get("max_weight_grams")
+    reference_weight = data.get("reference_weight_grams")
+    value = data.get("base_value_tides")
+    require(isinstance(min_weight, int) and min_weight >= 1,
+            f"{path}: invalid min_weight_grams")
+    require(isinstance(max_weight, int) and max_weight >= min_weight and max_weight <= 100_000,
+            f"{path}: invalid max_weight_grams")
+    require(isinstance(reference_weight, int) and min_weight <= reference_weight <= max_weight,
+            f"{path}: reference_weight_grams must be inside the species range")
+    require(isinstance(value, int) and 1 <= value <= 1_000_000,
+            f"{path}: invalid base_value_tides")
+
+
 def validate_resource_json() -> int:
     paths = sorted(RESOURCE_ROOT.rglob("*.json"))
     pack_meta = RESOURCE_ROOT / "pack.mcmeta"
@@ -389,13 +410,24 @@ def main() -> int:
     require(bool(files), "No Tidebound definitions found")
     for path, kind in sorted(files):
         validate_file(path, kind)
+
+    catch_profile_paths = sorted(DATA_ROOT.glob("*/tidebound/catch_profiles/**/*.json"))
+    require(bool(catch_profile_paths), "No Tidebound catch profiles found")
+    species_seen: set[str] = set()
+    for path in catch_profile_paths:
+        validate_catch_profile(path)
+        species = json.loads(path.read_text(encoding="utf-8"))["species"]
+        require(species not in species_seen, f"{path}: duplicate species {species!r}")
+        species_seen.add(species)
+
     resource_count = validate_resource_json()
     chapters, quests, quest_rewards, snbt_files = validate_ftb_questbook()
     mod_count = validate_modpack()
     milestones = sum(kind == "milestone" for _, kind in files)
     contracts = sum(kind == "contract" for _, kind in files)
     print(f"Tidebound content: OK ({milestones} milestones, {contracts} contracts, "
-          f"{resource_count} resource files; FTB Quests: {chapters} chapters, {quests} quests, "
+          f"{len(catch_profile_paths)} catch profiles, {resource_count} resource files; "
+          f"FTB Quests: {chapters} chapters, {quests} quests, "
           f"{quest_rewards} rewards, {snbt_files} SNBT files; Devpack: {mod_count} pinned mods)")
     return 0
 

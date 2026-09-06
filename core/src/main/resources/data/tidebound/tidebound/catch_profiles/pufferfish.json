@@ -1,0 +1,7 @@
+{
+  "species": "minecraft:pufferfish",
+  "min_weight_grams": 250,
+  "max_weight_grams": 1800,
+  "reference_weight_grams": 700,
+  "base_value_tides": 18
+}

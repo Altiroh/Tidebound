@@ -17,8 +17,10 @@ Le système doit survivre aux coffres, échanges, déconnexions et futurs raccor
 | `minecraft:tropical_fish` | 80–700 g | 250 g | 24 Tides |
 | `minecraft:pufferfish` | 250–1 800 g | 700 g | 18 Tides |
 
-Ces profils sont provisoirement codés dans `CatchProfiles`. Une version datapack sera nécessaire avant
-l'intégration des poissons d'autres mods.
+Ces profils sont désormais définis en datapack (`data/tidebound/tidebound/catch_profiles/*.json`,
+chargés par `TideboundContentManager` comme les paliers et contrats) plutôt que codés en dur dans
+`CatchProfiles`, qui n'est plus qu'une façade de lecture (`TB-CORE-010`). L'intégration de poissons
+d'autres mods ne nécessite plus de modification de code, seulement l'ajout d'un fichier JSON.
 
 ## Données persistantes
 
