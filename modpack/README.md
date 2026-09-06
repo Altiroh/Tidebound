@@ -15,7 +15,8 @@ comme profil personnalisé. Le manifeste installe :
 - AmbientSounds, ItemPhysic et CreativeCore ;
 - Sodium, Iris et ImmediatelyFast ;
 - Architectury API, requise par le socle FTB ;
-- FancyMenu, pour l'écran-titre personnalisé (fond et boutons Tidebound).
+- FancyMenu et ses librairies requises Konkrete et Melody, pour l'écran-titre personnalisé (fond et
+  boutons Tidebound).
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
 `tidebound-0.20.0-alpha.jar` dans le dossier `mods` de l'instance.
