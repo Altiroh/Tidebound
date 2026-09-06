@@ -1,5 +1,13 @@
 # Changelog
 
+## Devpack — écran-titre personnalisé
+
+- ajoute FancyMenu (client uniquement) au manifeste pour un écran-titre aux couleurs de Tidebound ;
+- fournit le fond et les cinq boutons (Singleplayer, Multiplayer, Mods, Options, Quit Game) dans
+  `modpack/overrides/config/fancymenu/assets/tidebound/` ;
+- le montage précis (positions, textures par bouton) se fait dans l'éditeur FancyMenu en jeu, pas en
+  code, conformément à l'usage du mod.
+
 ## 0.20.0-alpha — TB-CORE-006
 
 - le navire Tidebound n'affiche plus que les lignes de cale débloquées (9/18/27 cases) au lieu des

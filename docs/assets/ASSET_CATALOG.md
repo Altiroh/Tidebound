@@ -24,6 +24,8 @@ leur présence dans ce document ne signifie pas encore que l'objet ou le PNJ est
 | `tidebound_gui_poissonnier.png` | Interface visuelle du poissonnier | raccord économique prévu par `TB-ECON-001` |
 | `tidebound_gui_naturaliste_chercheur.png` | Interface visuelle du Journal | raccord encyclopédie/reliques à venir |
 | `tidebound_gui_gardien_phare.png` | Interface visuelle du phare | raccord météo/rumeurs à venir |
+| `background.png` | Fond de l'écran-titre | `modpack/overrides/config/fancymenu/assets/tidebound/` |
+| `button_singleplayer.png`, `button_multiplayer.png`, `button_mods.png`, `button_options.png`, `button_quit.png` | Boutons personnalisés de l'écran-titre | `modpack/overrides/config/fancymenu/assets/tidebound/` |
 
 ## Sources importées, conversion requise
 

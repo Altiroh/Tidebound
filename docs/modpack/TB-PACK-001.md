@@ -14,6 +14,7 @@ technique ; Tidebound Core conserve l'autorité sur les navires, la pêche, les 
 | Fonction | Mods | Rôle dans Tidebound |
 |---|---|---|
 | Identité | Tidebound Core | Logo, items, interfaces, monde et systèmes propriétaires |
+| Identité | FancyMenu | Écran-titre personnalisé (fond et boutons Tidebound), mod client uniquement |
 | Quêtes | FTB Library, Teams, Quests | Journal facultatif et onboarding visuel |
 | Récolte | FTB Ultimine | Réduit les tâches répétitives de construction |
 | Atelier | Create | Grues, quais et petits mécanismes visuels |

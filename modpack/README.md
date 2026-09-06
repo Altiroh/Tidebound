@@ -1,4 +1,4 @@
-# Tidebound — Into the Deep (Devpack 0.17.0-alpha)
+# Tidebound — Into the Deep (Devpack 0.20.0-alpha)
 
 Ce dossier assemble le premier socle jouable du modpack : Tidebound, quêtes, exploration, construction,
 stockage, ambiance et performances. Il reste volontairement plus petit que la cible finale de 50 à 80 mods.
@@ -14,13 +14,14 @@ comme profil personnalisé. Le manifeste installe :
 - JourneyMap, Waystones et Balm ;
 - AmbientSounds, ItemPhysic et CreativeCore ;
 - Sodium, Iris et ImmediatelyFast ;
-- Architectury API, requise par le socle FTB.
+- Architectury API, requise par le socle FTB ;
+- FancyMenu, pour l'écran-titre personnalisé (fond et boutons Tidebound).
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
-`tidebound-0.17.0-alpha.jar` dans le dossier `mods` de l'instance.
+`tidebound-0.20.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.17.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.20.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 CurseForge avertit que le JAR Tidebound et les fichiers de quêtes ne viennent pas encore de son catalogue.
 Il faut cocher **I understand** puis choisir **All Files**. Le bouton **CurseForge Files Only** retire précisément
@@ -44,6 +45,17 @@ bash modpack/package.sh
 L'enchantement **Fast Smelting** (`tidebound:fast_smelting`, `TB-SMELT-001`) est désormais natif à
 Tidebound Core, pas ajouté par un mod tiers. `FastFurnace` reste un optimiseur interne de fours,
 pas un enchantement de gameplay, et n'est donc pas présenté comme tel.
+
+## Écran-titre personnalisé
+
+Le fond et les cinq boutons (Singleplayer, Multiplayer, Mods, Options, Quit Game) sont fournis dans
+`overrides/config/fancymenu/assets/tidebound/` (`background.png`, `button_singleplayer.png`,
+`button_multiplayer.png`, `button_mods.png`, `button_options.png`, `button_quit.png`). FancyMenu est
+un mod purement client, pas de code Tidebound : ouvrir l'écran-titre en jeu, `H` (par défaut) pour
+l'éditeur FancyMenu, définir le fond sur `background.png`, puis remplacer chaque bouton vanilla par un
+bouton personnalisé pointant vers l'image correspondante et conservant son action d'origine
+(Singleplayer, Multiplayer, Mods, Options, Quit Game). Le placement se fait visuellement dans
+l'éditeur ; aucune valeur de positionnement n'est présumée ici.
 
 ## Périmètre de test
 
