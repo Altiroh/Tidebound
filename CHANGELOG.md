@@ -1,5 +1,12 @@
 # Changelog
 
+## Devpack — retrait temporaire de FancyMenu
+
+- FancyMenu, Konkrete et Melody retirés du manifeste : premier test bloqué par les dépendances
+  manquantes, retiré le temps de stabiliser le reste du pack plutôt que d'empiler les correctifs ;
+- le fond et les cinq boutons d'écran-titre restent conservés dans `docs/assets/title_screen/` pour
+  une reprise ultérieure, sans lien avec un mod précis.
+
 ## Devpack — écran-titre personnalisé
 
 - ajoute FancyMenu (client uniquement) au manifeste pour un écran-titre aux couleurs de Tidebound ;

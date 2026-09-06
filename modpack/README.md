@@ -14,9 +14,7 @@ comme profil personnalisé. Le manifeste installe :
 - JourneyMap, Waystones et Balm ;
 - AmbientSounds, ItemPhysic et CreativeCore ;
 - Sodium, Iris et ImmediatelyFast ;
-- Architectury API, requise par le socle FTB ;
-- FancyMenu et ses librairies requises Konkrete et Melody, pour l'écran-titre personnalisé (fond et
-  boutons Tidebound).
+- Architectury API, requise par le socle FTB.
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
 `tidebound-0.20.0-alpha.jar` dans le dossier `mods` de l'instance.
@@ -47,16 +45,11 @@ L'enchantement **Fast Smelting** (`tidebound:fast_smelting`, `TB-SMELT-001`) est
 Tidebound Core, pas ajouté par un mod tiers. `FastFurnace` reste un optimiseur interne de fours,
 pas un enchantement de gameplay, et n'est donc pas présenté comme tel.
 
-## Écran-titre personnalisé
+## Écran-titre personnalisé (retiré pour l'instant)
 
-Le fond et les cinq boutons (Singleplayer, Multiplayer, Mods, Options, Quit Game) sont fournis dans
-`overrides/config/fancymenu/assets/tidebound/` (`background.png`, `button_singleplayer.png`,
-`button_multiplayer.png`, `button_mods.png`, `button_options.png`, `button_quit.png`). FancyMenu est
-un mod purement client, pas de code Tidebound : ouvrir l'écran-titre en jeu, `H` (par défaut) pour
-l'éditeur FancyMenu, définir le fond sur `background.png`, puis remplacer chaque bouton vanilla par un
-bouton personnalisé pointant vers l'image correspondante et conservant son action d'origine
-(Singleplayer, Multiplayer, Mods, Options, Quit Game). Le placement se fait visuellement dans
-l'éditeur ; aucune valeur de positionnement n'est présumée ici.
+FancyMenu a été essayé pour un écran-titre aux couleurs de Tidebound, mais retiré du Devpack le temps
+de stabiliser le reste du pack (il ajoute deux dépendances, Konkrete et Melody). Le fond et les cinq
+boutons fournis restent conservés dans `docs/assets/title_screen/` pour une reprise ultérieure.
 
 ## Miniature du pack
 
