@@ -71,5 +71,6 @@
   "screen.tidebound.step.3": "Pêche",
   "screen.tidebound.step.4": "Vente",
   "screen.tidebound.step.5": "Étrange",
-  "generator.tidebound.archipelago": "Tidebound — Archipel"
+  "generator.tidebound.archipelago": "Tidebound — Archipel",
+  "enchantment.tidebound.fast_smelting": "Fonte rapide"
 }

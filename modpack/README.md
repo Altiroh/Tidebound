@@ -41,8 +41,8 @@ bash modpack/package.sh
 - JEI remplace NEI, qui n'est pas la branche moderne adaptée à Minecraft 1.21.1.
 - Create sert aux quais et ateliers visuels ; il ne remplace jamais le navire ou l'économie Tidebound.
 
-L'enchantement **Fast Smelting** n'est pas inclus dans cette version : aucun candidat NeoForge 1.21.1
-vérifié ne correspondait précisément à cette demande. `FastFurnace` est un optimiseur interne de fours,
+L'enchantement **Fast Smelting** (`tidebound:fast_smelting`, `TB-SMELT-001`) est désormais natif à
+Tidebound Core, pas ajouté par un mod tiers. `FastFurnace` reste un optimiseur interne de fours,
 pas un enchantement de gameplay, et n'est donc pas présenté comme tel.
 
 ## Périmètre de test

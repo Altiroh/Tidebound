@@ -1,10 +1,10 @@
 # Transmission Tidebound
 
-Dernière mise à jour : **5 septembre 2026**
+Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-NAV-001` / `0.17.0-alpha`
+État importé : `TB-SMELT-001` / `0.18.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -73,7 +73,9 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - preset normal remplacé par un archipel pour toute nouvelle sauvegarde ;
 - relief insulaire partagé par le terrain et les biomes, avec cœur forestier ciblé au spawn ;
 - diagnostic serveur terre/eau/rivage/bois et détection de masse continentale ;
-- tirage stable du futur port initial et smoke test CI créant réellement un monde neuf.
+- tirage stable du futur port initial et smoke test CI créant réellement un monde neuf ;
+- enchantement `tidebound:fast_smelting` sur les outils de minage vanilla, actif uniquement tant que
+  le joueur tient l'outil et surveille lui-même un four ouvert, sans jamais accélérer l'automatisation.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
 `core/TB-CORE-005B.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
@@ -96,19 +98,17 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
     leur lisibilité à plusieurs distances doivent encore être confirmés dans un vrai client.
 11. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
 12. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
-13. **Fast Smelting.** Aucun enchantement NeoForge 1.21.1 vérifié n'est encore intégré ; ne pas confondre
-    ce besoin avec `FastFurnace`, qui optimise le code des fours sans ajouter d'enchantement.
 
 ## Prochaine tâche recommandée
 
-### TB-SMELT-001 — Fonte rapide
+### TB-CORE-005C — Modules v1
 
 À réaliser maintenant :
 
-- créer un enchantement Fast Smelting propre à Tidebound pour NeoForge 1.21.1 ;
-- définir précisément les outils ou machines compatibles ;
-- éviter de court-circuiter les recettes, l'économie ou les mécanismes Create ;
-- ajouter un test de vitesse et documenter sa disponibilité.
+- brancher projecteur, sonar, treuil et filet aux systèmes réels (au lieu d'emplacements sans effet) ;
+- définir précisément l'effet et le coût de chaque module ;
+- réutiliser les emplacements de module déjà vendus par la capitainerie (`TB-CORE-005B`) ;
+- documenter les limites (un seul module actif à la fois, ou cumul, selon ce qui est réellement câblé).
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

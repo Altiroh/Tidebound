@@ -36,8 +36,8 @@ activation et disponibilité d'une pierre) restent actives.
 
 - Aucun shaderpack n'est imposé : Iris rend le menu Shaders disponible, mais le joueur choisit un pack
   adapté à son GPU.
-- Aucun mod prétendument « Fast Smelting Enchantment » n'est ajouté sans version NeoForge 1.21.1 vérifiée.
-  Un enchantement Tidebound natif ou un datapack dédié constitue le ticket recommandé.
+- Aucun mod prétendument « Fast Smelting Enchantment » n'a été ajouté sans version NeoForge 1.21.1
+  vérifiée. L'enchantement Tidebound natif `tidebound:fast_smelting` (`TB-SMELT-001`) répond à ce besoin.
 - Les mods décoratifs, agricoles et culinaires seront ajoutés après un démarrage complet de cette base,
   afin de mesurer mémoire, temps de chargement et conflits avant d'élargir vers 50 à 80 mods.
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.18.0-alpha — TB-SMELT-001
+
+- enchantement `tidebound:fast_smelting` sur les outils de minage vanilla (comme Efficacité) ;
+- accélère la cuisson d'un four uniquement tant que le joueur tient l'outil et surveille lui-même le
+  menu ouvert ; aucun effet sur les lignes automatisées (entonnoirs, Create) ;
+- access transformer dédié exposant les champs de cuisson du four, faute d'événement NeoForge adapté ;
+- compilation vérifiée avec un JDK 21 réel contre NeoForge 21.1.249 / Minecraft 1.21.1.
+
 ## 0.17.0-alpha — TB-NAV-001
 
 - registre mondial persistant des havres matérialisés, indépendant des chunks chargés ;
