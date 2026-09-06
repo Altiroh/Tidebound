@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-SMELT-001` / `0.18.0-alpha`
+État importé : `TB-CORE-005C` / `0.19.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -75,10 +75,14 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - diagnostic serveur terre/eau/rivage/bois et détection de masse continentale ;
 - tirage stable du futur port initial et smoke test CI créant réellement un monde neuf ;
 - enchantement `tidebound:fast_smelting` sur les outils de minage vanilla, actif uniquement tant que
-  le joueur tient l'outil et surveille lui-même un four ouvert, sans jamais accélérer l'automatisation.
+  le joueur tient l'outil et surveille lui-même un four ouvert, sans jamais accélérer l'automatisation ;
+- modules v1 branchés à de vrais systèmes selon les emplacements achetés : Projecteur (repousse les
+  spawns hostiles nocturnes), Sonar (pêche prometteuse, dangers, puis épaves/objets cachés au niveau 5
+  de Navigation), Treuil (attire les objets flottants) et Filet (multi-prise et pêche passive au
+  mouillage), tous inactifs sans le propriétaire en ligne à proximité.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-005B.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
+`core/TB-CORE-005C.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
@@ -90,7 +94,8 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
 4. **Contenu procédural.** L'archipel et l'île de départ existent, mais ports, épaves, phares et autres points d'intérêt ne sont pas encore placés.
 5. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
-6. **Modules.** Sonar, treuil, projecteur et filet ne sont pas encore équipables.
+6. **Équilibrage des modules.** Les effets de `TB-CORE-005C` sont branchés mais leurs rayons, intervalles
+   et la chance de multi-prise du Filet n'ont pas encore été ajustés par un vrai test en jeu.
 7. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
 8. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
 9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
@@ -101,14 +106,15 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-CORE-005C — Modules v1
+### TB-QA-001 — Partie neuve de 30 minutes
 
 À réaliser maintenant :
 
-- brancher projecteur, sonar, treuil et filet aux systèmes réels (au lieu d'emplacements sans effet) ;
-- définir précisément l'effet et le coût de chaque module ;
-- réutiliser les emplacements de module déjà vendus par la capitainerie (`TB-CORE-005B`) ;
-- documenter les limites (un seul module actif à la fois, ou cumul, selon ce qui est réellement câblé).
+- jouer une partie neuve d'environ 30 minutes sur plusieurs seeds, du naufrage au premier port ;
+- vérifier en conditions réelles la boucle bois → barque → port → pêche → vente → amélioration du navire ;
+- tester chaque module (`TB-CORE-005C`) au fur et à mesure des achats de slot et ajuster leur
+  équilibrage (rayons, intervalles, chance de multi-prise) selon ce qui est observé ;
+- consigner les frictions et bugs rencontrés, sans corriger silencieusement en cours de partie.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

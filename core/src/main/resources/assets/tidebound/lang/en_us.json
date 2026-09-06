@@ -72,5 +72,14 @@
   "screen.tidebound.step.4": "Sell",
   "screen.tidebound.step.5": "Strange",
   "generator.tidebound.archipelago": "Tidebound — Archipelago",
-  "enchantment.tidebound.fast_smelting": "Fast Smelting"
+  "enchantment.tidebound.fast_smelting": "Fast Smelting",
+  "message.tidebound.sonar.danger": "Sonar: danger nearby",
+  "message.tidebound.sonar.promising": "Sonar: promising waters",
+  "message.tidebound.sonar.structure": "Sonar: a wreck lies nearby",
+  "message.tidebound.sonar.items": "Sonar: %s floating item(s) detected",
+  "message.tidebound.net.passive_catch": "The net caught something while moored",
+  "screen.tidebound.module.spotlight": "Spotlight",
+  "screen.tidebound.module.sonar": "Sonar",
+  "screen.tidebound.module.winch": "Winch",
+  "screen.tidebound.module.net": "Net"
 }

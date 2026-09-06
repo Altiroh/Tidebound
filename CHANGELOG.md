@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.19.0-alpha — TB-CORE-005C
+
+- modules v1 branchés aux emplacements déjà vendus par le chantier, activation fixe et cumulative
+  (1 = Projecteur, 2 = Sonar, 3 = Treuil, 4 = Filet) ;
+- Projecteur : repousse les spawns hostiles la nuit autour du navire (`MobSpawnEvent.PositionCheck`) ;
+- Sonar : signale les eaux prometteuses et les dangers proches, détecte épaves et objets flottants
+  cachés à partir du niveau 5 de Navigation ;
+- Treuil : attire les objets flottants vers le navire ;
+- Filet : chance de prise supplémentaire à la pêche active, et pêche passive au mouillage à XP réduite ;
+- aucun module n'agit sans le propriétaire en ligne et à proximité, pour ne jamais accélérer une
+  installation automatisée ;
+- compilation vérifiée avec un JDK 21 réel contre NeoForge 21.1.249 / Minecraft 1.21.1.
+
 ## 0.18.0-alpha — TB-SMELT-001
 
 - enchantement `tidebound:fast_smelting` sur les outils de minage vanilla (comme Efficacité) ;

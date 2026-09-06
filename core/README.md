@@ -1,4 +1,4 @@
-# Tidebound Core — 0.18.0-alpha
+# Tidebound Core — 0.19.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -40,7 +40,8 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - prototype de quai portuaire matérialisé selon l'archétype et les services du plan régional ;
 - apparence synchronisée de la coque, du moteur, de la cale et des supports de modules.
 - six composants Tidebound illustrés, avec recettes et utilisation par le chantier naval ;
-- enchantement `tidebound:fast_smelting` sur les outils de minage vanilla.
+- enchantement `tidebound:fast_smelting` sur les outils de minage vanilla ;
+- modules v1 (Projecteur, Sonar, Treuil, Filet) branchés aux emplacements déjà vendus par le chantier.
 
 Le navire physique possède désormais son propre type d'entité. Il réutilise la physique éprouvée du bateau-coffre,
 mais son rendu, son équipage et ses niveaux visuels appartiennent à Tidebound. Le livre `Le Voyage` guide le joueur
@@ -271,3 +272,11 @@ d'enchantement ou l'enclume. Il n'accélère la cuisson d'un four (fourneau, hau
 si le joueur a lui-même le menu ouvert et tient l'outil enchanté en main : aucune ligne automatisée
 (entonneur, Create) n'en bénéficie jamais. Voir `TB-SMELT-001.md` pour l'implémentation technique
 (access transformer sur les champs de cuisson du four, aucun événement NeoForge dédié n'existant).
+
+## Modules v1
+
+Acheter un emplacement de module au chantier active le module correspondant, dans un ordre fixe :
+1 = Projecteur, 2 = Sonar, 3 = Treuil, 4 = Filet (`VesselModule`). Aucun n'agit sur un navire sans
+surveillance : le Projecteur ne réagit qu'à une vraie tentative de spawn hostile nocturne à proximité,
+les trois autres exigent que le propriétaire soit en ligne et à moins de douze blocs de son navire. Voir
+`TB-CORE-005C.md` pour le détail de chaque module et les garanties anti-automatisation.

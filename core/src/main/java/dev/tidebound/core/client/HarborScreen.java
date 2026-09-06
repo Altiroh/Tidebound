@@ -3,6 +3,9 @@ package dev.tidebound.core.client;
 import dev.tidebound.core.TideboundCore;
 import dev.tidebound.core.menu.HarborMenu;
 import dev.tidebound.core.npc.PortNpcRole;
+import dev.tidebound.core.vessel.VesselModule;
+import java.util.List;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
@@ -105,6 +108,30 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
         renderBackground(graphics, mouseX, mouseY, partialTick);
         super.render(graphics, mouseX, mouseY, partialTick);
         renderTooltip(graphics, mouseX, mouseY);
+        if (menu.role() == PortNpcRole.INTENDANT && menu.tideboundVessel()) {
+            renderModuleTooltip(graphics, mouseX, mouseY);
+        }
+    }
+
+    private void renderModuleTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
+        int x = artX(menu.role()) + 121 + 8;
+        int y = topPos + 40 + 114;
+        if (mouseX < x || mouseX > x + 108 || mouseY < y - 2 || mouseY > y + 10) {
+            return;
+        }
+        int moduleSlots = menu.moduleSlots();
+        List<Component> lines = List.of(
+                moduleTooltipLine(VesselModule.SPOTLIGHT, moduleSlots, "screen.tidebound.module.spotlight"),
+                moduleTooltipLine(VesselModule.SONAR, moduleSlots, "screen.tidebound.module.sonar"),
+                moduleTooltipLine(VesselModule.WINCH, moduleSlots, "screen.tidebound.module.winch"),
+                moduleTooltipLine(VesselModule.NET, moduleSlots, "screen.tidebound.module.net"));
+        graphics.renderComponentTooltip(font, lines, mouseX, mouseY);
+    }
+
+    private static Component moduleTooltipLine(VesselModule module, int moduleSlots, String translationKey) {
+        boolean active = module.active(moduleSlots);
+        ChatFormatting color = active ? ChatFormatting.GREEN : ChatFormatting.DARK_GRAY;
+        return Component.literal(active ? "✓ " : "✗ ").append(Component.translatable(translationKey)).withStyle(color);
     }
 
     @Override

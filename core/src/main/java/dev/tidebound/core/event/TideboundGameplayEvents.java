@@ -8,6 +8,7 @@ import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.service.CatchService;
 import dev.tidebound.core.service.MilestoneService;
 import dev.tidebound.core.service.ProgressionService;
+import dev.tidebound.core.vessel.VesselModule;
 import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.ChatFormatting;
@@ -41,12 +42,19 @@ public final class TideboundGameplayEvents {
 
         List<CatchData> catches = new ArrayList<>();
         ItemStack displayedStack = ItemStack.EMPTY;
-        for (ItemStack drop : event.getDrops()) {
+        boolean netActive = VesselModuleEvents.isModuleActive(player, VesselModule.NET);
+        for (ItemStack drop : List.copyOf(event.getDrops())) {
             var stamped = CatchService.stampFishedItem(player, drop, event.getHookEntity().blockPosition());
             if (stamped.isPresent()) {
                 catches.add(stamped.orElseThrow());
                 if (displayedStack.isEmpty()) {
                     displayedStack = drop;
+                }
+                if (netActive && player.getRandom().nextFloat() < VesselModuleEvents.NET_MULTI_CATCH_CHANCE) {
+                    ItemStack bonus = new ItemStack(drop.getItem());
+                    CatchService.stampFishedItem(player, bonus, event.getHookEntity().blockPosition())
+                            .ifPresent(catches::add);
+                    event.getDrops().add(bonus);
                 }
             }
         }

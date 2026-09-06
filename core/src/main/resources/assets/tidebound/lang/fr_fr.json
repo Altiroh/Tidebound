@@ -72,5 +72,14 @@
   "screen.tidebound.step.4": "Vente",
   "screen.tidebound.step.5": "Étrange",
   "generator.tidebound.archipelago": "Tidebound — Archipel",
-  "enchantment.tidebound.fast_smelting": "Fonte rapide"
+  "enchantment.tidebound.fast_smelting": "Fonte rapide",
+  "message.tidebound.sonar.danger": "Sonar : danger à proximité",
+  "message.tidebound.sonar.promising": "Sonar : eaux prometteuses",
+  "message.tidebound.sonar.structure": "Sonar : une épave se trouve à proximité",
+  "message.tidebound.sonar.items": "Sonar : %s objet(s) flottant(s) détecté(s)",
+  "message.tidebound.net.passive_catch": "Le filet a ramené quelque chose pendant le mouillage",
+  "screen.tidebound.module.spotlight": "Projecteur",
+  "screen.tidebound.module.sonar": "Sonar",
+  "screen.tidebound.module.winch": "Treuil",
+  "screen.tidebound.module.net": "Filet"
 }
