@@ -1,4 +1,4 @@
-# Tidebound Core — 0.21.0-alpha
+# Tidebound Core — 0.22.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -45,7 +45,9 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - interface de cale du navire Tidebound n'affichant que les lignes débloquées ;
 - onglet créatif dédié regroupant tous les objets Tidebound ;
 - solde de Tides affiché directement dans l'écran d'inventaire ;
-- annonce du biome à chaque changement, avec mise en évidence des biomes dangereux.
+- annonce du biome à chaque changement, avec mise en évidence des biomes dangereux ;
+- port initial matérialisé automatiquement près du spawn au premier démarrage du serveur, quand le
+  tirage par seed le réserve.
 
 Le navire physique possède désormais son propre type d'entité. Il réutilise la physique éprouvée du bateau-coffre,
 mais son rendu, son équipage et ses niveaux visuels appartiennent à Tidebound. Le livre `Le Voyage` guide le joueur
@@ -120,7 +122,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.17.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.22.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome

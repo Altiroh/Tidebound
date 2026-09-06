@@ -28,10 +28,11 @@
 - [x] `TB-CORE-007` — corrections issues du playtest : Instant Smelting, onglet créatif, Tides dans
   l'inventaire, annonce de biome, icône du Compas de sillage, Lootr, FTB Quests Translator.
 
-## Prochaine tranche du prototype vertical
+## En cours
 
-- [ ] `TB-WORLD-002` — variété de biomes maritimes, ports/PNJ placés automatiquement, gros navires
-  échoués rares, zones bornées par le niveau du navire (issu du retour de `TB-QA-001`).
+- [x] `TB-WORLD-002` tranche 1 — placement automatique du port initial près du spawn.
+- [ ] `TB-WORLD-002` tranche 2 — variété de biomes maritimes, gros navires échoués rares, zones
+  bornées par le niveau du navire (issu du retour de `TB-QA-001`, suivi dans `core/TB-WORLD-002.md`).
 
 ## Après validation du prototype
 

@@ -4,6 +4,7 @@ import dev.tidebound.core.command.TideboundCommands;
 import dev.tidebound.core.content.TideboundContentManager;
 import dev.tidebound.core.event.BiomeAwarenessEvents;
 import dev.tidebound.core.event.InstantSmeltingEvents;
+import dev.tidebound.core.event.StarterPortEvents;
 import dev.tidebound.core.event.TideboundGameplayEvents;
 import dev.tidebound.core.event.VesselModuleEvents;
 import dev.tidebound.core.registry.TideboundAttachments;
@@ -34,6 +35,7 @@ public final class TideboundCore {
         TideboundGameplayEvents.register(NeoForge.EVENT_BUS);
         InstantSmeltingEvents.register(NeoForge.EVENT_BUS);
         BiomeAwarenessEvents.register(NeoForge.EVENT_BUS);
+        StarterPortEvents.register(NeoForge.EVENT_BUS);
         VesselModuleEvents.register(NeoForge.EVENT_BUS);
         HarborBoardService.register(NeoForge.EVENT_BUS);
         VesselDeploymentService.register(NeoForge.EVENT_BUS);

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.22.0-alpha — TB-WORLD-002 (tranche 1) + icônes TB-CORE-007
+
+- le port initial (tirage ~1/3 par seed) se matérialise désormais automatiquement près du spawn au
+  premier démarrage du serveur, au lieu d'exiger `/tidebound world port-place` en administrateur ;
+- remplace les huit icônes jugées trop détaillées (`wake_compass`, `haven_compass`, `repair_kit`,
+  `caulking_kit`, `engine_parts`, `hold_fittings`, `hull_plate`, `mechanical_oil`) par de nouveaux
+  visuels réduits à l'échelle vanilla ;
+- le Compas des Havres a maintenant sa propre texture et sa propre silhouette (son modèle pointait
+  par erreur vers le compas vanilla) ;
+- nouveau logo `tidebound_logo.png` (ancre/tentacule/lanterne).
+
 ## 0.21.0-alpha — TB-CORE-007
 
 - renomme `tidebound:fast_smelting` en `tidebound:instant_smelting` et change sa mécanique : miner un

@@ -36,13 +36,15 @@ actionnables sans nouvelle décision de design ; la variété de biomes/ports au
   (voir `core/README.md` § Génération de l'archipel). L'automatisation de ce placement fait partie
   de `TB-WORLD-002`.
 
-## Reporté, besoin d'assets réels
+## Icônes remplacées
 
-Icônes actuelles jugées trop détaillées par rapport au style vanilla (dégradés lisses au lieu d'aplats
-en escalier) : `wake_compass`, `haven_compass` (n'a aucune texture propre pour l'instant),
-`repair_kit`, `caulking_kit`, `engine_parts`, `hold_fittings`, `hull_plate`, `mechanical_oil`. Les deux
-compas doivent en plus avoir une silhouette différente du compas vanilla. En attente de visuels
-fournis par l'utilisateur, comme pour l'écran-titre (`docs/assets/title_screen/`).
+Les huit icônes jugées trop détaillées (`wake_compass`, `haven_compass`, `repair_kit`,
+`caulking_kit`, `engine_parts`, `hold_fittings`, `hull_plate`, `mechanical_oil`) ont été remplacées
+par de nouveaux visuels fournis par l'utilisateur, réduits de 1254×1254 à 32×32 pour se rapprocher de
+l'échelle vanilla (voir `docs/assets/ASSET_CATALOG.md`). Le Compas des Havres a maintenant sa propre
+texture et sa propre silhouette, distincte du Compas de sillage et du compas vanilla — son modèle
+pointait par erreur vers `minecraft:item/compass_00`, corrigé au passage. Un nouveau logo
+(`icon_tidebound.png`, ancre/tentacule/lanterne) remplace `tidebound_logo.png` (écran Mods).
 
 ## Validation effectuée localement
 
@@ -52,8 +54,8 @@ fournis par l'utilisateur, comme pour l'écran-titre (`docs/assets/title_screen/
 
 ## Validation requise
 
-- lancement client réel : vérifier l'onglet créatif, le solde de Tides dans l'inventaire, l'icône du
-  Compas de sillage et le message de changement de biome ;
+- lancement client réel : vérifier l'onglet créatif, le solde de Tides dans l'inventaire, les
+  nouvelles icônes (les deux compas, les six composants) et le message de changement de biome ;
 - confirmer que Lootr donne bien un loot séparé par joueur sur un coffre de test ;
 - confirmer que FTB Quests Translator fonctionne avec le livre Tidebound.
 

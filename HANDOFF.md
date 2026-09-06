@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-007` / `0.21.0-alpha`
+État importé : `TB-WORLD-002` (tranche 1) / `0.22.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -86,7 +86,8 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   (rouge si marqué dangereux via `#tidebound:dangerous`), issus du retour de `TB-QA-001`.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-007.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
+`core/TB-CORE-007.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et
+`docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
@@ -96,7 +97,9 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
    affichés dans la maquette restent à rendre dynamiques.
 2. **Catalogue par datapack.** Les quatre profils vanilla sont encore définis dans le code ; les poissons de mods ne sont pas intégrés.
 3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
-4. **Contenu procédural.** L'archipel et l'île de départ existent, mais ports, épaves, phares et autres points d'intérêt ne sont pas encore placés.
+4. **Contenu procédural.** Le port initial se matérialise désormais automatiquement près du spawn
+   quand le tirage par seed le réserve (`TB-WORLD-002` tranche 1) ; épaves, phares et autres points
+   d'intérêt restent à placer, de même que la variété de biomes maritimes (tranche 2, en cours).
 5. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
 6. **Équilibrage des modules.** Les effets de `TB-CORE-005C` sont branchés mais leurs rayons, intervalles
    et la chance de multi-prise du Filet n'ont pas encore été ajustés par un vrai test en jeu.
@@ -109,15 +112,19 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-QA-001 — Partie neuve de 30 minutes
+### TB-WORLD-002 — Tranche 2 : variété de biomes et zones bornées
 
-À réaliser maintenant :
+À réaliser maintenant (voir `core/TB-WORLD-002.md` pour l'état détaillé) :
 
-- jouer une partie neuve d'environ 30 minutes sur plusieurs seeds, du naufrage au premier port ;
-- vérifier en conditions réelles la boucle bois → barque → port → pêche → vente → amélioration du navire ;
-- tester chaque module (`TB-CORE-005C`) au fur et à mesure des achats de slot et ajuster leur
-  équilibrage (rayons, intervalles, chance de multi-prise) selon ce qui est observé ;
-- consigner les frictions et bugs rencontrés, sans corriger silencieusement en cours de partie.
+- valider en jeu la tranche 1 (port initial auto-placé) sur plusieurs seeds ;
+- concevoir la variété de biomes maritimes (teintes/profondeurs d'eau, types d'îles au-delà de
+  forêt/plage) et peupler le tag `#tidebound:dangerous` en conséquence ;
+- définir et implémenter des zones bornées par le niveau du navire (aucun hook existant : partir de
+  `PlayerVessel.hullTier`/`motorTier` et `VesselDeploymentService`) ;
+- gros navires échoués rares, en plus des épaves existantes.
+
+Pas de structures `.nbt` externes pour cette tranche (décision prise avec l'utilisateur) : le système
+procédural actuel (`HarborPlacementService`) reste la source de vérité, à réévaluer plus tard si besoin.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

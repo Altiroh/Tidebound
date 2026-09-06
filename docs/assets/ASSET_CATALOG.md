@@ -8,13 +8,15 @@ leur présence dans ce document ne signifie pas encore que l'objet ou le PNJ est
 | Asset | Usage | État |
 | --- | --- | --- |
 | `tidebound_gui_intendant_port.png` | Habillage du menu de l'intendant | intégré dans `textures/gui/harbor_intendant.png` |
-| `compas_de_sillage.png` | Texture du Compas de sillage | intégré dans `textures/item/wake_compass.png` |
-| `kit_reparation.png` | Réparations au port | `tidebound:repair_kit` |
-| `necessaire_calfatage.png` | Recette du kit de réparation | `tidebound:caulking_kit` |
-| `pieces_moteur.png` | Améliorations de moteur | `tidebound:engine_parts` |
-| `ferrures_cale.png` | Améliorations de cale | `tidebound:hold_fittings` |
-| `plaque_coque.png` | Améliorations de coque | `tidebound:hull_plate` |
-| `huile_mecanique.png` | Composant moteur futur | `tidebound:mechanical_oil` |
+| `compas_de_sillage.png` (v2, `TB-CORE-007`) | Texture du Compas de sillage, style vanilla resserré | `textures/item/wake_compass.png` |
+| `compas_des_havres.png` (`TB-CORE-007`) | Texture du Compas des Havres, silhouette distincte du Compas de sillage | `textures/item/haven_compass.png` |
+| `kit_reparation.png` (v2, `TB-CORE-007`) | Réparations au port | `tidebound:repair_kit` |
+| `necessaire_calfatage.png` (v2, `TB-CORE-007`) | Recette du kit de réparation | `tidebound:caulking_kit` |
+| `pieces_moteur.png` (v2, `TB-CORE-007`) | Améliorations de moteur | `tidebound:engine_parts` |
+| `ferrures_cale.png` (v2, `TB-CORE-007`) | Améliorations de cale | `tidebound:hold_fittings` |
+| `plaque_coque.png` (v2, `TB-CORE-007`) | Améliorations de coque | `tidebound:hull_plate` |
+| `huile_mecanique.png` (v2, `TB-CORE-007`) | Composant moteur futur | `tidebound:mechanical_oil` |
+| `icon_tidebound.png` (`TB-CORE-007`) | Emblème ancre/tentacule/lanterne, logo du mod | `src/main/resources/tidebound_logo.png` (écran Mods) |
 | `tidebound_pnj_intendant_port.png` | Texture de l'Intendant du port | `tidebound:harbor_intendant` |
 | `tidebound_pnj_charpentier_mecanicien.png` | Texture du charpentier naval | `tidebound:shipwright` |
 | `tidebound_pnj_poissonnier.png` | Texture du poissonnier | `tidebound:fishmonger` |
@@ -41,6 +43,11 @@ stabiliser le reste du pack ; les visuels restent conservés tels quels.
 Les cinq atlas source 1254×1254 sont réduits par voisin le plus proche en textures runtime 512×512,
 sans modifier leur découpage UV. Leur rendu à distance doit encore être contrôlé en jeu. Le validateur
 contrôle désormais chaque chunk PNG jusqu'à `IEND`, afin qu'un transfert tronqué ne puisse plus passer.
+
+Les huit icônes d'objet remplacées par `TB-CORE-007` viennent de sources 1254×1254 elles aussi, mais
+réduites à 32×32 (rééchantillonnage `sips`, pas voisin le plus proche) pour se rapprocher de l'échelle
+et du niveau de détail des icônes vanilla, suite au retour direct du playtest. Le logo `icon_tidebound.png`
+est réduit à 512×512, cohérent avec les autres atlas du pack.
 
 ## Pack identifié, à importer par ticket
 
