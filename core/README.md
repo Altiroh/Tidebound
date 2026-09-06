@@ -1,4 +1,4 @@
-# Tidebound Core — 0.15.0-alpha
+# Tidebound Core — 0.16.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -37,6 +37,7 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - première capture limitée aux vrais poissons, sans récompense sur les déchets de pêche.
 - archipel appliqué par défaut aux nouvelles sauvegardes, avec îles boisées séparées par l'océan ;
 - diagnostic administrateur de la viabilité du spawn et tirage stable du futur port initial ;
+- prototype de quai portuaire matérialisé selon l'archétype et les services du plan régional ;
 - apparence synchronisée de la coque, du moteur, de la cale et des supports de modules.
 - six composants Tidebound illustrés, avec recettes et utilisation par le chantier naval.
 
@@ -113,7 +114,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.15.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.16.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -245,8 +246,9 @@ contrôler une seed neuve avec les commandes autorisées :
 /tidebound world diagnose 128
 ```
 
-Le futur port initial est seulement planifié par seed dans cette version. Sa structure arrivera avec
-`TB-PORT-001` ; une île sans port doit toujours permettre de fabriquer une barque vanilla.
+Le port initial reste facultatif et n'est pas encore généré automatiquement. Pour valider le placement
+runtime sur un rivage proche, utiliser `/tidebound world port-place` ; une île sans port doit toujours
+permettre de fabriquer une barque vanilla.
 
 Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
 
@@ -258,5 +260,5 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-La prochaine brique recommandée est `TB-PORT-001B` : placer physiquement les gabarits de ports sur un
-rivage viable et invoquer uniquement les services choisis par `PortPlan`.
+Le prototype `/tidebound world port-place` matérialise désormais le plan régional près d'un rivage.
+La prochaine brique recommandée est `TB-NAV-001` : index persistant des havres et Compas des Havres.

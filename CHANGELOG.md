@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.16.0-alpha — TB-PORT-001B
+
+- recherche serveur d'un rivage exploitable dans un rayon borné ;
+- quai compact différencié visuellement selon les cinq archétypes ;
+- stockage, pupitre, cloche et marqueur mécanique posés uniquement si le plan les prévoit ;
+- invocation des seuls PNJ annoncés par le plan, avec protection contre les doublons ;
+- commande de test `/tidebound world port-place` réservée aux administrateurs.
+
 ## 0.15.0-alpha — TB-PORT-001A
 
 - ajoute cinq archétypes pondérés de ports et avant-postes ;

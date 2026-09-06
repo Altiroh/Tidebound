@@ -1,6 +1,6 @@
 package dev.tidebound.core.world;
 
-/** Stable one-in-three starter-port roll. TB-PORT-001 will consume this decision. */
+/** Stable one-in-three starter-port roll reserved for automatic inhabited-island generation. */
 public final class StarterPortPlan {
     private StarterPortPlan() {
     }

@@ -17,6 +17,7 @@ import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.service.HarborBoardService;
+import dev.tidebound.core.service.HarborPlacementService;
 import dev.tidebound.core.service.ArchipelagoSurveyService;
 import dev.tidebound.core.service.ProgressionService;
 import dev.tidebound.core.world.ArchipelagoSurvey;
@@ -281,7 +282,31 @@ public final class TideboundCommands {
                                         context.getSource(),
                                         IntegerArgumentType.getInteger(context, "radius")))))
                 .then(Commands.literal("port-plan")
-                        .executes(context -> showPortPlan(context.getSource())));
+                        .executes(context -> showPortPlan(context.getSource())))
+                .then(Commands.literal("port-place")
+                        .executes(context -> placePort(context.getSource())));
+    }
+
+    private static int placePort(CommandSourceStack source) {
+        ServerPlayer player;
+        try {
+            player = source.getPlayerOrException();
+        } catch (Exception exception) {
+            source.sendFailure(Component.literal("Cette commande doit être exécutée par un joueur."));
+            return 0;
+        }
+        int regionX = Math.floorDiv(player.getBlockX(), 512);
+        int regionZ = Math.floorDiv(player.getBlockZ(), 512);
+        PortPlan plan = PortPlan.at(player.serverLevel().getSeed(), regionX, regionZ);
+        HarborPlacementService.PlacementResult result = HarborPlacementService.placeNear(
+                player.serverLevel(), player.blockPosition(), plan);
+        if (!result.placed()) {
+            source.sendFailure(Component.literal(result.message()));
+            return 0;
+        }
+        source.sendSuccess(() -> Component.literal(result.message() + " Quai : "
+                + result.origin().toShortString()).withStyle(ChatFormatting.GREEN), true);
+        return 1;
     }
 
     private static int showPortPlan(CommandSourceStack source) {
