@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.25.0-alpha — TB-CORE-008 : ports, PNJ et interfaces après le deuxième retour client
+
+- ports : `HarborPlacementService` construit désormais un vrai bâtiment fermé derrière le quai (sol,
+  murs, porte, fenêtres, toit en dalles en surplomb) au lieu d'un ponton plat avec des props posés au
+  sol ; les props de service (tonneau, lutrin, cloche, bloc de cuivre) sont rangés à l'intérieur ;
+- PNJ : les cinq skins repartent de la vraie texture villageoise vanilla (64×64) recolorée par calque
+  de métier vanilla existant, au lieu des atlas illustrés 512×512 qui rendaient en pixels mélangés sur
+  le modèle réel ; `validate_content.py` vérifiait encore l'ancien format, corrigé ;
+- interfaces : `HarborScreen` passe de 265×287 px à 198×215 px (échelle 0,375 au lieu de 0,5), tous
+  les décalages internes recalculés au même facteur pour se rapprocher d'un écran de commerce vanilla ;
+- décisions actées avec l'utilisateur pour ce ticket : pas de structures `.nbt` pour les ports (on
+  améliore le procédural existant), l'utilisateur fournit les nouveaux visuels PNJ, l'interface se
+  rapproche du gabarit vanilla plutôt que de conserver l'art custom pleine taille.
+
+Build, `validate_content.py` et démarrage serveur réels vérifiés sans erreur. Qualité visuelle du
+bâtiment de port, lisibilité des skins recolorés et proportions de l'écran redimensionné **non
+vérifiées en jeu** — nécessite le prochain retour client. Détails dans `core/TB-CORE-008.md`.
+
 ## 0.24.0-alpha — corrections après premier retour client sur TB-WORLD-002
 
 - la variété de biomes utilisait la température comme discriminant, dont le bruit vanilla varie sur

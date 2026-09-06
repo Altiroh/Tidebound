@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-002` (tranches 1-2, corrigées après un premier retour) / `0.24.0-alpha`
+État importé : `TB-CORE-008` (ports/PNJ/interfaces après un deuxième retour) / `0.25.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -93,10 +93,16 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - bruit de forme des îles élargi (×1,6) pour que les profondeurs/reliefs extrêmes soient réellement
   atteints, au lieu de rester coincés près du centre de la plage de valeurs ;
 - dégâts progressifs au navire en eaux dangereuses (profondeurs, glace, `abyss_ocean`) si la coque est
-  sous le niveau 3.
+  sous le niveau 3 ;
+- bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
+  la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
+- cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
+  calque de métier vanilla, remplaçant les atlas illustrés 512×512 qui rendaient buggés en jeu ;
+- écran portuaire `HarborScreen` réduit à 0,375× (198×215 px) pour se rapprocher d'un écran de
+  commerce vanilla, tous les décalages internes recalculés au même facteur.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-007.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et
+`core/TB-CORE-008.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et
 `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
@@ -115,48 +121,39 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
    et la chance de multi-prise du Filet n'ont pas encore été ajustés par un vrai test en jeu.
 7. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
 8. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
-9. **PNJ : validation visuelle.** Les cinq atlas sont branchés au modèle villageois, mais leur UV et
-    leur lisibilité à plusieurs distances doivent encore être confirmés dans un vrai client.
+9. **PNJ : validation visuelle.** Les cinq skins repartent désormais de la texture villageoise vanilla
+    recolorée (UV garanti correct), mais la palette de couleurs et la lisibilité à plusieurs distances
+    doivent encore être confirmées dans un vrai client (`TB-CORE-008`).
 10. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
 11. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
 
 ## Prochaine tâche recommandée
 
-### Décisions en attente avant de continuer
+`TB-CORE-008` a répondu aux trois décisions du deuxième retour client (voir `core/TB-CORE-008.md`) :
+bâtiment de port fermé au lieu d'un ponton nu, skins PNJ reconstruits depuis la base vanilla, écran
+portuaire réduit à l'échelle d'un écran de commerce classique — toujours sans structure `.nbt`, décision
+maintenue explicitement par l'utilisateur.
 
-Premier vrai test client de `TB-WORLD-002` fait (carte + retour utilisateur) : la variété de biomes
-et la profondeur ont été corrigées une première fois (humidité au lieu de température, bruit élargi
-×1,6), mais trois points touchent des choix de fond non tranchés, à ne pas deviner une troisième fois :
+### En attente du prochain retour client
 
-1. **Qualité de génération des ports.** Le quai procédural actuel (`HarborPlacementService`, blocs
-   posés à la main) rend mal (« vieux port avec des blocs random »). S'en approcher du système de
-   génération des villages vanilla (jigsaw + pools de structures) impose de facto des structures
-   `.nbt` — ce qui avait été explicitement écarté dans `TB-WORLD-002`. À retrancher : soit
-   l'utilisateur fournit quelques pièces modulaires construites en jeu et exportées en `.nbt`, soit on
-   améliore le générateur procédural actuel sans réécriture complète.
-2. **Skins des PNJ.** Les cinq atlas custom (512×512) rendent complètement buggés sur le modèle
-   villageois. Piste proposée par l'utilisateur : repartir des skins vanilla plutôt que du pack
-   artistique actuel.
-3. **Taille et fonctionnement des interfaces portuaires.** `HarborScreen` (art custom par rôle) est
-   jugé trop grand et mal positionné ; envisager de se rapprocher d'un écran de PNJ vanilla classique
-   et d'y greffer les fonctions Tidebound plutôt que l'inverse. Les boutons de l'Intendant/Charpentier
-   semblent corrects dans le code (`HarborMenu#clickMenuButton`) ; le signalement « ne fait rien »
-   vient probablement du placement erratique des PNJ (point 1) plutôt que d'un bug de câblage — à
-   confirmer avant de toucher au code du menu.
-
-### Une fois ces décisions prises
-
+- confirmer que les cinq PNJ s'affichent correctement (plus de pixels mélangés) et juger la palette de
+  recolorisation ;
+- confirmer que l'écran portuaire est bien proportionné après la réduction d'échelle ;
+- reconfirmer si les boutons de l'Intendant/Charpentier fonctionnent maintenant (hypothèse : ils étaient
+  gênés par le placement erratique des PNJ sur l'ancien ponton, pas par un bug de câblage) ;
+- juger si le nouveau bâtiment de port est suffisant ou nécessite une itération supplémentaire ;
 - valider en jeu ports/biomes/dégâts de coque sur plusieurs seeds (rien de tout ça n'a encore été vu
-  tourner dans un vrai client) ;
+  tourner dans un vrai client).
+
+### Ensuite
+
 - animer l'aiguille des compas (Compas de sillage/des Havres) — nécessite soit des frames de texture
   façon compas vanilla, soit un modèle 3D animé ;
-- gros navires échoués rares (mêmes contraintes `.nbt` que le point 1).
+- gros navires échoués rares (nécessite soit une structure `.nbt`, soit un générateur procédural
+  dédié — aucun des deux commencé) ;
+- variété d'humidité supplémentaire (mangrove, badlands...).
 
-Une fois validé, prochain morceau explicitement laissé de côté : gros navires échoués rares (nécessite
-soit une structure `.nbt`, soit un générateur procédural dédié — aucun des deux commencé) et/ou
-variété d'humidité (mangrove, badlands...).
-
-Pas de structures `.nbt` externes pour cette tranche (décision prise avec l'utilisateur) : le système
+Pas de structures `.nbt` externes pour l'instant (décision prise avec l'utilisateur) : le système
 procédural actuel (`HarborPlacementService`) reste la source de vérité, à réévaluer plus tard si besoin.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage

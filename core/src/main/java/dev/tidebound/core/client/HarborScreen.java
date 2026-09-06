@@ -14,9 +14,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-/** First visual harbour pass, skinned from the Tidebound art pack. */
+/**
+ * Harbour screen, skinned from the Tidebound art pack. Rendered at 0.375x instead of the original
+ * 0.5x (TB-QA-001 feedback: too large compared to a classic villager trade screen) — every offset
+ * below is the original value scaled by the same 0.75 factor, to keep the relative layout intact.
+ */
 public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
-    private static final float ART_SCALE = 0.5F;
+    private static final float ART_SCALE = 0.375F;
     private static final int PANEL = 0xF2D8BD8C;
     private static final int INK = 0xFF241D18;
     private static final int TRACK = 0xFF313A3C;
@@ -25,8 +29,8 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
 
     public HarborScreen(HarborMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
-        imageWidth = 265;
-        imageHeight = 287;
+        imageWidth = 198;
+        imageHeight = 215;
         inventoryLabelY = 10_000;
         titleLabelY = 10_000;
     }
@@ -46,51 +50,51 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     }
 
     private void initFishmonger(int artX) {
-        addRenderableWidget(new Hotspot(artX + 17, topPos + 170, 78, 39,
+        addRenderableWidget(new Hotspot(artX + 13, topPos + 128, 59, 29,
                 Component.translatable("menu.tidebound.sell_all"),
                 () -> press(HarborMenu.ACTION_SELL_ALL)));
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                 Component.translatable("menu.tidebound.sell_all"), button -> press(HarborMenu.ACTION_SELL_ALL))
-                .bounds(artX + 199, topPos + 248, 49, 20).build());
+                .bounds(artX + 149, topPos + 186, 37, 15).build());
     }
 
     private void initIntendant(int artX) {
-        addRenderableWidget(new Hotspot(artX + 13, topPos + 170, 56, 39,
+        addRenderableWidget(new Hotspot(artX + 10, topPos + 128, 42, 29,
                 Component.translatable("menu.tidebound.contracts"),
                 () -> press(HarborMenu.ACTION_CONTRACTS)));
-        addRenderableWidget(new Hotspot(artX + 134, topPos + 170, 55, 39,
+        addRenderableWidget(new Hotspot(artX + 101, topPos + 128, 41, 29,
                 Component.translatable("menu.tidebound.voyage"), this::openVoyage));
-        int actionY = topPos + 248;
+        int actionY = topPos + 186;
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                 primaryActionLabel(), button -> press(primaryAction()))
-                .bounds(artX + 13, actionY, 112, 20).build());
+                .bounds(artX + 10, actionY, 84, 15).build());
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                 Component.translatable("menu.tidebound.compass"),
                 button -> press(HarborMenu.ACTION_COMPASS))
-                .bounds(artX + 132, actionY, 112, 20).build());
+                .bounds(artX + 99, actionY, 84, 15).build());
     }
 
     private void initShipwright(int artX) {
         boolean enabled = menu.tideboundVessel();
-        Hotspot motor = addRenderableWidget(new Hotspot(artX + 105, topPos + 45, 38, 45,
+        Hotspot motor = addRenderableWidget(new Hotspot(artX + 79, topPos + 34, 29, 34,
                 Component.translatable("menu.tidebound.upgrade.motor"), () -> press(HarborMenu.ACTION_MOTOR)));
-        Hotspot hull = addRenderableWidget(new Hotspot(artX + 102, topPos + 91, 40, 43,
+        Hotspot hull = addRenderableWidget(new Hotspot(artX + 77, topPos + 68, 30, 32,
                 Component.translatable("menu.tidebound.upgrade.hull"), () -> press(HarborMenu.ACTION_HULL)));
-        Hotspot hold = addRenderableWidget(new Hotspot(artX + 196, topPos + 91, 40, 43,
+        Hotspot hold = addRenderableWidget(new Hotspot(artX + 147, topPos + 68, 30, 32,
                 Component.translatable("menu.tidebound.upgrade.hold"), () -> press(HarborMenu.ACTION_HOLD)));
-        Hotspot module = addRenderableWidget(new Hotspot(artX + 105, topPos + 136, 132, 30,
+        Hotspot module = addRenderableWidget(new Hotspot(artX + 79, topPos + 102, 99, 23,
                 Component.translatable("menu.tidebound.upgrade.module"), () -> press(HarborMenu.ACTION_MODULE)));
         motor.active = enabled;
         hull.active = enabled;
         hold.active = enabled;
         module.active = enabled;
 
-        addRenderableWidget(new Hotspot(artX + 18, topPos + 170, 73, 38,
+        addRenderableWidget(new Hotspot(artX + 14, topPos + 128, 55, 29,
                 Component.translatable("menu.tidebound.repair"), () -> press(HarborMenu.ACTION_REPAIR)));
         if (menu.refitAvailable()) {
             addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                     Component.translatable("menu.tidebound.refit"), button -> press(HarborMenu.ACTION_REFIT))
-                    .bounds(artX + 169, topPos + 247, 78, 20).build());
+                    .bounds(artX + 127, topPos + 185, 59, 15).build());
         }
     }
 
@@ -114,9 +118,9 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
     }
 
     private void renderModuleTooltip(GuiGraphics graphics, int mouseX, int mouseY) {
-        int x = artX(menu.role()) + 121 + 8;
-        int y = topPos + 40 + 114;
-        if (mouseX < x || mouseX > x + 108 || mouseY < y - 2 || mouseY > y + 10) {
+        int x = artX(menu.role()) + 91 + 6;
+        int y = topPos + 30 + 86;
+        if (mouseX < x || mouseX > x + 81 || mouseY < y - 2 || mouseY > y + 8) {
             return;
         }
         int moduleSlots = menu.moduleSlots();
@@ -146,54 +150,54 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
 
         if (menu.role() != PortNpcRole.INTENDANT) {
             if (menu.role() == PortNpcRole.FISHMONGER) {
-                graphics.fill(artX + 159, topPos + 214, artX + 250, topPos + 244, 0xE6192528);
+                graphics.fill(artX + 119, topPos + 161, artX + 188, topPos + 183, 0xE6192528);
                 graphics.drawString(font, Component.translatable("menu.tidebound.sale.estimate",
                                 menu.saleCount(), menu.saleValue()),
-                        artX + 164, topPos + 225, 0xFFFFD36A, false);
+                        artX + 123, topPos + 169, 0xFFFFD36A, false);
             }
             return;
         }
 
         // Replace the static mock-up values with synchronized state while retaining its frame and portrait.
-        int x = artX + 121;
-        int y = topPos + 40;
-        graphics.fill(x, y, x + 124, y + 124, PANEL);
+        int x = artX + 91;
+        int y = topPos + 30;
+        graphics.fill(x, y, x + 93, y + 93, PANEL);
         graphics.drawString(font, Component.translatable(menu.tideboundVessel()
-                ? "menu.tidebound.my_vessel" : "menu.tidebound.simple_boat"), x + 8, y + 7, INK, false);
-        drawVesselSilhouette(graphics, x + 10, y + 27);
+                ? "menu.tidebound.my_vessel" : "menu.tidebound.simple_boat"), x + 6, y + 5, INK, false);
+        drawVesselSilhouette(graphics, x + 8, y + 20);
         if (menu.tideboundVessel()) {
-            drawTier(graphics, Component.translatable("menu.tidebound.hull"), menu.hullTier(), x + 8, y + 49);
-            drawTier(graphics, Component.translatable("menu.tidebound.motor"), menu.motorTier(), x + 8, y + 73);
-            drawTier(graphics, Component.translatable("menu.tidebound.hold"), menu.holdTier(), x + 8, y + 97);
-            drawTier(graphics, Component.translatable("menu.tidebound.modules"), menu.moduleSlots(), x + 8, y + 114);
+            drawTier(graphics, Component.translatable("menu.tidebound.hull"), menu.hullTier(), x + 6, y + 37);
+            drawTier(graphics, Component.translatable("menu.tidebound.motor"), menu.motorTier(), x + 6, y + 55);
+            drawTier(graphics, Component.translatable("menu.tidebound.hold"), menu.holdTier(), x + 6, y + 73);
+            drawTier(graphics, Component.translatable("menu.tidebound.modules"), menu.moduleSlots(), x + 6, y + 86);
         } else {
             graphics.drawWordWrap(font, Component.translatable("menu.tidebound.simple_boat.help"),
-                    x + 8, y + 55, 108, 0xFF6B3F2B);
+                    x + 6, y + 41, 81, 0xFF6B3F2B);
         }
 
-        graphics.fill(artX + 14, topPos + 214, artX + 244, topPos + 244, 0xE6192528);
+        graphics.fill(artX + 11, topPos + 161, artX + 183, topPos + 183, 0xE6192528);
         graphics.drawString(font, Component.translatable("menu.tidebound.tides", menu.tides()),
-                artX + 22, topPos + 225, 0xFFFFD36A, false);
+                artX + 17, topPos + 169, 0xFFFFD36A, false);
         graphics.drawString(font, Component.translatable(menu.deployed()
                         ? "menu.tidebound.status.at_sea" : "menu.tidebound.status.at_harbor"),
-                artX + 145, topPos + 225, 0xFFB9D8D0, false);
+                artX + 109, topPos + 169, 0xFFB9D8D0, false);
     }
 
     private void drawTier(GuiGraphics graphics, Component label, int tier, int x, int y) {
         graphics.drawString(font, label, x, y, INK, false);
-        int barX = x + 57;
-        int width = 51;
-        graphics.fill(barX, y, barX + width, y + 8, TRACK);
-        graphics.fill(barX + 1, y + 1, barX + 1 + Math.round((width - 2) * tier / 5.0F), y + 7, FILL);
-        graphics.drawString(font, tier + "/5", barX + 18, y, 0xFFFFFFFF, true);
+        int barX = x + 43;
+        int width = 38;
+        graphics.fill(barX, y, barX + width, y + 6, TRACK);
+        graphics.fill(barX + 1, y + 1, barX + 1 + Math.round((width - 2) * tier / 5.0F), y + 5, FILL);
+        graphics.drawString(font, tier + "/5", barX + 14, y, 0xFFFFFFFF, true);
     }
 
     private static void drawVesselSilhouette(GuiGraphics graphics, int x, int y) {
-        graphics.fill(x, y + 12, x + 44, y + 17, 0xFF744C2C);
-        graphics.fill(x + 5, y + 17, x + 38, y + 21, 0xFF4D3324);
-        graphics.fill(x + 20, y, x + 22, y + 13, 0xFF513725);
-        graphics.fill(x + 22, y + 2, x + 35, y + 10, 0xFFE5D5B0);
-        graphics.fill(x + 7, y + 22, x + 41, y + 24, 0xFF2C8090);
+        graphics.fill(x, y + 9, x + 33, y + 13, 0xFF744C2C);
+        graphics.fill(x + 4, y + 13, x + 29, y + 16, 0xFF4D3324);
+        graphics.fill(x + 15, y, x + 17, y + 10, 0xFF513725);
+        graphics.fill(x + 17, y + 2, x + 26, y + 8, 0xFFE5D5B0);
+        graphics.fill(x + 5, y + 17, x + 31, y + 18, 0xFF2C8090);
     }
 
     private int primaryAction() {

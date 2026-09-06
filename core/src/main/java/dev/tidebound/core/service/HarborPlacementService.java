@@ -113,20 +113,87 @@ public final class HarborPlacementService {
             }
         }
 
-        BlockPos serviceRow = origin.relative(water.getOpposite(), 1);
+        buildHut(level, shore, plan);
+    }
+
+    /**
+     * A small enclosed building behind the dock: floor, four walls with a door and window gaps, and
+     * a flat overhanging roof. Replaces bare service props standing on open decking (TB-QA-001
+     * feedback: the previous dock-only layout read as "random blocks", not a real structure).
+     */
+    private static void buildHut(ServerLevel level, ShoreSite shore, PortPlan plan) {
+        BlockPos origin = shore.deckOrigin();
+        Direction water = shore.waterDirection();
+        Direction inland = water.getOpposite();
+        Direction across = water.getClockWise();
+        var wall = wallBlock(plan);
+        var eave = eaveBlock(plan);
+        int width = 2;
+        int frontDepth = 1;
+        int backDepth = 4;
+        int wallHeight = 3;
+
+        for (int depth = frontDepth; depth <= backDepth; depth++) {
+            for (int lateral = -width; lateral <= width; lateral++) {
+                BlockPos floor = origin.relative(inland, depth).relative(across, lateral);
+                level.setBlock(floor, wall, 3);
+                boolean edge = depth == frontDepth || depth == backDepth || lateral == -width || lateral == width;
+                boolean doorway = depth == frontDepth && lateral == 0;
+                for (int y = 1; y <= wallHeight; y++) {
+                    BlockPos wallPos = floor.above(y);
+                    if (!edge) {
+                        level.setBlock(wallPos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+                        continue;
+                    }
+                    if (doorway && y <= 2) {
+                        level.setBlock(wallPos, net.minecraft.world.level.block.Blocks.AIR.defaultBlockState(), 3);
+                        continue;
+                    }
+                    boolean windowGap = y == 2 && !doorway
+                            && ((depth == frontDepth + (backDepth - frontDepth) / 2 && (lateral == -width || lateral == width))
+                                    || (lateral == 0 && (depth == frontDepth || depth == backDepth) && !doorway));
+                    level.setBlock(wallPos, windowGap
+                            ? net.minecraft.world.level.block.Blocks.GLASS_PANE.defaultBlockState()
+                            : wall, 3);
+                }
+                level.setBlock(floor.above(wallHeight + 1), eave, 3);
+            }
+        }
+        for (int lateral = -width - 1; lateral <= width + 1; lateral++) {
+            level.setBlock(origin.relative(inland, frontDepth - 1).relative(across, lateral).above(wallHeight + 1),
+                    eave, 3);
+            level.setBlock(origin.relative(inland, backDepth + 1).relative(across, lateral).above(wallHeight + 1),
+                    eave, 3);
+        }
+        level.setBlock(origin.relative(inland, frontDepth).above(2), Blocks.LANTERN.defaultBlockState(), 3);
+
+        BlockPos serviceRow = origin.relative(inland, backDepth - 1);
         if (plan.services().contains(PortService.STORAGE)) {
-            level.setBlock(serviceRow.relative(across, -3), Blocks.BARREL.defaultBlockState(), 3);
-            level.setBlock(serviceRow.relative(across, 3), Blocks.BARREL.defaultBlockState(), 3);
+            level.setBlock(serviceRow.relative(across, -1), Blocks.BARREL.defaultBlockState(), 3);
         }
         if (plan.services().contains(PortService.CONTRACT_BOARD)) {
-            level.setBlock(serviceRow.relative(across, 2), Blocks.LECTERN.defaultBlockState(), 3);
+            level.setBlock(serviceRow.relative(across, 1), Blocks.LECTERN.defaultBlockState(), 3);
         }
         if (plan.services().contains(PortService.INTENDANT)) {
-            level.setBlock(serviceRow.relative(across, -2), Blocks.BELL.defaultBlockState(), 3);
+            level.setBlock(origin.relative(inland, frontDepth + 1), Blocks.BELL.defaultBlockState(), 3);
         }
         if (plan.services().contains(PortService.CREATE_MECHANISM)) {
-            level.setBlock(serviceRow.relative(across, 3), Blocks.COPPER_BLOCK.defaultBlockState(), 3);
+            level.setBlock(serviceRow, Blocks.COPPER_BLOCK.defaultBlockState(), 3);
         }
+    }
+
+    private static net.minecraft.world.level.block.state.BlockState eaveBlock(PortPlan plan) {
+        return switch (plan.archetype()) {
+            case FISHING_HAMLET -> Blocks.OAK_SLAB.defaultBlockState();
+            case SHIPYARD_QUAY -> Blocks.SPRUCE_SLAB.defaultBlockState();
+            case LIGHTHOUSE_OUTPOST -> Blocks.STONE_BRICK_SLAB.defaultBlockState();
+            case MARKET_HARBOR -> Blocks.DARK_OAK_SLAB.defaultBlockState();
+            case FIELD_STATION -> Blocks.MANGROVE_SLAB.defaultBlockState();
+        };
+    }
+
+    private static net.minecraft.world.level.block.state.BlockState wallBlock(PortPlan plan) {
+        return deckBlock(plan);
     }
 
     private static net.minecraft.world.level.block.state.BlockState deckBlock(PortPlan plan) {

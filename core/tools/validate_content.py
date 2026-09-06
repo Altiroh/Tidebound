@@ -152,8 +152,10 @@ def validate_visual_assets() -> None:
     asset_root = RESOURCE_ROOT / "assets/tidebound/textures"
     npc_root = asset_root / "entity/port_npc"
     for role in ("intendant", "shipwright", "fishmonger", "naturalist", "lighthouse_keeper"):
-        require(png_dimensions(npc_root / f"{role}.png") == (512, 512),
-                f"Unexpected {role} entity atlas dimensions")
+        # 64x64: a real villager model UV skin (TB-CORE-007+ playtest), not the earlier 512x512
+        # illustrated atlas, which rendered as scrambled pixels on the actual VillagerModel.
+        require(png_dimensions(npc_root / f"{role}.png") == (64, 64),
+                f"Unexpected {role} entity skin dimensions")
 
     expected_guis = {
         "harbor_intendant.png": (529, 573),

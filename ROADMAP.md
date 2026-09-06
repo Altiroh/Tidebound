@@ -27,17 +27,21 @@
 - [x] `TB-QA-001` — partie neuve jouée, retours consignés dans `core/TB-CORE-007.md`.
 - [x] `TB-CORE-007` — corrections issues du playtest : Instant Smelting, onglet créatif, Tides dans
   l'inventaire, annonce de biome, icône du Compas de sillage, Lootr, FTB Quests Translator.
-
-## En cours
-
 - [x] `TB-WORLD-002` tranche 1 — placement automatique du port initial, puis par région explorée.
 - [x] `TB-WORLD-002` tranche 2 — 22 biomes vanilla par climat (humidité, pas température : la
   première version produisait de trop grandes zones uniformes), deux biomes à eau teintée, bruit
-  d'îles élargi ×1,6, zones bornées par le niveau de coque. Premier retour client obtenu : la
-  variété/profondeur ont été corrigées, mais la qualité de génération des ports, les skins des PNJ et
-  la taille des interfaces restent en attente d'une décision (voir `HANDOFF.md`).
+  d'îles élargi ×1,6, zones bornées par le niveau de coque.
+- [x] `TB-CORE-008` — deuxième retour client : bâtiment de port fermé au lieu d'un ponton nu, skins
+  PNJ reconstruits depuis la base vanilla (fini les atlas 512×512 buggés), écran portuaire réduit à
+  l'échelle d'un écran de commerce vanilla.
+
+## En cours
+
 - [ ] `TB-WORLD-002` suite — gros navires échoués rares (bloqué sans `.nbt`), aiguilles de compas
-  animées, qualité des ports/skins PNJ/interfaces selon les décisions à prendre.
+  animées.
+- [ ] `TB-CORE-008` suite — validation client des PNJ recolorés, du bâtiment de port et de l'écran
+  redimensionné ; reconfirmer si les boutons de l'Intendant/Charpentier fonctionnent une fois les PNJ
+  mieux positionnés.
 
 ## Après validation du prototype
 
