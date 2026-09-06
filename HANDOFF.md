@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-002` (tranches 1-2) / `0.23.0-alpha`
+État importé : `TB-WORLD-002` (tranches 1-2, corrigées après un premier retour) / `0.24.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -82,14 +82,18 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   mouillage), tous inactifs sans le propriétaire en ligne à proximité ;
 - interface de cale du navire Tidebound n'affichant que les lignes débloquées (9/18/27 cases), en
   réutilisant directement `ChestMenu` vanilla sans nouveau menu ni écran ;
-- onglet créatif dédié, solde de Tides visible dans l'inventaire et annonce du biome traversé
-  (rouge si marqué dangereux via `#tidebound:dangerous`), issus du retour de `TB-QA-001` ;
+- onglet créatif dédié et solde de Tides visible dans l'inventaire, issus du retour de `TB-QA-001` ;
+- nom du biome affiché en haut de l'écran à chaque changement, entièrement client (rouge si
+  `#tidebound:dangerous`) ;
 - port initial matérialisé automatiquement près du spawn, puis un port par région de 512 blocs avec
   ~1/3 de chance en explorant (jamais plus de quelques centaines/un millier de blocs à parcourir) ;
-- 25 biomes vanilla (contre 5) répartis par continentalité et température, plus deux biomes Tidebound
-  à eau teintée (`violet_shallows`, `abyss_ocean`) en poches rares, désormais dans `#tidebound:dangerous` ;
+- 22 biomes vanilla (contre 5) répartis par continentalité et humidité (plus rapide à varier que la
+  température, corrigé après un premier essai trop uniforme), plus deux biomes Tidebound à eau
+  teintée (`violet_shallows`, `abyss_ocean`) en poches rares, `abyss_ocean` dans `#tidebound:dangerous` ;
+- bruit de forme des îles élargi (×1,6) pour que les profondeurs/reliefs extrêmes soient réellement
+  atteints, au lieu de rester coincés près du centre de la plage de valeurs ;
 - dégâts progressifs au navire en eaux dangereuses (profondeurs, glace, `abyss_ocean`) si la coque est
-  sous le niveau 3 — conséquence mécanique de l'annonce de biome ci-dessus.
+  sous le niveau 3.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
 `core/TB-CORE-007.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et
@@ -118,16 +122,35 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-WORLD-002 — Validation en jeu, puis gros navires échoués
+### Décisions en attente avant de continuer
 
-Tranches 1 et 2 codées et compilées (voir `core/TB-WORLD-002.md`) mais jamais vues tourner dans un
-vrai client — aucune de ces vérifications n'a été faite en jeu :
+Premier vrai test client de `TB-WORLD-002` fait (carte + retour utilisateur) : la variété de biomes
+et la profondeur ont été corrigées une première fois (humidité au lieu de température, bruit élargi
+×1,6), mais trois points touchent des choix de fond non tranchés, à ne pas deviner une troisième fois :
 
-- ports (initial + par région) apparaissant à une distance raisonnable, PNJ interactifs ;
-- variété de biomes réellement visible en explorant plusieurs seeds, y compris les poches
-  `violet_shallows`/`abyss_ocean` ;
-- dégâts de coque en zone dangereuse avec hull < 3, absence de dégâts avec hull ≥ 3 ;
-- spawn toujours jouable (bois accessible) quel que soit le biome tiré.
+1. **Qualité de génération des ports.** Le quai procédural actuel (`HarborPlacementService`, blocs
+   posés à la main) rend mal (« vieux port avec des blocs random »). S'en approcher du système de
+   génération des villages vanilla (jigsaw + pools de structures) impose de facto des structures
+   `.nbt` — ce qui avait été explicitement écarté dans `TB-WORLD-002`. À retrancher : soit
+   l'utilisateur fournit quelques pièces modulaires construites en jeu et exportées en `.nbt`, soit on
+   améliore le générateur procédural actuel sans réécriture complète.
+2. **Skins des PNJ.** Les cinq atlas custom (512×512) rendent complètement buggés sur le modèle
+   villageois. Piste proposée par l'utilisateur : repartir des skins vanilla plutôt que du pack
+   artistique actuel.
+3. **Taille et fonctionnement des interfaces portuaires.** `HarborScreen` (art custom par rôle) est
+   jugé trop grand et mal positionné ; envisager de se rapprocher d'un écran de PNJ vanilla classique
+   et d'y greffer les fonctions Tidebound plutôt que l'inverse. Les boutons de l'Intendant/Charpentier
+   semblent corrects dans le code (`HarborMenu#clickMenuButton`) ; le signalement « ne fait rien »
+   vient probablement du placement erratique des PNJ (point 1) plutôt que d'un bug de câblage — à
+   confirmer avant de toucher au code du menu.
+
+### Une fois ces décisions prises
+
+- valider en jeu ports/biomes/dégâts de coque sur plusieurs seeds (rien de tout ça n'a encore été vu
+  tourner dans un vrai client) ;
+- animer l'aiguille des compas (Compas de sillage/des Havres) — nécessite soit des frames de texture
+  façon compas vanilla, soit un modèle 3D animé ;
+- gros navires échoués rares (mêmes contraintes `.nbt` que le point 1).
 
 Une fois validé, prochain morceau explicitement laissé de côté : gros navires échoués rares (nécessite
 soit une structure `.nbt`, soit un générateur procédural dédié — aucun des deux commencé) et/ou

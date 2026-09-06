@@ -2,7 +2,6 @@ package dev.tidebound.core;
 
 import dev.tidebound.core.command.TideboundCommands;
 import dev.tidebound.core.content.TideboundContentManager;
-import dev.tidebound.core.event.BiomeAwarenessEvents;
 import dev.tidebound.core.event.HullIntegrityEvents;
 import dev.tidebound.core.event.InstantSmeltingEvents;
 import dev.tidebound.core.event.RegionalPortEvents;
@@ -36,7 +35,6 @@ public final class TideboundCore {
         NeoForge.EVENT_BUS.addListener(TideboundContentManager::register);
         TideboundGameplayEvents.register(NeoForge.EVENT_BUS);
         InstantSmeltingEvents.register(NeoForge.EVENT_BUS);
-        BiomeAwarenessEvents.register(NeoForge.EVENT_BUS);
         HullIntegrityEvents.register(NeoForge.EVENT_BUS);
         StarterPortEvents.register(NeoForge.EVENT_BUS);
         RegionalPortEvents.register(NeoForge.EVENT_BUS);

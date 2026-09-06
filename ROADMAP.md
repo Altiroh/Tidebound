@@ -31,10 +31,13 @@
 ## En cours
 
 - [x] `TB-WORLD-002` tranche 1 — placement automatique du port initial, puis par région explorée.
-- [x] `TB-WORLD-002` tranche 2 — 25 biomes vanilla par climat, deux biomes à eau teintée, zones
-  bornées par le niveau de coque (issu du retour de `TB-QA-001`, suivi dans `core/TB-WORLD-002.md`).
-  Codé et compilé, **jamais validé en jeu**.
-- [ ] `TB-WORLD-002` suite — gros navires échoués rares, variété d'humidité.
+- [x] `TB-WORLD-002` tranche 2 — 22 biomes vanilla par climat (humidité, pas température : la
+  première version produisait de trop grandes zones uniformes), deux biomes à eau teintée, bruit
+  d'îles élargi ×1,6, zones bornées par le niveau de coque. Premier retour client obtenu : la
+  variété/profondeur ont été corrigées, mais la qualité de génération des ports, les skins des PNJ et
+  la taille des interfaces restent en attente d'une décision (voir `HANDOFF.md`).
+- [ ] `TB-WORLD-002` suite — gros navires échoués rares (bloqué sans `.nbt`), aiguilles de compas
+  animées, qualité des ports/skins PNJ/interfaces selon les décisions à prendre.
 
 ## Après validation du prototype
 

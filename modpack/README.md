@@ -1,4 +1,4 @@
-# Tidebound — Into the Deep (Devpack 0.23.0-alpha)
+# Tidebound — Into the Deep (Devpack 0.24.0-alpha)
 
 Ce dossier assemble le premier socle jouable du modpack : Tidebound, quêtes, exploration, construction,
 stockage, ambiance et performances. Il reste volontairement plus petit que la cible finale de 50 à 80 mods.
@@ -19,13 +19,14 @@ comme profil personnalisé. Le manifeste installe :
 - FTB Quests Translator, pour traduire le livre à la demande indépendamment de la langue du jeu ;
 - Complementary Shaders (Reimagined), Photon, Solas et AstraLex — quatre shaders au choix dans le menu
   Iris, aucun activé par défaut. Reverie a été demandé mais exclu : sa version la plus ancienne exige
-  Minecraft 1.21.5+, incompatible avec le verrouillage 1.21.1 du pack.
+  Minecraft 1.21.5+, incompatible avec le verrouillage 1.21.1 du pack ;
+- Inventory Profiles Next (+ libIPN), équivalent moderne d'Inventory Tweaks (tri automatique).
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
-`tidebound-0.23.0-alpha.jar` dans le dossier `mods` de l'instance.
+`tidebound-0.24.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.23.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.24.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 CurseForge avertit que le JAR Tidebound et les fichiers de quêtes ne viennent pas encore de son catalogue.
 Il faut cocher **I understand** puis choisir **All Files**. Le bouton **CurseForge Files Only** retire précisément

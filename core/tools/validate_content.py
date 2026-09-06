@@ -351,6 +351,8 @@ def validate_modpack() -> int:
         1312687: 7927503,  # Photon Shader
         678384: 7128860,   # Solas Shader
         406081: 5434888,   # AstraLex Shaders
+        679177: 7327448,   # libIPN (Inventory Profiles Next dependency)
+        495267: 6811490,   # Inventory Profiles Next
     }
     entries = manifest.get("files", [])
     require(isinstance(entries, list), "CurseForge manifest files must be an array")

@@ -82,5 +82,7 @@
   "screen.tidebound.module.spotlight": "Projecteur",
   "screen.tidebound.module.sonar": "Sonar",
   "screen.tidebound.module.winch": "Treuil",
-  "screen.tidebound.module.net": "Filet"
+  "screen.tidebound.module.net": "Filet",
+  "biome.tidebound.violet_shallows": "Hauts-fonds violets",
+  "biome.tidebound.abyss_ocean": "Océan abyssal"
 }

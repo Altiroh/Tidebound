@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.24.0-alpha — corrections après premier retour client sur TB-WORLD-002
+
+- la variété de biomes utilisait la température comme discriminant, dont le bruit vanilla varie sur
+  ~1024+ blocs — beaucoup trop lent pour un archipel dont les îles font ~100-200 blocs, d'où de
+  grandes zones uniformément gelées constatées en jeu. Remplacé par l'humidité (~256 blocs) ;
+  22 biomes vanilla au lieu de 25 après fusion des doublons de plage ;
+- `data/minecraft/worldgen/world_preset/normal.json` (le fichier qui compte réellement pour une
+  nouvelle sauvegarde) resynchronisé, il avait divergé de `archipelago.json` ;
+- le bruit de forme des îles est élargi ×1,6 (plafonné à [-1, 1]) : les fonds marins restaient peu
+  profonds car le bruit n'atteignait jamais vraiment les extrêmes de continentalité utilisés par les
+  biomes/profondeurs les plus marqués ;
+- le nom du biome passe de l'annonce serveur (barre d'action, bas d'écran) à un HUD client en haut de
+  l'écran, sans réseau supplémentaire (les tags de biome sont déjà synchronisés au client) ;
+- ajoute Inventory Profiles Next (+ sa dépendance libIPN) au Devpack, équivalent moderne d'Inventory
+  Tweaks.
+
+Build et démarrage serveur réels vérifiés. Rendu effectif en jeu (couleurs, profondeur perçue,
+rareté des poches) toujours non vérifiable sans client graphique — seul un nouveau retour visuel peut
+confirmer que ces ajustements suffisent.
+
 ## 0.23.0-alpha — TB-WORLD-002 (tranche 2)
 
 - 25 biomes vanilla (contre 5) : chaque bande de continentalité de l'archipel est désormais aussi

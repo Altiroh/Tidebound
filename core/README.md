@@ -1,4 +1,4 @@
-# Tidebound Core — 0.23.0-alpha
+# Tidebound Core — 0.24.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -45,13 +45,16 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - interface de cale du navire Tidebound n'affichant que les lignes débloquées ;
 - onglet créatif dédié regroupant tous les objets Tidebound ;
 - solde de Tides affiché directement dans l'écran d'inventaire ;
-- annonce du biome à chaque changement, avec mise en évidence des biomes dangereux ;
+- nom du biome affiché en haut de l'écran à chaque changement (entièrement client, aucun réseau),
+  en rouge si tagué dangereux ;
 - port initial matérialisé automatiquement près du spawn au premier démarrage du serveur, quand le
   tirage par seed le réserve ;
 - au-delà du port initial, chaque région de 512 blocs a ~1/3 de chance d'obtenir son propre port en
   l'explorant, pour ne jamais forcer un très long trajet sans port ;
-- 25 biomes vanilla (contre 5) via un découpage par température, plus deux biomes Tidebound à eau
-  teintée (`violet_shallows`, `abyss_ocean`) en poches rares ;
+- 22 biomes vanilla (contre 5) via un découpage par humidité — plus rapide à varier que la
+  température, trop lente pour un archipel (retour `TB-QA-001` : de trop grandes zones uniformément
+  gelées) — plus deux biomes Tidebound à eau teintée (`violet_shallows`, `abyss_ocean`) en poches
+  rares ;
 - dégâts progressifs au navire naviguant en eaux taguées dangereuses avec une coque insuffisamment
   améliorée.
 
@@ -128,7 +131,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.23.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.24.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -250,17 +253,22 @@ Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle sui
 
 Toute nouvelle sauvegarde créée avec Tidebound remplace le preset normal par l'archipel. Le preset
 `Tidebound — Archipel` est également exposé dans la liste des types de monde. Le spawn cible la bande
-de continentalité la plus haute, désormais partagée entre cinq biomes vanilla selon la température
-locale (`snowy_taiga`, `taiga`, `forest`, `birch_forest`, `jungle`) : tous fournissent du bois, la
-boucle bois → barque reste donc garantie même si l'ambiance du tout premier écran varie. Les
-dimensions du Nether et de l'End restent vanilla.
+de continentalité la plus haute, désormais partagée entre cinq biomes vanilla selon l'humidité locale
+(`snowy_taiga`, `taiga`, `forest`, `birch_forest`, `jungle`) : tous fournissent du bois, la boucle
+bois → barque reste donc garantie même si l'ambiance du tout premier écran varie. Les dimensions du
+Nether et de l'End restent vanilla.
 
-25 biomes vanilla au total (contre 5 dans les toutes premières versions), répartis par continentalité
-puis par température — profondeurs, océans, plages, plaines et forêts ont chacun leurs variantes
-climatiques. Deux biomes Tidebound s'y ajoutent en poches rares, uniquement des teintes d'eau
+22 biomes vanilla au total (contre 5 dans les toutes premières versions), répartis par continentalité
+puis par humidité — profondeurs, océans, plages, plaines et forêts ont chacun leurs variantes
+climatiques. L'humidité varie plus vite que la température dans le bruit vanilla (période ~256 blocs
+contre ~1024+), un point important pour un archipel dont les îles font ~100-200 blocs : la première
+version utilisait la température et produisait de trop grandes zones uniformément gelées (retour
+`TB-QA-001`). Deux biomes Tidebound s'y ajoutent en poches rares, uniquement des teintes d'eau
 personnalisées sans nouvel asset : `tidebound:violet_shallows` (eau violette, dans l'océan tempéré) et
-`tidebound:abyss_ocean` (eau bleu très sombre, dans l'océan profond tempéré). Voir `TB-WORLD-002.md`
-pour le détail du découpage.
+`tidebound:abyss_ocean` (eau bleu très sombre, dans l'océan profond tempéré). Le bruit de forme des
+îles a aussi été élargi (×1,6, plafonné à [-1, 1]) pour que les profondeurs/hauteurs extrêmes soient
+réellement atteintes au lieu de rester coincées près du centre de la plage de valeurs. Voir
+`TB-WORLD-002.md` pour le détail du découpage.
 
 Ne pas ouvrir une ancienne sauvegarde importante sans copie : les chunks déjà présents restent intacts,
 mais les nouveaux chunks suivront le relief insulaire et peuvent former une frontière visible. Pour
