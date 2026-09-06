@@ -24,14 +24,17 @@
 - [x] `TB-SMELT-001` — enchantement de fonte rapide compatible avec l'économie et Create.
 - [x] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet.
 - [x] `TB-CORE-006` — interface de cale dédiée n'affichant que les emplacements débloqués.
+- [x] `TB-QA-001` — partie neuve jouée, retours consignés dans `core/TB-CORE-007.md`.
+- [x] `TB-CORE-007` — corrections issues du playtest : Instant Smelting, onglet créatif, Tides dans
+  l'inventaire, annonce de biome, icône du Compas de sillage, Lootr, FTB Quests Translator.
 
 ## Prochaine tranche du prototype vertical
 
-- [ ] `TB-QA-001` — partie neuve de 30 minutes sur plusieurs seeds.
+- [ ] `TB-WORLD-002` — variété de biomes maritimes, ports/PNJ placés automatiquement, gros navires
+  échoués rares, zones bornées par le niveau du navire (issu du retour de `TB-QA-001`).
 
 ## Après validation du prototype
 
-- [ ] archipels et biomes maritimes ;
 - [ ] ports secondaires et contrats régionaux ;
 - [ ] épaves, plongée et récupération ;
 - [ ] événements de nuit, brume et danger maritime ;

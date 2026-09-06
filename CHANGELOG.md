@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.21.0-alpha — TB-CORE-007
+
+- renomme `tidebound:fast_smelting` en `tidebound:instant_smelting` et change sa mécanique : miner un
+  bloc avec l'outil enchanté récupère directement le résultat fondu (`BlockDropsEvent`), au lieu
+  d'accélérer un four surveillé ; niveau unique, incompatible avec Toucher de soie/Fortune ;
+- ajoute un onglet créatif dédié regroupant tous les objets Tidebound ;
+- affiche le solde de Tides dans l'écran d'inventaire (portefeuille désormais synchronisé au client) ;
+- annonce le biome traversé à chaque changement, en rouge si tagué `#tidebound:dangerous` ;
+- corrige l'icône du Compas de sillage, qui pointait par erreur vers le compas vanilla ;
+- ajoute Lootr (loot indépendant par joueur) et FTB Quests Translator (traduction du livre à la
+  demande) au Devpack ;
+- retiré : `META-INF/accesstransformer.cfg`, devenu inutile avec la nouvelle mécanique d'Instant
+  Smelting.
+
 ## Devpack — retrait temporaire de FancyMenu
 
 - FancyMenu, Konkrete et Melody retirés du manifeste : premier test bloqué par les dépendances

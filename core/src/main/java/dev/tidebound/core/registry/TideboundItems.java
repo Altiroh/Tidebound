@@ -4,11 +4,9 @@ import dev.tidebound.core.TideboundCore;
 import dev.tidebound.core.item.WakeCompassItem;
 import dev.tidebound.core.item.HavenCompassItem;
 import java.util.function.Supplier;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public final class TideboundItems {
@@ -36,20 +34,6 @@ public final class TideboundItems {
 
     public static void register(IEventBus modBus) {
         ITEMS.register(modBus);
-        modBus.addListener(TideboundItems::addToCreativeTabs);
-    }
-
-    private static void addToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
-        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(WAKE_COMPASS.get());
-            event.accept(HAVEN_COMPASS.get());
-            event.accept(REPAIR_KIT.get());
-            event.accept(CAULKING_KIT.get());
-            event.accept(ENGINE_PARTS.get());
-            event.accept(HOLD_FITTINGS.get());
-            event.accept(HULL_PLATE.get());
-            event.accept(MECHANICAL_OIL.get());
-        }
     }
 
     private static Supplier<Item> component(String id, int stackSize) {

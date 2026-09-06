@@ -22,6 +22,7 @@ public final class TideboundAttachments {
             () -> AttachmentType.builder(TideWallet::empty)
                     .serialize(TideboundCodecs.TIDE_WALLET)
                     .copyOnDeath()
+                    .sync((holder, to) -> holder == to, TideboundCodecs.TIDE_WALLET_STREAM)
                     .build()
     );
 

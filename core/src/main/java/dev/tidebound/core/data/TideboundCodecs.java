@@ -5,6 +5,9 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import dev.tidebound.core.fishing.CatchAnomaly;
 import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.fishing.CatchQuality;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 
 public final class TideboundCodecs {
     public static final Codec<CatchData> CATCH_DATA = RecordCodecBuilder.create(instance -> instance.group(
@@ -22,6 +25,10 @@ public final class TideboundCodecs {
     public static final Codec<TideWallet> TIDE_WALLET = RecordCodecBuilder.create(instance -> instance.group(
             Codec.LONG.optionalFieldOf("balance", 0L).forGetter(TideWallet::balance)
     ).apply(instance, TideWallet::new));
+
+    /** Lets the client display its own balance (e.g. in the inventory screen) without a custom packet. */
+    public static final StreamCodec<ByteBuf, TideWallet> TIDE_WALLET_STREAM =
+            ByteBufCodecs.VAR_LONG.map(TideWallet::new, TideWallet::balance);
 
     public static final Codec<PlayerVessel> PLAYER_VESSEL = RecordCodecBuilder.create(instance -> instance.group(
             Codec.STRING.optionalFieldOf("vessel_id", "").forGetter(PlayerVessel::vesselId),

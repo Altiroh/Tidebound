@@ -22,6 +22,8 @@ technique ; Tidebound Core conserve l'autorité sur les navires, la pêche, les 
 | Exploration | JourneyMap, Waystones, Balm | Carte et retours rapides entre lieux découverts |
 | Ambiance | AmbientSounds, ItemPhysic, CreativeCore | Paysages sonores et objets au sol plus matériels |
 | Rendu | Sodium, Iris, ImmediatelyFast | Performances client et prise en charge des shaders |
+| Multijoueur | Lootr | Loot indépendant par joueur sur coffres, tonneaux et minecarts |
+| Quêtes | FTB Quests Translator | Traduction du livre à la demande, indépendante de la langue du jeu |
 
 Tous les fichiers du manifeste ciblent Minecraft `1.21.1` et NeoForge. Les dépendances directes
 Architectury, Balm et CreativeCore sont déclarées explicitement.
@@ -37,7 +39,8 @@ activation et disponibilité d'une pierre) restent actives.
 - Aucun shaderpack n'est imposé : Iris rend le menu Shaders disponible, mais le joueur choisit un pack
   adapté à son GPU.
 - Aucun mod prétendument « Fast Smelting Enchantment » n'a été ajouté sans version NeoForge 1.21.1
-  vérifiée. L'enchantement Tidebound natif `tidebound:fast_smelting` (`TB-SMELT-001`) répond à ce besoin.
+  vérifiée. L'enchantement Tidebound natif `tidebound:instant_smelting` (`TB-SMELT-001`) répond à ce
+  besoin.
 - Les mods décoratifs, agricoles et culinaires seront ajoutés après un démarrage complet de cette base,
   afin de mesurer mémoire, temps de chargement et conflits avant d'élargir vers 50 à 80 mods.
 

@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-006` / `0.20.0-alpha`
+État importé : `TB-CORE-007` / `0.21.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -74,17 +74,19 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - relief insulaire partagé par le terrain et les biomes, avec cœur forestier ciblé au spawn ;
 - diagnostic serveur terre/eau/rivage/bois et détection de masse continentale ;
 - tirage stable du futur port initial et smoke test CI créant réellement un monde neuf ;
-- enchantement `tidebound:fast_smelting` sur les outils de minage vanilla, actif uniquement tant que
-  le joueur tient l'outil et surveille lui-même un four ouvert, sans jamais accélérer l'automatisation ;
+- enchantement `tidebound:instant_smelting` sur les outils de minage vanilla : mine un minerai
+  éligible et récupère directement son équivalent fondu, incompatible avec Toucher de soie/Fortune ;
 - modules v1 branchés à de vrais systèmes selon les emplacements achetés : Projecteur (repousse les
   spawns hostiles nocturnes), Sonar (pêche prometteuse, dangers, puis épaves/objets cachés au niveau 5
   de Navigation), Treuil (attire les objets flottants) et Filet (multi-prise et pêche passive au
   mouillage), tous inactifs sans le propriétaire en ligne à proximité ;
 - interface de cale du navire Tidebound n'affichant que les lignes débloquées (9/18/27 cases), en
-  réutilisant directement `ChestMenu` vanilla sans nouveau menu ni écran.
+  réutilisant directement `ChestMenu` vanilla sans nouveau menu ni écran ;
+- onglet créatif dédié, solde de Tides visible dans l'inventaire et annonce du biome traversé
+  (rouge si marqué dangereux via `#tidebound:dangerous`), issus du retour de `TB-QA-001`.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-006.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
+`core/TB-CORE-007.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 

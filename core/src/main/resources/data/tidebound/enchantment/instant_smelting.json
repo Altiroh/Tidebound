@@ -1,11 +1,12 @@
 {
   "description": {
-    "translate": "enchantment.tidebound.fast_smelting"
+    "translate": "enchantment.tidebound.instant_smelting"
   },
   "supported_items": "#minecraft:enchantable/mining",
   "primary_items": "#minecraft:pickaxes",
-  "weight": 5,
-  "max_level": 3,
+  "exclusive_set": "#minecraft:exclusive_set/mining",
+  "weight": 2,
+  "max_level": 1,
   "min_cost": {
     "base": 15,
     "per_level_above_first": 9
@@ -14,7 +15,7 @@
     "base": 65,
     "per_level_above_first": 9
   },
-  "anvil_cost": 4,
+  "anvil_cost": 8,
   "slots": ["mainhand", "offhand"],
   "effects": {}
 }

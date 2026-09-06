@@ -345,6 +345,8 @@ def validate_modpack() -> int:
         394468: 6382651,  # Sodium
         455508: 6213632,  # Iris
         686911: 7349649,  # ImmediatelyFast
+        361276: 8041234,  # Lootr
+        1504552: 7977168,  # FTB Quests Translator
     }
     entries = manifest.get("files", [])
     require(isinstance(entries, list), "CurseForge manifest files must be an array")

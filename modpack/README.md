@@ -1,4 +1,4 @@
-# Tidebound — Into the Deep (Devpack 0.20.0-alpha)
+# Tidebound — Into the Deep (Devpack 0.21.0-alpha)
 
 Ce dossier assemble le premier socle jouable du modpack : Tidebound, quêtes, exploration, construction,
 stockage, ambiance et performances. Il reste volontairement plus petit que la cible finale de 50 à 80 mods.
@@ -14,13 +14,15 @@ comme profil personnalisé. Le manifeste installe :
 - JourneyMap, Waystones et Balm ;
 - AmbientSounds, ItemPhysic et CreativeCore ;
 - Sodium, Iris et ImmediatelyFast ;
-- Architectury API, requise par le socle FTB.
+- Architectury API, requise par le socle FTB ;
+- Lootr, pour un loot indépendant par joueur sur coffres, tonneaux et minecarts ;
+- FTB Quests Translator, pour traduire le livre à la demande indépendamment de la langue du jeu.
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
-`tidebound-0.20.0-alpha.jar` dans le dossier `mods` de l'instance.
+`tidebound-0.21.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.20.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.21.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 CurseForge avertit que le JAR Tidebound et les fichiers de quêtes ne viennent pas encore de son catalogue.
 Il faut cocher **I understand** puis choisir **All Files**. Le bouton **CurseForge Files Only** retire précisément
@@ -41,9 +43,9 @@ bash modpack/package.sh
 - JEI remplace NEI, qui n'est pas la branche moderne adaptée à Minecraft 1.21.1.
 - Create sert aux quais et ateliers visuels ; il ne remplace jamais le navire ou l'économie Tidebound.
 
-L'enchantement **Fast Smelting** (`tidebound:fast_smelting`, `TB-SMELT-001`) est désormais natif à
-Tidebound Core, pas ajouté par un mod tiers. `FastFurnace` reste un optimiseur interne de fours,
-pas un enchantement de gameplay, et n'est donc pas présenté comme tel.
+L'enchantement **Fonte instantanée** (`tidebound:instant_smelting`, `TB-SMELT-001`) est désormais
+natif à Tidebound Core, pas ajouté par un mod tiers. `FastFurnace` reste un optimiseur interne de
+fours, pas un enchantement de gameplay, et n'est donc pas présenté comme tel.
 
 ## Écran-titre personnalisé (retiré pour l'instant)
 

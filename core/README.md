@@ -1,4 +1,4 @@
-# Tidebound Core — 0.20.0-alpha
+# Tidebound Core — 0.21.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -40,9 +40,12 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - prototype de quai portuaire matérialisé selon l'archétype et les services du plan régional ;
 - apparence synchronisée de la coque, du moteur, de la cale et des supports de modules.
 - six composants Tidebound illustrés, avec recettes et utilisation par le chantier naval ;
-- enchantement `tidebound:fast_smelting` sur les outils de minage vanilla ;
+- enchantement `tidebound:instant_smelting` sur les outils de minage vanilla ;
 - modules v1 (Projecteur, Sonar, Treuil, Filet) branchés aux emplacements déjà vendus par le chantier ;
-- interface de cale du navire Tidebound n'affichant que les lignes débloquées.
+- interface de cale du navire Tidebound n'affichant que les lignes débloquées ;
+- onglet créatif dédié regroupant tous les objets Tidebound ;
+- solde de Tides affiché directement dans l'écran d'inventaire ;
+- annonce du biome à chaque changement, avec mise en évidence des biomes dangereux.
 
 Le navire physique possède désormais son propre type d'entité. Il réutilise la physique éprouvée du bateau-coffre,
 mais son rendu, son équipage et ses niveaux visuels appartiennent à Tidebound. Le livre `Le Voyage` guide le joueur
@@ -266,13 +269,13 @@ l'instant de capture.
 Le prototype `/tidebound world port-place` matérialise désormais le plan régional près d'un rivage et
 l'inscrit dans l'index persistant utilisé par le Compas des Havres.
 
-## Fonte rapide
+## Fonte instantanée
 
-L'enchantement `tidebound:fast_smelting` se pose sur les mêmes outils qu'Efficacité, via la table
-d'enchantement ou l'enclume. Il n'accélère la cuisson d'un four (fourneau, haut-fourneau, fumoir) que
-si le joueur a lui-même le menu ouvert et tient l'outil enchanté en main : aucune ligne automatisée
-(entonneur, Create) n'en bénéficie jamais. Voir `TB-SMELT-001.md` pour l'implémentation technique
-(access transformer sur les champs de cuisson du four, aucun événement NeoForge dédié n'existant).
+L'enchantement `tidebound:instant_smelting` se pose sur les mêmes outils qu'Efficacité, via la table
+d'enchantement ou l'enclume (niveau unique, incompatible avec Toucher de soie/Fortune). Miner un bloc
+possédant une recette de fonderie vanilla avec l'outil enchanté récupère directement son équivalent
+fondu (minerai → lingot). Voir `TB-SMELT-001.md` pour l'implémentation technique
+(`BlockDropsEvent`, aucun access transformer nécessaire).
 
 ## Modules v1
 
