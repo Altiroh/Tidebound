@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-012` (correctif de crash au lancement — JourneyMap) / `0.30.0-alpha`
+État importé : `TB-CORE-013` (JourneyMap remplacé par Xaero's Minimap) / `0.31.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -46,7 +46,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - réparations payantes uniquement lorsque le navire est ramené au port ;
 - capacité de cale progressive : 9, 18 puis 27 emplacements, sans suppression du surplus ;
 - Gradle Wrapper, workflow GitHub Actions et guide de test reproductible ;
-- Devpack CurseForge avec FTB Quests/Ultimine, Create, JEI, Tom's Storage, JourneyMap, Waystones,
+- Devpack CurseForge avec FTB Quests/Ultimine, Create, JEI, Tom's Storage, Xaero's Minimap, Waystones,
   ambiance sonore, physique des objets, Sodium, Iris et leurs dépendances ;
 - Waystones configuré sans coût d'expérience et validation des références épinglées ;
 - cinq entités portuaires dédiées utilisant les atlas du pack artistique : Intendant, charpentier,
@@ -112,9 +112,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   infrastructure d'aiguille de compas animée (cible persistante `COMPASS_TARGET`, calcul de cap
   client) prête côté code mais sans effet visuel tant que l'aiguille dessinée séparément n'est pas
   fournie (`TB-CORE-009`) ;
-- correctif de crash au lancement : JourneyMap était épinglé sur une préversion bêta instable
-  (`6.0.0-beta.76` + dépendance snapshot), remplacée par la version stable `6.0.7`
-  (`TB-CORE-012`, crash réel remonté par l'utilisateur) ;
+- correctif de crash au lancement : deux versions distinctes de JourneyMap (bêta puis stable 6.0.7)
+  plantaient identiquement dès le premier écran de chargement — instabilité connue du mod sur cette
+  ligne NeoForge 1.21.1, pas un fichier mal épinglé. Remplacé par Xaero's Minimap
+  (`TB-CORE-012`/`TB-CORE-013`, crash réel remonté par l'utilisateur, deux fois) ;
 - catalogue des quatre profils de prise vanilla migré du code vers le datapack
   (`data/tidebound/tidebound/catch_profiles/*.json`), chargé par `TideboundContentManager` comme les
   paliers et contrats — ajouter un poisson de mod ne nécessite plus de modification de code
@@ -125,7 +126,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-012.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-013.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
@@ -179,8 +180,9 @@ maintenue explicitement par l'utilisateur.
   vérifier en particulier que les tâches concernées se cochent seules au bon moment et pas avant ;
 - vérifier l'alignement des deux nouvelles zones grisées « Demandes »/« Produits » de la poissonnerie
   (géométrie calculée, pas vue en jeu, `TB-CORE-011`) ;
-- confirmer que le client démarre normalement avec JourneyMap `6.0.7` (`TB-CORE-012`) — la cause
-  identifiée est corrigée mais un vrai lancement client reste nécessaire pour valider.
+- confirmer que le client démarre normalement avec Xaero's Minimap à la place de JourneyMap
+  (`TB-CORE-013`) — si ce mod pose à son tour un problème, le traiter comme un vrai bug plutôt que de
+  retenter un remplacement au jugé.
 
 ### Ensuite
 

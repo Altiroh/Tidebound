@@ -46,3 +46,13 @@ Impossible de relancer le client réel dans cette session (l'environnement de d�
 lance qu'un serveur dédié, sans JourneyMap). La correction lève la cause identifiée (bêta instable +
 dépendance snapshot), mais seul un nouvel import du Devpack sur la machine de l'utilisateur confirmera
 que le client démarre normalement.
+
+## Correctif insuffisant — voir `TB-CORE-013`
+
+Le nouvel import a planté à l'identique, au même endroit, avec `journeymap-neoforge-1.21.1-6.0.7.jar`
+(canal Release, pas bêta) et sa vraie dépendance `journeymap-api-neoforge-2.0.0-1.21.1.jar` (pas un
+snapshot). Deux versions différentes de JourneyMap plantent donc de la même façon : ce n'est pas un
+problème de version précise mais une instabilité connue de JourneyMap lui-même sur cette combinaison
+NeoForge 1.21.1 (des rapports similaires existent sur son dépôt GitHub, `TeamJM/journeymap` issues
+#792 et #856). Continuer à changer de version aurait été deviner une troisième fois. Décision : sortir
+JourneyMap du pack plutôt que de le maintenir — voir `TB-CORE-013`.

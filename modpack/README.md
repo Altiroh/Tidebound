@@ -1,4 +1,4 @@
-# Tidebound — Into the Deep (Devpack 0.30.0-alpha)
+# Tidebound — Into the Deep (Devpack 0.31.0-alpha)
 
 Ce dossier assemble le premier socle jouable du modpack : Tidebound, quêtes, exploration, construction,
 stockage, ambiance et performances. Il reste volontairement plus petit que la cible finale de 50 à 80 mods.
@@ -11,7 +11,7 @@ comme profil personnalisé. Le manifeste installe :
 - Minecraft `1.21.1` et NeoForge `21.1.249` ;
 - FTB Library, Teams, Quests et Ultimine ;
 - Create, JEI et Tom's Simple Storage ;
-- JourneyMap, Waystones et Balm ;
+- Xaero's Minimap, Waystones et Balm ;
 - AmbientSounds, ItemPhysic et CreativeCore ;
 - Sodium, Iris et ImmediatelyFast ;
 - Architectury API, requise par le socle FTB ;
@@ -23,10 +23,10 @@ comme profil personnalisé. Le manifeste installe :
 - Inventory Profiles Next (+ libIPN), équivalent moderne d'Inventory Tweaks (tri automatique).
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
-`tidebound-0.30.0-alpha.jar` dans le dossier `mods` de l'instance.
+`tidebound-0.31.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.30.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.31.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 CurseForge avertit que le JAR Tidebound et les fichiers de quêtes ne viennent pas encore de son catalogue.
 Il faut cocher **I understand** puis choisir **All Files**. Le bouton **CurseForge Files Only** retire précisément

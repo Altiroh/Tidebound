@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.31.0-alpha — TB-CORE-013 : JourneyMap remplacé par Xaero's Minimap
+
+Le correctif `TB-CORE-012` (passer JourneyMap en version stable 6.0.7) n'a pas suffi : le nouveau
+Devpack a planté exactement de la même façon, au même endroit, avec la vraie version stable et sa
+vraie dépendance non-snapshot. Deux versions distinctes de JourneyMap plantant identiquement pointent
+vers une instabilité du mod lui-même sur cette ligne NeoForge 1.21.1 (rapports similaires sur
+`TeamJM/journeymap`, issues #792 et #856), pas vers un fichier mal choisi.
+
+- JourneyMap retiré du Devpack, remplacé par **Xaero's Minimap** (`neoforge-1.21.1-26.1.0`, canal
+  Release, sans dépendance externe séparée) pour la même fonction d'exploration/carte ;
+- `modpack/manifest.json` et `validate_content.py` mis à jour ; toutes les mentions actives de
+  JourneyMap dans la documentation (`README.md`, `modpack/README.md`, `TB-PACK-001.md`,
+  `DECISIONS.md`, `TESTING.md`) remplacées.
+
+`validate_content.py` : `OK`, toujours 25 mods épinglés. Comme pour `TB-CORE-012`, aucun client réel
+n'est lancé dans cette session : seul un nouvel import confirmera que le client démarre.
+
 ## 0.30.0-alpha — TB-CORE-011/012 : boutons honnêtes et crash de lancement corrigé
 
 - **Correctif de crash** (`TB-CORE-012`, crash réel remonté par l'utilisateur) : JourneyMap était

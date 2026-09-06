@@ -77,7 +77,7 @@
 - Ajouter les mods par fonction démontrée ; `Create` représente le plafond de complexité acceptable.
 - Le contenu maritime propriétaire doit primer sur l'empilement de systèmes généralistes.
 - Le premier socle externe utilise JEI plutôt que NEI, Create comme plafond technique, Tom's Storage
-  pour les coffres, JourneyMap/Waystones pour l'exploration et Sodium/Iris pour le rendu.
+  pour les coffres, Xaero's Minimap/Waystones pour l'exploration et Sodium/Iris pour le rendu.
 - Les téléportations Waystones ne coûtent pas d'XP ; leur découverte reste nécessaire.
 
 ## Architecture

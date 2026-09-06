@@ -14,7 +14,7 @@ Le projet n'est pas un mode histoire. Le livre **Le Voyage** fournit un fil dire
 Le code actuel contient la monnaie, les métiers, les paliers, les contrats répétables, l'intendant de port,
 l'enregistrement d'une barque vanilla, un Compas de sillage, ainsi que les achats et réparations du navire.
 Le Devpack fournit également les chapitres FTB Quests **Naufragé** et **Premier port**.
-Il inclut désormais une première sélection cohérente pour Create, JEI, Tom's Storage, JourneyMap,
+Il inclut désormais une première sélection cohérente pour Create, JEI, Tom's Storage, Xaero's Minimap,
 Waystones sans coût d'XP, Ultimine, l'ambiance sonore, les objets physiques et les shaders.
 Les morues, saumons, poissons tropicaux et poissons-globes pêchés portent désormais un poids, une
 qualité, une fraîcheur, une origine, une valeur et parfois une anomalie rare.

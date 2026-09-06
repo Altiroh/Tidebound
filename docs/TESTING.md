@@ -73,7 +73,7 @@ FTB et le socle cosy, exploration et performances. Dans l'archive produite par G
 Après import du Devpack avec **All Files**, vérifier dans le menu **Mods** la présence du logo Tidebound,
 puis les intégrations suivantes :
 
-- ouvrir JEI et JourneyMap ;
+- ouvrir JEI et Xaero's Minimap ;
 - utiliser FTB Ultimine sur un arbre ou un petit filon de test ;
 - connecter quelques coffres avec Tom's Simple Storage ;
 - construire une roue à eau ou un petit mécanisme Create ;
@@ -81,7 +81,7 @@ puis les intégrations suivantes :
 - jeter un objet au sol et écouter les transitions d'ambiance entre plage, forêt et océan ;
 - ouvrir les options vidéo Iris et tester un shader léger adapté au GPU.
 
-Sodium, Iris, JourneyMap et AmbientSounds sont des fonctions client. Pour un serveur dédié, conserver
+Sodium, Iris, Xaero's Minimap et AmbientSounds sont des fonctions client. Pour un serveur dédié, conserver
 les mods communs nécessaires au gameplay mais suivre les indications client/serveur de chaque projet.
 
 ## 5. Tester l'archipel sur un monde neuf
