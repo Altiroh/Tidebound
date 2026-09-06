@@ -28,20 +28,31 @@ feuille de 64×64) à l'image fournie quel que soit son format, donc un atlas il
 
 Nouvelle méthode : partir de la vraie texture vanilla (`base_villager_64x64.png`, envoyée à
 l'utilisateur comme gabarit) et d'un calque de métier vanilla existant (déjà aligné pixel pour
-pixel sur le bon UV), reteinté par luminance vers la palette de couleurs proposée par l'utilisateur
-dans ses nouveaux visuels (toujours des rendus « concept » 1254×1254, pas des feuilles UV réelles —
-un second essai avec le même problème que le premier). Correspondance retenue (à confirmer/corriger) :
+pixel sur le bon UV), reteinté par luminance vers la palette de couleurs de la référence artistique.
+Toujours des rendus « concept » (1254×1254, puis un deuxième envoi), pas des feuilles UV réelles —
+impossible à appliquer directement au modèle villageois, mais utilisable pour en extraire une palette
+de couleurs précise (échantillonnage automatique des couleurs dominantes de chaque image, fond/teinte
+de peau/contours exclus) plutôt que deviner à l'œil comme au premier essai. Correspondance retenue,
+déduite de l'iconographie de chaque image (ancre → Intendant, lanterne/ciré → Gardien de phare,
+marteau/tablier de cuir → Charpentier, écusson poisson → Poissonnier, canne à pêche/boussole →
+Naturaliste) :
 
-| Rôle | Calque vanilla de base | Teinte |
+| Rôle | Calque vanilla de base | Teinte (RGB, extraite du 2ᵉ envoi) |
 |---|---|---|
-| Intendant | `cleric` | bleu marine |
-| Poissonnier | `fisherman` | inchangé (déjà brun/beige) |
-| Charpentier naval | `toolsmith` | bleu marine |
-| Naturaliste | `cartographer` | sarcelle |
-| Gardien de phare | `shepherd` | jaune moutarde |
+| Intendant | `cleric` | bleu marine (28, 42, 74) |
+| Poissonnier | `fisherman` | bleu-sarcelle (32, 82, 92) |
+| Charpentier naval | `toolsmith` | cuir brun foncé (80, 58, 45) |
+| Naturaliste | `cartographer` | sarcelle (72, 118, 106) |
+| Gardien de phare | `shepherd` | jaune moutarde (206, 160, 40) |
+
+Écart avec la première tentative : le Poissonnier n'est plus laissé « tel quel » (brun/beige d'origine)
+mais teinté bleu-sarcelle, et le Charpentier passe de bleu marine à cuir brun foncé — la deuxième
+référence artistique montre clairement un tablier de cuir avec marteau, plus proche d'un charpentier
+que d'un officier naval.
 
 Moins détaillé que les illustrations originales, mais garanti aligné sur le modèle réel puisque
-construit à partir des fichiers vanilla eux-mêmes.
+construit à partir des fichiers vanilla eux-mêmes. Structure UV et cohérence des couleurs vérifiées
+par rendu agrandi (NEAREST) hors moteur de jeu ; rendu réel en jeu toujours à confirmer.
 
 ## 3. Interfaces portuaires — échelle réduite
 
@@ -50,6 +61,16 @@ de 265×287). Passé à 0,375× (198×215), tous les décalages internes (bouton
 info-bulles, jauges) recalculés par le même facteur ×0,75 pour garder la disposition relative
 intacte. Plus proche de la taille d'un écran de commerce vanilla (176×166) sans redécouper la mise
 en page à la main.
+
+## 4. Affichage du biome — cadre et statut de dangerosité explicite
+
+Le nom du biome (HUD client, `TideboundClientEvents.onRenderGui`) n'était qu'un texte nu, coloré en
+rouge ou cyan selon `#tidebound:dangerous` — pas assez lisible comme indicateur de danger réel. Ajout
+d'un encadrement (fond semi-transparent + bordure colorée selon le statut) et d'une seconde ligne de
+texte explicite sous le nom du biome : « Eaux sûres » ou « Eaux dangereuses » (au lieu de ne compter
+que sur la couleur du nom). Le système de dangerosité reste binaire (tag `#tidebound:dangerous`,
+inchangé) : ce correctif rend ce statut existant lisible, il n'introduit pas de nouveaux paliers de
+danger.
 
 ## Explicitement pas traité ici
 

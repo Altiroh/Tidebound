@@ -84,5 +84,7 @@
   "screen.tidebound.module.winch": "Winch",
   "screen.tidebound.module.net": "Net",
   "biome.tidebound.violet_shallows": "Violet Shallows",
-  "biome.tidebound.abyss_ocean": "Abyssal Ocean"
+  "biome.tidebound.abyss_ocean": "Abyssal Ocean",
+  "hud.tidebound.biome.safe": "Safe waters",
+  "hud.tidebound.biome.dangerous": "Dangerous waters"
 }

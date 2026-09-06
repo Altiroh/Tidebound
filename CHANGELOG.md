@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.26.0-alpha — TB-CORE-008 (suite) : palette PNJ affinée et cadre de dangerosité du biome
+
+- les cinq skins PNJ sont reconstruits une deuxième fois avec la même méthode (base villageoise
+  vanilla + calque de métier recoloré), mais avec des couleurs extraites automatiquement de la
+  deuxième référence artistique de l'utilisateur au lieu de couleurs devinées ; le Poissonnier passe
+  de « inchangé » à bleu-sarcelle et le Charpentier de bleu marine à cuir brun foncé, plus fidèles à
+  ce deuxième envoi (voir `core/TB-CORE-008.md`) ;
+- le HUD du nom de biome gagne un encadrement (fond semi-transparent, bordure colorée) et une
+  deuxième ligne de texte explicite (« Eaux sûres »/« Eaux dangereuses ») au lieu de ne signaler le
+  danger que par la couleur du texte ; le système de dangerosité reste binaire, seule la lisibilité
+  change.
+
+Build, `validate_content.py` et démarrage serveur réels vérifiés sans erreur. Rendu et lisibilité
+réels toujours non vérifiés en jeu.
+
 ## 0.25.0-alpha — TB-CORE-008 : ports, PNJ et interfaces après le deuxième retour client
 
 - ports : `HarborPlacementService` construit désormais un vrai bâtiment fermé derrière le quai (sol,

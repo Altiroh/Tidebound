@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-008` (ports/PNJ/interfaces après un deuxième retour) / `0.25.0-alpha`
+État importé : `TB-CORE-008` (ports/PNJ/interfaces/HUD biome après un deuxième retour) / `0.26.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -99,7 +99,11 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
   calque de métier vanilla, remplaçant les atlas illustrés 512×512 qui rendaient buggés en jeu ;
 - écran portuaire `HarborScreen` réduit à 0,375× (198×215 px) pour se rapprocher d'un écran de
-  commerce vanilla, tous les décalages internes recalculés au même facteur.
+  commerce vanilla, tous les décalages internes recalculés au même facteur ;
+- palette des cinq skins PNJ affinée par extraction automatique des couleurs dominantes de la
+  deuxième référence artistique de l'utilisateur (Poissonnier bleu-sarcelle, Charpentier cuir brun) ;
+- nom du biome affiché dans un cadre (fond + bordure colorée) avec une ligne de statut explicite
+  « Eaux sûres »/« Eaux dangereuses » en plus de la couleur du texte.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
 `core/TB-CORE-008.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et

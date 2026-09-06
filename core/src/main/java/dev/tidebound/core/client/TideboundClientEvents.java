@@ -24,11 +24,15 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 public final class TideboundClientEvents {
     private static final long BIOME_NAME_DISPLAY_MILLIS = 3000L;
     private static final int BIOME_NAME_TOP_MARGIN = 10;
+    private static final int BIOME_FRAME_PADDING = 4;
     private static final int COLOR_DANGEROUS = 0xFFFF5555;
     private static final int COLOR_NORMAL = 0xFF55FFFF;
+    private static final int COLOR_FRAME_FILL = 0xA0101018;
+    private static final int COLOR_NAME_TEXT = 0xFFFFFFFF;
 
     private static ResourceKey<Biome> lastBiome;
     private static Component biomeDisplayText;
+    private static Component biomeStatusText;
     private static boolean biomeDisplayDangerous;
     private static long biomeDisplayUntilMillis;
 
@@ -54,15 +58,33 @@ public final class TideboundClientEvents {
             if (!firstReading) {
                 biomeDisplayText = Component.translatable(Util.makeDescriptionId("biome", key.get().location()));
                 biomeDisplayDangerous = biome.is(BiomeAwarenessEvents.DANGEROUS);
+                biomeStatusText = Component.translatable(biomeDisplayDangerous
+                        ? "hud.tidebound.biome.dangerous"
+                        : "hud.tidebound.biome.safe");
                 biomeDisplayUntilMillis = System.currentTimeMillis() + BIOME_NAME_DISPLAY_MILLIS;
             }
         }
 
         if (biomeDisplayText != null && System.currentTimeMillis() < biomeDisplayUntilMillis) {
             GuiGraphics graphics = event.getGuiGraphics();
-            int color = biomeDisplayDangerous ? COLOR_DANGEROUS : COLOR_NORMAL;
+            int statusColor = biomeDisplayDangerous ? COLOR_DANGEROUS : COLOR_NORMAL;
+            int lineHeight = minecraft.font.lineHeight;
+            int nameWidth = minecraft.font.width(biomeDisplayText);
+            int statusWidth = minecraft.font.width(biomeStatusText);
+            int boxWidth = Math.max(nameWidth, statusWidth) + BIOME_FRAME_PADDING * 2;
+            int boxHeight = lineHeight * 2 + BIOME_FRAME_PADDING * 3;
+            int centerX = graphics.guiWidth() / 2;
+            int boxLeft = centerX - boxWidth / 2;
+            int boxRight = centerX + boxWidth / 2;
+            int boxTop = BIOME_NAME_TOP_MARGIN;
+            int boxBottom = boxTop + boxHeight;
+
+            graphics.fill(boxLeft - 1, boxTop - 1, boxRight + 1, boxBottom + 1, statusColor);
+            graphics.fill(boxLeft, boxTop, boxRight, boxBottom, COLOR_FRAME_FILL);
             graphics.drawCenteredString(minecraft.font, biomeDisplayText,
-                    graphics.guiWidth() / 2, BIOME_NAME_TOP_MARGIN, color);
+                    centerX, boxTop + BIOME_FRAME_PADDING, COLOR_NAME_TEXT);
+            graphics.drawCenteredString(minecraft.font, biomeStatusText,
+                    centerX, boxTop + BIOME_FRAME_PADDING * 2 + lineHeight, statusColor);
         }
     }
 
