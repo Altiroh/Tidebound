@@ -380,6 +380,8 @@ def validate_modpack() -> int:
         406081: 5434888,   # AstraLex Shaders
         679177: 7327448,   # libIPN (Inventory Profiles Next dependency)
         495267: 6811490,   # Inventory Profiles Next
+        351264: 6706911,   # Kotlin for Forge (language provider required by libIPN/Inventory
+                           # Profiles Next — missing from the pack, real client load error, TB-CORE-014)
     }
     entries = manifest.get("files", [])
     require(isinstance(entries, list), "CurseForge manifest files must be an array")

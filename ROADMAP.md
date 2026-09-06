@@ -46,6 +46,9 @@
   à l'identique, crash réel remonté par l'utilisateur une deuxième fois.
 - [x] `TB-CORE-013` — JourneyMap sorti du pack (instabilité connue du mod, pas un fichier mal épinglé)
   et remplacé par Xaero's Minimap.
+- [x] `TB-CORE-014` — Kotlin for Forge ajouté au manifeste : dépendance manquante d'Inventory
+  Profiles Next/libIPN, jamais détectée en environnement de développement Core, bloquant réel
+  remonté par l'utilisateur.
 
 ## En cours
 

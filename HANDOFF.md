@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-013` (JourneyMap remplacé par Xaero's Minimap) / `0.31.0-alpha`
+État importé : `TB-CORE-014` (fournisseur de langage Kotlin ajouté) / `0.32.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -126,7 +126,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-013.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-014.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
@@ -182,7 +182,9 @@ maintenue explicitement par l'utilisateur.
   (géométrie calculée, pas vue en jeu, `TB-CORE-011`) ;
 - confirmer que le client démarre normalement avec Xaero's Minimap à la place de JourneyMap
   (`TB-CORE-013`) — si ce mod pose à son tour un problème, le traiter comme un vrai bug plutôt que de
-  retenter un remplacement au jugé.
+  retenter un remplacement au jugé ;
+- confirmer que l'ajout de Kotlin for Forge (`TB-CORE-014`) lève bien l'erreur de chargement des mods
+  qui bloquait Inventory Profiles Next/libIPN.
 
 ### Ensuite
 

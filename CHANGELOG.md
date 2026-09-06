@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.32.0-alpha — TB-CORE-014 : fournisseur de langage Kotlin manquant
+
+Le devpack `0.31.0-alpha` a passé le crash JourneyMap (`TB-CORE-013`) mais a bloqué au chargement des
+mods : `libIPN` et `Inventory Profiles Next` (Kotlin, ajoutés dans `TB-CORE-007`) déclarent tous les
+deux une dépendance sur le fournisseur de langage FML `kotlinforge`, jamais ajouté au manifeste — un
+oubli initial, invisible en environnement de développement Core puisqu'il ne charge aucun vrai mod
+tiers.
+
+- ajout de **Kotlin for Forge** (`5.9.0`, canal Release, CurseForge `351264`/`6706911`) au manifeste ;
+- `validate_content.py` : 26 mods épinglés désormais (au lieu de 25) ;
+- `modpack/README.md`, `docs/modpack/TB-PACK-001.md` mis à jour.
+
+`validate_content.py` : `OK`. Comme pour les deux tickets précédents, aucun client réel n'est lancé
+dans cette session : seul un nouvel import confirmera que l'écran d'erreur disparaît.
+
 ## 0.31.0-alpha — TB-CORE-013 : JourneyMap remplacé par Xaero's Minimap
 
 Le correctif `TB-CORE-012` (passer JourneyMap en version stable 6.0.7) n'a pas suffi : le nouveau

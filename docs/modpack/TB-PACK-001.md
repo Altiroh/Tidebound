@@ -25,7 +25,7 @@ technique ; Tidebound Core conserve l'autorité sur les navires, la pêche, les 
 | Multijoueur | Lootr | Loot indépendant par joueur sur coffres, tonneaux et minecarts |
 | Quêtes | FTB Quests Translator | Traduction du livre à la demande, indépendante de la langue du jeu |
 | Rendu | Complementary (Reimagined), Photon, Solas, AstraLex | Quatre shaders au choix dans le menu Iris, aucun activé par défaut |
-| Confort | Inventory Profiles Next, libIPN | Tri automatique de l'inventaire, équivalent moderne d'Inventory Tweaks |
+| Confort | Inventory Profiles Next, libIPN, Kotlin for Forge | Tri automatique de l'inventaire, équivalent moderne d'Inventory Tweaks |
 
 Tous les fichiers du manifeste ciblent Minecraft `1.21.1` et NeoForge. Les dépendances directes
 Architectury, Balm et CreativeCore sont déclarées explicitement.
@@ -50,6 +50,8 @@ activation et disponibilité d'une pierre) restent actives.
 - JourneyMap (choix initial) a été remplacé par Xaero's Minimap (`TB-CORE-013`) : deux versions
   distinctes de JourneyMap plantaient identiquement au lancement sur cette combinaison NeoForge
   1.21.1, une instabilité connue du mod plutôt qu'un fichier mal épinglé.
+- Kotlin for Forge manquait du manifeste alors qu'Inventory Profiles Next et libIPN en dépendent tous
+  les deux (`TB-CORE-014`, erreur réelle de chargement remontée par l'utilisateur) : ajouté.
 
 ## Validation manuelle attendue
 
