@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.28.0-alpha — TB-CORE-009 : infrastructure des compas animés
+
+- nouveau composant persistant/synchronisé `COMPASS_TARGET` (`GlobalPos`) rafraîchi automatiquement
+  toutes les 20 ticks tant qu'un joueur porte un Compas de sillage ou des Havres, sans attendre un
+  clic droit ;
+- propriété d'objet cliente `tidebound:angle` calculant le cap réel vers la cible relatif à
+  l'orientation du porteur, avec rotation de recherche lente si aucune cible n'est connue ;
+- API réelle (`ItemProperties`, `DataComponentType.Builder`, `GlobalPos`) confirmée par `javap` sur
+  les classes Minecraft recompilées localement avant d'écrire le code.
+- aucun effet visuel pour l'instant : les icônes actuelles sont peintes à la main avec un dégradé
+  continu, une segmentation automatique de l'aiguille a été jugée trop risquée sur un asset canonique
+  sans pouvoir la vérifier visuellement. L'utilisateur fournira l'aiguille comme calque séparé
+  (spécification exacte dans `core/TB-CORE-009.md`) pour générer les 32 trames de rotation.
+
+Build, `validate_content.py` et démarrage serveur réel vérifiés sans erreur.
+
 ## 0.27.0-alpha — TB-QUEST-002 : livre FTB Quests durci
 
 - fini les cases à cocher soi-même sans vérification serveur : cinq tâches (enregistrement du navire,

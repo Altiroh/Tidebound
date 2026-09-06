@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-QUEST-002` (livre FTB Quests durci) / `0.27.0-alpha`
+État importé : `TB-CORE-009` (infrastructure compas animés, art en attente) / `0.28.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -108,7 +108,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   cocher mais de vrais avancements Minecraft cachés déclenchés par Core au moment réel de chaque
   action (navire enregistré, port trouvé, tableau consulté, contrat livré, navire amélioré) ;
   troisième chapitre « Les eaux côtières » (saumon, Compas des Havres, niveau 3 en Navigation) ;
-  dépendances explicites entre quêtes au sein de et entre chapitres, mode `flexible` conservé.
+  dépendances explicites entre quêtes au sein de et entre chapitres, mode `flexible` conservé ;
+  infrastructure d'aiguille de compas animée (cible persistante `COMPASS_TARGET`, calcul de cap
+  client) prête côté code mais sans effet visuel tant que l'aiguille dessinée séparément n'est pas
+  fournie (`TB-CORE-009`).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
 `core/TB-CORE-008.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
@@ -129,7 +132,8 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
    les cinq autres sont désormais de vrais avancements déclenchés par Core (`TB-QUEST-002`).
 6. **Équilibrage des modules.** Les effets de `TB-CORE-005C` sont branchés mais leurs rayons, intervalles
    et la chance de multi-prise du Filet n'ont pas encore été ajustés par un vrai test en jeu.
-7. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
+7. **Aiguille animée du Compas.** Infrastructure serveur/client terminée (`TB-CORE-009`) ; en attente
+   du calque d'aiguille fourni par l'utilisateur pour générer les 32 trames de rotation.
 8. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
 9. **PNJ : validation visuelle.** Les cinq skins repartent désormais de la texture villageoise vanilla
     recolorée (UV garanti correct), mais la palette de couleurs et la lisibilité à plusieurs distances
@@ -161,8 +165,8 @@ maintenue explicitement par l'utilisateur.
 
 ### Ensuite
 
-- animer l'aiguille des compas (Compas de sillage/des Havres) — nécessite soit des frames de texture
-  façon compas vanilla, soit un modèle 3D animé ;
+- finaliser l'aiguille animée dès réception du calque d'aiguille séparé demandé à l'utilisateur
+  (`TB-CORE-009`) : génération des 32 trames, branchement des `overrides` de modèle ;
 - gros navires échoués rares (nécessite soit une structure `.nbt`, soit un générateur procédural
   dédié — aucun des deux commencé) ;
 - variété d'humidité supplémentaire (mangrove, badlands...).

@@ -41,8 +41,10 @@
 
 ## En cours
 
-- [ ] `TB-WORLD-002` suite — gros navires échoués rares (bloqué sans `.nbt`), aiguilles de compas
-  animées.
+- [ ] `TB-WORLD-002` suite — gros navires échoués rares (bloqué sans `.nbt`).
+- [ ] `TB-CORE-009` — aiguilles de compas animées : infrastructure serveur/client terminée
+  (cible persistante, calcul de cap, propriété d'objet cliente) ; bloqué sur l'art de l'aiguille,
+  l'utilisateur fournit un calque séparé plutôt qu'une segmentation automatique risquée.
 - [ ] `TB-CORE-008` suite — validation client des PNJ recolorés, du bâtiment de port, de l'écran
   redimensionné et du cadre de biome ; reconfirmer si les boutons de l'Intendant/Charpentier
   fonctionnent une fois les PNJ mieux positionnés.

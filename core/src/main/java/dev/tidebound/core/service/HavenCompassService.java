@@ -3,7 +3,9 @@ package dev.tidebound.core.service;
 import dev.tidebound.core.navigation.WakeBearing;
 import dev.tidebound.core.world.HarborRegistry;
 import dev.tidebound.core.world.HarborSite;
+import java.util.Optional;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.GlobalPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -32,6 +34,13 @@ public final class HavenCompassService {
         String direction = WakeBearing.direction(deltaX, deltaZ);
         message(player, "Un Intendant se trouve vers " + direction + ", à environ " + distance
                 + " blocs.", ChatFormatting.GOLD);
+    }
+
+    /** World position the needle should point toward, or empty if no harbour is indexed yet. */
+    public static Optional<GlobalPos> resolveTarget(ServerPlayer player) {
+        return HarborRegistry.get(player.serverLevel())
+                .nearestIntendant(player.serverLevel().dimension().location().toString(), player.blockPosition())
+                .map(site -> GlobalPos.of(player.serverLevel().dimension(), site.position()));
     }
 
     private static void message(ServerPlayer player, String text, ChatFormatting color) {
