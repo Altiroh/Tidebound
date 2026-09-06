@@ -1,5 +1,6 @@
 package dev.tidebound.core.service;
 
+import dev.tidebound.core.advancement.TideboundCriteriaTriggers;
 import dev.tidebound.core.content.ItemAmount;
 import dev.tidebound.core.data.PlayerProgress;
 import dev.tidebound.core.data.PlayerVessel;
@@ -97,6 +98,7 @@ public final class VesselMaintenanceService {
                 if (upgrade == VesselUpgrade.HOLD) {
                     VesselDeploymentService.ensureCargoVessel(player, upgraded);
                 }
+                TideboundCriteriaTriggers.QUEST_SIGNAL.get().trigger(player, "vessel_upgraded");
                 return VesselTransactionResult.completed("upgrade_purchased", label(upgrade) + " niveau "
                         + quote.targetTier() + " installé pour " + quote.tideCost() + " Tides et "
                         + quote.materialCount() + " × " + quote.materialItemId() + ".");

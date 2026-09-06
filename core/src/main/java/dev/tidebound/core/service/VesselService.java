@@ -1,5 +1,6 @@
 package dev.tidebound.core.service;
 
+import dev.tidebound.core.advancement.TideboundCriteriaTriggers;
 import dev.tidebound.core.data.PlayerVessel;
 import dev.tidebound.core.data.VesselUpgrade;
 import dev.tidebound.core.registry.TideboundAttachments;
@@ -24,6 +25,7 @@ public final class VesselService {
         }
         PlayerVessel unlocked = PlayerVessel.unlock(name, UUID.randomUUID());
         player.setData(TideboundAttachments.PLAYER_VESSEL, unlocked);
+        TideboundCriteriaTriggers.QUEST_SIGNAL.get().trigger(player, "vessel_registered");
         return unlocked;
     }
 

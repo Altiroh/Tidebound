@@ -1,5 +1,6 @@
 package dev.tidebound.core.event;
 
+import dev.tidebound.core.advancement.TideboundCriteriaTriggers;
 import dev.tidebound.core.fishing.CatchAnomaly;
 import dev.tidebound.core.fishing.CatchData;
 import dev.tidebound.core.fishing.CatchQuality;
@@ -139,6 +140,9 @@ public final class TideboundGameplayEvents {
         if (currentLevel > previousLevel) {
             player.sendSystemMessage(Component.literal("Niveau " + currentLevel + " en " + skill + " !")
                     .withStyle(ChatFormatting.AQUA));
+            if (skill.equals("navigation") && currentLevel >= 3) {
+                TideboundCriteriaTriggers.QUEST_SIGNAL.get().trigger(player, "navigation_level_3");
+            }
         } else {
             player.displayClientMessage(Component.literal("+" + (currentXp - previousXp)
                     + " XP " + skill).withStyle(ChatFormatting.AQUA), true);

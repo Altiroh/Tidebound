@@ -265,14 +265,14 @@ def validate_ftb_questbook() -> tuple[int, int, int, int]:
             "FTB Quests fallback locale must be fr_fr")
 
     chapter_paths = sorted(chapter_dir.glob("*.snbt"))
-    require(len(chapter_paths) == 2, "The first Tidebound quest book must contain exactly two chapters")
+    require(len(chapter_paths) == 3, "The Tidebound quest book must contain exactly three chapters")
     chapter_text = "\n".join(documents[path] for path in chapter_paths)
 
     group_ids = OBJECT_ID.findall(documents[groups_path])
     require(len(group_ids) == 1 and HEX_ID.fullmatch(group_ids[0]) is not None,
             "FTB Quests chapter group must have one valid ID")
     chapter_ids = {OBJECT_ID.findall(documents[path])[0] for path in chapter_paths}
-    require(len(chapter_ids) == 2, "FTB Quests chapter IDs must be unique")
+    require(len(chapter_ids) == 3, "FTB Quests chapter IDs must be unique")
     for path in chapter_paths:
         require(f'group: "{group_ids[0]}"' in documents[path],
                 f"{path}: chapter is not assigned to The Voyage")
@@ -281,22 +281,25 @@ def validate_ftb_questbook() -> tuple[int, int, int, int]:
     for path in chapter_paths:
         object_ids.extend(OBJECT_ID.findall(documents[path]))
     require(len(object_ids) == len(set(object_ids)), "FTB Quests object IDs must be globally unique")
-    require(len(object_ids) == 30,
-            f"Unexpected FTB Quests object count: {len(object_ids)} instead of 30")
+    require(len(object_ids) == 40,
+            f"Unexpected FTB Quests object count: {len(object_ids)} instead of 40")
 
     commands = REWARD_COMMAND.findall(chapter_text)
-    require(len(commands) == 9, f"Expected 9 Tide rewards, found {len(commands)}")
+    require(len(commands) == 12, f"Expected 12 Tide rewards, found {len(commands)}")
     receipts = [receipt for receipt, _ in commands]
     require(len(receipts) == len(set(receipts)), "FTB reward receipts must be unique")
-    require(chapter_text.count('permission_level: 2') == 9,
+    require(chapter_text.count('permission_level: 2') == 12,
             "Every FTB command reward must use permission level 2")
-    require(chapter_text.count('type: "command"') == 9,
+    require(chapter_text.count('type: "command"') == 12,
             "Every Tide reward must be a command reward")
-    require(chapter_text.count('auto: "enabled"') == 9,
+    require(chapter_text.count('auto: "enabled"') == 12,
             "Every onboarding reward must be auto-claimed")
-    require(chapter_text.count('tasks: [') == 9, "Expected one task list per onboarding quest")
-    require(chapter_text.count('type: "item"') == 3, "Expected three automatic item tasks")
-    require(chapter_text.count('type: "checkmark"') == 6, "Expected six explicit checkmark tasks")
+    require(chapter_text.count('tasks: [') == 12, "Expected one task list per onboarding quest")
+    require(chapter_text.count('type: "item"') == 5, "Expected five automatic item tasks")
+    require(chapter_text.count('type: "advancement"') == 6,
+            "Expected six tasks auto-detected via a real Core-fired advancement signal")
+    require(chapter_text.count('type: "checkmark"') == 1,
+            "Expected exactly one remaining manual checkmark task (obtaining any boat)")
 
     locale_paths = [language_dir / "fr_fr.snbt", language_dir / "en_us.snbt"]
     require(all(path in documents for path in locale_paths), "French and English quest translations are required")
@@ -310,9 +313,9 @@ def validate_ftb_questbook() -> tuple[int, int, int, int]:
         rewards = translation_ids(text, "reward")
         require(groups == set(group_ids), f"{path}: chapter group translations are incomplete")
         require(chapters == chapter_ids, f"{path}: chapter translations are incomplete")
-        require(len(quests) == 9, f"{path}: expected 9 translated quests")
-        require(len(tasks) == 9, f"{path}: expected 9 translated tasks")
-        require(len(rewards) == 9, f"{path}: expected 9 translated rewards")
+        require(len(quests) == 12, f"{path}: expected 12 translated quests")
+        require(len(tasks) == 12, f"{path}: expected 12 translated tasks")
+        require(len(rewards) == 12, f"{path}: expected 12 translated rewards")
         locale_sets.append((chapters, quests, tasks, rewards))
     require(locale_sets[0] == locale_sets[1], "French and English translation IDs differ")
 

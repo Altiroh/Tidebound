@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-008` (ports/PNJ/interfaces/HUD biome après un deuxième retour) / `0.26.0-alpha`
+État importé : `TB-QUEST-002` (livre FTB Quests durci) / `0.27.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -102,12 +102,17 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   commerce vanilla, tous les décalages internes recalculés au même facteur ;
 - palette des cinq skins PNJ affinée par extraction automatique des couleurs dominantes de la
   deuxième référence artistique de l'utilisateur (Poissonnier bleu-sarcelle, Charpentier cuir brun) ;
-- nom du biome affiché dans un cadre (fond + bordure colorée) avec une ligne de statut explicite
-  « Eaux sûres »/« Eaux dangereuses » en plus de la couleur du texte.
+- nom du biome affiché dans un cadre (dégradé, ombre, ligne de séparation, fondu en sortie) avec une
+  ligne de statut explicite « Eaux sûres »/« Eaux dangereuses » en plus de la couleur du texte ;
+- livre FTB Quests durci (`TB-QUEST-002`) : cinq tâches sur neuf ne sont plus de simples cases à
+  cocher mais de vrais avancements Minecraft cachés déclenchés par Core au moment réel de chaque
+  action (navire enregistré, port trouvé, tableau consulté, contrat livré, navire amélioré) ;
+  troisième chapitre « Les eaux côtières » (saumon, Compas des Havres, niveau 3 en Navigation) ;
+  dépendances explicites entre quêtes au sein de et entre chapitres, mode `flexible` conservé.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-008.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et
-`docs/fishing/TB-FISH-001.md`.
+`core/TB-CORE-008.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
+`docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
@@ -120,7 +125,8 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 4. **Contenu procédural.** Le port initial se matérialise désormais automatiquement près du spawn
    quand le tirage par seed le réserve (`TB-WORLD-002` tranche 1) ; épaves, phares et autres points
    d'intérêt restent à placer, de même que la variété de biomes maritimes (tranche 2, en cours).
-5. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
+5. **Automatisation complète du livre.** Un seul objectif (obtenir une barque) reste une case manuelle ;
+   les cinq autres sont désormais de vrais avancements déclenchés par Core (`TB-QUEST-002`).
 6. **Équilibrage des modules.** Les effets de `TB-CORE-005C` sont branchés mais leurs rayons, intervalles
    et la chance de multi-prise du Filet n'ont pas encore été ajustés par un vrai test en jeu.
 7. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
@@ -147,7 +153,11 @@ maintenue explicitement par l'utilisateur.
   gênés par le placement erratique des PNJ sur l'ancien ponton, pas par un bug de câblage) ;
 - juger si le nouveau bâtiment de port est suffisant ou nécessite une itération supplémentaire ;
 - valider en jeu ports/biomes/dégâts de coque sur plusieurs seeds (rien de tout ça n'a encore été vu
-  tourner dans un vrai client).
+  tourner dans un vrai client) ;
+- juger le cadre du nom de biome (lisibilité, esthétique du dégradé/fondu) ;
+- confirmer que le livre FTB Quests se charge bien avec le nouveau chapitre et les nouvelles tâches
+  `advancement` (non testable sans FTB Quests, absent de l'environnement de développement Core) ;
+  vérifier en particulier que les tâches concernées se cochent seules au bon moment et pas avant.
 
 ### Ensuite
 

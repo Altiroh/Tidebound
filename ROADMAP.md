@@ -33,15 +33,21 @@
   d'îles élargi ×1,6, zones bornées par le niveau de coque.
 - [x] `TB-CORE-008` — deuxième retour client : bâtiment de port fermé au lieu d'un ponton nu, skins
   PNJ reconstruits depuis la base vanilla (fini les atlas 512×512 buggés), écran portuaire réduit à
-  l'échelle d'un écran de commerce vanilla.
+  l'échelle d'un écran de commerce vanilla, palette PNJ affinée sur un deuxième envoi, cadre de
+  dangerosité du biome.
+- [x] `TB-QUEST-002` — livre FTB Quests durci : cinq tâches passent d'une case manuelle à un vrai
+  avancement déclenché par Core, troisième chapitre « Les eaux côtières », dépendances explicites
+  entre quêtes.
 
 ## En cours
 
 - [ ] `TB-WORLD-002` suite — gros navires échoués rares (bloqué sans `.nbt`), aiguilles de compas
   animées.
-- [ ] `TB-CORE-008` suite — validation client des PNJ recolorés, du bâtiment de port et de l'écran
-  redimensionné ; reconfirmer si les boutons de l'Intendant/Charpentier fonctionnent une fois les PNJ
-  mieux positionnés.
+- [ ] `TB-CORE-008` suite — validation client des PNJ recolorés, du bâtiment de port, de l'écran
+  redimensionné et du cadre de biome ; reconfirmer si les boutons de l'Intendant/Charpentier
+  fonctionnent une fois les PNJ mieux positionnés.
+- [ ] `TB-QUEST-002` suite — validation du livre complet (FTB Quests absent de l'environnement de
+  développement Core) : chargement du nouveau chapitre, déclenchement réel des tâches `advancement`.
 
 ## Après validation du prototype
 

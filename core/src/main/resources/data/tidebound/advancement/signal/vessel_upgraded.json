@@ -1,0 +1,8 @@
+{
+  "criteria": {
+    "signal": {
+      "trigger": "tidebound:quest_signal",
+      "conditions": { "signal": "vessel_upgraded" }
+    }
+  }
+}

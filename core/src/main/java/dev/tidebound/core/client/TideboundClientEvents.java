@@ -4,6 +4,7 @@ import dev.tidebound.core.TideboundCore;
 import dev.tidebound.core.event.BiomeAwarenessEvents;
 import dev.tidebound.core.registry.TideboundAttachments;
 import java.util.Optional;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -23,12 +24,15 @@ import net.neoforged.neoforge.client.event.ScreenEvent;
 @EventBusSubscriber(modid = TideboundCore.MOD_ID, value = Dist.CLIENT)
 public final class TideboundClientEvents {
     private static final long BIOME_NAME_DISPLAY_MILLIS = 3000L;
+    private static final long BIOME_NAME_FADE_MILLIS = 500L;
     private static final int BIOME_NAME_TOP_MARGIN = 10;
-    private static final int BIOME_FRAME_PADDING = 4;
-    private static final int COLOR_DANGEROUS = 0xFFFF5555;
-    private static final int COLOR_NORMAL = 0xFF55FFFF;
-    private static final int COLOR_FRAME_FILL = 0xA0101018;
-    private static final int COLOR_NAME_TEXT = 0xFFFFFFFF;
+    private static final int BIOME_FRAME_PADDING = 5;
+    private static final int COLOR_DANGEROUS = 0xFFFF5D5D;
+    private static final int COLOR_NORMAL = 0xFF6BE7FF;
+    private static final int COLOR_FRAME_FILL_TOP = 0xC8101018;
+    private static final int COLOR_FRAME_FILL_BOTTOM = 0x90101018;
+    private static final int COLOR_FRAME_SHADOW = 0x50000000;
+    private static final int COLOR_NAME_TEXT = 0xFFF4F4F4;
 
     private static ResourceKey<Biome> lastBiome;
     private static Component biomeDisplayText;
@@ -65,12 +69,19 @@ public final class TideboundClientEvents {
             }
         }
 
-        if (biomeDisplayText != null && System.currentTimeMillis() < biomeDisplayUntilMillis) {
+        long now = System.currentTimeMillis();
+        if (biomeDisplayText != null && now < biomeDisplayUntilMillis) {
             GuiGraphics graphics = event.getGuiGraphics();
-            int statusColor = biomeDisplayDangerous ? COLOR_DANGEROUS : COLOR_NORMAL;
+            long remaining = biomeDisplayUntilMillis - now;
+            float fade = remaining < BIOME_NAME_FADE_MILLIS ? remaining / (float) BIOME_NAME_FADE_MILLIS : 1.0F;
+
+            int statusColor = withAlphaFactor(biomeDisplayDangerous ? COLOR_DANGEROUS : COLOR_NORMAL, fade);
+            Component name = biomeDisplayText.copy().withStyle(ChatFormatting.BOLD);
+            Component status = biomeStatusText.copy().withStyle(ChatFormatting.ITALIC);
+
             int lineHeight = minecraft.font.lineHeight;
-            int nameWidth = minecraft.font.width(biomeDisplayText);
-            int statusWidth = minecraft.font.width(biomeStatusText);
+            int nameWidth = minecraft.font.width(name);
+            int statusWidth = minecraft.font.width(status);
             int boxWidth = Math.max(nameWidth, statusWidth) + BIOME_FRAME_PADDING * 2;
             int boxHeight = lineHeight * 2 + BIOME_FRAME_PADDING * 3;
             int centerX = graphics.guiWidth() / 2;
@@ -79,13 +90,25 @@ public final class TideboundClientEvents {
             int boxTop = BIOME_NAME_TOP_MARGIN;
             int boxBottom = boxTop + boxHeight;
 
+            graphics.fill(boxLeft - 2, boxTop - 2, boxRight + 2, boxBottom + 2, withAlphaFactor(COLOR_FRAME_SHADOW, fade));
             graphics.fill(boxLeft - 1, boxTop - 1, boxRight + 1, boxBottom + 1, statusColor);
-            graphics.fill(boxLeft, boxTop, boxRight, boxBottom, COLOR_FRAME_FILL);
-            graphics.drawCenteredString(minecraft.font, biomeDisplayText,
-                    centerX, boxTop + BIOME_FRAME_PADDING, COLOR_NAME_TEXT);
-            graphics.drawCenteredString(minecraft.font, biomeStatusText,
+            graphics.fillGradient(boxLeft, boxTop, boxRight, boxBottom,
+                    withAlphaFactor(COLOR_FRAME_FILL_TOP, fade), withAlphaFactor(COLOR_FRAME_FILL_BOTTOM, fade));
+
+            int dividerY = boxTop + BIOME_FRAME_PADDING + lineHeight + BIOME_FRAME_PADDING / 2;
+            graphics.fill(boxLeft + 3, dividerY, boxRight - 3, dividerY + 1, withAlphaFactor(statusColor, 0.4F));
+
+            graphics.drawCenteredString(minecraft.font, name,
+                    centerX, boxTop + BIOME_FRAME_PADDING, withAlphaFactor(COLOR_NAME_TEXT, fade));
+            graphics.drawCenteredString(minecraft.font, status,
                     centerX, boxTop + BIOME_FRAME_PADDING * 2 + lineHeight, statusColor);
         }
+    }
+
+    private static int withAlphaFactor(int argb, float factor) {
+        int alpha = (argb >>> 24) & 0xFF;
+        int scaled = Math.max(0, Math.min(255, Math.round(alpha * factor)));
+        return (scaled << 24) | (argb & 0x00FFFFFF);
     }
 
     @SubscribeEvent

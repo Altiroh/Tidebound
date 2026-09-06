@@ -1,5 +1,6 @@
 package dev.tidebound.core.service;
 
+import dev.tidebound.core.advancement.TideboundCriteriaTriggers;
 import dev.tidebound.core.content.ContractDefinition;
 import dev.tidebound.core.content.ItemAmount;
 import dev.tidebound.core.content.TideboundContentManager;
@@ -52,6 +53,7 @@ public final class ContractService {
                     definition.id(), gameTime, definition.cooldownTicks());
             RewardService.apply(player, definition.reward(), completed,
                     () -> consume(player.getInventory(), requiredItem, requirement.count()));
+            TideboundCriteriaTriggers.QUEST_SIGNAL.get().trigger(player, "contract_delivered");
             ProgressionResult firstSale = MilestoneService.complete(player, "tidebound:first_sale");
             String bonus = firstSale.success() ? " — premier échange récompensé" : "";
             return ProgressionResult.completed("Contract completed: " + definition.title() + bonus);

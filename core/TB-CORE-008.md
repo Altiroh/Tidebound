@@ -68,9 +68,12 @@ Le nom du biome (HUD client, `TideboundClientEvents.onRenderGui`) n'était qu'un
 rouge ou cyan selon `#tidebound:dangerous` — pas assez lisible comme indicateur de danger réel. Ajout
 d'un encadrement (fond semi-transparent + bordure colorée selon le statut) et d'une seconde ligne de
 texte explicite sous le nom du biome : « Eaux sûres » ou « Eaux dangereuses » (au lieu de ne compter
-que sur la couleur du nom). Le système de dangerosité reste binaire (tag `#tidebound:dangerous`,
-inchangé) : ce correctif rend ce statut existant lisible, il n'introduit pas de nouveaux paliers de
-danger.
+que sur la couleur du nom). Le système de dangerosité reste binaire (tag `#tidebound:dangerous`, inchangé) : ce correctif rend
+ce statut existant lisible, il n'introduit pas de nouveaux paliers de danger.
+
+Polish visuel supplémentaire : fond en dégradé (plus opaque en haut) plutôt qu'une teinte plate,
+ombre externe légère, ligne de séparation entre le nom et le statut, nom en gras/statut en italique,
+et fondu en sortie sur les derniers 500 ms au lieu d'une disparition brutale.
 
 ## Explicitement pas traité ici
 

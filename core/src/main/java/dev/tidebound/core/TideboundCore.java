@@ -8,6 +8,7 @@ import dev.tidebound.core.event.RegionalPortEvents;
 import dev.tidebound.core.event.StarterPortEvents;
 import dev.tidebound.core.event.TideboundGameplayEvents;
 import dev.tidebound.core.event.VesselModuleEvents;
+import dev.tidebound.core.advancement.TideboundCriteriaTriggers;
 import dev.tidebound.core.registry.TideboundAttachments;
 import dev.tidebound.core.registry.TideboundCreativeTabs;
 import dev.tidebound.core.registry.TideboundDataComponents;
@@ -27,6 +28,7 @@ public final class TideboundCore {
     public TideboundCore(IEventBus modBus) {
         TideboundAttachments.register(modBus);
         TideboundCreativeTabs.register(modBus);
+        TideboundCriteriaTriggers.register(modBus);
         TideboundDataComponents.register(modBus);
         TideboundEntities.register(modBus);
         TideboundItems.register(modBus);

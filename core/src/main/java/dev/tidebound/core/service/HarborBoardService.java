@@ -1,5 +1,6 @@
 package dev.tidebound.core.service;
 
+import dev.tidebound.core.advancement.TideboundCriteriaTriggers;
 import dev.tidebound.core.content.ContractDefinition;
 import dev.tidebound.core.content.TideboundContentManager;
 import dev.tidebound.core.data.ContractProgress;
@@ -104,6 +105,10 @@ public final class HarborBoardService {
     }
 
     public static void open(ServerPlayer player, PortNpcRole role) {
+        TideboundCriteriaTriggers.QUEST_SIGNAL.get().trigger(player, "port_visited");
+        if (role == PortNpcRole.INTENDANT) {
+            TideboundCriteriaTriggers.QUEST_SIGNAL.get().trigger(player, "contract_board_opened");
+        }
         player.openMenu(new SimpleMenuProvider(
                 (containerId, inventory, ignored) ->
                         new dev.tidebound.core.menu.HarborMenu(containerId, inventory, player, role),

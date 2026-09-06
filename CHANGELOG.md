@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.27.0-alpha — TB-QUEST-002 : livre FTB Quests durci
+
+- fini les cases à cocher soi-même sans vérification serveur : cinq tâches (enregistrement du navire,
+  port trouvé, tableau des contrats consulté, contrat livré, navire amélioré) passent d'un
+  `checkmark` manuel à un vrai déclencheur d'avancement Minecraft caché
+  (`tidebound:quest_signal`), déclenché par Core au point de succès réel de chaque action serveur ;
+  seule « obtenir une barque » reste manuelle, faute de point d'ancrage fiable et vu l'enjeu nul ;
+- nouveau troisième chapitre « Les eaux côtières » (3 quêtes : saumon, Compas des Havres, niveau 3 en
+  Navigation) — traduit en français et anglais dès sa création ;
+- dépendances explicites entre quêtes à l'intérieur de chaque chapitre et entre `Naufragé` et
+  `Premier port` (le mode `flexible` global est conservé, seules des dépendances ciblées sont
+  ajoutées) ;
+- `validate_content.py` vérifie désormais 3 chapitres / 12 quêtes et le nouveau ratio de tâches
+  (5 automatiques par objet, 6 par avancement, 1 manuelle).
+
+Build, `validate_content.py` et démarrage serveur réel (1405 avancements chargés, dont le nouveau)
+vérifiés sans erreur. FTB Quests n'étant pas présent dans l'environnement de développement, l'affichage
+réel du livre et le déclenchement des tâches en jeu restent à confirmer sur le Devpack complet — voir
+`docs/quests/TB-QUEST-002.md`.
+
 ## 0.26.0-alpha — TB-CORE-008 (suite) : palette PNJ affinée et cadre de dangerosité du biome
 
 - les cinq skins PNJ sont reconstruits une deuxième fois avec la même méthode (base villageoise

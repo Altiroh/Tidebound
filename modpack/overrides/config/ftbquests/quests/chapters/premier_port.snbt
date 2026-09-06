@@ -10,6 +10,7 @@
 	quest_links: [ ]
 	quests: [
 		{
+			dependencies: ["0A11CE0000000104"]
 			icon: { id: "minecraft:name_tag" }
 			id: "0A11CE0000000201"
 			rewards: [{
@@ -22,13 +23,16 @@
 				type: "command"
 			}]
 			tasks: [{
+				advancement: "tidebound:signal/vessel_registered"
+				criterion: ""
 				id: "0A11CE0000001201"
-				type: "checkmark"
+				type: "advancement"
 			}]
 			x: 0.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000201"]
 			icon: { id: "tidebound:wake_compass" }
 			id: "0A11CE0000000202"
 			rewards: [{
@@ -49,6 +53,7 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000201"]
 			icon: { id: "minecraft:paper" }
 			id: "0A11CE0000000203"
 			rewards: [{
@@ -61,13 +66,16 @@
 				type: "command"
 			}]
 			tasks: [{
+				advancement: "tidebound:signal/contract_board_opened"
+				criterion: ""
 				id: "0A11CE0000001203"
-				type: "checkmark"
+				type: "advancement"
 			}]
 			x: 4.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000203"]
 			icon: { id: "minecraft:barrel" }
 			id: "0A11CE0000000204"
 			rewards: [{
@@ -80,13 +88,16 @@
 				type: "command"
 			}]
 			tasks: [{
+				advancement: "tidebound:signal/contract_delivered"
+				criterion: ""
 				id: "0A11CE0000001204"
-				type: "checkmark"
+				type: "advancement"
 			}]
 			x: 6.0d
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000204"]
 			icon: { id: "minecraft:anvil" }
 			id: "0A11CE0000000205"
 			rewards: [{
@@ -99,8 +110,10 @@
 				type: "command"
 			}]
 			tasks: [{
+				advancement: "tidebound:signal/vessel_upgraded"
+				criterion: ""
 				id: "0A11CE0000001205"
-				type: "checkmark"
+				type: "advancement"
 			}]
 			x: 8.0d
 			y: 0.0d

@@ -1,0 +1,77 @@
+{
+	default_hide_dependency_lines: false
+	default_quest_shape: "circle"
+	filename: "les_eaux_cotieres"
+	group: "0A11CE0000000001"
+	icon: { id: "minecraft:tropical_fish" }
+	id: "0A11CE0000000030"
+	images: [ ]
+	order_index: 2
+	quest_links: [ ]
+	quests: [
+		{
+			dependencies: ["0A11CE0000000104"]
+			icon: { id: "minecraft:salmon" }
+			id: "0A11CE0000000301"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:coastal_salmon 10"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002301"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001301"
+				item: { id: "minecraft:salmon" }
+				type: "item"
+			}]
+			x: 0.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0A11CE0000000301"]
+			icon: { id: "tidebound:haven_compass" }
+			id: "0A11CE0000000302"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:coastal_haven_compass 15"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002302"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				id: "0A11CE0000001302"
+				item: { id: "tidebound:haven_compass" }
+				type: "item"
+			}]
+			x: 2.0d
+			y: 0.0d
+		}
+		{
+			dependencies: ["0A11CE0000000302"]
+			icon: { id: "minecraft:map" }
+			id: "0A11CE0000000303"
+			rewards: [{
+				auto: "enabled"
+				command: "/tidebound progression reward-once {p} ftb:coastal_navigation_3 25"
+				icon: { id: "minecraft:prismarine_crystals" }
+				id: "0A11CE0000002303"
+				permission_level: 2
+				silent: true
+				type: "command"
+			}]
+			tasks: [{
+				advancement: "tidebound:signal/navigation_level_3"
+				criterion: ""
+				id: "0A11CE0000001303"
+				type: "advancement"
+			}]
+			x: 4.0d
+			y: 0.0d
+		}
+	]
+}

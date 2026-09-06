@@ -1,6 +1,7 @@
 {
 	chapter.0A11CE0000000010.title: "Naufragé"
 	chapter.0A11CE0000000020.title: "Premier port"
+	chapter.0A11CE0000000030.title: "Les eaux côtières"
 	chapter_group.0A11CE0000000001.title: "&3⚓ Le Voyage"
 	file.0000000000000001.title: "&3Tidebound"
 
@@ -62,6 +63,25 @@
 		"Les Tides gagnés dans le Voyage constituent une première avance, pas un salaire infini."
 	]
 
+	quest.0A11CE0000000301.title: "Une pêche plus généreuse"
+	quest.0A11CE0000000301.quest_desc: [
+		"Les eaux côtières nourrissent davantage que le premier rivage. Ramène un saumon."
+		""
+		"Chaque prise reste une entrée persistante estampillée par Tidebound Core, jamais un simple objet vanilla."
+	]
+	quest.0A11CE0000000302.title: "Le Compas des Havres"
+	quest.0A11CE0000000302.quest_desc: [
+		"Fabrique un Compas des Havres pour repérer l'intendant enregistré le plus proche, où que tu sois."
+		""
+		"Contrairement au Compas de sillage, il pointe vers un port, pas vers ton navire."
+	]
+	quest.0A11CE0000000303.title: "Lire la mer"
+	quest.0A11CE0000000303.quest_desc: [
+		"Navigue en pleine mer jusqu'à atteindre le niveau 3 en Navigation."
+		""
+		"Cette étape se coche automatiquement dès que Tidebound Core confirme ta progression réelle."
+	]
+
 	task.0A11CE0000001101.title: "Fabriquer un établi"
 	task.0A11CE0000001102.title: "J'ai obtenu une barque"
 	task.0A11CE0000001103.title: "Rapporter une morue"
@@ -71,6 +91,9 @@
 	task.0A11CE0000001203.title: "J'ai consulté les contrats"
 	task.0A11CE0000001204.title: "J'ai livré un contrat"
 	task.0A11CE0000001205.title: "J'ai entretenu mon navire"
+	task.0A11CE0000001301.title: "Rapporter un saumon"
+	task.0A11CE0000001302.title: "Posséder le Compas des Havres"
+	task.0A11CE0000001303.title: "Atteindre le niveau 3 en Navigation"
 
 	reward.0A11CE0000002101.title: "+5 Tides"
 	reward.0A11CE0000002102.title: "+10 Tides"
@@ -81,4 +104,7 @@
 	reward.0A11CE0000002203.title: "+5 Tides"
 	reward.0A11CE0000002204.title: "+15 Tides"
 	reward.0A11CE0000002205.title: "+25 Tides"
+	reward.0A11CE0000002301.title: "+10 Tides"
+	reward.0A11CE0000002302.title: "+15 Tides"
+	reward.0A11CE0000002303.title: "+25 Tides"
 }

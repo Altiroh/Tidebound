@@ -30,6 +30,7 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000101"]
 			icon: { id: "minecraft:oak_boat" }
 			id: "0A11CE0000000102"
 			rewards: [{
@@ -49,6 +50,7 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000102"]
 			icon: { id: "minecraft:cod" }
 			id: "0A11CE0000000103"
 			rewards: [{
@@ -69,6 +71,7 @@
 			y: 0.0d
 		}
 		{
+			dependencies: ["0A11CE0000000103"]
 			icon: { id: "minecraft:lantern" }
 			id: "0A11CE0000000104"
 			rewards: [{
@@ -81,8 +84,10 @@
 				type: "command"
 			}]
 			tasks: [{
+				advancement: "tidebound:signal/port_visited"
+				criterion: ""
 				id: "0A11CE0000001104"
-				type: "checkmark"
+				type: "advancement"
 			}]
 			x: 6.0d
 			y: 0.0d
