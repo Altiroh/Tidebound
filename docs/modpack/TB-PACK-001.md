@@ -24,6 +24,7 @@ technique ; Tidebound Core conserve l'autorité sur les navires, la pêche, les 
 | Rendu | Sodium, Iris, ImmediatelyFast | Performances client et prise en charge des shaders |
 | Multijoueur | Lootr | Loot indépendant par joueur sur coffres, tonneaux et minecarts |
 | Quêtes | FTB Quests Translator | Traduction du livre à la demande, indépendante de la langue du jeu |
+| Rendu | Complementary (Reimagined), Photon, Solas, AstraLex | Quatre shaders au choix dans le menu Iris, aucun activé par défaut |
 
 Tous les fichiers du manifeste ciblent Minecraft `1.21.1` et NeoForge. Les dépendances directes
 Architectury, Balm et CreativeCore sont déclarées explicitement.
@@ -36,8 +37,10 @@ activation et disponibilité d'une pierre) restent actives.
 
 ## Choix différés
 
-- Aucun shaderpack n'est imposé : Iris rend le menu Shaders disponible, mais le joueur choisit un pack
-  adapté à son GPU.
+- Aucun des quatre shaders fournis n'est activé par défaut : Iris rend le menu Shaders disponible,
+  mais le joueur choisit celui adapté à son GPU (ou aucun). Reverie a été demandé mais exclu : sa
+  version la plus ancienne exige Minecraft 1.21.5+, incompatible avec le verrouillage 1.21.1 du pack ;
+  à reconsidérer si le pack migre un jour de version.
 - Aucun mod prétendument « Fast Smelting Enchantment » n'a été ajouté sans version NeoForge 1.21.1
   vérifiée. L'enchantement Tidebound natif `tidebound:instant_smelting` (`TB-SMELT-001`) répond à ce
   besoin.

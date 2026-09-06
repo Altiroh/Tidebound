@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.23.0-alpha — TB-WORLD-002 (tranche 2)
+
+- 25 biomes vanilla (contre 5) : chaque bande de continentalité de l'archipel est désormais aussi
+  découpée par température (glacial/froid/tempéré/chaud/torride), zéro nouvel asset ;
+- deux biomes Tidebound à eau teintée en poches rares : `violet_shallows` (violet, océan tempéré) et
+  `abyss_ocean` (bleu très sombre, océan profond tempéré) — uniquement des couleurs, pas de nouvel
+  asset visuel non plus ;
+- le tag `#tidebound:dangerous` (vide depuis `TB-CORE-007`) est peuplé : profondeurs, eaux glacées,
+  `abyss_ocean` ;
+- naviguer dans une zone dangereuse avec une coque de niveau < 3 use désormais le navire au fil du
+  temps — conséquence mécanique de l'annonce de biome déjà en place ;
+- chaque région de 512 blocs a ~1/3 de chance d'obtenir son propre port en l'explorant, en plus du
+  port initial du spawn, pour ne jamais forcer un trajet de plusieurs milliers de blocs ;
+- Devpack : ajoute Complementary (Reimagined), Photon, Solas et AstraLex comme shaders au choix dans
+  Iris (aucun activé par défaut) ; Reverie demandé mais exclu, incompatible avec Minecraft 1.21.1.
+
+Codé, compilé et démarré sur un serveur réel sans erreur ; **non validé visuellement en jeu** (rendu
+des teintes, rareté effective des poches, distance réelle aux ports, équilibrage des dégâts de coque).
+
 ## 0.22.0-alpha — TB-WORLD-002 (tranche 1) + icônes TB-CORE-007
 
 - le port initial (tirage ~1/3 par seed) se matérialise désormais automatiquement près du spawn au

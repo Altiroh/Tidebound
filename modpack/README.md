@@ -1,4 +1,4 @@
-# Tidebound — Into the Deep (Devpack 0.22.0-alpha)
+# Tidebound — Into the Deep (Devpack 0.23.0-alpha)
 
 Ce dossier assemble le premier socle jouable du modpack : Tidebound, quêtes, exploration, construction,
 stockage, ambiance et performances. Il reste volontairement plus petit que la cible finale de 50 à 80 mods.
@@ -16,13 +16,16 @@ comme profil personnalisé. Le manifeste installe :
 - Sodium, Iris et ImmediatelyFast ;
 - Architectury API, requise par le socle FTB ;
 - Lootr, pour un loot indépendant par joueur sur coffres, tonneaux et minecarts ;
-- FTB Quests Translator, pour traduire le livre à la demande indépendamment de la langue du jeu.
+- FTB Quests Translator, pour traduire le livre à la demande indépendamment de la langue du jeu ;
+- Complementary Shaders (Reimagined), Photon, Solas et AstraLex — quatre shaders au choix dans le menu
+  Iris, aucun activé par défaut. Reverie a été demandé mais exclu : sa version la plus ancienne exige
+  Minecraft 1.21.5+, incompatible avec le verrouillage 1.21.1 du pack.
 
 Le JAR Tidebound n'est pas téléchargé par CurseForge. Après import du dossier seul, copier
-`tidebound-0.22.0-alpha.jar` dans le dossier `mods` de l'instance.
+`tidebound-0.23.0-alpha.jar` dans le dossier `mods` de l'instance.
 
 Le workflow GitHub Actions automatise cette étape : son artifact contient
-`Tidebound_Devpack_0.22.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
+`Tidebound_Devpack_0.23.0-alpha.zip`, directement importable dans CurseForge, ainsi que le JAR seul.
 
 CurseForge avertit que le JAR Tidebound et les fichiers de quêtes ne viennent pas encore de son catalogue.
 Il faut cocher **I understand** puis choisir **All Files**. Le bouton **CurseForge Files Only** retire précisément
@@ -38,8 +41,9 @@ bash modpack/package.sh
 ## Réglages Tidebound
 
 - Waystones ne consomme aucun niveau d'expérience grâce à `config/waystones-common.toml`.
-- Iris apporte le menu des shaders, mais aucun shaderpack n'est imposé afin de rester compatible avec
-  les petites configurations.
+- Iris apporte le menu des shaders ; quatre shaders sont fournis (Complementary, Photon, Solas,
+  AstraLex) mais aucun n'est activé par défaut, afin de rester compatible avec les petites
+  configurations — le joueur choisit dans le menu Iris.
 - JEI remplace NEI, qui n'est pas la branche moderne adaptée à Minecraft 1.21.1.
 - Create sert aux quais et ateliers visuels ; il ne remplace jamais le navire ou l'économie Tidebound.
 

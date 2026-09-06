@@ -1,4 +1,4 @@
-# Tidebound Core — 0.22.0-alpha
+# Tidebound Core — 0.23.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -47,7 +47,13 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - solde de Tides affiché directement dans l'écran d'inventaire ;
 - annonce du biome à chaque changement, avec mise en évidence des biomes dangereux ;
 - port initial matérialisé automatiquement près du spawn au premier démarrage du serveur, quand le
-  tirage par seed le réserve.
+  tirage par seed le réserve ;
+- au-delà du port initial, chaque région de 512 blocs a ~1/3 de chance d'obtenir son propre port en
+  l'explorant, pour ne jamais forcer un très long trajet sans port ;
+- 25 biomes vanilla (contre 5) via un découpage par température, plus deux biomes Tidebound à eau
+  teintée (`violet_shallows`, `abyss_ocean`) en poches rares ;
+- dégâts progressifs au navire naviguant en eaux taguées dangereuses avec une coque insuffisamment
+  améliorée.
 
 Le navire physique possède désormais son propre type d'entité. Il réutilise la physique éprouvée du bateau-coffre,
 mais son rendu, son équipage et ses niveaux visuels appartiennent à Tidebound. Le livre `Le Voyage` guide le joueur
@@ -122,7 +128,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.22.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.23.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -243,8 +249,18 @@ Le spawn n'a pas besoin de contenir un port. Le joueur peut suivre la boucle sui
 ## Génération de l'archipel
 
 Toute nouvelle sauvegarde créée avec Tidebound remplace le preset normal par l'archipel. Le preset
-`Tidebound — Archipel` est également exposé dans la liste des types de monde. Le spawn cible une zone
-forestière entourée de plages et d'océan ; les dimensions du Nether et de l'End restent vanilla.
+`Tidebound — Archipel` est également exposé dans la liste des types de monde. Le spawn cible la bande
+de continentalité la plus haute, désormais partagée entre cinq biomes vanilla selon la température
+locale (`snowy_taiga`, `taiga`, `forest`, `birch_forest`, `jungle`) : tous fournissent du bois, la
+boucle bois → barque reste donc garantie même si l'ambiance du tout premier écran varie. Les
+dimensions du Nether et de l'End restent vanilla.
+
+25 biomes vanilla au total (contre 5 dans les toutes premières versions), répartis par continentalité
+puis par température — profondeurs, océans, plages, plaines et forêts ont chacun leurs variantes
+climatiques. Deux biomes Tidebound s'y ajoutent en poches rares, uniquement des teintes d'eau
+personnalisées sans nouvel asset : `tidebound:violet_shallows` (eau violette, dans l'océan tempéré) et
+`tidebound:abyss_ocean` (eau bleu très sombre, dans l'océan profond tempéré). Voir `TB-WORLD-002.md`
+pour le détail du découpage.
 
 Ne pas ouvrir une ancienne sauvegarde importante sans copie : les chunks déjà présents restent intacts,
 mais les nouveaux chunks suivront le relief insulaire et peuvent former une frontière visible. Pour
@@ -254,9 +270,16 @@ contrôler une seed neuve avec les commandes autorisées :
 /tidebound world diagnose 128
 ```
 
-Le port initial reste facultatif et n'est pas encore généré automatiquement. Pour valider le placement
-runtime sur un rivage proche, utiliser `/tidebound world port-place` ; une île sans port doit toujours
+Le port initial (tirage ~1/3 par seed) se matérialise automatiquement près du spawn au premier
+démarrage du serveur. Au-delà, chaque région de 512 blocs a aussi ~1/3 de chance de contenir un port,
+vérifié pendant que les joueurs explorent — de quoi retrouver un port sans avoir à parcourir des
+milliers de blocs, sans que ce soit pour autant garanti à tout coup. `/tidebound world port-place`
+reste disponible pour forcer un placement précis en administration ; une île sans port doit toujours
 permettre de fabriquer une barque vanilla.
+
+Certaines eaux sont taguées `#tidebound:dangerous` (profondeurs, eaux glacées, `abyss_ocean`) :
+y naviguer avec une coque de niveau inférieur à 3 use progressivement le navire. L'annonce de biome
+prévient déjà en rouge à l'entrée dans une zone marquée comme telle.
 
 Une recette de remplacement du compas est disponible avec un compas vanilla, du cuivre et du papier.
 

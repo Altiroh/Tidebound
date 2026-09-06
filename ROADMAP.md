@@ -30,9 +30,11 @@
 
 ## En cours
 
-- [x] `TB-WORLD-002` tranche 1 — placement automatique du port initial près du spawn.
-- [ ] `TB-WORLD-002` tranche 2 — variété de biomes maritimes, gros navires échoués rares, zones
-  bornées par le niveau du navire (issu du retour de `TB-QA-001`, suivi dans `core/TB-WORLD-002.md`).
+- [x] `TB-WORLD-002` tranche 1 — placement automatique du port initial, puis par région explorée.
+- [x] `TB-WORLD-002` tranche 2 — 25 biomes vanilla par climat, deux biomes à eau teintée, zones
+  bornées par le niveau de coque (issu du retour de `TB-QA-001`, suivi dans `core/TB-WORLD-002.md`).
+  Codé et compilé, **jamais validé en jeu**.
+- [ ] `TB-WORLD-002` suite — gros navires échoués rares, variété d'humidité.
 
 ## Après validation du prototype
 

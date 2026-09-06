@@ -27,6 +27,10 @@ public final class HarborRegistry extends SavedData {
         return level.getServer().overworld().getDataStorage().computeIfAbsent(FACTORY, DATA_NAME);
     }
 
+    public boolean contains(long siteId) {
+        return sites.containsKey(siteId);
+    }
+
     public void register(HarborSite site) {
         HarborSite previous = sites.put(site.siteId(), site);
         if (!site.equals(previous)) {

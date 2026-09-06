@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-002` (tranche 1) / `0.22.0-alpha`
+État importé : `TB-WORLD-002` (tranches 1-2) / `0.23.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -83,7 +83,13 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - interface de cale du navire Tidebound n'affichant que les lignes débloquées (9/18/27 cases), en
   réutilisant directement `ChestMenu` vanilla sans nouveau menu ni écran ;
 - onglet créatif dédié, solde de Tides visible dans l'inventaire et annonce du biome traversé
-  (rouge si marqué dangereux via `#tidebound:dangerous`), issus du retour de `TB-QA-001`.
+  (rouge si marqué dangereux via `#tidebound:dangerous`), issus du retour de `TB-QA-001` ;
+- port initial matérialisé automatiquement près du spawn, puis un port par région de 512 blocs avec
+  ~1/3 de chance en explorant (jamais plus de quelques centaines/un millier de blocs à parcourir) ;
+- 25 biomes vanilla (contre 5) répartis par continentalité et température, plus deux biomes Tidebound
+  à eau teintée (`violet_shallows`, `abyss_ocean`) en poches rares, désormais dans `#tidebound:dangerous` ;
+- dégâts progressifs au navire en eaux dangereuses (profondeurs, glace, `abyss_ocean`) si la coque est
+  sous le niveau 3 — conséquence mécanique de l'annonce de biome ci-dessus.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
 `core/TB-CORE-007.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md` et
@@ -112,16 +118,20 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-WORLD-002 — Tranche 2 : variété de biomes et zones bornées
+### TB-WORLD-002 — Validation en jeu, puis gros navires échoués
 
-À réaliser maintenant (voir `core/TB-WORLD-002.md` pour l'état détaillé) :
+Tranches 1 et 2 codées et compilées (voir `core/TB-WORLD-002.md`) mais jamais vues tourner dans un
+vrai client — aucune de ces vérifications n'a été faite en jeu :
 
-- valider en jeu la tranche 1 (port initial auto-placé) sur plusieurs seeds ;
-- concevoir la variété de biomes maritimes (teintes/profondeurs d'eau, types d'îles au-delà de
-  forêt/plage) et peupler le tag `#tidebound:dangerous` en conséquence ;
-- définir et implémenter des zones bornées par le niveau du navire (aucun hook existant : partir de
-  `PlayerVessel.hullTier`/`motorTier` et `VesselDeploymentService`) ;
-- gros navires échoués rares, en plus des épaves existantes.
+- ports (initial + par région) apparaissant à une distance raisonnable, PNJ interactifs ;
+- variété de biomes réellement visible en explorant plusieurs seeds, y compris les poches
+  `violet_shallows`/`abyss_ocean` ;
+- dégâts de coque en zone dangereuse avec hull < 3, absence de dégâts avec hull ≥ 3 ;
+- spawn toujours jouable (bois accessible) quel que soit le biome tiré.
+
+Une fois validé, prochain morceau explicitement laissé de côté : gros navires échoués rares (nécessite
+soit une structure `.nbt`, soit un générateur procédural dédié — aucun des deux commencé) et/ou
+variété d'humidité (mangrove, badlands...).
 
 Pas de structures `.nbt` externes pour cette tranche (décision prise avec l'utilisateur) : le système
 procédural actuel (`HarborPlacementService`) reste la source de vérité, à réévaluer plus tard si besoin.
