@@ -57,6 +57,14 @@ bouton personnalisé pointant vers l'image correspondante et conservant son acti
 (Singleplayer, Multiplayer, Mods, Options, Quit Game). Le placement se fait visuellement dans
 l'éditeur ; aucune valeur de positionnement n'est présumée ici.
 
+## Miniature du pack
+
+`icon.png`, à la racine de ce dossier (donc à la racine du zip généré, à côté de `manifest.json`), est
+l'illustration de couverture de Tidebound. Le format d'import personnalisé de CurseForge ne l'applique
+pas automatiquement à la miniature du profil : dans l'app CurseForge, clic droit sur le profil importé
+→ **Change Icon** → sélectionner ce fichier. Il servira aussi de logo si le pack est un jour publié
+comme projet CurseForge à part entière.
+
 ## Périmètre de test
 
 Ce premier ensemble doit être lancé dans CurseForge avant d'ajouter d'autres mods cosy. Vérifier en

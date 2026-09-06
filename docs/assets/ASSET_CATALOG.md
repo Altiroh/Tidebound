@@ -26,6 +26,7 @@ leur présence dans ce document ne signifie pas encore que l'objet ou le PNJ est
 | `tidebound_gui_gardien_phare.png` | Interface visuelle du phare | raccord météo/rumeurs à venir |
 | `background.png` | Fond de l'écran-titre | `modpack/overrides/config/fancymenu/assets/tidebound/` |
 | `button_singleplayer.png`, `button_multiplayer.png`, `button_mods.png`, `button_options.png`, `button_quit.png` | Boutons personnalisés de l'écran-titre | `modpack/overrides/config/fancymenu/assets/tidebound/` |
+| `icon.png` | Miniature/illustration de couverture du pack | `modpack/icon.png` |
 
 ## Sources importées, conversion requise
 
