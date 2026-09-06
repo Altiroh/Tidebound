@@ -40,6 +40,10 @@
   entre quêtes.
 - [x] `TB-CORE-010` — catalogue des profils de prise migré du code vers le datapack, même mécanisme
   que paliers et contrats ; ajouter un poisson de mod ne demande plus de code.
+- [x] `TB-CORE-011` — onglets morts « Demandes »/« Produits » de la poissonnerie désactivés avec une
+  info-bulle plutôt que silencieusement inertes.
+- [x] `TB-CORE-012` — crash au lancement corrigé : JourneyMap remplacé par sa version stable 6.0.7
+  (bêta instable + dépendance snapshot épinglées par erreur), crash réel remonté par l'utilisateur.
 
 ## En cours
 

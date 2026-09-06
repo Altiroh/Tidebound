@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.30.0-alpha — TB-CORE-011/012 : boutons honnêtes et crash de lancement corrigé
+
+- **Correctif de crash** (`TB-CORE-012`, crash réel remonté par l'utilisateur) : JourneyMap était
+  épinglé sur `6.0.0-beta.76`, une préversion instable tirant une dépendance snapshot, qui plantait
+  au tout premier écran de chargement (`JourneymapClient.getInstance()` nul dans son propre mixin,
+  aucun code Tidebound impliqué). Remplacé par la version stable `6.0.7` (fichier CurseForge
+  `8764294`), qui documente son API comme intégrée sans dépendance externe séparée ;
+- les onglets « Demandes » et « Produits » de la poissonnerie, jusqu'ici cliquables sans aucun effet,
+  sont désactivés avec une info-bulle « Bientôt disponible » plutôt que de rester des boutons morts
+  sans explication (`TB-CORE-011`). Le tableau de prix peint dans l'art (six espèces fictives) reste
+  inchangé : le rendre réel demande un nouvel art ou une décision de contenu, pas juste du câblage.
+
+`validate_content.py` mis à jour (nouvelle version JourneyMap épinglée). Build et démarrage serveur
+réel vérifiés sans erreur ; le lancement client réel avec JourneyMap 6.0.7 reste à confirmer sur la
+machine de l'utilisateur, de même que l'alignement visuel des deux nouvelles zones grisées.
+
 ## 0.29.0-alpha — TB-CORE-010 : catalogue de prises en datapack
 
 - les quatre profils de prise vanilla (morue, saumon, poisson tropical, poisson-globe) passent du

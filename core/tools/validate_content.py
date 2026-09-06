@@ -362,7 +362,7 @@ def validate_modpack() -> int:
         328085: 7963363,  # Create
         238222: 8792638,  # JEI
         378609: 7917007,  # Tom's Simple Storage
-        32274: 8116777,   # JourneyMap
+        32274: 8764294,   # JourneyMap 6.0.7 stable (6.0.0-beta.76 crashed on launch, see TB-CORE-012)
         531761: 7264790,  # Balm
         245755: 8056467,  # Waystones
         257814: 8699787,  # CreativeCore

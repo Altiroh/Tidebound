@@ -8,6 +8,7 @@ import java.util.List;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractButton;
+import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -56,6 +57,18 @@ public final class HarborScreen extends AbstractContainerScreen<HarborMenu> {
         addRenderableWidget(net.minecraft.client.gui.components.Button.builder(
                 Component.translatable("menu.tidebound.sell_all"), button -> press(HarborMenu.ACTION_SELL_ALL))
                 .bounds(artX + 149, topPos + 186, 37, 15).build());
+
+        Hotspot requests = new Hotspot(artX + 75, topPos + 128, 59, 29,
+                Component.translatable("menu.tidebound.requests"), () -> { });
+        requests.active = false;
+        requests.setTooltip(Tooltip.create(Component.translatable("menu.tidebound.coming_soon")));
+        addRenderableWidget(requests);
+
+        Hotspot catalog = new Hotspot(artX + 137, topPos + 128, 59, 29,
+                Component.translatable("menu.tidebound.catalog"), () -> { });
+        catalog.active = false;
+        catalog.setTooltip(Tooltip.create(Component.translatable("menu.tidebound.coming_soon")));
+        addRenderableWidget(catalog);
     }
 
     private void initIntendant(int artX) {

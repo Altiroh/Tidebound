@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-010` (catalogue de prises en datapack) / `0.29.0-alpha`
+État importé : `TB-CORE-012` (correctif de crash au lancement — JourneyMap) / `0.30.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -112,21 +112,30 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   infrastructure d'aiguille de compas animée (cible persistante `COMPASS_TARGET`, calcul de cap
   client) prête côté code mais sans effet visuel tant que l'aiguille dessinée séparément n'est pas
   fournie (`TB-CORE-009`) ;
+- correctif de crash au lancement : JourneyMap était épinglé sur une préversion bêta instable
+  (`6.0.0-beta.76` + dépendance snapshot), remplacée par la version stable `6.0.7`
+  (`TB-CORE-012`, crash réel remonté par l'utilisateur) ;
 - catalogue des quatre profils de prise vanilla migré du code vers le datapack
   (`data/tidebound/tidebound/catch_profiles/*.json`), chargé par `TideboundContentManager` comme les
   paliers et contrats — ajouter un poisson de mod ne nécessite plus de modification de code
-  (`TB-CORE-010`).
+  (`TB-CORE-010`) ;
+- onglets « Demandes »/« Produits » de la poissonnerie, jusqu'ici cliquables sans aucun effet,
+  désactivés avec une info-bulle « Bientôt disponible » plutôt que de rester silencieusement morts
+  (`TB-CORE-011`) — le tableau des prix peint dans l'art reste inchangé (espèces fictives non
+  alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-010.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-012.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
 Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pas être présentés comme fonctionnels :
 
-1. **Demandes du poissonnier.** La vente générale fonctionne ; les prix du jour et commandes spéciales
-   affichés dans la maquette restent à rendre dynamiques.
+1. **Demandes du poissonnier.** La vente générale fonctionne ; les onglets « Demandes » et « Produits »
+   sont désormais honnêtement désactivés (« Bientôt disponible », `TB-CORE-011`) plutôt que morts sans
+   explication. Les rendre réels demande soit un nouvel art (les six espèces peintes dans le tableau
+   des prix ne correspondent pas aux quatre espèces gérées), soit une décision de contenu.
 2. **Catalogue par datapack.** Fait (`TB-CORE-010`) : les quatre profils vanilla sont désormais des
    fichiers JSON, chargés comme les paliers et contrats. Les poissons de mods restent à ajouter (un
    fichier JSON par espèce suffit, aucun code supplémentaire requis).
@@ -167,7 +176,11 @@ maintenue explicitement par l'utilisateur.
 - juger le cadre du nom de biome (lisibilité, esthétique du dégradé/fondu) ;
 - confirmer que le livre FTB Quests se charge bien avec le nouveau chapitre et les nouvelles tâches
   `advancement` (non testable sans FTB Quests, absent de l'environnement de développement Core) ;
-  vérifier en particulier que les tâches concernées se cochent seules au bon moment et pas avant.
+  vérifier en particulier que les tâches concernées se cochent seules au bon moment et pas avant ;
+- vérifier l'alignement des deux nouvelles zones grisées « Demandes »/« Produits » de la poissonnerie
+  (géométrie calculée, pas vue en jeu, `TB-CORE-011`) ;
+- confirmer que le client démarre normalement avec JourneyMap `6.0.7` (`TB-CORE-012`) — la cause
+  identifiée est corrigée mais un vrai lancement client reste nécessaire pour valider.
 
 ### Ensuite
 
