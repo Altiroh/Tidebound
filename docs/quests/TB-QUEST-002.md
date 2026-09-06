@@ -98,3 +98,12 @@ global :
   déverrouillage visuel des dépendances et le déclenchement effectif des tâches `advancement` en jeu
   restent à confirmer sur le Devpack complet ;
 - aucune vérification visuelle possible dans cette session, comme pour le reste de `TB-CORE-008`.
+
+## Correctif de vérification (après coup)
+
+Le champ `criterion: ""` des six tâches `advancement` avait été écrit par analogie avec l'export
+standard de FTB Quests, sans confirmation contre le code source réel. Vérifié après coup contre
+`AdvancementTask.java` (dépôt officiel `FTBTeam/FTB-Quests`) : `criterion` vide est la valeur par
+défaut documentée dans le code lui-même et signifie explicitement « valider l'avancement entier »
+(`criterion.isEmpty() → progress.isDone()`), pas une chaîne de repli fragile. Syntaxe confirmée
+correcte, aucun changement nécessaire.
