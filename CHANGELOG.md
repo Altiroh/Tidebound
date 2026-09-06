@@ -4,6 +4,16 @@ Toutes les évolutions notables de Tidebound sont consignées ici.
 
 ## Non publié
 
+## 0.13.0-alpha — TB-DESIGN-002
+
+- refonte du lore canonique autour d'un archipel vivant et de l'utilité sandbox avant le mythe ;
+- formalisation des îles de ressources, habitées, hostiles et étranges ;
+- distinction du Compas des Havres et du Compas de sillage ;
+- définition des cinq rôles portuaires et de ports aux services variables ;
+- verrouillage de la Barque de fortune vanilla comme embarcation non améliorable ;
+- cadrage du dragage, du sonar, des abysses et de la Connaissance interdite ;
+- reliques de vitalité uniques limitées à trois à cinq gains par partie complète.
+
 ## 0.12.0-alpha — TB-PACK-001
 
 - extension du Devpack à Create, JEI, Tom's Simple Storage, JourneyMap, Waystones et FTB Ultimine ;

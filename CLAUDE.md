@@ -17,11 +17,12 @@ Commencer par lire `HANDOFF.md`, puis `docs/design/Tidebound_Lore.md`, `ROADMAP.
 
 ## Travail courant
 
-La prochaine unité de travail est `TB-VESSEL-001`, décrite dans `HANDOFF.md`. Les prises persistantes,
+La prochaine unité de travail est `TB-NPC-001`, décrite dans `HANDOFF.md`. Les prises persistantes,
 leur fraîcheur et leur valeur sont implémentées dans `TB-FISH-001` sans remplacer les items vanilla.
 La direction visuelle est désormais canonique : consulter `docs/assets/ASSET_CATALOG.md` avant de créer
-un nouvel asset. Ne pas présenter le skin d'intendant ni le navire Tidebound comme implémentés tant que
-leurs tickets respectifs n'ont pas été validés en jeu.
+un nouvel asset. Le navire Tidebound existe ; une barque vanilla reste une Barque de fortune et ne
+doit jamais recevoir ses améliorations. Ne pas présenter les cinq PNJ dédiés comme implémentés avant
+validation de `TB-NPC-001`.
 
 Le preset normal est volontairement remplacé par l'archipel de `TB-WORLD-001`. Ne jamais annoncer la
 matrice 20/20 comme validée sans avoir créé et diagnostiqué vingt mondes neufs. Tout changement de

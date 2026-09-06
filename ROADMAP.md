@@ -15,12 +15,14 @@
 - [x] `TB-WORLD-001` — preset d'archipel par défaut, île boisée ciblée et diagnostic de spawn.
 - [x] `TB-VESSEL-001` — entité de navire modulaire, quatre places, rendu progressif et migration des barques.
 - [x] `TB-PACK-001` — socle cosy : Create, stockage, carte, voyage, ambiance, objets physiques et shaders.
+- [x] `TB-DESIGN-002` — archipel vivant, Compas des Havres, rôles portuaires, abysses et vitalité canonisés.
 
 ## Prochaine tranche du prototype vertical
 
-- [ ] `TB-NPC-001` — entité d'intendant originale et conversion de son skin ;
+- [ ] `TB-NPC-001` — cinq rôles de PNJ originaux, proches des villageois, avec services visuels distincts ;
 - [ ] `TB-ECON-001` — vente physique au port et équilibrage des Tides ;
 - [ ] `TB-PORT-001` — structure de port, intendant et services générés ;
+- [ ] `TB-NAV-001` — Compas des Havres pointant vers un Intendant pertinent ;
 - [ ] `TB-SMELT-001` — enchantement de fonte rapide compatible avec l'économie et Create ;
 - [ ] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet ;
 - [ ] `TB-QA-001` — partie neuve de 30 minutes sur plusieurs seeds.
@@ -33,4 +35,5 @@
 - [ ] événements de nuit, brume et danger maritime ;
 - [ ] encyclopédie, records de pêche et objectifs long terme ;
 - [ ] progression de la Connaissance interdite et révélations conditionnelles ;
+- [ ] reliques abyssales uniques et trois à cinq gains permanents de vitalité maximum ;
 - [ ] équilibrage multijoueur et protection anti-farm.

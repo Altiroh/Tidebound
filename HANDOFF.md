@@ -1,10 +1,10 @@
 # Transmission Tidebound
 
-Dernière mise à jour : **5 septembre 2026**
+Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-PACK-001` / `0.12.0-alpha`
+État importé : `TB-DESIGN-002` / `0.13.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -17,6 +17,11 @@ Tidebound est une aventure Minecraft maritime **sandbox et procédurale**, pas u
 - des contrats répétables, qui fournissent Tides, denrées et matériaux.
 
 Le joueur doit devenir efficace rapidement, tout en restant libre de construire, explorer, cultiver, combattre ou commercer. L'océan oriente la progression sans supprimer Minecraft.
+
+La référence `TB-DESIGN-002` verrouille aussi l'archipel vivant, les familles d'îles, la recherche
+du premier Intendant, les cinq rôles portuaires, les abysses, la Connaissance interdite révélatrice
+et un maximum visé de trois à cinq gains uniques de vitalité. Le Compas des Havres (Intendant) et le
+Compas de sillage (navire personnel) sont deux objets distincts.
 
 ## Ce qui fonctionne dans le code
 
