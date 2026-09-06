@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-PORT-001A` / `0.15.0-alpha`
+État importé : `TB-PORT-001B` / `0.16.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -57,6 +57,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - estimation en direct et vente physique des prises estampillées auprès du poissonnier ;
 - transaction de vente non duplicable créditant Tides et XP Commerce sans toucher aux poissons vanilla ;
 - planificateur stable des ports par seed/région, avec cinq archétypes pondérés et services facultatifs ;
+- placement administrateur d'un quai compact sur un rivage détecté, avec uniquement les PNJ du plan ;
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
@@ -99,16 +100,14 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-PORT-001B — Placement physique des ports
+### TB-NAV-001 — Compas des Havres
 
 À réaliser maintenant :
 
-- construire les gabarits du hameau, quai, phare, marché et station ;
-- choisir un rivage viable puis consommer le `PortPlan` de la région ;
-- invoquer uniquement les PNJ et services annoncés par le plan ;
-- placer au moins un port atteignable sans marche continentale lorsqu'un site est tiré ;
-- conserver le Compas des Havres comme garde-fou ultérieur ;
-- intégrer Create uniquement lorsque `CREATE_MECHANISM` est présent.
+- enregistrer les sites portuaires générés dans des données monde persistantes ;
+- créer le Compas des Havres avec son asset et sa recette vanilla avancée ;
+- pointer vers l'Intendant pertinent le plus proche sans exiger qu'il soit déjà chargé ;
+- distinguer clairement ce compas du Compas de sillage lié au navire.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

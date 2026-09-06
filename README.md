@@ -6,8 +6,8 @@ Le projet n'est pas un mode histoire. Le livre **Le Voyage** fournit un fil dire
 
 ## État actuel
 
-- version du projet : `0.15.0-alpha` ;
-- dernier ticket terminé : `TB-PORT-001A` ;
+- version du projet : `0.16.0-alpha` ;
+- dernier ticket terminé : `TB-PORT-001B` ;
 - cible : Minecraft `1.21.1`, NeoForge `21.1.249`, Java `21` ;
 - tests de domaine et validation du contenu automatisés par Gradle et la CI GitHub.
 
@@ -20,6 +20,8 @@ Les morues, saumons, poissons tropicaux et poissons-globes pêchés portent dés
 qualité, une fraîcheur, une origine, une valeur et parfois une anomalie rare.
 Toute nouvelle sauvegarde utilise désormais un archipel avec un spawn ciblé sur une île boisée ; le
 Nether et l'End restent inchangés.
+Une commande de prototypage peut désormais matérialiser un petit quai et les seuls PNJ prévus par le
+plan régional, sans modifier automatiquement les anciennes sauvegardes.
 
 ## Reprendre le projet
 
@@ -58,5 +60,5 @@ python tools/validate_content.py
 ./gradlew build
 ```
 
-Le JAR attendu est `core/build/libs/tidebound-0.15.0-alpha.jar`. Le workflow GitHub Actions publie
+Le JAR attendu est `core/build/libs/tidebound-0.16.0-alpha.jar`. Le workflow GitHub Actions publie
 également ce JAR comme artifact à chaque push et pull request.

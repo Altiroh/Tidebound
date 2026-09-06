@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.15.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.16.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.15.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.16.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.15.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.16.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
@@ -102,8 +102,17 @@ masse continentale ne remplit l'horizon proche.
 
 Pour la matrice d'acceptation, créer vingt mondes avec les seeds `tidebound-01` à `tidebound-20`, lancer
 le diagnostic dans chacun et noter : verdict, proportion de terre/eau, rivages, bois et tirage du port.
-La cible est 20/20 spawns jouables et 0/20 masse continentale. Le tirage du port ne place encore aucune
-structure : il prépare `TB-PORT-001`.
+La cible est 20/20 spawns jouables et 0/20 masse continentale. Pour tester le prototype portuaire,
+se placer à moins de 48 blocs d'un rivage puis exécuter :
+
+```mcfunction
+/tidebound world port-plan
+/tidebound world port-place
+```
+
+Le quai doit employer l'identité visuelle annoncée, invoquer uniquement les rôles du plan et refuser
+une seconde pose du même site à proximité. Cette commande ne remplace pas encore la génération
+automatique des ports ni les futures structures `.nbt` détaillées.
 
 Le workflow GitHub lance aussi `tools/smoke_test_worldgen.sh`. Ce contrôle crée un monde par défaut et
 attend que le serveur atteigne son état prêt, ce qui détecte les références ou codecs worldgen invalides.
