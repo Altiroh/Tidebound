@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-005C` / `0.19.0-alpha`
+État importé : `TB-CORE-006` / `0.20.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -79,10 +79,12 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - modules v1 branchés à de vrais systèmes selon les emplacements achetés : Projecteur (repousse les
   spawns hostiles nocturnes), Sonar (pêche prometteuse, dangers, puis épaves/objets cachés au niveau 5
   de Navigation), Treuil (attire les objets flottants) et Filet (multi-prise et pêche passive au
-  mouillage), tous inactifs sans le propriétaire en ligne à proximité.
+  mouillage), tous inactifs sans le propriétaire en ligne à proximité ;
+- interface de cale du navire Tidebound n'affichant que les lignes débloquées (9/18/27 cases), en
+  réutilisant directement `ChestMenu` vanilla sans nouveau menu ni écran.
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-005C.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
+`core/TB-CORE-006.md`, `docs/quests/TB-QUEST-001.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
 
@@ -96,13 +98,12 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 5. **Automatisation complète du livre.** Six objectifs utilisent provisoirement une case manuelle tant que les événements Core correspondants n'existent pas.
 6. **Équilibrage des modules.** Les effets de `TB-CORE-005C` sont branchés mais leurs rayons, intervalles
    et la chance de multi-prise du Filet n'ont pas encore été ajustés par un vrai test en jeu.
-7. **Interface de cale dédiée.** Le conteneur vanilla montre encore 27 cases ; le serveur rend le contenu des cases verrouillées au joueur au lieu de le supprimer.
-8. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
-9. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
-10. **PNJ : validation visuelle.** Les cinq atlas sont branchés au modèle villageois, mais leur UV et
+7. **Aiguille animée du Compas.** Le clic droit donne déjà direction et distance ; le modèle animé pointant physiquement vers le navire reste une amélioration future.
+8. **Validation en jeu.** Le workflow compile automatiquement ; un lancement manuel du Devpack complet et le smoke test de `docs/TESTING.md` restent indispensables.
+9. **PNJ : validation visuelle.** Les cinq atlas sont branchés au modèle villageois, mais leur UV et
     leur lisibilité à plusieurs distances doivent encore être confirmés dans un vrai client.
-11. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
-12. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
+10. **Modèle final du navire.** L'entité dédiée existe avec une coque voxel fonctionnelle ; le modèle Blockbench et ses animations restent à importer.
+11. **Finition des interfaces.** L'intendant utilise la maquette artistique, mais contrats, traduction complète des éléments graphiques et animations restent à raccorder.
 
 ## Prochaine tâche recommandée
 

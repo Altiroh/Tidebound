@@ -1,4 +1,4 @@
-# Tidebound Core — 0.19.0-alpha
+# Tidebound Core — 0.20.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -41,7 +41,8 @@ Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 - apparence synchronisée de la coque, du moteur, de la cale et des supports de modules.
 - six composants Tidebound illustrés, avec recettes et utilisation par le chantier naval ;
 - enchantement `tidebound:fast_smelting` sur les outils de minage vanilla ;
-- modules v1 (Projecteur, Sonar, Treuil, Filet) branchés aux emplacements déjà vendus par le chantier.
+- modules v1 (Projecteur, Sonar, Treuil, Filet) branchés aux emplacements déjà vendus par le chantier ;
+- interface de cale du navire Tidebound n'affichant que les lignes débloquées.
 
 Le navire physique possède désormais son propre type d'entité. Il réutilise la physique éprouvée du bateau-coffre,
 mais son rendu, son équipage et ses niveaux visuels appartiennent à Tidebound. Le livre `Le Voyage` guide le joueur

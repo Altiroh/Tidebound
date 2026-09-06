@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.20.0-alpha — TB-CORE-006
+
+- le navire Tidebound n'affiche plus que les lignes de cale débloquées (9/18/27 cases) au lieu des
+  27 cases vanilla systématiques, en réutilisant `ChestMenu` sans nouveau menu ni écran ;
+- le conteneur physique conserve toujours ses 27 cases : rien n'est perdu lors d'une amélioration ;
+- versions de `neoforge.mods.toml` et `modpack/manifest.json` resynchronisées avec
+  `gradle.properties` (elles dérivaient depuis plusieurs tickets) ;
+- compilation vérifiée avec un JDK 21 réel contre NeoForge 21.1.249 / Minecraft 1.21.1.
+
 ## 0.19.0-alpha — TB-CORE-005C
 
 - modules v1 branchés aux emplacements déjà vendus par le chantier, activation fixe et cumulative

@@ -23,6 +23,7 @@
 - [x] `TB-NAV-001` — registre monde persistant et Compas des Havres à recette avancée.
 - [x] `TB-SMELT-001` — enchantement de fonte rapide compatible avec l'économie et Create.
 - [x] `TB-CORE-005C` — modules v1 branchés aux systèmes réels : projecteur, sonar, treuil et filet.
+- [x] `TB-CORE-006` — interface de cale dédiée n'affichant que les emplacements débloqués.
 
 ## Prochaine tranche du prototype vertical
 
