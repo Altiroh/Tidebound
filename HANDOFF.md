@@ -4,7 +4,7 @@ Dernière mise à jour : **5 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-PORT-001B` / `0.16.0-alpha`
+État importé : `TB-NAV-001` / `0.17.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -58,6 +58,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
 - transaction de vente non duplicable créditant Tides et XP Commerce sans toucher aux poissons vanilla ;
 - planificateur stable des ports par seed/région, avec cinq archétypes pondérés et services facultatifs ;
 - placement administrateur d'un quai compact sur un rivage détecté, avec uniquement les PNJ du plan ;
+- index persistant des havres et Compas des Havres pointant vers l'Intendant enregistré le plus proche ;
 - livre FTB Quests bilingue au format SNBT v13 avec les chapitres `Naufragé` et `Premier port` ;
 - neuf objectifs sans dépendances obligatoires et neuf récompenses idempotentes totalisant 105 Tides ;
 - lore canonique consolidé dans `docs/design/Tidebound_Lore.md` ;
@@ -100,14 +101,14 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
 
 ## Prochaine tâche recommandée
 
-### TB-NAV-001 — Compas des Havres
+### TB-SMELT-001 — Fonte rapide
 
 À réaliser maintenant :
 
-- enregistrer les sites portuaires générés dans des données monde persistantes ;
-- créer le Compas des Havres avec son asset et sa recette vanilla avancée ;
-- pointer vers l'Intendant pertinent le plus proche sans exiger qu'il soit déjà chargé ;
-- distinguer clairement ce compas du Compas de sillage lié au navire.
+- créer un enchantement Fast Smelting propre à Tidebound pour NeoForge 1.21.1 ;
+- définir précisément les outils ou machines compatibles ;
+- éviter de court-circuiter les recettes, l'économie ou les mécanismes Create ;
+- ajouter un test de vitesse et documenter sa disponibilité.
 
 La matrice de vingt seeds de `TB-WORLD-001` reste un test manuel obligatoire : la CI valide le décodage
 du worldgen et la création d'un monde, mais ne permet pas encore d'annoncer 20/20 spawns jouables.

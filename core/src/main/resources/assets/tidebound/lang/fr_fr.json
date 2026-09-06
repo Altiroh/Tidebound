@@ -8,6 +8,7 @@
   "menu.tidebound.sale.estimate": "%s prises · %s Tides",
   "message.tidebound.sale.completed": "%s prises vendues pour %s Tides · +%s XP commerce",
   "item.tidebound.wake_compass": "Compas de sillage",
+  "item.tidebound.haven_compass": "Compas des Havres",
   "item.tidebound.repair_kit": "Kit de réparation",
   "item.tidebound.caulking_kit": "Nécessaire de calfatage",
   "item.tidebound.engine_parts": "Pièces moteur",

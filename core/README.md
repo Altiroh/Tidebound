@@ -1,4 +1,4 @@
-# Tidebound Core — 0.16.0-alpha
+# Tidebound Core — 0.17.0-alpha
 
 Socle serveur du mod Tidebound pour **Minecraft Java 1.21.1 / NeoForge**.
 
@@ -114,7 +114,7 @@ Sous Linux ou macOS :
 ./gradlew build
 ```
 
-Le JAR est produit dans `build/libs/tidebound-0.16.0-alpha.jar`. Pour lancer un client de développement,
+Le JAR est produit dans `build/libs/tidebound-0.17.0-alpha.jar`. Pour lancer un client de développement,
 utiliser `runClient` à la place de `build`. Voir `../docs/TESTING.md`.
 
 ## Lancer le test autonome
@@ -260,5 +260,5 @@ Les durées du prototype sont : fraîche moins de 24 000 ticks, vieillissante ju
 jusqu'à 144 000, puis avariée. Aucun scan d'inventaire n'est nécessaire : l'état est calculé depuis
 l'instant de capture.
 
-Le prototype `/tidebound world port-place` matérialise désormais le plan régional près d'un rivage.
-La prochaine brique recommandée est `TB-NAV-001` : index persistant des havres et Compas des Havres.
+Le prototype `/tidebound world port-place` matérialise désormais le plan régional près d'un rivage et
+l'inscrit dans l'index persistant utilisé par le Compas des Havres.
