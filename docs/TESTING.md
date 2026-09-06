@@ -43,7 +43,7 @@ Le premier lancement télécharge Minecraft, NeoForge et les mappings. Pour prod
 .\gradlew.bat build
 ```
 
-Le résultat attendu est `core/build/libs/tidebound-0.16.0-alpha.jar`.
+Le résultat attendu est `core/build/libs/tidebound-0.17.0-alpha.jar`.
 
 ## 3. Récupérer le JAR construit par GitHub
 
@@ -52,7 +52,7 @@ Chaque push et chaque pull request lance le workflow **Build Tidebound**. Dans G
 1. ouvrir l'onglet **Actions** du dépôt ;
 2. ouvrir le dernier workflow vert **Build Tidebound** ;
 3. télécharger l'artifact `tidebound-build-<commit>` ;
-4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.16.0-alpha.zip` prêt à importer.
+4. utiliser soit le JAR seul, soit `Tidebound_Devpack_0.17.0-alpha.zip` prêt à importer.
 
 Cela permet de tester sans environnement de développement local, une fois le premier workflow validé.
 
@@ -62,7 +62,7 @@ Créer un profil séparé dans CurseForge, Prism Launcher ou Modrinth App :
 
 1. Minecraft `1.21.1` ;
 2. chargeur **NeoForge `21.1.249`** ;
-3. ajouter `tidebound-0.16.0-alpha.jar` au dossier `mods` ;
+3. ajouter `tidebound-0.17.0-alpha.jar` au dossier `mods` ;
 4. lancer d'abord sans autre mod ;
 5. créer un monde avec les commandes autorisées.
 
@@ -113,6 +113,16 @@ se placer à moins de 48 blocs d'un rivage puis exécuter :
 Le quai doit employer l'identité visuelle annoncée, invoquer uniquement les rôles du plan et refuser
 une seconde pose du même site à proximité. Cette commande ne remplace pas encore la génération
 automatique des ports ni les futures structures `.nbt` détaillées.
+
+Si le plan contient un Intendant, fabriquer ensuite le Compas des Havres ou l'obtenir pour le test :
+
+```mcfunction
+/give @s tidebound:haven_compass
+```
+
+S'éloigner d'au moins 25 blocs et faire un clic droit. Le message doit indiquer direction et distance
+vers le havre. Quitter puis rouvrir le monde et répéter : la cible doit survivre au rechargement. Le
+Compas des Havres cherche un port ; le Compas de sillage continue exclusivement à chercher le navire.
 
 Le workflow GitHub lance aussi `tools/smoke_test_worldgen.sh`. Ce contrôle crée un monde par défaut et
 attend que le serveur atteigne son état prêt, ce qui détecte les références ou codecs worldgen invalides.

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.17.0-alpha — TB-NAV-001
+
+- registre mondial persistant des havres matérialisés, indépendant des chunks chargés ;
+- Compas des Havres distinct du Compas de sillage ;
+- direction et distance vers le havre enregistré doté d'un Intendant le plus proche ;
+- recette avancée utilisant bois, cuivre, fer, redstone, or et boussole vanilla ;
+- modèle d'item provisoirement vanilla-friendly en attente d'un asset dédié.
+
 ## 0.16.0-alpha — TB-PORT-001B
 
 - recherche serveur d'un rivage exploitable dans un rayon borné ;

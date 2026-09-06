@@ -8,6 +8,7 @@
   "menu.tidebound.sale.estimate": "%s catches · %s Tides",
   "message.tidebound.sale.completed": "%s catches sold for %s Tides · +%s trade XP",
   "item.tidebound.wake_compass": "Wake Compass",
+  "item.tidebound.haven_compass": "Haven Compass",
   "item.tidebound.repair_kit": "Repair Kit",
   "item.tidebound.caulking_kit": "Caulking Kit",
   "item.tidebound.engine_parts": "Engine Parts",

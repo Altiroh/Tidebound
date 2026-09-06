@@ -106,6 +106,17 @@ def validate_resource_json() -> int:
     require(recipe.get("type") == "minecraft:crafting_shaped", "Invalid Wake Compass recipe type")
     require(recipe.get("result", {}).get("id") == "tidebound:wake_compass",
             "Invalid Wake Compass recipe result")
+    haven_recipe = DATA_ROOT / "tidebound/recipe/haven_compass.json"
+    require(haven_recipe in paths, "Missing Haven Compass recipe")
+    with haven_recipe.open(encoding="utf-8") as handle:
+        haven = json.load(handle)
+    require(haven.get("type") == "minecraft:crafting_shaped", "Invalid Haven Compass recipe type")
+    require(haven.get("result", {}).get("id") == "tidebound:haven_compass",
+            "Invalid Haven Compass recipe result")
+    ingredients = json.dumps(haven.get("key", {}))
+    for required in ("minecraft:copper_ingot", "minecraft:gold_ingot", "minecraft:iron_ingot",
+                     "minecraft:compass", "minecraft:planks", "minecraft:redstone"):
+        require(required in ingredients, f"Haven Compass recipe is missing {required}")
     validate_worldgen()
     validate_visual_assets()
     return len(paths)

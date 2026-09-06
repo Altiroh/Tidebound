@@ -4,6 +4,8 @@ import dev.tidebound.core.npc.PortNpcEntity;
 import dev.tidebound.core.registry.TideboundEntities;
 import dev.tidebound.core.world.PortPlan;
 import dev.tidebound.core.world.PortService;
+import dev.tidebound.core.world.HarborRegistry;
+import dev.tidebound.core.world.HarborSite;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -44,6 +46,13 @@ public final class HarborPlacementService {
 
         buildPier(level, shore, plan);
         int spawned = spawnServices(level, shore, plan, siteTag);
+        HarborRegistry.get(level).register(new HarborSite(
+                plan.siteId(),
+                level.dimension().location().toString(),
+                shore.deckOrigin(),
+                plan.archetype(),
+                plan.services()
+        ));
         return new PlacementResult(true, shore.deckOrigin(), spawned,
                 "Avant-poste " + plan.archetype().name() + " créé avec " + spawned + " PNJ.");
     }

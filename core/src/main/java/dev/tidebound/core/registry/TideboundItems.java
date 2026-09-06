@@ -2,6 +2,7 @@ package dev.tidebound.core.registry;
 
 import dev.tidebound.core.TideboundCore;
 import dev.tidebound.core.item.WakeCompassItem;
+import dev.tidebound.core.item.HavenCompassItem;
 import java.util.function.Supplier;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -16,6 +17,11 @@ public final class TideboundItems {
     public static final Supplier<Item> WAKE_COMPASS = ITEMS.registerItem(
             "wake_compass",
             WakeCompassItem::new,
+            new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)
+    );
+    public static final Supplier<Item> HAVEN_COMPASS = ITEMS.registerItem(
+            "haven_compass",
+            HavenCompassItem::new,
             new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON)
     );
     public static final Supplier<Item> REPAIR_KIT = component("repair_kit", 16);
@@ -36,6 +42,7 @@ public final class TideboundItems {
     private static void addToCreativeTabs(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(WAKE_COMPASS.get());
+            event.accept(HAVEN_COMPASS.get());
             event.accept(REPAIR_KIT.get());
             event.accept(CAULKING_KIT.get());
             event.accept(ENGINE_PARTS.get());
