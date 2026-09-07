@@ -71,8 +71,10 @@ maritimes nommées, roadmap de conception en 9 phases, priorisation MVP/V1.5/end
 ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plate.
 
 **MVP (biomes nommés)** :
-- [x] Marais des Lanternes — biome + marée simplifiée + bonus de pêche nocturne (`TB-WORLD-003`) ;
-  reste à faire : structures/PNJ dédiés, contrat régional, éventuel biais de tirage d'espèce ;
+- [x] Marais des Lanternes — biome + marée simplifiée + bonus de pêche nocturne + contrat régional
+  (`TB-WORLD-003`) ; reste : structures/PNJ dédiés (nouveau générateur à part entière, son propre
+  ticket) — le biais de tirage d'espèce par biome est écarté (demanderait de surcharger la table de
+  loot de pêche vanilla) ;
 - [ ] Plateau des Épaves — épaves explorables, pièces mécaniques, cartes au trésor (rejoint les
   « gros navires échoués rares » différés faute de décision `.nbt`) ;
 - [ ] Archipel des Brisants — formalise et nomme le système de ports régionaux déjà en place ;

@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-003` (premier biome nommé — Marais des Lanternes) / `0.33.0-alpha`
+État importé : `TB-WORLD-003` (Marais des Lanternes + contrat régional) / `0.34.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -96,8 +96,9 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   sous le niveau 3 ;
 - troisième biome Tidebound, Marais des Lanternes (clone teinté de `mangrove_swamp`), premier biome
   nommé de la nouvelle roadmap maritime ; cycle de marée simplifié (`TideCycle`, aucun changement de
-  terrain) et bonus d'anomalie de pêche la nuit à marée basse dans ce biome, premier cas où le biome
-  d'origine influence réellement une prise plutôt que son seul affichage (`TB-WORLD-003`) ;
+  terrain), bonus d'anomalie de pêche la nuit à marée basse dans ce biome (premier cas où le biome
+  d'origine influence réellement une prise plutôt que son seul affichage), et un quatrième contrat
+  répétable thématique (`TB-WORLD-003`) ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par

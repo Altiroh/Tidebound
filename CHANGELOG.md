@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.34.0-alpha — TB-WORLD-003 (suite) : contrat régional du Marais
+
+- nouveau contrat répétable « Ce que la lanterne attire » (5 poissons-globes contre 60 Tides, 35 XP
+  Pêche et 2 encres luminescentes) — aucun nouveau mécanisme, le système de contrats existant ne
+  vérifie jamais le biome de capture, seulement l'inventaire à la livraison ;
+- structures/PNJ dédiés au biome et biais de tirage d'espèce par biome examinés puis écartés pour
+  cette tranche : le premier demande un nouveau générateur de structure à part entière, le second
+  demanderait de surcharger la table de loot de pêche vanilla — les deux méritent leur propre ticket
+  plutôt qu'un ajout précipité.
+
+Build, `validate_content.py` et démarrage serveur réel vérifiés (`4 repeatable contracts` chargés
+sans erreur).
+
 ## 0.33.0-alpha — TB-WORLD-003 : Marais des Lanternes
 
 Premier biome nommé de la nouvelle roadmap maritime (`docs/design/Tidebound_Roadmap_Biomes.md`,

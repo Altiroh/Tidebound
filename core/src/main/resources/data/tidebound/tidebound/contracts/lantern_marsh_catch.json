@@ -1,0 +1,24 @@
+{
+  "title": "Ce que la lanterne attire",
+  "cooldown_ticks": 24000,
+  "requires": {
+    "skill": "fishing",
+    "level": 2
+  },
+  "requirement": {
+    "item": "minecraft:pufferfish",
+    "count": 5
+  },
+  "reward": {
+    "tides": 60,
+    "skill_xp": {
+      "fishing": 35
+    },
+    "items": [
+      {
+        "item": "minecraft:glow_ink_sac",
+        "count": 2
+      }
+    ]
+  }
+}

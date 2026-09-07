@@ -30,13 +30,25 @@ qu'une vraie simulation de marée physique, jugée trop lourde et jamais tentée
    Lanternes la nuit à marée basse. Premier cas réel où le biome d'origine influence la génération
    d'une prise, pas seulement son affichage — comme identifié dans la spécification de région.
 
-## Ce qui n'est pas dans cette tranche
+## Contrat régional (ajouté après coup)
+
+`data/tidebound/tidebound/contracts/lantern_marsh_catch.json` — « Ce que la lanterne attire »,
+5 poissons-globes contre 60 Tides + 35 XP Pêche + 2 encres luminescentes (`glow_ink_sac`, écho
+délibéré de la thématique lumineuse du biome). Aucun nouveau mécanisme : le système de contrats
+existant ne vérifie jamais le biome de capture, seulement l'inventaire au moment de la livraison —
+exactement ce qu'anticipait la spécification de région (« pas de nouveau mécanisme de contrat
+nécessaire »).
+
+## Ce qui n'est toujours pas dans cette tranche
 
 - pas de nouvelle espèce de poisson (toujours limité aux quatre profils vanilla, `TB-CORE-010`) ;
-- pas de biais de tirage d'espèce par biome (le marais donne les mêmes espèces que partout ailleurs,
-  seule la chance d'anomalie change) ;
-- pas de structure/PNJ dédiée à ce biome pour l'instant ;
-- pas de contrat régional spécifique.
+- pas de biais de tirage d'espèce par biome — le tirage d'espèce est entièrement décidé par la table
+  de loot de pêche **vanilla**, avant que Tidebound ne voie le moindre item ; le biaiser demanderait
+  de surcharger cette table de loot, une modification plus lourde et plus risquée qu'anticipé dans la
+  spécification, volontairement pas tentée ici ;
+- pas de structure/PNJ dédiée à ce biome — la spécification proposait un petit ponton isolé sans
+  Intendant, mais c'est un nouveau générateur de structure à part entière (`HarborPlacementService`
+  ne cible que des ports complets), qui mérite son propre ticket plutôt qu'un ajout rapide.
 
 ## Vérification
 
