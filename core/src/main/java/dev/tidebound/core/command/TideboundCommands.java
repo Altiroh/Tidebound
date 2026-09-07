@@ -14,8 +14,11 @@ import dev.tidebound.core.data.TideWallet;
 import dev.tidebound.core.data.VesselUpgrade;
 import dev.tidebound.core.data.VesselTransactionResult;
 import dev.tidebound.core.fishing.CatchData;
+import dev.tidebound.core.npc.PortNpcEntity;
+import dev.tidebound.core.npc.PortNpcRole;
 import dev.tidebound.core.progression.ProgressionResult;
 import dev.tidebound.core.progression.SkillProgression;
+import dev.tidebound.core.registry.TideboundEntities;
 import dev.tidebound.core.service.HarborBoardService;
 import dev.tidebound.core.service.HarborPlacementService;
 import dev.tidebound.core.service.ArchipelagoSurveyService;
@@ -51,7 +54,8 @@ public final class TideboundCommands {
                 .then(skillsNode())
                 .then(contractBoardNode())
                 .then(harborNode())
-                .then(worldNode()));
+                .then(worldNode())
+                .then(npcNode()));
     }
 
     private static LiteralArgumentBuilder<CommandSourceStack> tideNode() {
@@ -284,7 +288,54 @@ public final class TideboundCommands {
                 .then(Commands.literal("port-plan")
                         .executes(context -> showPortPlan(context.getSource())))
                 .then(Commands.literal("port-place")
-                        .executes(context -> placePort(context.getSource())));
+                        .executes(context -> placePort(context.getSource())))
+                .then(Commands.literal("biomes")
+                        .executes(context -> listCustomBiomes(context.getSource())));
+    }
+
+    private static int listCustomBiomes(CommandSourceStack source) {
+        source.sendSuccess(() -> Component.literal(
+                "Biomes Tidebound (essaie /locate biome <id>, rayon de recherche vanilla 6400 blocs) :")
+                .withStyle(ChatFormatting.GOLD), false);
+        for (String id : List.of(
+                "tidebound:lantern_marsh", "tidebound:abyssal_cliffs", "tidebound:glass_reef",
+                "tidebound:foggy_sea", "tidebound:abyssal_trench", "tidebound:dead_calm",
+                "tidebound:violet_shallows", "tidebound:abyss_ocean")) {
+            source.sendSuccess(() -> Component.literal("  /locate biome " + id)
+                    .withStyle(ChatFormatting.AQUA), false);
+        }
+        return 1;
+    }
+
+    private static LiteralArgumentBuilder<CommandSourceStack> npcNode() {
+        LiteralArgumentBuilder<CommandSourceStack> summon = Commands.literal("summon")
+                .requires(source -> source.hasPermission(ADMIN_PERMISSION));
+        for (PortNpcRole role : PortNpcRole.values()) {
+            summon.then(Commands.literal(role.id())
+                    .executes(context -> summonNpc(context.getSource(), role)));
+        }
+        return Commands.literal("npc").then(summon);
+    }
+
+    private static int summonNpc(CommandSourceStack source, PortNpcRole role) {
+        ServerPlayer player;
+        try {
+            player = source.getPlayerOrException();
+        } catch (Exception exception) {
+            source.sendFailure(Component.literal("Cette commande doit être exécutée par un joueur."));
+            return 0;
+        }
+        PortNpcEntity npc = TideboundEntities.forRole(role).get().create(player.serverLevel());
+        if (npc == null) {
+            source.sendFailure(Component.literal("Impossible de créer ce PNJ."));
+            return 0;
+        }
+        npc.moveTo(player.getX(), player.getY(), player.getZ(), player.getYRot(), 0.0F);
+        player.serverLevel().addFreshEntity(npc);
+        source.sendSuccess(() -> Component.literal(
+                "PNJ invoqué : " + role.id() + ". Clic droit pour tester son écran.")
+                .withStyle(ChatFormatting.GREEN), true);
+        return 1;
     }
 
     private static int placePort(CommandSourceStack source) {

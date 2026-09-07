@@ -4,7 +4,6 @@ import dev.tidebound.core.TideboundCore;
 import dev.tidebound.core.event.BiomeAwarenessEvents;
 import dev.tidebound.core.registry.TideboundAttachments;
 import java.util.Optional;
-import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -26,12 +25,9 @@ public final class TideboundClientEvents {
     private static final long BIOME_NAME_DISPLAY_MILLIS = 3000L;
     private static final long BIOME_NAME_FADE_MILLIS = 500L;
     private static final int BIOME_NAME_TOP_MARGIN = 10;
-    private static final int BIOME_FRAME_PADDING = 5;
+    private static final int BIOME_LINE_GAP = 2;
     private static final int COLOR_DANGEROUS = 0xFFFF5D5D;
     private static final int COLOR_NORMAL = 0xFF6BE7FF;
-    private static final int COLOR_FRAME_FILL_TOP = 0xC8101018;
-    private static final int COLOR_FRAME_FILL_BOTTOM = 0x90101018;
-    private static final int COLOR_FRAME_SHADOW = 0x50000000;
     private static final int COLOR_NAME_TEXT = 0xFFF4F4F4;
 
     private static ResourceKey<Biome> lastBiome;
@@ -76,32 +72,13 @@ public final class TideboundClientEvents {
             float fade = remaining < BIOME_NAME_FADE_MILLIS ? remaining / (float) BIOME_NAME_FADE_MILLIS : 1.0F;
 
             int statusColor = withAlphaFactor(biomeDisplayDangerous ? COLOR_DANGEROUS : COLOR_NORMAL, fade);
-            Component name = biomeDisplayText.copy().withStyle(ChatFormatting.BOLD);
-            Component status = biomeStatusText.copy().withStyle(ChatFormatting.ITALIC);
-
-            int lineHeight = minecraft.font.lineHeight;
-            int nameWidth = minecraft.font.width(name);
-            int statusWidth = minecraft.font.width(status);
-            int boxWidth = Math.max(nameWidth, statusWidth) + BIOME_FRAME_PADDING * 2;
-            int boxHeight = lineHeight * 2 + BIOME_FRAME_PADDING * 3;
+            int nameColor = withAlphaFactor(COLOR_NAME_TEXT, fade);
             int centerX = graphics.guiWidth() / 2;
-            int boxLeft = centerX - boxWidth / 2;
-            int boxRight = centerX + boxWidth / 2;
-            int boxTop = BIOME_NAME_TOP_MARGIN;
-            int boxBottom = boxTop + boxHeight;
 
-            graphics.fill(boxLeft - 2, boxTop - 2, boxRight + 2, boxBottom + 2, withAlphaFactor(COLOR_FRAME_SHADOW, fade));
-            graphics.fill(boxLeft - 1, boxTop - 1, boxRight + 1, boxBottom + 1, statusColor);
-            graphics.fillGradient(boxLeft, boxTop, boxRight, boxBottom,
-                    withAlphaFactor(COLOR_FRAME_FILL_TOP, fade), withAlphaFactor(COLOR_FRAME_FILL_BOTTOM, fade));
-
-            int dividerY = boxTop + BIOME_FRAME_PADDING + lineHeight + BIOME_FRAME_PADDING / 2;
-            graphics.fill(boxLeft + 3, dividerY, boxRight - 3, dividerY + 1, withAlphaFactor(statusColor, 0.4F));
-
-            graphics.drawCenteredString(minecraft.font, name,
-                    centerX, boxTop + BIOME_FRAME_PADDING, withAlphaFactor(COLOR_NAME_TEXT, fade));
-            graphics.drawCenteredString(minecraft.font, status,
-                    centerX, boxTop + BIOME_FRAME_PADDING * 2 + lineHeight, statusColor);
+            graphics.drawCenteredString(minecraft.font, biomeDisplayText,
+                    centerX, BIOME_NAME_TOP_MARGIN, nameColor);
+            graphics.drawCenteredString(minecraft.font, biomeStatusText,
+                    centerX, BIOME_NAME_TOP_MARGIN + minecraft.font.lineHeight + BIOME_LINE_GAP, statusColor);
         }
     }
 

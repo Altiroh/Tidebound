@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.40.0-alpha — TB-CORE-016 : retours du premier vrai test en jeu
+
+- **Cadre du nom de biome retiré** : retour à un texte simple (nom + statut « Eaux sûres »/« Eaux
+  dangereuses »), sans fond ni bordure — jugé trop carré ;
+- **Ports plus peuplés** : chaque port a désormais au moins deux PNJ. Cause trouvée dans
+  `PortPlan.at` : le second PNJ n'avait qu'une chance sur 8 d'être ajouté, ce qui expliquait
+  directement le retour « je n'avais qu'un pêcheur » — comportement normal de l'ancienne formule sur
+  l'archétype le plus fréquent, pas un coup de malchance ;
+- **Deuxième port plus fréquent** : chance régionale remontée de 1/3 à 1/2 par région de 512 blocs ;
+- **`/tidebound world biomes`** : liste tous les identifiants de biome Tidebound avec la syntaxe
+  `/locate biome <id>` — `/locate biome` est une commande vanilla native, aucun code de recherche
+  n'était nécessaire (vérifié contre le bytecode réel de `LocateCommand` : rayon 6400 blocs, marche
+  sur n'importe quel biome enregistré) ;
+- **`/tidebound npc summon <role>`** : invoque un PNJ du rôle demandé pour tester son écran sans
+  dépendre d'un port généré ;
+- **Counter Day** ajouté au Devpack pour suivre le nombre de jours en survie, en écho au repère de
+  pacing « 100 jours » déjà présent dans la conception du projet.
+
+Build, `validate_content.py` et démarrage serveur réel vérifiés sans erreur (27 mods épinglés
+désormais). Discussion en cours, non tranchée dans ce commit : préférence de l'utilisateur pour
+JourneyMap malgré son instabilité constatée deux fois, et son offre de fournir des structures `.nbt`
+faites à la main pour les ports/épaves — voir la conversation pour la liste transmise.
+
 ## 0.39.0-alpha — TB-WORLD-008/TB-CORE-015 : Mer Morte + correctif libIPN
 
 **Correctif de blocage réel** (`TB-CORE-015`, remonté par l'utilisateur juste après avoir passé le

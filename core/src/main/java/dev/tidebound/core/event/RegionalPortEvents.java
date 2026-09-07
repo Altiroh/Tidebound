@@ -12,14 +12,15 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 /**
  * Extends the single lucky starter port ({@link StarterPortEvents}) with a broader rule so a
  * player never has to sail thousands of blocks to find one: every 512-block region has roughly a
- * one-in-three chance of holding a real port, checked as players explore into it. Across a handful
- * of regions that puts the nearest port within roughly 500-1000 blocks on average while keeping the
- * placement a matter of luck rather than a rigid guarantee.
+ * one-in-two chance of holding a real port, checked as players explore into it (raised from
+ * one-in-three after real playtest feedback that a second port was too hard to find). Across a
+ * handful of regions that puts the nearest port within roughly 500-1000 blocks on average while
+ * keeping the placement a matter of luck rather than a rigid guarantee.
  */
 public final class RegionalPortEvents {
     private static final int REGION_SIZE = 512;
     private static final long CHECK_INTERVAL_TICKS = 600L;
-    private static final long MATERIALIZE_ODDS = 3L;
+    private static final long MATERIALIZE_ODDS = 2L;
 
     private RegionalPortEvents() {
     }

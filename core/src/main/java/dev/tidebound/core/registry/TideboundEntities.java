@@ -43,6 +43,17 @@ public final class TideboundEntities {
         ENTITIES.register(modBus);
     }
 
+    /** For admin/testing tools that need to spawn a role's NPC without a real harbour site. */
+    public static Supplier<EntityType<PortNpcEntity>> forRole(PortNpcRole role) {
+        return switch (role) {
+            case INTENDANT -> HARBOR_INTENDANT;
+            case SHIPWRIGHT -> SHIPWRIGHT;
+            case FISHMONGER -> FISHMONGER;
+            case NATURALIST -> NATURALIST;
+            case LIGHTHOUSE_KEEPER -> LIGHTHOUSE_KEEPER;
+        };
+    }
+
     private static Supplier<EntityType<PortNpcEntity>> portNpc(String id, PortNpcRole role) {
         return ENTITIES.register(id, () -> EntityType.Builder.<PortNpcEntity>of(
                         (type, level) -> new PortNpcEntity(type, level, role), MobCategory.CREATURE)

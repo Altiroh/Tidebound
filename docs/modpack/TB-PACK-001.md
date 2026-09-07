@@ -26,6 +26,7 @@ technique ; Tidebound Core conserve l'autorité sur les navires, la pêche, les 
 | Quêtes | FTB Quests Translator | Traduction du livre à la demande, indépendante de la langue du jeu |
 | Rendu | Complementary (Reimagined), Photon, Solas, AstraLex | Quatre shaders au choix dans le menu Iris, aucun activé par défaut |
 | Confort | Inventory Profiles Next, libIPN, Kotlin for Forge | Tri automatique de l'inventaire, équivalent moderne d'Inventory Tweaks |
+| Confort | Counter Day | Compteur de jours en survie, écho au repère de pacing « 100 jours » |
 
 Tous les fichiers du manifeste ciblent Minecraft `1.21.1` et NeoForge. Les dépendances directes
 Architectury, Balm et CreativeCore sont déclarées explicitement.

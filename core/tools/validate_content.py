@@ -383,6 +383,7 @@ def validate_modpack() -> int:
         495267: 6811490,   # Inventory Profiles Next
         351264: 6706911,   # Kotlin for Forge (language provider required by libIPN/Inventory
                            # Profiles Next — missing from the pack, real client load error, TB-CORE-014)
+        1116006: 6657495,  # Counter Day — in-game day counter for the 100-day pacing reference (TB-CORE-016)
     }
     entries = manifest.get("files", [])
     require(isinstance(entries, list), "CurseForge manifest files must be an array")

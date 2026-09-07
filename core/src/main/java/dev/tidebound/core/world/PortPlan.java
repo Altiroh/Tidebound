@@ -45,7 +45,7 @@ public record PortPlan(long siteId, PortArchetype archetype, Set<PortService> se
                 || archetype == PortArchetype.MARKET_HARBOR)) {
             services.add(PortService.CREATE_MECHANISM);
         }
-        if (((choices >>> 10) & 7L) == 0 && npcCount(services) < 4) {
+        if (npcCount(services) < 4) {
             services.add(secondaryNpc(archetype));
         }
         return new PortPlan(siteId, archetype, services);

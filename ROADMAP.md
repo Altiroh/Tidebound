@@ -68,6 +68,9 @@
 - [x] `TB-CORE-015` — correctif de blocage réel remonté par l'utilisateur : libIPN 6.6.2 était hors de
   la plage acceptée par Inventory Profiles Next (`>=6.5.1, <6.6`), jamais détecté avant que le crash
   JourneyMap (`TB-CORE-012`/`013`) ne soit lui-même corrigé. Remplacé par libIPN 6.5.1.
+- [x] `TB-CORE-016` — retours du premier vrai test en jeu : cadre du nom de biome retiré, ports
+  toujours peuplés d'au moins 2 PNJ, deuxième port régional plus fréquent (1/2 au lieu de 1/3),
+  commandes `/tidebound world biomes` et `/tidebound npc summon`, ajout de Counter Day.
 
 ## En cours
 
