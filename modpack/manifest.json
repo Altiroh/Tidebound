@@ -11,7 +11,7 @@
   "manifestType": "minecraftModpack",
   "manifestVersion": 1,
   "name": "Tidebound — Into the Deep (Development)",
-  "version": "0.38.0-alpha",
+  "version": "0.39.0-alpha",
   "author": "Tidebound",
   "files": [
     {
@@ -131,7 +131,7 @@
     },
     {
       "projectID": 679177,
-      "fileID": 7327448,
+      "fileID": 6748206,
       "required": true
     },
     {

@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.39.0-alpha — TB-WORLD-008/TB-CORE-015 : Mer Morte + correctif libIPN
+
+**Correctif de blocage réel** (`TB-CORE-015`, remonté par l'utilisateur juste après avoir passé le
+crash JourneyMap) : `libIPN` était épinglé sur `6.6.2`, au-delà de la plage `[6.5.1, 6.6.0[` acceptée
+par la version déjà épinglée d'`Inventory Profiles Next` — incompatibilité présente depuis
+`TB-CORE-007`, jamais détectée tant que JourneyMap bloquait le chargement avant. Remplacé par
+`libIPN` `6.5.1` (fichier CurseForge `6748206`), la borne basse exacte de la plage acceptée.
+
+**Mer Morte** (`TB-WORLD-008`), palier Endgame : `tidebound:dead_calm`, clone de `lukewarm_ocean` —
+teinte gris-vert délavée **et**, première fois dans ce projet, suppression complète des apparitions
+de faune aquatique (`water_ambient`/`water_creature`/`underground_water_creature` vidés). La pêche à
+la canne reste pleinement fonctionnelle, mécanisme indépendant des entités de poissons nageant à
+proximité. Pas de tag dangereux (malaise psychologique, pas un danger physique).
+
+**Mer Extérieure délibérément différée**, pas juste laissée de côté : aucun de ses trois piliers
+(poissons légendaires, structures majeures, météo instable) n'a de système existant à réutiliser — un
+simple clone de biome serait une coquille vide plutôt qu'une implémentation honnête. Voir
+`docs/design/regions/mer_exterieure.md`.
+
+`validate_content.py` : `OK`. Build et démarrage serveur réel vérifiés sans erreur pour Mer Morte ;
+teinte réelle et absence visible de poissons restent à confirmer par l'utilisateur, de même que le
+correctif libIPN (nécessite un nouvel import complet du Devpack).
+
 ## 0.38.0-alpha — TB-WORLD-007 : palier Extension/V1.5 (trois biomes)
 
 Après les cinq biomes MVP, traite en un seul lot les trois biomes du palier Extension/V1.5 de

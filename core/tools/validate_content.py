@@ -378,7 +378,8 @@ def validate_modpack() -> int:
         1312687: 7927503,  # Photon Shader
         678384: 7128860,   # Solas Shader
         406081: 5434888,   # AstraLex Shaders
-        679177: 7327448,   # libIPN (Inventory Profiles Next dependency)
+        679177: 6748206,   # libIPN 6.5.1 (IPN pin 495267 requires libIPN >=6.5.1 and <6.6 — the
+                           # previously pinned 6.6.2 was outside that range, real load error, TB-CORE-015)
         495267: 6811490,   # Inventory Profiles Next
         351264: 6706911,   # Kotlin for Forge (language provider required by libIPN/Inventory
                            # Profiles Next — missing from the pack, real client load error, TB-CORE-014)

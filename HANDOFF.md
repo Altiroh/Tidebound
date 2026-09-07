@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-007` (palier Extension/V1.5 — 3 biomes) / `0.38.0-alpha`
+État importé : `TB-WORLD-008`/`TB-CORE-015` (Mer Morte + correctif libIPN) / `0.39.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -118,6 +118,14 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   réduction de visibilité, aucun mécanisme de ce type n'existe), Fosses Abyssales
   (`abyssal_trench`, carvée à l'intérieur même de la tranche `abyss_ocean` existante, encore plus
   rare) (`TB-WORLD-007`) ;
+- Mer Morte (`dead_calm`, teinte délavée + première suppression complète de la faune aquatique
+  visible d'un biome — la pêche à la canne reste pleinement fonctionnelle, mécanisme indépendant) ;
+  Mer Extérieure délibérément différée, aucun de ses trois piliers (poissons légendaires, structures
+  majeures, météo instable) n'a de système existant — un clone de biome serait une coquille vide
+  (`TB-WORLD-008`) ;
+- correctif de blocage réel remonté par l'utilisateur : libIPN 6.6.2 dépassait la plage acceptée par
+  Inventory Profiles Next (`>=6.5.1, <6.6`), jamais détecté avant que le crash JourneyMap ne soit
+  lui-même corrigé ; remplacé par libIPN 6.5.1 (`TB-CORE-015`) ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
@@ -150,7 +158,8 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-014.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-007.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-001.md` à `core/TB-CORE-015.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-008.md`,
+`docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté

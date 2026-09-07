@@ -148,7 +148,11 @@ premier passage procédural, sans `.nbt` (`TB-WORLD-005`) ; Archipel des Brisant
 presque aucun code neuf (`TB-WORLD-006`). Le palier Extension/V1.5 est également traité (couche
 biome/danger uniquement, gameplay dédié laissé à des tickets futurs) : Récifs du Verre Noir, Mer
 Brumeuse, Fosses Abyssales (`TB-WORLD-007`, `docs/design/regions/recifs_du_verre_noir.md`,
-`mer_brumeuse.md`, `fosses_abyssales.md`). Reste : Mer Morte et Mer Extérieure (endgame).
+`mer_brumeuse.md`, `fosses_abyssales.md`). Palier Endgame : Mer Morte implémentée
+(`TB-WORLD-008`, `docs/design/regions/mer_morte.md`) ; Mer Extérieure **délibérément différée**
+(`docs/design/regions/mer_exterieure.md`) — aucun des trois piliers de sa fantasy (poissons
+légendaires, structures majeures, météo instable) n'a de système existant à réutiliser, un simple
+clone de biome serait une coquille vide.
 
 ## Sorties demandées par ce document (à produire dans une prochaine session)
 

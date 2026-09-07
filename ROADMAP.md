@@ -61,6 +61,13 @@
   **Les cinq biomes MVP de la nouvelle roadmap maritime sont désormais tous traités.**
 - [x] `TB-WORLD-007` — Palier Extension/V1.5 : Récifs du Verre Noir, Mer Brumeuse, Fosses Abyssales
   (couche biome/danger, gameplay dédié laissé à des tickets futurs).
+- [x] `TB-WORLD-008` — Mer Morte implémentée (teinte + suppression de la faune aquatique visible) ;
+  Mer Extérieure **délibérément différée** — aucun de ses trois piliers (poissons légendaires,
+  structures majeures, météo instable) n'a de système existant, un clone de biome serait une coquille
+  vide (voir `docs/design/regions/mer_exterieure.md`).
+- [x] `TB-CORE-015` — correctif de blocage réel remonté par l'utilisateur : libIPN 6.6.2 était hors de
+  la plage acceptée par Inventory Profiles Next (`>=6.5.1, <6.6`), jamais détecté avant que le crash
+  JourneyMap (`TB-CORE-012`/`013`) ne soit lui-même corrigé. Remplacé par libIPN 6.5.1.
 
 ## En cours
 
@@ -102,8 +109,10 @@ ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plat
   réutiliser `WreckPlacementService`), reliques et aberrations (système du lore §17 pas encore codé).
 
 **Endgame** :
-- [ ] Mer Morte — biome psychologique, poissons spéciaux ;
-- [ ] Mer Extérieure — expéditions majeures, contenu final.
+- [x] Mer Morte — biome posé (`TB-WORLD-008`) ; reste : poissons spéciaux distincts (aucun palier de
+  rareté propre à ce biome n'existe) ;
+- [ ] Mer Extérieure — délibérément différée tant qu'aucun de ses trois piliers n'a de système propre
+  (voir `docs/design/regions/mer_exterieure.md`), pas juste « à faire ».
 
 **Systèmes transverses restant à faire, indépendamment des biomes** :
 - [ ] ports secondaires et contrats régionaux par zone ;
