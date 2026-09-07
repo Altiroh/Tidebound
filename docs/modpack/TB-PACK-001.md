@@ -19,7 +19,7 @@ technique ; Tidebound Core conserve l'autorité sur les navires, la pêche, les 
 | Atelier | Create | Grues, quais et petits mécanismes visuels |
 | Recettes | JEI | Remplace l'ancien NEI sur Minecraft 1.21.1 |
 | Stockage | Tom's Simple Storage | Réseau de coffres simple pour le port du joueur |
-| Exploration | Xaero's Minimap, Waystones, Balm | Carte et retours rapides entre lieux découverts |
+| Exploration | JourneyMap, Waystones, Balm | Carte et retours rapides entre lieux découverts |
 | Ambiance | AmbientSounds, ItemPhysic, CreativeCore | Paysages sonores et objets au sol plus matériels |
 | Rendu | Sodium, Iris, ImmediatelyFast | Performances client et prise en charge des shaders |
 | Multijoueur | Lootr | Loot indépendant par joueur sur coffres, tonneaux et minecarts |
@@ -48,9 +48,11 @@ activation et disponibilité d'une pierre) restent actives.
   besoin.
 - Les mods décoratifs, agricoles et culinaires seront ajoutés après un démarrage complet de cette base,
   afin de mesurer mémoire, temps de chargement et conflits avant d'élargir vers 50 à 80 mods.
-- JourneyMap (choix initial) a été remplacé par Xaero's Minimap (`TB-CORE-013`) : deux versions
-  distinctes de JourneyMap plantaient identiquement au lancement sur cette combinaison NeoForge
-  1.21.1, une instabilité connue du mod plutôt qu'un fichier mal épinglé.
+- JourneyMap (choix initial) a été remplacé par Xaero's Minimap après deux crashes identiques
+  (`TB-CORE-013`), puis **remis** à la demande explicite de l'utilisateur (`TB-CORE-017`) : troisième
+  tentative avec `6.0.0-beta.52`, choisie pour son volume de téléchargements (4,7 M, un vrai signal de
+  stabilité en usage réel) plutôt que « la plus récente » comme les deux essais précédents qui ont
+  échoué. Risque de crash assumé explicitement par l'utilisateur.
 - Kotlin for Forge manquait du manifeste alors qu'Inventory Profiles Next et libIPN en dépendent tous
   les deux (`TB-CORE-014`, erreur réelle de chargement remontée par l'utilisateur) : ajouté.
 
@@ -59,7 +61,7 @@ activation et disponibilité d'une pierre) restent actives.
 1. importer le Devpack avec l'option **All Files** ;
 2. vérifier que Tidebound apparaît avec son logo dans **Mods** ;
 3. créer un monde neuf et confirmer l'archipel ;
-4. ouvrir JEI, Xaero's Minimap et le livre FTB Quests ;
+4. ouvrir JEI, JourneyMap et le livre FTB Quests ;
 5. relier deux Waystones et contrôler que le niveau d'XP ne change pas ;
 6. créer un petit réseau Tom's Storage et un mécanisme Create ;
 7. activer un shader léger dans Iris et contrôler les FPS ;

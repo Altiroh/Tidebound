@@ -362,8 +362,10 @@ def validate_modpack() -> int:
         328085: 7963363,  # Create
         238222: 8792638,  # JEI
         378609: 7917007,  # Tom's Simple Storage
-        263420: 8231212,  # Xaero's Minimap (replaces JourneyMap: two different JourneyMap versions
-                          # crashed identically on launch, see TB-CORE-012/013)
+        32274: 6689206,   # JourneyMap 6.0.0-beta.52 (re-enabled, TB-CORE-017): user prefers JourneyMap
+                          # over Xaero's Minimap and accepted the crash risk on a third attempt — this
+                          # build picked for its 4.7M download count (real-world stability signal),
+                          # not just "newest", unlike the two builds that already crashed identically
         531761: 7264790,  # Balm
         245755: 8056467,  # Waystones
         257814: 8699787,  # CreativeCore

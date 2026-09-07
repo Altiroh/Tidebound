@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-016` (retours du premier vrai test en jeu) / `0.40.0-alpha`
+État importé : `TB-CORE-017` (JourneyMap remis, 3e tentative informée) / `0.41.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -131,6 +131,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   de deuxième port régional remontée de 1/3 à 1/2 ; commandes `/tidebound world biomes` (liste des
   identifiants pour `/locate biome`) et `/tidebound npc summon <role>` (invoquer un PNJ pour tester
   son écran sans port réel) ; ajout de Counter Day pour suivre le nombre de jours en survie ;
+- JourneyMap remis à la place de Xaero's Minimap (`TB-CORE-017`) : troisième tentative, à la demande
+  explicite de l'utilisateur qui accepte le risque de crash. Choix basé cette fois sur le volume de
+  téléchargements (`6.0.0-beta.52`, 4,7 M) plutôt que « la plus récente » comme les deux essais
+  précédents qui ont planté identiquement ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
@@ -163,7 +167,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-001.md` à `core/TB-CORE-016.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-008.md`,
+`core/TB-CORE-001.md` à `core/TB-CORE-017.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-008.md`,
 `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 

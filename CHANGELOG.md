@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.41.0-alpha — TB-CORE-017 : JourneyMap remis (troisième tentative informée)
+
+L'utilisateur préfère JourneyMap à Xaero's Minimap et a explicitement demandé de retenter, en
+acceptant le risque après deux crashes identiques (`TB-CORE-012`/`013`). Plutôt qu'un troisième pari
+« à l'aveugle » sur la version la plus récente (le schéma déjà perdu deux fois), choix basé sur le
+volume de téléchargements comme signal de stabilité réelle : `journeymap-neoforge-1.21.1-6.0.0-beta.52`
+(CurseForge `6689206`) affiche 4,7 M de téléchargements sur ce seul fichier, un ordre de grandeur
+au-dessus des deux builds qui ont planté.
+
+`modpack/manifest.json` et `validate_content.py` mis à jour ; toutes les mentions actives de Xaero's
+Minimap dans la documentation repassées à JourneyMap. Les tickets historiques ne sont pas réécrits.
+
+`validate_content.py` : `OK`, toujours 27 mods épinglés. **Aucune garantie cette fois** : si ce build
+plante à son tour, ce sera un signal qu'il faut chercher une interaction avec un autre mod du pack
+plutôt qu'un simple choix de version — voir `core/TB-CORE-017.md`.
+
 ## 0.40.0-alpha — TB-CORE-016 : retours du premier vrai test en jeu
 
 - **Cadre du nom de biome retiré** : retour à un texte simple (nom + statut « Eaux sûres »/« Eaux
