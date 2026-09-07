@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-003` (Marais des Lanternes + contrat régional) / `0.34.0-alpha`
+État importé : `TB-WORLD-004` (deuxième biome nommé — Falaises Abyssales) / `0.35.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -99,6 +99,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   terrain), bonus d'anomalie de pêche la nuit à marée basse dans ce biome (premier cas où le biome
   d'origine influence réellement une prise plutôt que son seul affichage), et un quatrième contrat
   répétable thématique (`TB-WORLD-003`) ;
+- quatrième biome Tidebound, Falaises Abyssales (clone teinté de `stony_shore`, carvé par érosion
+  plutôt que par humidité), deuxième biome nommé de la nouvelle roadmap ; premier biome **terrestre**
+  ajouté au tag `#tidebound:dangerous`, sans toucher un seul fichier Java — la coque en subit déjà les
+  dégâts via l'infrastructure de `TB-WORLD-002` (`TB-WORLD-004`) ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
@@ -131,7 +135,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-014.md`, `core/TB-WORLD-002.md`, `core/TB-WORLD-003.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-014.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-004.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté

@@ -142,6 +142,11 @@ déjà partiellement posées par `TB-WORLD-002`. L'Archipel des Brisants recoupe
 régionaux déjà en place. Marais des Lanternes et Plateau des Épaves sont les deux ajouts MVP
 entièrement nouveaux.
 
+**État d'implémentation (mis à jour au fil des tickets)** : Marais des Lanternes implémenté
+(`TB-WORLD-003`, `docs/design/regions/marais_des_lanternes.md`) ; Falaises Abyssales implémenté
+(`TB-WORLD-004`, `docs/design/regions/falaises_abyssales.md`) ; Archipel des Brisants et Plateau des
+Épaves restent à faire.
+
 ## Sorties demandées par ce document (à produire dans une prochaine session)
 
 1. tableaux biome → poissons / ressources / structures / événements ;

@@ -51,6 +51,8 @@
   remonté par l'utilisateur.
 - [x] `TB-WORLD-003` — Marais des Lanternes : premier biome nommé de la nouvelle roadmap maritime
   implémenté (clone teinté de `mangrove_swamp`, marée simplifiée, bonus de pêche nocturne).
+- [x] `TB-WORLD-004` — Falaises Abyssales : clone teinté de `stony_shore`, carvé par érosion, premier
+  biome terrestre dangereux (réutilise `#tidebound:dangerous`/`HullIntegrityEvents` sans code neuf).
 
 ## En cours
 
@@ -78,8 +80,8 @@ ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plat
 - [ ] Plateau des Épaves — épaves explorables, pièces mécaniques, cartes au trésor (rejoint les
   « gros navires échoués rares » différés faute de décision `.nbt`) ;
 - [ ] Archipel des Brisants — formalise et nomme le système de ports régionaux déjà en place ;
-- [ ] Falaises Abyssales — formalise et nomme les zones dangereuses déjà bornées par le niveau de
-  coque (`TB-WORLD-002`).
+- [x] Falaises Abyssales — biome + tag dangereux posés (`TB-WORLD-004`) ; reste : pêche profonde et
+  silhouettes sous-marines (aucune des deux mécaniques n'existe encore, ticket futur dédié).
 
 **Extension / V1.5** :
 - [ ] Récifs du Verre Noir — plongée technique, lecture du terrain ;

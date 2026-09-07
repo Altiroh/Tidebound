@@ -5,6 +5,7 @@
     "minecraft:deep_ocean",
     "minecraft:deep_lukewarm_ocean",
     "minecraft:frozen_ocean",
-    "tidebound:abyss_ocean"
+    "tidebound:abyss_ocean",
+    "tidebound:abyssal_cliffs"
   ]
 }

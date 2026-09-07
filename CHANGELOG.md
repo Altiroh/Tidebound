@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.35.0-alpha — TB-WORLD-004 : Falaises Abyssales
+
+Deuxième biome nommé de la roadmap maritime, choisi après le Marais car il recoupe directement des
+systèmes déjà en place. Contrairement au Marais, l'identité est d'abord une question de relief (côte
+abrupte), pas de couleur.
+
+- nouveau biome `tidebound:abyssal_cliffs`, clone teinté (bleu-ardoise très sombre) de
+  `minecraft:stony_shore` plutôt que `beach` — relief rocheux escarpé, pas une plage ;
+- carvé par **érosion** (le quart le plus escarpé de la plage de valeurs) plutôt que par humidité,
+  dans la cellule `beach` existante des deux fichiers de preset : les falaises peuvent apparaître le
+  long de n'importe quelle côte tempérée ;
+- ajouté au tag `#tidebound:dangerous` — premier biome **terrestre** dangereux, aucun code Java
+  touché : `HullIntegrityEvents` et les dégâts de coque progressifs de `TB-WORLD-002` s'appliquent
+  déjà, uniquement via ce tag.
+
+Build, `validate_content.py` et démarrage serveur réel sur un monde neuf vérifiés sans erreur. Relief
+réel, teinte et perception du danger à cet endroit restent à confirmer visuellement — voir
+`core/TB-WORLD-004.md`.
+
 ## 0.34.0-alpha — TB-WORLD-003 (suite) : contrat régional du Marais
 
 - nouveau contrat répétable « Ce que la lanterne attire » (5 poissons-globes contre 60 Tides, 35 XP
