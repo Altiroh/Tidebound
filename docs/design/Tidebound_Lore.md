@@ -4,7 +4,9 @@ Statut : **référence canonique de conception**
 Dernière mise à jour : **5 septembre 2026**
 
 Les systèmes réellement implémentés restent décrits dans `HANDOFF.md`. Ce document fixe la vision
-cible et remplace les versions antérieures du lore.
+cible et remplace les versions antérieures du lore. `Tidebound_Roadmap_Biomes.md` détaille dix
+régions maritimes nommées (fantasy, gameplay, promesse narrative) qui concrétisent la progression
+esquissée ici, section 20 et « Structure cible du livre » ci-dessous.
 
 ## 1. Vision générale
 

@@ -64,9 +64,36 @@
 
 ## Après validation du prototype
 
-- [ ] ports secondaires et contrats régionaux ;
-- [ ] épaves, plongée et récupération ;
+Cadrage détaillé reçu le 7 septembre 2026 : `docs/design/Tidebound_Roadmap_Biomes.md` (dix régions
+maritimes nommées, roadmap de conception en 9 phases, priorisation MVP/V1.5/endgame). Les items
+ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plate.
+
+**MVP (biomes nommés)** :
+- [ ] Marais des Lanternes — navigation lente, marées, pêche de nuit (entièrement nouveau) ;
+- [ ] Plateau des Épaves — épaves explorables, pièces mécaniques, cartes au trésor (rejoint les
+  « gros navires échoués rares » différés faute de décision `.nbt`) ;
+- [ ] Archipel des Brisants — formalise et nomme le système de ports régionaux déjà en place ;
+- [ ] Falaises Abyssales — formalise et nomme les zones dangereuses déjà bornées par le niveau de
+  coque (`TB-WORLD-002`).
+
+**Extension / V1.5** :
+- [ ] Récifs du Verre Noir — plongée technique, lecture du terrain ;
+- [ ] Mer Brumeuse — navigation à visibilité réduite, événements d'ambiance ;
+- [ ] Fosses Abyssales — pêche abyssale, reliques, aberrations (rejoint lore §16-17).
+
+**Endgame** :
+- [ ] Mer Morte — biome psychologique, poissons spéciaux ;
+- [ ] Mer Extérieure — expéditions majeures, contenu final.
+
+**Systèmes transverses restant à faire, indépendamment des biomes** :
+- [ ] ports secondaires et contrats régionaux par zone ;
+- [ ] plongée et récupération (dragage déjà nommé dans le lore, non implémenté) ;
 - [ ] événements de nuit, brume et danger maritime ;
-- [ ] encyclopédie, records de pêche et objectifs long terme ;
+- [ ] encyclopédie, records de pêche et objectifs long terme (Journal du marin) ;
 - [ ] progression de la Connaissance interdite et révélations conditionnelles ;
 - [ ] équilibrage multijoueur et protection anti-farm.
+
+Sorties encore attendues de `Tidebound_Roadmap_Biomes.md`, à produire région par région : tableaux
+biome → poissons/ressources/structures/événements, roadmap de production (mods/datapacks/KubeJS),
+progression des modules du navire, contrats PNJ par région, version MVP vs idéale, équilibrage
+économique.
