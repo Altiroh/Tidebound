@@ -114,6 +114,36 @@
                 ],
                 "erosion": [
                   0.7,
+                  0.9
+                ],
+                "weirdness": [
+                  -1.0,
+                  1.0
+                ],
+                "depth": [
+                  -1.0,
+                  1.0
+                ],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "tidebound:abyssal_trench",
+              "parameters": {
+                "temperature": [
+                  -1.0,
+                  1.0
+                ],
+                "humidity": [
+                  -0.15,
+                  0.2
+                ],
+                "continentalness": [
+                  -1.0,
+                  -0.35
+                ],
+                "erosion": [
+                  0.9,
                   1.0
                 ],
                 "weirdness": [
@@ -234,6 +264,36 @@
                 ],
                 "erosion": [
                   -1.0,
+                  0.7
+                ],
+                "weirdness": [
+                  -1.0,
+                  1.0
+                ],
+                "depth": [
+                  -1.0,
+                  1.0
+                ],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "tidebound:foggy_sea",
+              "parameters": {
+                "temperature": [
+                  -1.0,
+                  1.0
+                ],
+                "humidity": [
+                  -0.45,
+                  -0.15
+                ],
+                "continentalness": [
+                  -0.35,
+                  0.05
+                ],
+                "erosion": [
+                  0.7,
                   1.0
                 ],
                 "weirdness": [
@@ -354,6 +414,36 @@
                 ],
                 "erosion": [
                   -1.0,
+                  0.7
+                ],
+                "weirdness": [
+                  -1.0,
+                  1.0
+                ],
+                "depth": [
+                  -1.0,
+                  1.0
+                ],
+                "offset": 0.0
+              }
+            },
+            {
+              "biome": "tidebound:glass_reef",
+              "parameters": {
+                "temperature": [
+                  -1.0,
+                  1.0
+                ],
+                "humidity": [
+                  0.55,
+                  1.0
+                ],
+                "continentalness": [
+                  -0.35,
+                  0.05
+                ],
+                "erosion": [
+                  0.7,
                   1.0
                 ],
                 "weirdness": [

@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.38.0-alpha — TB-WORLD-007 : palier Extension/V1.5 (trois biomes)
+
+Après les cinq biomes MVP, traite en un seul lot les trois biomes du palier Extension/V1.5 de
+`docs/design/Tidebound_Roadmap_Biomes.md` : couche biome/danger posée, gameplay dédié (faune rare,
+ruines, reliques, vraie réduction de visibilité) explicitement laissé à des tickets futurs plutôt que
+deviné.
+
+- `tidebound:glass_reef` (Récifs du Verre Noir) — clone de `warm_ocean`, hérite nativement de ses
+  récifs coralliens, teinté turquoise sombre, carvé par érosion, tag dangereux ;
+- `tidebound:foggy_sea` (Mer Brumeuse) — clone de `cold_ocean`, teinte pâle et délavée de l'eau **et**
+  du brouillard atmosphérique (`fog_color`, jamais retinté dans ce projet avant cette tranche), pas de
+  tag dangereux (tension, pas de danger physique) ;
+- `tidebound:abyssal_trench` (Fosses Abyssales) — carvé à l'intérieur même de la tranche
+  `tidebound:abyss_ocean` existante (encore plus rare), teinté noir neutre plutôt que le bleu sombre
+  déjà utilisé pour `abyss_ocean`, tag dangereux.
+
+Les deux fichiers de preset passent de 26 à 29 entrées, toujours identiques entre eux.
+
+Build, `validate_content.py` et démarrage serveur réel sur un monde neuf vérifiés sans erreur. Teinte
+réelle et rareté des trois poches (chacune imbriquée dans des tranches d'érosion déjà réduites)
+restent à confirmer visuellement — voir `core/TB-WORLD-007.md`.
+
 ## 0.37.0-alpha — TB-WORLD-006 : Archipel des Brisants — les cinq biomes MVP sont traités
 
 Dernier biome MVP de la roadmap maritime. Contrairement aux trois précédents, vérification faite

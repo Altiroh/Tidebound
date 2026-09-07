@@ -6,6 +6,8 @@
     "minecraft:deep_lukewarm_ocean",
     "minecraft:frozen_ocean",
     "tidebound:abyss_ocean",
-    "tidebound:abyssal_cliffs"
+    "tidebound:abyssal_cliffs",
+    "tidebound:glass_reef",
+    "tidebound:abyssal_trench"
   ]
 }

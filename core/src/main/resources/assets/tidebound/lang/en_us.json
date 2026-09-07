@@ -90,6 +90,9 @@
   "biome.tidebound.abyss_ocean": "Abyssal Ocean",
   "biome.tidebound.lantern_marsh": "Marsh of Lanterns",
   "biome.tidebound.abyssal_cliffs": "Abyssal Cliffs",
+  "biome.tidebound.glass_reef": "Black Glass Reef",
+  "biome.tidebound.foggy_sea": "Misty Sea",
+  "biome.tidebound.abyssal_trench": "Abyssal Trench",
   "hud.tidebound.biome.safe": "Safe waters",
   "hud.tidebound.biome.dangerous": "Dangerous waters"
 }

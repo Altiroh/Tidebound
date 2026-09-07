@@ -59,6 +59,8 @@
 - [x] `TB-WORLD-006` — Archipel des Brisants, dernier biome MVP : les systèmes de ports/phares
   existaient déjà, seul ajout réel un décor de récifs rocheux autour des avant-postes de phare.
   **Les cinq biomes MVP de la nouvelle roadmap maritime sont désormais tous traités.**
+- [x] `TB-WORLD-007` — Palier Extension/V1.5 : Récifs du Verre Noir, Mer Brumeuse, Fosses Abyssales
+  (couche biome/danger, gameplay dédié laissé à des tickets futurs).
 
 ## En cours
 
@@ -91,10 +93,13 @@ ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plat
 - [x] Falaises Abyssales — biome + tag dangereux posés (`TB-WORLD-004`) ; reste : pêche profonde et
   silhouettes sous-marines (aucune des deux mécaniques n'existe encore, ticket futur dédié).
 
-**Extension / V1.5** :
-- [ ] Récifs du Verre Noir — plongée technique, lecture du terrain ;
-- [ ] Mer Brumeuse — navigation à visibilité réduite, événements d'ambiance ;
-- [ ] Fosses Abyssales — pêche abyssale, reliques, aberrations (rejoint lore §16-17).
+**Extension / V1.5** (couche biome/danger posée par `TB-WORLD-007`, gameplay dédié restant) :
+- [x] Récifs du Verre Noir — biome posé ; reste : mécanique de cartographie précise, faune rare dédiée ;
+- [x] Mer Brumeuse — biome posé (teinte uniquement) ; reste : vraie réduction de visibilité (aucun
+  mécanisme de ce type n'existe, nécessite soit un effet client soit un hook de rendu dédié),
+  cloches d'ambiance, rencontres rares ;
+- [x] Fosses Abyssales — biome posé ; reste : faune bioluminescente, ruines englouties (pourrait
+  réutiliser `WreckPlacementService`), reliques et aberrations (système du lore §17 pas encore codé).
 
 **Endgame** :
 - [ ] Mer Morte — biome psychologique, poissons spéciaux ;
