@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-005` (troisième biome nommé — Plateau des Épaves) / `0.36.0-alpha`
+État importé : `TB-WORLD-006` (cinq biomes MVP tous traités) / `0.37.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -108,6 +108,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   chacune contenant un tonneau relié à une vraie table de butin Minecraft (première utilisation de ce
   système dans le projet) mêlant ambiance vanilla et pièces de maintenance Tidebound déjà existantes
   (`TB-WORLD-005`) ;
+- récifs rocheux autour des avant-postes de phare (`PortArchetype.LIGHTHOUSE_OUTPOST`), déterministes
+  par site et posés sur le vrai fond marin local — dernier des cinq biomes MVP de la nouvelle roadmap
+  maritime, qui ne demandait presque aucun code neuf : ports secondaires, phares et enchaînement
+  d'îlots existaient déjà (`TB-WORLD-006`) ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
@@ -140,7 +144,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-014.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-005.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-014.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-006.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté

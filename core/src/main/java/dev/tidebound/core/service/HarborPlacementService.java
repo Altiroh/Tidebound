@@ -114,6 +114,42 @@ public final class HarborPlacementService {
         }
 
         buildHut(level, shore, plan);
+        if (plan.archetype() == dev.tidebound.core.world.PortArchetype.LIGHTHOUSE_OUTPOST) {
+            buildReef(level, shore, plan);
+        }
+    }
+
+    /**
+     * Scattered rock islets in the shallows flanking a lighthouse outpost's pier — the "Archipel des
+     * Brisants" region (docs/design/Tidebound_Roadmap_Biomes.md) recoups this existing archetype
+     * rather than needing a new mechanism; this is its one genuinely new visual touch.
+     */
+    private static void buildReef(ServerLevel level, ShoreSite shore, PortPlan plan) {
+        var random = net.minecraft.util.RandomSource.create(plan.siteId());
+        Direction water = shore.waterDirection();
+        Direction across = water.getClockWise();
+        var rockBlocks = new net.minecraft.world.level.block.state.BlockState[] {
+                Blocks.STONE.defaultBlockState(),
+                Blocks.MOSSY_COBBLESTONE.defaultBlockState(),
+                Blocks.COBBLESTONE.defaultBlockState(),
+                Blocks.ANDESITE.defaultBlockState()
+        };
+        int rockCount = 6 + random.nextInt(4);
+        for (int i = 0; i < rockCount; i++) {
+            int side = random.nextBoolean() ? 1 : -1;
+            int depth = 3 + random.nextInt(7);
+            int lateral = side * (4 + random.nextInt(5));
+            BlockPos column = shore.deckOrigin().relative(water, depth).relative(across, lateral);
+            int floorY = level.getHeight(Heightmap.Types.OCEAN_FLOOR, column.getX(), column.getZ());
+            if (level.getSeaLevel() - floorY > 10) {
+                continue;
+            }
+            BlockPos base = new BlockPos(column.getX(), floorY, column.getZ());
+            int height = 1 + random.nextInt(3);
+            for (int y = 0; y < height; y++) {
+                level.setBlock(base.above(y), rockBlocks[random.nextInt(rockBlocks.length)], 3);
+            }
+        }
     }
 
     /**

@@ -56,6 +56,9 @@
 - [x] `TB-WORLD-005` — Plateau des Épaves : épaves procédurales bornées (toujours pas de `.nbt`,
   décision `TB-WORLD-002` enfin traitée), tonneau relié à une vraie table de butin (première dans le
   projet), mêlant ambiance vanilla et pièces de maintenance Tidebound déjà existantes.
+- [x] `TB-WORLD-006` — Archipel des Brisants, dernier biome MVP : les systèmes de ports/phares
+  existaient déjà, seul ajout réel un décor de récifs rocheux autour des avant-postes de phare.
+  **Les cinq biomes MVP de la nouvelle roadmap maritime sont désormais tous traités.**
 
 ## En cours
 
@@ -83,7 +86,8 @@ ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plat
 - [x] Plateau des Épaves — épaves procédurales bornées + table de butin posées (`TB-WORLD-005`) ;
   reste : vraie grande structure de navire (nécessiterait `.nbt` ou un générateur bien plus élaboré),
   journal de bord narratif, carte au trésor menant quelque part, contrat régional ;
-- [ ] Archipel des Brisants — formalise et nomme le système de ports régionaux déjà en place ;
+- [x] Archipel des Brisants — récifs rocheux autour des avant-postes de phare (`TB-WORLD-006`), le
+  reste (ports secondaires, phares, enchaînement d'îlots) existait déjà avant ce ticket.
 - [x] Falaises Abyssales — biome + tag dangereux posés (`TB-WORLD-004`) ; reste : pêche profonde et
   silhouettes sous-marines (aucune des deux mécaniques n'existe encore, ticket futur dédié).
 

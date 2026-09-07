@@ -1,5 +1,26 @@
 # Changelog
 
+## 0.37.0-alpha — TB-WORLD-006 : Archipel des Brisants — les cinq biomes MVP sont traités
+
+Dernier biome MVP de la roadmap maritime. Contrairement aux trois précédents, vérification faite
+contre le code réel avant d'écrire quoi que ce soit : « petits phares », « ports secondaires » et
+« commerce léger » correspondaient déjà à des systèmes en place
+(`PortArchetype.LIGHTHOUSE_OUTPOST`, `RegionalPortEvents`, archétypes de commerce), et
+« enchaînement d'îlots » est déjà une propriété du preset `archipelago`. Un seul élément manquait
+réellement : les récifs.
+
+- `HarborPlacementService.buildReef` (nouveau) : 6 à 9 rochers (pierre/pierre moussue/cobblestone/
+  andésite) dispersés dans les hauts-fonds autour du quai, uniquement pour l'archétype
+  `LIGHTHOUSE_OUTPOST`, posés sur le vrai fond marin local plutôt qu'à une hauteur fixe pour éviter
+  tout rocher flottant, déterministe par site.
+
+Avec cette tranche, les cinq biomes MVP de `docs/design/Tidebound_Roadmap_Biomes.md` sont tous
+traités, à des degrés d'ambition assumés et documentés région par région. Prochaine étape naturelle :
+Récifs du Verre Noir, Mer Brumeuse, Fosses Abyssales (extension/V1.5).
+
+Build, `validate_content.py` et démarrage serveur réel vérifiés sans erreur. Rendu réel des récifs
+non vérifié — voir `core/TB-WORLD-006.md`.
+
 ## 0.36.0-alpha — TB-WORLD-005 : Plateau des Épaves
 
 Troisième biome nommé de la roadmap maritime. Répond enfin à la question laissée en suspens depuis

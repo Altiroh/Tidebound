@@ -142,11 +142,13 @@ déjà partiellement posées par `TB-WORLD-002`. L'Archipel des Brisants recoupe
 régionaux déjà en place. Marais des Lanternes et Plateau des Épaves sont les deux ajouts MVP
 entièrement nouveaux.
 
-**État d'implémentation (mis à jour au fil des tickets)** : Marais des Lanternes implémenté
-(`TB-WORLD-003`, `docs/design/regions/marais_des_lanternes.md`) ; Falaises Abyssales implémenté
-(`TB-WORLD-004`, `docs/design/regions/falaises_abyssales.md`) ; Plateau des Épaves implémenté en
-premier passage procédural, sans `.nbt` (`TB-WORLD-005`, `docs/design/regions/plateau_des_epaves.md`) ;
-Archipel des Brisants reste à faire — seul biome MVP restant.
+**État d'implémentation (mis à jour au fil des tickets)** : les cinq biomes MVP sont désormais tous
+traités. Marais des Lanternes (`TB-WORLD-003`, `docs/design/regions/marais_des_lanternes.md`) ;
+Falaises Abyssales (`TB-WORLD-004`, `docs/design/regions/falaises_abyssales.md`) ; Plateau des Épaves
+en premier passage procédural, sans `.nbt` (`TB-WORLD-005`, `docs/design/regions/plateau_des_epaves.md`) ;
+Archipel des Brisants, qui ne demandait presque aucun code neuf — les systèmes de ports/phares
+existaient déjà (`TB-WORLD-006`, `docs/design/regions/archipel_des_brisants.md`). Suite naturelle :
+Récifs du Verre Noir, Mer Brumeuse, Fosses Abyssales (extension/V1.5).
 
 ## Sorties demandées par ce document (à produire dans une prochaine session)
 
