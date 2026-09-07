@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.36.0-alpha — TB-WORLD-005 : Plateau des Épaves
+
+Troisième biome nommé de la roadmap maritime. Répond enfin à la question laissée en suspens depuis
+`TB-WORLD-002` sur les « gros navires échoués rares » : procédural, toujours pas de `.nbt`, cohérent
+avec la décision déjà prise dans ce projet.
+
+- `WreckPlan`/`WreckRegistry`/`WreckPlacementService`/`WreckPlacementEvents` (nouveaux) : environ
+  1 chance sur 5 par région de 512 blocs, recherche d'un fond marin exploitable (biome océanique,
+  profondeur ≥ 4 blocs) puis construction d'une coque procédurale bornée (planches partiellement
+  manquantes, murs irréguliers, écoutille, mât brisé) — même discipline que
+  `HarborPlacementService.buildHut`, pas de structure `.nbt` externe ;
+- premier tonneau relié à une vraie table de butin Minecraft
+  (`RandomizableContainer.setBlockEntityLootTable`) dans ce projet, mêlant ambiance vanilla (papier,
+  carte, pépite de fer...) et pièces de maintenance Tidebound déjà existantes (`hull_plate`,
+  `engine_parts`, `hold_fittings`...), qui gagnent une seconde voie d'acquisition hors recette.
+
+Coque modeste assumée comme premier pas, pas la grande structure spectaculaire de l'ambition
+initiale — voir `docs/design/regions/plateau_des_epaves.md` pour ce qui reste hors scope (vraie
+grande structure, journal de bord narratif, carte au trésor menant quelque part, contrat régional).
+
+Build, `validate_content.py` et démarrage serveur réel sur un monde neuf vérifiés sans erreur (la
+table de butin est syntaxiquement validée par le vrai chargeur de datapack au démarrage). Le code de
+construction de la coque n'a en revanche jamais été exercé par un vrai joueur dans cette session,
+même limite que `HarborPlacementService.buildHut` en son temps — voir `core/TB-WORLD-005.md`.
+
 ## 0.35.0-alpha — TB-WORLD-004 : Falaises Abyssales
 
 Deuxième biome nommé de la roadmap maritime, choisi après le Marais car il recoupe directement des

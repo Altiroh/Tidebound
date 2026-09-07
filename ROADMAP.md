@@ -53,6 +53,9 @@
   implémenté (clone teinté de `mangrove_swamp`, marée simplifiée, bonus de pêche nocturne).
 - [x] `TB-WORLD-004` — Falaises Abyssales : clone teinté de `stony_shore`, carvé par érosion, premier
   biome terrestre dangereux (réutilise `#tidebound:dangerous`/`HullIntegrityEvents` sans code neuf).
+- [x] `TB-WORLD-005` — Plateau des Épaves : épaves procédurales bornées (toujours pas de `.nbt`,
+  décision `TB-WORLD-002` enfin traitée), tonneau relié à une vraie table de butin (première dans le
+  projet), mêlant ambiance vanilla et pièces de maintenance Tidebound déjà existantes.
 
 ## En cours
 
@@ -77,8 +80,9 @@ ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plat
   (`TB-WORLD-003`) ; reste : structures/PNJ dédiés (nouveau générateur à part entière, son propre
   ticket) — le biais de tirage d'espèce par biome est écarté (demanderait de surcharger la table de
   loot de pêche vanilla) ;
-- [ ] Plateau des Épaves — épaves explorables, pièces mécaniques, cartes au trésor (rejoint les
-  « gros navires échoués rares » différés faute de décision `.nbt`) ;
+- [x] Plateau des Épaves — épaves procédurales bornées + table de butin posées (`TB-WORLD-005`) ;
+  reste : vraie grande structure de navire (nécessiterait `.nbt` ou un générateur bien plus élaboré),
+  journal de bord narratif, carte au trésor menant quelque part, contrat régional ;
 - [ ] Archipel des Brisants — formalise et nomme le système de ports régionaux déjà en place ;
 - [x] Falaises Abyssales — biome + tag dangereux posés (`TB-WORLD-004`) ; reste : pêche profonde et
   silhouettes sous-marines (aucune des deux mécaniques n'existe encore, ticket futur dédié).

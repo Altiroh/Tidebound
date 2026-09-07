@@ -144,8 +144,9 @@ entièrement nouveaux.
 
 **État d'implémentation (mis à jour au fil des tickets)** : Marais des Lanternes implémenté
 (`TB-WORLD-003`, `docs/design/regions/marais_des_lanternes.md`) ; Falaises Abyssales implémenté
-(`TB-WORLD-004`, `docs/design/regions/falaises_abyssales.md`) ; Archipel des Brisants et Plateau des
-Épaves restent à faire.
+(`TB-WORLD-004`, `docs/design/regions/falaises_abyssales.md`) ; Plateau des Épaves implémenté en
+premier passage procédural, sans `.nbt` (`TB-WORLD-005`, `docs/design/regions/plateau_des_epaves.md`) ;
+Archipel des Brisants reste à faire — seul biome MVP restant.
 
 ## Sorties demandées par ce document (à produire dans une prochaine session)
 

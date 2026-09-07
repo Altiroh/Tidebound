@@ -5,6 +5,7 @@ import dev.tidebound.core.content.TideboundContentManager;
 import dev.tidebound.core.event.HullIntegrityEvents;
 import dev.tidebound.core.event.InstantSmeltingEvents;
 import dev.tidebound.core.event.RegionalPortEvents;
+import dev.tidebound.core.event.WreckPlacementEvents;
 import dev.tidebound.core.event.StarterPortEvents;
 import dev.tidebound.core.event.TideboundGameplayEvents;
 import dev.tidebound.core.event.VesselModuleEvents;
@@ -40,6 +41,7 @@ public final class TideboundCore {
         HullIntegrityEvents.register(NeoForge.EVENT_BUS);
         StarterPortEvents.register(NeoForge.EVENT_BUS);
         RegionalPortEvents.register(NeoForge.EVENT_BUS);
+        WreckPlacementEvents.register(NeoForge.EVENT_BUS);
         VesselModuleEvents.register(NeoForge.EVENT_BUS);
         HarborBoardService.register(NeoForge.EVENT_BUS);
         VesselDeploymentService.register(NeoForge.EVENT_BUS);

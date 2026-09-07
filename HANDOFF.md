@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-WORLD-004` (deuxième biome nommé — Falaises Abyssales) / `0.35.0-alpha`
+État importé : `TB-WORLD-005` (troisième biome nommé — Plateau des Épaves) / `0.36.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -103,6 +103,11 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   plutôt que par humidité), deuxième biome nommé de la nouvelle roadmap ; premier biome **terrestre**
   ajouté au tag `#tidebound:dangerous`, sans toucher un seul fichier Java — la coque en subit déjà les
   dégâts via l'infrastructure de `TB-WORLD-002` (`TB-WORLD-004`) ;
+- Plateau des Épaves : épaves procédurales bornées (pas de `.nbt`, question laissée en suspens depuis
+  `TB-WORLD-002` enfin traitée), ~1 chance sur 5 par région de 512 blocs sur un fond marin exploitable,
+  chacune contenant un tonneau relié à une vraie table de butin Minecraft (première utilisation de ce
+  système dans le projet) mêlant ambiance vanilla et pièces de maintenance Tidebound déjà existantes
+  (`TB-WORLD-005`) ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
@@ -135,7 +140,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-014.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-004.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-014.md`, `core/TB-WORLD-002.md` à `core/TB-WORLD-005.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté
@@ -150,9 +155,10 @@ Les points suivants sont des décisions ou besoins acceptés, mais ne doivent pa
    fichiers JSON, chargés comme les paliers et contrats. Les poissons de mods restent à ajouter (un
    fichier JSON par espèce suffit, aucun code supplémentaire requis).
 3. **Stockage spécialisé.** Les caractéristiques uniques empêchent naturellement la plupart des prises de s'empiler ; casiers et viviers restent à créer.
-4. **Contenu procédural.** Le port initial se matérialise désormais automatiquement près du spawn
-   quand le tirage par seed le réserve (`TB-WORLD-002` tranche 1) ; épaves, phares et autres points
-   d'intérêt restent à placer, de même que la variété de biomes maritimes (tranche 2, en cours).
+4. **Contenu procédural.** Le port initial se matérialise automatiquement près du spawn
+   (`TB-WORLD-002` tranche 1) ; des épaves procédurales bornées apparaissent désormais aussi
+   (`TB-WORLD-005`, premier pas modeste, pas la grande structure échouée de l'ambition initiale) ;
+   phares et autres points d'intérêt dédiés restent à placer.
 5. **Automatisation complète du livre.** Un seul objectif (obtenir une barque) reste une case manuelle ;
    les cinq autres sont désormais de vrais avancements déclenchés par Core (`TB-QUEST-002`).
 6. **Équilibrage des modules.** Les effets de `TB-CORE-005C` sont branchés mais leurs rayons, intervalles
