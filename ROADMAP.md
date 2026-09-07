@@ -49,6 +49,8 @@
 - [x] `TB-CORE-014` — Kotlin for Forge ajouté au manifeste : dépendance manquante d'Inventory
   Profiles Next/libIPN, jamais détectée en environnement de développement Core, bloquant réel
   remonté par l'utilisateur.
+- [x] `TB-WORLD-003` — Marais des Lanternes : premier biome nommé de la nouvelle roadmap maritime
+  implémenté (clone teinté de `mangrove_swamp`, marée simplifiée, bonus de pêche nocturne).
 
 ## En cours
 
@@ -69,7 +71,8 @@ maritimes nommées, roadmap de conception en 9 phases, priorisation MVP/V1.5/end
 ci-dessous sont réorganisés selon cette priorisation plutôt qu'une liste plate.
 
 **MVP (biomes nommés)** :
-- [ ] Marais des Lanternes — navigation lente, marées, pêche de nuit (entièrement nouveau) ;
+- [x] Marais des Lanternes — biome + marée simplifiée + bonus de pêche nocturne (`TB-WORLD-003`) ;
+  reste à faire : structures/PNJ dédiés, contrat régional, éventuel biais de tirage d'espèce ;
 - [ ] Plateau des Épaves — épaves explorables, pièces mécaniques, cartes au trésor (rejoint les
   « gros navires échoués rares » différés faute de décision `.nbt`) ;
 - [ ] Archipel des Brisants — formalise et nomme le système de ports régionaux déjà en place ;

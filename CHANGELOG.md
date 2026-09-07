@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.33.0-alpha — TB-WORLD-003 : Marais des Lanternes
+
+Premier biome nommé de la nouvelle roadmap maritime (`docs/design/Tidebound_Roadmap_Biomes.md`,
+reçue le 7 septembre), choisi comme point de départ car entièrement nouveau, sans recoupement avec
+l'existant.
+
+- nouveau biome `tidebound:lantern_marsh`, clone teinté (ambre) de `mangrove_swamp` — même méthode
+  que `violet_shallows`/`abyss_ocean` — carvé en poche rare dans la bande plage existante des deux
+  fichiers de preset, gardés identiques comme toujours ;
+- marée simplifiée (`TideCycle`, décision actée avec l'utilisateur plutôt qu'une simulation physique
+  de niveau d'eau, jamais tentée dans ce projet et jugée trop risquée) ;
+- bonus d'anomalie de pêche la nuit à marée basse dans ce biome — premier cas où le biome d'origine
+  d'une prise influence réellement sa génération plutôt que son seul affichage.
+
+Build, `validate_content.py` et démarrage serveur réel sur un monde neuf vérifiés sans erreur. Teinte
+réelle, rareté des poches et perception du bonus restent à confirmer visuellement — voir
+`core/TB-WORLD-003.md`.
+
 ## 0.32.0-alpha — TB-CORE-014 : fournisseur de langage Kotlin manquant
 
 Le devpack `0.31.0-alpha` a passé le crash JourneyMap (`TB-CORE-013`) mais a bloqué au chargement des

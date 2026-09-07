@@ -4,7 +4,7 @@ Dernière mise à jour : **6 septembre 2026**
 
 Branche de référence : `main`
 
-État importé : `TB-CORE-014` (fournisseur de langage Kotlin ajouté) / `0.32.0-alpha`
+État importé : `TB-WORLD-003` (premier biome nommé — Marais des Lanternes) / `0.33.0-alpha`
 
 Ce fichier est la porte d'entrée pour reprendre le projet. Il doit être actualisé après chaque ticket terminé, même si les notes techniques détaillées existent ailleurs.
 
@@ -94,6 +94,10 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   atteints, au lieu de rester coincés près du centre de la plage de valeurs ;
 - dégâts progressifs au navire en eaux dangereuses (profondeurs, glace, `abyss_ocean`) si la coque est
   sous le niveau 3 ;
+- troisième biome Tidebound, Marais des Lanternes (clone teinté de `mangrove_swamp`), premier biome
+  nommé de la nouvelle roadmap maritime ; cycle de marée simplifié (`TideCycle`, aucun changement de
+  terrain) et bonus d'anomalie de pêche la nuit à marée basse dans ce biome, premier cas où le biome
+  d'origine influence réellement une prise plutôt que son seul affichage (`TB-WORLD-003`) ;
 - bâtiment de port fermé (sol, murs, porte, fenêtres, toit en surplomb) généré derrière chaque quai à
   la place d'un ponton nu avec des props éparpillés, props de service rangés à l'intérieur ;
 - cinq skins PNJ reconstruits à partir de la vraie texture villageoise vanilla (64×64) recolorée par
@@ -126,7 +130,7 @@ Le joueur doit devenir efficace rapidement, tout en restant libre de construire,
   alignées avec `TB-CORE-010`, nécessite un art ou une décision de contenu avant de le rendre réel).
 
 Les détails et commandes sont dans `core/README.md`, les notes `core/TB-CORE-001.md` à
-`core/TB-CORE-014.md`, `core/TB-WORLD-002.md`, `docs/quests/TB-QUEST-001.md`,
+`core/TB-CORE-014.md`, `core/TB-WORLD-002.md`, `core/TB-WORLD-003.md`, `docs/quests/TB-QUEST-001.md`,
 `docs/quests/TB-QUEST-002.md` et `docs/fishing/TB-FISH-001.md`.
 
 ## Ce qui n'est pas encore implémenté

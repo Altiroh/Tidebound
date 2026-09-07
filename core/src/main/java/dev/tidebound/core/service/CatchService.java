@@ -7,6 +7,7 @@ import dev.tidebound.core.fishing.CatchProfiles;
 import dev.tidebound.core.fishing.CatchValuation;
 import dev.tidebound.core.progression.SkillProgression;
 import dev.tidebound.core.registry.TideboundDataComponents;
+import dev.tidebound.core.world.TideCycle;
 import java.util.Optional;
 import java.util.OptionalLong;
 import net.minecraft.core.BlockPos;
@@ -48,7 +49,10 @@ public final class CatchService {
                 .orElse("minecraft:unknown");
         boolean ocean = level.getBiome(catchPosition).is(BiomeTags.IS_OCEAN);
         long timeOfDay = Math.floorMod(level.getDayTime(), 24_000L);
-        boolean eerieWater = ocean && timeOfDay >= 13_000L && timeOfDay <= 23_000L;
+        boolean eerieOcean = ocean && timeOfDay >= 13_000L && timeOfDay <= 23_000L;
+        boolean marshBonus = biomeId.equals("tidebound:lantern_marsh")
+                && !level.isDay() && TideCycle.isLowTide(level.getDayTime());
+        boolean eerieWater = eerieOcean || marshBonus;
         int fishingLevel = SkillProgression.levelForXp(ProgressionService.progress(player).skillXp("fishing"));
         long seed = player.getRandom().nextLong() ^ catchPosition.asLong() ^ gameTime;
         CatchData catchData = CatchGenerator.generate(
